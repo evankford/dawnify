@@ -1,0 +1,110 @@
+{%- comment -%}
+  type: "image" | "model" | "video" | "embed"
+  ratio: "image" | "model" | "video" | "embed"
+  size: "full" | "half" | "large" | "small" | "icon" | "actual"
+  class: (optional)
+  alt: (optional) override alt text
+  max_width: (optional) number for
+  image: image object required if type is "image"
+  model: model object required if type is "model"
+  video: video url required if type is "video"
+  embed: embed url required if type is "embed"
+{%- endcomment -%}
+{%- liquid
+  unless type
+    assign type = "image"
+  endunless
+  unless ratio
+    assign ratio = "adapt"
+  endunless
+  unless size
+    assign size = "full"
+  endunless
+
+  assign sizes = '100vw'
+  assign loading_size = '300x'
+
+  if type == "image" and ratio == "adapt" and image
+    assign aspect_ratio = 1 | divided_by: image.aspect_ratio | times: 100
+  endif
+
+  if size == "full"
+    assign loading_size = '450x'
+    unless max_width
+      if type == "image"
+        assign max_width = image.width
+      else
+        assign max_width = 2400
+      endif
+    endunless
+  elsif size == "half"
+    unless max_width
+      if type == "image"
+        assign max_width = image.width
+      else
+        assign max_width = 1200
+      endif
+    endunless
+    assign sizes = "(min-width: 1200px) 600px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+  elsif size == "large"
+    assign loading_size = '450x'
+    assign sizes = "(min-width: 1200px) 1200px, (min-width: 750px) 80vw, 100vw"
+    unless max_width
+      if type == "image"
+        assign max_width = image.width
+      else
+        assign max_width = 1600
+      endif
+    endunless
+  elsif size == "small"
+    assign loading_size = '120x'
+    assign sizes = "(min-width: 1200px) 750px, (min-width: 750px) 500px, 250px"
+    unless max_width
+      assign max_width = 750
+    endunless
+  elsif size == "icon"
+    assign sizes = "(min-width: 1200px) 300px, (min-width: 750px) 200px, 120px"
+    unless max_width
+      assign max_width = 120
+    endunless
+    assign loading_size = max_width | append: 'x'
+  elsif size == "actual"
+    assign loading_size = '500x'
+    assign sizes = "auto"
+    assign max_width = 2400
+  endif
+-%}
+
+<div class="media media--{{ ratio }} {{ class }}" style="{% if aspect_ratio > 0%}--ar: {{ aspect_ratio }}%;{% endif %}{% if size != 'full' %} --mw: {{ max_width }}px;  {% endif %}">
+  {%- case type -%}
+    {%- when 'image' -%}
+      {%- if image -%}
+        {% comment %} Requires an image input, that's it! {% endcomment %}
+        <img
+        {% if size == "icon" %}
+          srcset="{{ image | img_url: max_width }} 1x, {{ image | img_url: max_width, scale: 2 }} 2x"
+        {% else %}
+          srcset="{%- if max_width >= 165 -%}{{ image | img_url: '165x' }} 165w,{%- endif -%}
+            {%- if max_width >= 240 -%}{{ image | img_url: '240x' }} 240w,{%- endif -%}
+            {%- if max_width >= 360 -%}{{ image | img_url: '360x' }} 360w,{%- endif -%}
+            {%- if max_width >= 535 -%}{{ image | img_url: '535x' }} 535w,{%- endif -%}
+            {%- if max_width >= 720 -%}{{ image | img_url: '720x' }} 720w,{%- endif -%}
+            {%- if max_width >= 940 -%}{{ image | img_url: '940x' }} 940w,{%- endif -%}
+            {%- if max_width >= 1200 -%}{{ image | img_url: '1200x' }} 1200w,{%- endif -%}
+            {%- if max_width >= 1400 -%}{{ image | img_url: '1400x' }} 1400w,{%- endif -%}
+            {%- if max_width >= 1600 -%}{{ image | img_url: '1600x' }} 1600w,{%- endif -%}
+            {%- if max_width >= 2000 -%}{{ image | img_url: '2000x' }} 2000w{%- endif -%}
+            {%- if max_width >= 2400 -%}{{ image | img_url: '2400x' }}{%- endif -%}"
+        {% endif %}
+          src="{{ section.settings.image | img_url: loading_size }}"
+          sizes="{{ sizes }}"
+          alt="{{ alt | default: image.alt | escape }}"
+          loading="lazy"
+          width="{{ section.settings.image.width }}"
+          height="{{ section.settings.image.height }}"
+        >
+      {%- else -%}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+  {%- endcase -%}
+</div>

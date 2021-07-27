@@ -1,0 +1,96 @@
+@use "../abstracts/" as *;
+/* component-media */
+.media {
+  display: block;
+  // background-color: rgba(var(--color-foreground), 0.1);
+  position: relative;
+  overflow: hidden;
+  max-width: var(--mw, unset);//Only works if set
+
+  &::before {
+    //Psuedo can't inherit variables
+    @extend %psuedo;
+    position: relative;
+    height: 0;
+    padding-bottom: 100%; //Defaults to square
+  }
+
+  &>img {
+    @extend %psuedoish;
+    object-fit: cover;
+    object-position: center center;
+    transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  // &:after {
+  //   @extend %psuedo;
+  //   position: relative;
+  //   height: 0;
+  //   padding-bottom: 100%; //Defaults to square
+  // }
+
+  &--adapt {
+    &::before {
+      padding-bottom: var(--ar, 100%);
+    }
+  }
+
+  &--portrait {
+    &::before {
+      padding-bottom: 125%;
+    }
+  }
+
+  &--landscape {
+    &::before {
+      padding-bottom: 66.6%;
+    }
+  }
+
+  &--cropped {
+    &::before {
+      padding-bottom: 56%;
+    }
+  }
+
+  &--16-9 {
+    &::before {
+      padding-bottom: 56.26%;
+    }
+  }
+  &--circle {
+    border-radius: 50%;
+  }
+}
+
+.media--transparent {
+  background-color: transparent;
+}
+
+.media > *:not(.zoom, .deferred-media__poster-button),
+.media model-viewer {
+  display: block;
+  max-width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+
+
+
+.media.media--hover-effect > img + img {
+  opacity: 0;
+}
+
+@media screen and (min-width: 990px) {
+  .media--cropped {
+    padding-bottom: 63%;
+  }
+}
+
+deferred-media {
+  display: block;
+}

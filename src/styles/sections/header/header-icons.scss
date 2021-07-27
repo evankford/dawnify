@@ -1,0 +1,47 @@
+
+/* Header icons */
+.header__icons {
+  display: flex;
+  grid-area: icons;
+  justify-self: end;
+}
+
+.header__icon {
+
+  span, &:not(.header__icon--summary) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  span {
+    height: 100%;
+  }
+
+  &::after {
+    content: none;
+  }
+
+  .icon {
+    height: 2rem;
+    width: 2rem;
+    fill: none;
+    vertical-align: middle;
+  }
+
+  &,
+  &--cart .icon {
+    height: 2.6rem;
+    width: 2.6rem;
+  }
+
+  &--cart {
+    position: relative;
+    margin-right: -1.2rem;
+  }
+}
+
+.header__icon:hover .icon,
+.modal__close-button:hover .icon {
+  transform: scale(1.07);
+}

@@ -1,0 +1,15 @@
+source_language: en
+target_languages: []
+#cs, da, de, es, fi, fr, it, ja, ko, nb, nl, pl, pt-BR, pt-PT, sv, th, tr, vi, zh-CN, zh-TW
+components:
+  - name: buyer
+    audience: buyer
+    scheme: 'online-store-theme'
+    paths:
+      - locales/{{language}}.json
+  - name: merchant
+    target_languages: []
+    audience: merchant
+    scheme: 'online-store-theme'
+    paths:
+      - locales/{{language}}.schema.json

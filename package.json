@@ -1,0 +1,39 @@
+{
+  "name": "@atmtfy/elite",
+  "version": "0.0.1",
+  "description": "Elite Shopify 2.0 Theme. Based on Shopify's \"Dawn\", but with preprocessing, etc",
+  "main": "index.js",
+  "author": "Automatify",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@atmtfy/schema-loader": "^0.0.5",
+    "babel-loader": "^8.2.2",
+    "merge-jsons-webpack-plugin": "^2.0.0-alpha",
+    "normalize.css": "^8.0.1"
+  },
+  "scripts": {
+    "start": "run-p watch serve",
+    "deploy": "webpack -env=production && cd dist && shopify theme push",
+    "theme-check": "webpack --env=development && shopify theme check",
+    "publish": "cd dist && shopify theme publish",
+    "watch": "webpack --watch --env=development",
+    "serve" : "cd dist && shopify theme serve"
+  },
+  "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
+    "concurrently": "^6.2.0",
+    "copy-webpack-plugin": "^9.0.1",
+    "css-loader": "^6.2.0",
+    "glob": "^7.1.7",
+    "merge-json-webpack-plugin": "^5.1.0",
+    "mini-css-extract-plugin": "^2.1.0",
+    "npm-run-all": "^4.1.5",
+    "sass": "^1.36.0",
+    "sass-loader": "^12.1.0",
+    "webpack": "^5.46.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-concat-files-plugin": "^0.5.2",
+    "webpack-remove-empty-scripts": "^0.7.1"
+  }
+}

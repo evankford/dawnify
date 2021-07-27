@@ -1,0 +1,196 @@
+{
+  "name": "t:settings_schema.typography.name",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:settings_schema.typography.settings.header__1.content"
+    },
+    {
+      "type": "font_picker",
+      "id": "type_header_font",
+      "default": "sans-serif",
+      "label": "t:settings_schema.typography.settings.type_header_font.label",
+      "info": "t:settings_schema.typography.settings.type_header_font.info"
+    },
+    {
+      "type": "font_picker",
+      "id": "type_extra_font",
+      "default": "serif",
+      "label": "Extra Font",
+      "info": "Can be used for high-impact typography"
+    },
+    {
+      "type": "header",
+      "content": "t:settings_schema.typography.settings.header__2.content"
+    },
+    {
+      "type": "font_picker",
+      "id": "type_body_font",
+      "default": "sans-serif",
+      "label": "t:settings_schema.typography.settings.type_body_font.label",
+      "info": "t:settings_schema.typography.settings.type_body_font.info"
+    },
+    {
+      "type" : "header",
+      "content" :"Custom Fonts"
+    },
+    {
+      "type": "text",
+      "id": "type_font_code",
+      "label": "Embedded Font Code",
+      "info": "(from your kit on fonts.adobe.com or google fonts)"
+    },
+    {
+      "type": "text",
+      "id": "body_typekit",
+      "label": "Typekit/GF Body Font Family",
+      "info": "Usually all lowercase + hyphenated"
+    },
+    {
+      "type": "text",
+      "id": "heading_typekit",
+      "label": "Typekit/GF Heading Font Family",
+      "info": "Usually all lowercase + hyphenated"
+    },
+    {
+      "type": "text",
+      "id": "extra_typekit",
+      "label": "Typekit/GF Extra Font Family",
+      "info": "Usually all lowercase + hyphenated"
+    },
+    {
+      "type" : "header",
+      "content" :"Uploaded fonts"
+    },
+    {
+      "id" : "type_asset_woff",
+      "label" : "Asset URL (woff)",
+      "type" : "url",
+      "info" : "URL for custom font from files"
+    },
+    {
+      "id" : "type_asset_woff2",
+      "label" : "Asset URL (woff2)",
+      "type" : "url",
+      "info" : "URL for custom font from files"
+    },
+    {
+      "type": "select",
+      "id": "type_asset_weight",
+      "label": "Asset 1 Font Weight",
+      "default": "400",
+      "options": [
+        {
+          "group": "Light",
+          "value": "100",
+          "label": "Thin"
+        },
+        {
+          "group": "Light",
+          "value": "200",
+          "label": "Extra-Light"
+        },
+        {
+          "group": "Light",
+          "value": "300",
+          "label": "Light"
+        },
+        {
+          "group": "Normal",
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "group": "Normal",
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "group": "Bold",
+          "value": "600",
+          "label": "Semi-Bold"
+        },
+        {
+          "group": "Bold",
+          "value": "700",
+          "label": "Bold"
+        },
+        {
+          "group": "Black",
+          "value": "800",
+          "label": "Semi-Black"
+        },
+        {
+          "group": "Black",
+          "value": "900",
+          "label": "Black"
+        }
+      ]
+    },
+    {
+      "id" : "type_asset2_woff",
+      "label" : "Asset URL (woff)",
+      "type" : "url",
+      "info" : "URL for custom font from files"
+    },
+    {
+      "id" : "type_asset2_woff2",
+      "label" : "Asset URL (woff2)",
+      "type" : "url",
+      "info" : "URL for custom font from files"
+    },
+    {
+      "type": "select",
+      "id": "type_asset2_weight",
+      "label": "Asset 2 Font Weight",
+      "default": "400",
+      "options": [
+        {
+          "group": "Light",
+          "value": "100",
+          "label": "Thin"
+        },
+        {
+          "group": "Light",
+          "value": "200",
+          "label": "Extra-Light"
+        },
+        {
+          "group": "Light",
+          "value": "300",
+          "label": "Light"
+        },
+        {
+          "group": "Normal",
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "group": "Normal",
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "group": "Bold",
+          "value": "600",
+          "label": "Semi-Bold"
+        },
+        {
+          "group": "Bold",
+          "value": "700",
+          "label": "Bold"
+        },
+        {
+          "group": "Black",
+          "value": "800",
+          "label": "Semi-Black"
+        },
+        {
+          "group": "Black",
+          "value": "900",
+          "label": "Black"
+        }
+      ]
+    }
+  ]
+}

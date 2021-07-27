@@ -1,0 +1,35 @@
+
+@mixin shadowBefore($startingScale: 0.95, $endingScale: 0.99, $shadowColor: rgba(0,0,0,0.14)) {
+  &:before  {
+    @extend %psuedo;
+    position: absolute;
+    z-index: 0;
+    opacity: 0.5;
+    transition: transform 400ms $ease, opacity 400ms $ease;
+    background: transparent;
+    top: -3px;
+    box-shadow: 4px 9px 18px $shadowColor;
+    transform: scale($startingScale);
+  }
+  &:after {
+    @extend %psuedo;
+    z-index: 1;
+    background: var(--color-card-bg);
+
+  }
+
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+  transition: transform 400ms $ease, opacity 400ms $ease !important;
+  backface-visibility: visible;
+  transform:perspective(100px) translate3d(0, 0, 0px );
+  &:hover {
+    transform:perspective(100px) translate3d(0, -2px, 2px );
+
+    &::before {
+      opacity: 1;
+      transform: scale($endingScale) translate3d(0, 3px, -2px);
+    }
+  }
+}

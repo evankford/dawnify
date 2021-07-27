@@ -1,0 +1,58 @@
+@use '../abstracts' as *;
+
+.hidden {
+  display: none !important;
+}
+
+@include media-query($small) {
+  .small-hide, .hide--small {
+    display: none;
+  }
+}
+@include media-query($medium) {
+  .medium-hide, .hide--medium {
+    display: none;
+  }
+}
+@include media-query($large-up) {
+  .large-up-hide, .hide--desktop {
+    display: none;
+  }
+}
+.visually-hidden {
+  @include visually-hidden;
+}
+
+.visually-hidden--inline {
+  margin: 0;
+  height: 1em;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.visibility-hidden {
+  visibility: hidden;
+}
+
+.overflow-hidden-mobile,
+.overflow-hidden-tablet {
+  overflow: hidden;
+}
+
+@include media-query($medium-up) {
+  .overflow-hidden-mobile {
+    overflow: auto;
+  }
+}
+
+@include media-query($large-up) {
+  .overflow-hidden-tablet {
+    overflow: auto;
+  }
+}
