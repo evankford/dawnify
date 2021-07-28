@@ -25,6 +25,14 @@ TODO: Not sure we want these?
   --color-foreground: var(--color-base-solid-button-labels);
   --color-background: var(--color-base-accent-2);
 }
+.color-transparent-light {
+  --color-foreground: #ffffff;
+  --color-background: transparent;
+}
+.color-transparent-dark {
+  --color-foreground: var(--color-base-text);
+  --color-background: transparent;
+}
 
 .color-foreground-outline-button {
   --color-foreground: var(--color-base-outline-button-labels);

@@ -12,11 +12,16 @@
 
 <div class="collection page-width{% if section.settings.swipe_on_mobile == true and section.settings.collection.all_products_count > 2 and section.settings.products_to_show > 2 %} page-width-desktop{% endif %}">
   <div class="{% if section.settings.show_view_all and section.settings.swipe_on_mobile %}title-wrapper-with-link{% endif %}{% if section.settings.title == blank %} title-wrapper-with-link--no-heading{% endif %}{% if section.settings.collection.all_products_count > 2 and section.settings.swipe_on_mobile and section.settings.products_to_show > 2 %} title-wrapper--self-padded-tablet-down{% endif %}">
-    <h2 class="title{% if section.settings.title == blank %} title--no-heading{% endif %}">{{ section.settings.title | escape }}</h2>
-
+    {% if section.settings.introduction != blank %}
+      <div class="h4 label">{{ section.settings.introduction | escape }}</div>
+    {%endif %}
+    <h2 class="title heading{% if section.settings.title == blank %} title--no-heading{% endif %}">{{ section.settings.title | escape }}</h2>
     {%- if section.settings.show_view_all and section.settings.swipe_on_mobile -%}
       <a href="{{ section.settings.collection.url }}" class="link underlined-link large-up-hide">{{ 'sections.featured_collection.view_all' | t }}</a>
     {%- endif -%}
+     {% if section.settings.subtitle != blank %}
+      <div class="h4 label">{{ section.settings.subtitle | escape }}</div>
+    {%endif %}
   </div>
 
   {%- liquid

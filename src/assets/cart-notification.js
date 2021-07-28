@@ -3,9 +3,9 @@ class CartNotification extends HTMLElement {
     super();
 
     this.notification = document.getElementById('cart-notification');
-    this.header = document.querySelector('sticky-header');
+    this.header = document.querySelector('site-header');
     this.onBodyClick = this.handleBodyClick.bind(this);
-    
+
     this.notification.addEventListener('keyup', (evt) => evt.code === 'Escape' && this.close());
     this.querySelectorAll('button[type="button"]').forEach((closeButton) =>
       closeButton.addEventListener('click', this.close.bind(this))

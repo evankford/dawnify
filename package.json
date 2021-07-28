@@ -9,8 +9,10 @@
   "dependencies": {
     "@atmtfy/schema-loader": "^0.0.5",
     "babel-loader": "^8.2.2",
+    "file-loader": "^6.2.0",
     "merge-jsons-webpack-plugin": "^2.0.0-alpha",
-    "normalize.css": "^8.0.1"
+    "normalize.css": "^8.0.1",
+    "swiper": "^6.8.0"
   },
   "scripts": {
     "start": "run-p watch serve",
@@ -18,7 +20,7 @@
     "theme-check": "webpack --env=development && shopify theme check",
     "publish": "cd dist && shopify theme publish",
     "watch": "webpack --watch --env=development",
-    "serve" : "cd dist && shopify theme serve"
+    "serve": "cd dist && shopify theme serve"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^4.0.0-alpha.0",

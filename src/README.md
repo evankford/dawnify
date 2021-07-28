@@ -1,4 +1,13 @@
-# Dawn
+# Dawn Development Flow
+This is a development flow I built around preprocessing and building Shopify 2.0 Themes. By default, it builds the "Dawn" shopify theme, with some extras added for better headers, typography and styling.
+
+## Getting Started
+
+You'll need to have shopify-cli installed, and login using `shopify login`.
+
+After you're logged in, you can simply run `yarn start`. Webpack will watch your files and
+
+## Dawn
 
 [![Build status](https://github.com/shopify/dawn/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Shopify/dawn/actions/workflows/ci.yml?query=branch%3Amain)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?color=informational)](/CONTRIBUTING.md)

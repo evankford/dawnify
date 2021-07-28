@@ -6,7 +6,7 @@ const modules = document.querySelectorAll('[data-module]');
 modules.forEach(async el=> {
   const moduleName = el.getAttribute('data-module');
   import(
-    /* webpackMode:"lazy" */ /* webpackPrefetch:true */ /* webpackChunkName:"module-[request]" */ `./modules/${moduleName}`
+    /* webpackMode:"lazy" */ /* webpackPrefetch:true */ /* webpackChunkName:"[request]" */ `./modules/${moduleName}`
   )
     .then((classConstructor) => {
       new classConstructor(el);

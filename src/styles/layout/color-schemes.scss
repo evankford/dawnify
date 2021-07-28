@@ -3,14 +3,16 @@ body,
 .color-background-1,
 .color-background-2,
 .color-inverse,
+.color-transparent-light,
+.color-transparent-dark,
 .color-accent-1,
 .color-accent-2 {
-  color: rgba(var(--color-foreground), 0.75);
-  background-color: rgb(var(--color-background));
+  color: var(--color-foreground);
+  background-color: var(--color-background);
 }
 
 .background-secondary {
-  background-color: rgba(var(--color-foreground), 0.04);
+  background-color: var(--color-base-background-2);
   padding: 4rem 0 5rem;
 }
 

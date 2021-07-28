@@ -5,9 +5,19 @@
   "settings": [
     {
       "type": "text",
+      "id": "introduction",
+      "label": "Introduction"
+    },
+    {
+      "type": "text",
       "id": "title",
       "default": "Featured collection",
       "label": "t:sections.featured-collection.settings.title.label"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle"
     },
     {
       "type": "collection",

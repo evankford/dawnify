@@ -12,7 +12,6 @@ var sass = require('sass');
 
 const env = process.env.WEBPACK_ENV ? process.env.WEBPACK_ENV : "development";
 function getSections() {
-
   let sectionBundles = []
   const allSections = glob.sync(path.resolve('./src/sections/**/*/*.liquid'));
   allSections.forEach(fileName=> {
@@ -51,17 +50,23 @@ function getSections() {
 
 function getEntries() {
   let componentEntries = {};
-  const allComponents = glob.sync(path.resolve('./src/styles/_modules/*/*css'))
 
-  allComponents.forEach(file=> {
+  const allCssComponents = glob.sync(path.resolve('./src/styles/_modules/*/*css'))
+  allCssComponents.forEach(file=> {
     const type = file.substring(file.indexOf('_modules/') + 9, file.lastIndexOf('/'));
     const name = file.substring(file.lastIndexOf('/') + 1, file.lastIndexOf('.'));
     componentEntries[`${type}-${name}`] = [file];
+  })
+  const allJsElements = glob.sync(path.resolve('./src/scripts/_elements/*/*.js'))
+  allJsElements.forEach(file=> {
+    const name = file.substring(file.lastIndexOf('/') + 1, file.lastIndexOf('.'));
+    componentEntries[`${name}`] = [file];
   })
 
   return {
     ...componentEntries,
     theme: ['./src/scripts/theme.js', './src/styles/theme.scss'],
+    slider: ['./src/scripts/slider.js', './src/styles/slider.scss'],
     product: ['./src/scripts/product.js', './src/styles/product.scss'],
   };
 }
@@ -72,8 +77,8 @@ module.exports = {
   entry: getEntries(),
   output: {
     filename: 'assets/[name].js',
-    chunkFilename: 'assets/[name].bundle.js',
-    publicPath: 'dist/',
+    chunkFilename: 'assets/[name].js',
+    // publicPath: 'dist/',
     path: path.resolve(__dirname, outputDirectory),
   },
   module: {

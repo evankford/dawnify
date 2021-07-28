@@ -626,3 +626,6 @@ class VariantRadios extends VariantSelects {
 }
 
 customElements.define('variant-radios', VariantRadios);
+
+
+/// TODO watch all sections

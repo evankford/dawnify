@@ -48,8 +48,8 @@
     },
     {
       "type": "text",
-      "id": "heading_typekit",
-      "label": "Typekit/GF Heading Font Family",
+      "id": "header_typekit",
+      "label": "Typekit/GF header Font Family",
       "info": "Usually all lowercase + hyphenated"
     },
     {

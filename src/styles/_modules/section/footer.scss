@@ -13,15 +13,21 @@
     display: block;
   }
 
+  .grid {
+
+    @include media-query($medium-up) {
+      display: block;
+      margin-left: 0;
+    }
+  }
+}
+
+.footer-block {
+
 }
 
 
 @include media-query($medium-up){
-
- .footer .grid {
-    display: block;
-    margin-left: 0;
-  }
 
   .footer-block.grid__item {
     padding: 0;

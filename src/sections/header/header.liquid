@@ -28,10 +28,18 @@
 {% assign first_type = section.blocks.first.type %}
 {% assign json_logo = false %}
 {% assign is_first_button = true %}
-
-<{% if section.settings.enable_sticky_header %}sticky-header{% else %}div{% endif %} class="header-wrapper{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}">
-  <header class="header first--{{ first_type }} page-width{% if section.settings.menu != blank %} header--has-menu{% endif %}" data-breakpoint="{{ section.settings.mobile_menu_breakpoint | default : 'small' }}">
-
+<style>
+.header-wrapper {
+ --bg: {{ section.setting.background-color | default: "var(--color-background)"" }};
+ --obg:{{  section.setting.background-color | default: '#ffffff' }};
+ --txt: {{ section.setting.background-color | default: "rgba(var(--color-foreground), 0.75)" }};
+ --txt-h: {{ section.setting.background-color | default: "rgba(var(--color-foreground), 1))" }};
+ --otxt: {{ section.setting.background-color | default: "rgba(255, 255,255,0.75)" }};
+ --otxt-h: {{ section.setting.background-color | default: '#ffffff' }};
+}</style>
+<site-header{% if section.settings.enable_sticky_header %} data-sticky {% endif %}{% if section.settings.enable_overlay %} data-overlay {% endif %} class="header-wrapper{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}">
+  <header class="header first--{{ first_type }} layout--{{ section.settings.layout }} page-width{% if section.settings.menu != blank %} header--has-menu{% endif %}" data-breakpoint="{{ section.settings.mobile_menu_breakpoint | default : 'small' }}">
+    <
     {% assign index = 0 %}
     {% assign in_group = false %}
     {%- for block in section.blocks -%}
@@ -50,6 +58,14 @@
     {% comment %} Group Contents {% endcomment %}
     <div class="header__item type--{{ block.type }}{% unless block.settings.visible_large %} hide--desktop {% endunless %}{% unless block.settings.visible_medium %} hide--medium {% endunless %}{% unless block.settings.visible_small %} hide--small {% endunless %} {% if block.type == 'button' and is_first_button %}{% assign is_first_button = false %}first-button{% endif %}" {% if block.settings.align %} data-align="{{ block.settings.align }}" {% endif %}>
         {% case block.type %}
+        {% when "button" %}
+          {%- if block.settings.button_label != blank -%}
+            <a{% if block.settings.button_link != blank %} href="{{ block.settings.button_link }}"{% endif %} class="{% if block.settings.button_style %} button {% else %} link--text link {% endif %} {% if block.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}"{% if block.settings.button_link == blank %} aria-disabled="true"{% endif %} {{ block.shopify_attributes }}>
+              {{ block.settings.button_label | escape }}
+            </a>
+          {%- endif -%}
+        {% when "content" %}
+          <h4 class="heading">{{ block.settings.title | escape }}</h4>
         {% when "logo" %}
           {% liquid
             if block.settings.socials_layout == "before" or block.settings.social_layout == "above"
@@ -60,21 +76,22 @@
             endif
           %}
           <style>
-            .header-logo img{
-              max-width: {{ block.settings.logo_width | default: 150 }}px;
-            }
             .header-logo {
-              margin: {{ block.settings.logo_spacing_top | minus: 40 | default: 0 }}% {{ block.settings.logo_spacing_horizontal | minus: 10 | default: 0 }}% {{ block.settings.logo_spacing_bottom | minus: 40 | default: 0 }}%;
+              --ar: {{ 1 | divided_by: block.settings.image.aspect_ratio | times: 100 }}%;
+              --mw: {{ block.settings.logo_width }}px;
+              max-width: 100%; /* needed for the psuedoelement */
+              width: {{ block.settings.logo_width | default: 150 }}px;
+              margin: {{ block.settings.logo_spacing_top | minus: 40 | default: 0 }}% auto {{ block.settings.logo_spacing_bottom | minus: 40 | default: 0 }}%;
             }
 
             @media (max-width: 790px) {
-              .header-logo img {
-                max-width: {{ block.settings.width_mobile | default: 100 }}px;
+              .header-logo {
+              --mw: {{ block.settings.logo_width_mobile }};
+                width: {{ block.settings.logo_width_mobile | default: 100 }}px;
               }
             }
           </style>
-
-          <a href="{{ routes.root_url }}" class="header-logo header__heading-link link link--text focus-inset {% if block.settings.socials_layout == 'before' or block.settings.socials_layout == 'after' %} flex-center {%endif%}">
+          <a href="{{ routes.root_url }}" class="header-logo media media--adapt header__heading-link link link--text focus-inset {% if block.settings.socials_layout == 'before' or block.settings.socials_layout == 'after' %} flex-center {%endif%}">
             {%- if block.settings.image != blank -%}
               {% assign json_logo = block.settings.image | img_url: block.settings.image.width | prepend: "https:" | json %}
               {%- assign image_size = block.settings.logo_width | append: 'x' -%}
@@ -141,7 +158,8 @@
     {% endif %}
   {% endfor %}
   </header>
-</{% if section.settings.enable_sticky_header %}sticky-header{% else %}div{% endif %}>
+
+</site-header>
 
 {%- if request.page_type != 'cart' -%}
   {%- render 'cart-notification' -%}

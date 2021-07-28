@@ -63,6 +63,26 @@
   }
 }
 
+.media--wide {
+  display: none;
+
+  @include media-query($widescreen) {
+    display: block;
+    &~.media {
+      display: none;
+    }
+  }
+}
+.media--mobile {
+  display: none;
+
+  @include media-query($small) {
+    display: block;
+    &~.media {
+      display: none;
+    }
+  }
+}
 .media--transparent {
   background-color: transparent;
 }

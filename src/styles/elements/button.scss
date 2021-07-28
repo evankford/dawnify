@@ -12,10 +12,10 @@
   align-items: center;
   box-sizing: border-box;
   font: inherit;
-  padding: 0.9rem 3rem 1.1rem;
+  // padding: 0.9rem 3rem 1.1rem;
   text-decoration: none;
   border: 0;
-  border-radius: 0;
+  // border-radius: 0;
   background-color: rgba(var(--color-button), var(--alpha-button-background));
   box-shadow: 0 0 0 0.1rem rgba(var(--color-button), var(--alpha-button-border));
   color: rgb(var(--color-button-text));
@@ -42,9 +42,9 @@
 .button-label,
 .shopify-challenge__button,
 .customer button {
-  font-size: 1.5rem;
-  letter-spacing: 0.1rem;
-  line-height: 1.2;
+  // font-size: 1.5rem;
+  // letter-spacing: 0.1rem;
+  // line-height: 1.2;
 }
 
 .button--tertiary {

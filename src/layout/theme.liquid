@@ -33,7 +33,7 @@
       assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
       assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
     %}
-
+    {% if settings.type_font_code != blank %}{{settings.type_font_code}}{% endif %}
     {% style %}
       {{ settings.type_body_font | font_face: font_display: 'swap' }}
       {{ body_font_bold | font_face: font_display: 'swap' }}
@@ -41,14 +41,22 @@
       {{ body_font_bold_italic | font_face: font_display: 'swap' }}
       {{ settings.type_header_font | font_face: font_display: 'swap' }}
 
+      {% comment %} TODO: Load font files {% endcomment %}
+
       :root {
-        --font-body-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+
+        --font-body-family: {% if settings.body_typekit != "" %}{{ settings.body_typekit }}, {% endif %}{{settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
         --font-body-style: {{ settings.type_body_font.style }};
         --font-body-weight: {{ settings.type_body_font.weight }};
 
-        --font-heading-family: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
+        --font-heading-family: {% if settings.header_typekit != "" %}{{ settings.header_typekit }}, {% endif %}{{settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
         --font-heading-style: {{ settings.type_header_font.style }};
         --font-heading-weight: {{ settings.type_header_font.weight }};
+
+
+        --font-extra-family: {% if settings.extra_typekit != "" %}{{ settings.extra_typekit }}, {% endif %}{{settings.type_extra_font.family }}, {{ settings.type_extra_font.fallback_families }};
+        --font-extra-style: {{ settings.type_extra_font.style }};
+        --font-extra-weight: {{ settings.type_extra_font.weight }};
 
         --color-base-text: {{ settings.colors_text.red }}, {{ settings.colors_text.green }}, {{ settings.colors_text.blue }};
         --color-base-background-1: {{ settings.colors_background_1.red }}, {{ settings.colors_background_1.green }}, {{ settings.colors_background_1.blue }};
@@ -93,6 +101,7 @@
       }
     {% endstyle %}
 
+    {{'typography.scss.css' | asset_url | | stylesheet_tag}}
     {{ 'theme.css' | asset_url | stylesheet_tag }}
 
     {%- unless settings.type_body_font.system? -%}
@@ -141,5 +150,9 @@
         unavailable: `{{ 'products.product.unavailable' | t }}`,
       }
     </script>
+
+    {{ 'slider.js' | asset_url | script_tag }}
+    {{ 'slider.css' | append: '?enable_css_minification=1' | asset_url | stylesheet_tag }}
+
   </body>
 </html>

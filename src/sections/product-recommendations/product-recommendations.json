@@ -10,9 +10,19 @@
     },
     {
       "type": "text",
+      "id": "introduction",
+      "label": "Introduction"
+    },
+    {
+      "type": "text",
       "id": "heading",
       "default": "You may also like",
       "label": "t:sections.product-recommendations.settings.heading.label"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle"
     },
     {
       "type": "header",

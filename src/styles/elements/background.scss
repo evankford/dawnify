@@ -1,0 +1,16 @@
+@use "../abstracts/" as * ;
+
+.background-element {
+  @extend %psuedo;
+  z-index: 0;
+
+   &::before {
+    @extend %psuedo;
+    z-index: 2;
+    opacity: var(--oo, 0);
+    background-color: var(--oc, #000000);
+  }
+  .media  {
+    @extend %psuedoish;
+  }
+}

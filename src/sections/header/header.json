@@ -16,7 +16,7 @@
     },
     {
       "type": "checkbox",
-      "id": "overlay",
+      "id": "enable_overlay",
       "default": true,
       "info" : "Overlays header over image banner sections if they are the first section",
       "label": "Overlay header?"
@@ -33,9 +33,139 @@
       "default": true,
       "label": "t:sections.header.settings.enable_sticky_header.label",
       "info": "t:sections.header.settings.enable_sticky_header.info"
+    },
+    {
+      "type" : "header",
+      "content" : "Colors"
+    },
+    {
+      "type" : "color",
+      "label" : "Background",
+      "id" : "background"
+    },
+    {
+      "type" : "color",
+      "label" : "Text Color",
+      "id" : "color"
+    },
+    {
+      "type" : "color",
+      "label" : "Color (Hover)",
+      "id" : "color_hover"
+    },
+    {
+      "type" : "color",
+      "label" : "Color (Overlay)",
+      "id" : "color_overlay"
+    },
+    {
+      "type" : "color",
+      "label" : "Color (Overlay Hover)",
+      "id" : "color_overlay_hover"
+    },
+    {
+      "type" : "header" ,
+      "content" : "Layout"
+    },
+    {
+      "type" : "select",
+      "id" : "layout",
+      "label" : "Layout",
+      "options" : [
+        {
+          "group" : "Horizontal",
+          "value" : "centered",
+          "label" : "Centered"
+        },
+        {
+          "group" : "Horizontal",
+          "value" : "spaced",
+          "label" : "Spaced"
+        }
+      ]
     }
   ],
   "blocks" : [
+    {
+      "type" : "link",
+      "name" : "link",
+      "settings" : [
+        {
+          "type" :"text",
+          "label" : "Button Label",
+          "id" : "button_label",
+          "default" :"A Button"
+        },
+        {
+          "type" :"url",
+          "label" : "Button Link",
+          "id" : "button_link",
+          "default" :"/"
+        },
+        {
+          "type" : "checkbox",
+          "id" : "button_style",
+          "label" : "Button Style",
+          "default" : true
+        },
+        {
+          "type" : "header",
+          "content" : "visibility"
+        },
+        {
+          "type" : "checkbox",
+          "id" : "visible_large",
+          "label" : "Large Screens",
+          "default" :true
+        },
+        {
+          "type" : "checkbox",
+          "id" : "visible_medium",
+          "label" : "Medium Screens",
+          "default" :true
+        },
+        {
+          "type" : "checkbox",
+          "id" : "visible_small",
+          "label" : "Small Screens",
+          "default" :true
+        }
+      ]
+    },
+    {
+      "type" : "content",
+      "name" : "Content",
+      "settings" : [
+        {
+          "type" :"text",
+          "label" : "Text",
+          "id" : "title",
+          "default" :"Some Text Here"
+        },
+        {
+          "type" : "header",
+          "content" : "visibility"
+        },
+        {
+          "type" : "checkbox",
+          "id" : "visible_large",
+          "label" : "Large Screens",
+          "default" :true
+        },
+        {
+          "type" : "checkbox",
+          "id" : "visible_medium",
+          "label" : "Medium Screens",
+          "default" :true
+        },
+        {
+          "type" : "checkbox",
+          "id" : "visible_small",
+          "label" : "Small Screens",
+          "default" :true
+        }
+      ]
+    },
     {
       "type" : "logo",
       "name" : "Logo",
@@ -79,15 +209,6 @@
           "default": 20,
           "info" : "Less than 20 is negative!",
           "label": "Logo Spacing Bottom "
-        },
-        {
-          "type": "range",
-          "id": "logo_spacing_horizontal",
-          "min": 0,
-          "max": 50,
-          "step": 1,
-          "default": 20,
-          "label": "Logo Spacing (horizontal)"
         },
         {
           "type" : "header",
