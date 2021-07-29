@@ -13,7 +13,10 @@
 <script src="{{ 'collection-filters-form.js' | asset_url }}" defer="defer"></script>
 
 {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
-
+<style>
+#shopify-section-{{section.id}} {
+  margin: {{section.settings.spacing_top | minus: 5 | divided_by: 3.0 | default: 1}}rem auto {{section.settings.spacing_bottom | minus: 5 | divided_by: 3.0 | default: 1}}rem auto;
+}</style>
 <div class="page-width collection-filters" id="main-collection-filters" data-id="{{ section.id }}">
   {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
     {%- assign total_active_values = 0 -%}
@@ -433,7 +436,7 @@
 <div id="CollectionProductGrid">
   {%- paginate collection.products by section.settings.products_per_page -%}
     {%- if collection.products.size == 0 -%}
-      <div class="collection collection--empty page-width" id="main-collection-product-grid" data-id="{{ section.id }}">
+      <div class="collection collection--empty {% unless section.settings.full_width == true %} page-width {% endunless %}" id="main-collection-product-grid" data-id="{{ section.id }}">
         <div class="loading-overlay">
           <div class="loading-overlay__spinner">
             <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
@@ -468,7 +471,7 @@
         </p>
 
         <ul id="main-collection-product-grid" data-id="{{ section.id }}" class="
-          grid grid--2-col negative-margin product-grid
+          grid grid--2-col product-grid  product-grid--{{section.settings.grid_size}}
           {% if collection.products_count < 4 %} grid--{{ collection.products_count }}-col-tablet{% else %}
             {% if collection.products_count == 4 %} grid--4-col-desktop{% else %} grid--3-col-tablet grid--one-third-max grid--4-col-desktop grid--quarter-max{% endif %}
           {% endif %}">

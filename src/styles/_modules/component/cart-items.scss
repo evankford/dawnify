@@ -4,6 +4,15 @@
   border: none;
 }
 
+
+.cart-items__wrap {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 .cart-items th {
   text-align: left;
   padding-bottom: 1.8rem;

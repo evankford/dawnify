@@ -65,6 +65,8 @@
         --color-base-outline-button-labels: {{ settings.colors_outline_button_labels.red }}, {{ settings.colors_outline_button_labels.green }}, {{ settings.colors_outline_button_labels.blue }};
         --color-base-accent-1: {{ settings.colors_accent_1.red }}, {{ settings.colors_accent_1.green }}, {{ settings.colors_accent_1.blue }};
         --color-base-accent-2: {{ settings.colors_accent_2.red }}, {{ settings.colors_accent_2.green }}, {{ settings.colors_accent_2.blue }};
+        --color-card-background: {{ settings.colors_card_background.red }}, {{ settings.colors_card_background.green }},{{ settings.colors_card_background.blue }};
+        --color-card-text: {{ settings.colors_card_text.red }}, {{ settings.colors_card_text.green }}, {{ settings.colors_card_text.blue }};
         --payment-terms-background-color: {{ settings.colors_background_1 }};
       }
 
@@ -100,6 +102,14 @@
         }
       }
     {% endstyle %}
+    {% if settings.header_code != blank %}
+    {{settings.header_code}}
+    {% endif %}
+    {% if settings.custom_css != blank %}
+    <style>
+      {{settings.custom_css}}
+    </style>
+    {% endif %}
 
     {{'typography.scss.css' | asset_url | | stylesheet_tag}}
     {{ 'theme.css' | asset_url | stylesheet_tag }}
@@ -114,7 +124,7 @@
     <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
   </head>
 
-  <body>
+  <body class="template-{{template.name}}">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ "accessibility.skip_to_text" | t }}
     </a>
@@ -122,7 +132,7 @@
     {% section 'announcement-bar' %}
     {% section 'header' %}
 
-    <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
+    <main id="MainContent" class="content-for-layout focus-none {% if template.name == 'index' %} has-overlay {% endif %}" role="main" tabindex="-1">
       {{ content_for_layout }}
     </main>
 
@@ -151,8 +161,15 @@
       }
     </script>
 
+    {% if settings.grid_swatches_enabled == true %}
+      {{ 'grid-swatches.js' | asset_url | script_tag }}
+      {{ 'component-grid-swatches.css' | asset_url | stylesheet_tag }}
+    {% endif %}
+
     {{ 'slider.js' | asset_url | script_tag }}
     {{ 'slider.css' | append: '?enable_css_minification=1' | asset_url | stylesheet_tag }}
-
+    {% if settings.footer_code != blank %}
+    {{settings.footer_code}}
+    {% endif %}
   </body>
 </html>

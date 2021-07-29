@@ -18,7 +18,9 @@
     "start": "run-p watch serve",
     "deploy": "webpack -env=production && cd dist && shopify theme push",
     "theme-check": "webpack --env=development && shopify theme check",
-    "publish": "cd dist && shopify theme publish",
+    "push": "yarn webpack --env=production && cd dist && shopify theme push --unpublished --nodelete",
+    "update": "yarn webpack --env=production && cd dist && shopify theme push --nodelete",
+    "publish": "yarn webpack --env=production && cd dist && shopify theme push --publish --nodelete",
     "watch": "webpack --watch --env=development",
     "serve": "cd dist && shopify theme serve"
   },

@@ -3,6 +3,7 @@
 @import "~swiper/swiper.scss";
 @import "~swiper/components/a11y/a11y.scss";
 @import "~swiper/components/thumbs/thumbs.scss";
+@import "~swiper/components/lazy/lazy.scss";
 @import "~swiper/components/pagination/pagination.scss";
 @import "~swiper/components/navigation/navigation.scss";
 @import "~swiper/components/effect-fade/effect-fade.scss";
@@ -16,9 +17,15 @@ ul.swiper-wrapper {
 slider-element {
   display: block;
   position: relative;
+  background: var(--color-foreground);
+
+  --swiper-theme-color: white;
+}
+.swiper-pagination-bullet {
+  background: var(--swiper-pagination-color, var(--swiper-theme-color));
 }
 
-li.swiper-slide {
+div.swiper-slide, li.swiper-slide {
   height: 100%;
 
   .auto-height & {
@@ -31,6 +38,8 @@ li.swiper-slide {
     height: 100%;
     box-sizing: border-box;
     width: 100%;
+    top: 0;
+    padding:0;
   }
 }
 
@@ -50,3 +59,44 @@ html.js .swiper-slide.swiper-slide-active {
     transform: translateY(0);
   }
 }
+
+.swiper-navigation {
+  position: absolute;
+  top: 50%;
+  margin: -25px 0 -25px;
+  width: 100%;
+  z-index: 12;
+}
+
+button[data-prev],
+button[data-next] {
+  padding: 12px;
+  appearance: none;
+  border: 0;
+  background: transparent;
+  position: absolute;
+  top: 0;
+  border-radius: 0;
+  color: var(--swiper-theme-color);
+  display: inline-block;
+
+  svg {
+    width: 24px;
+    height: auto;
+    fill: currentColor;
+  }
+}
+
+button[data-prev] {
+  left: 0;
+  svg {
+    transform: rotate(90deg)
+  }
+}
+button[data-next] {
+  right: 0;
+  svg {
+    transform: rotate(-90deg)
+  }
+}
+

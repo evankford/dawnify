@@ -18,6 +18,70 @@
           "default": "footer",
           "label": "t:sections.footer.blocks.link_list.settings.menu.label",
           "info": "t:sections.footer.blocks.link_list.settings.menu.info"
+        },
+        {
+          "type" : "header",
+          "content" : "Visibility"
+        },
+        {
+          "type" : "checkbox",
+          "id" : "visible_large",
+          "label" : "Large Screens",
+          "default" :true
+        },
+        {
+          "type" : "checkbox",
+          "id" : "visible_medium",
+          "label" : "Medium Screens",
+          "default" :true
+        },
+        {
+          "type" : "checkbox",
+          "id" : "visible_small",
+          "label" : "Small Screens",
+          "default" :true
+        }
+      ]
+    },
+    {
+      "type": "accordion",
+      "name": "Accordion Menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Quick links",
+          "label": "t:sections.footer.blocks.link_list.settings.heading.label",
+          "info": "t:sections.footer.blocks.link_list.settings.heading.info"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "default": "footer",
+          "label": "t:sections.footer.blocks.link_list.settings.menu.label",
+          "info": "t:sections.footer.blocks.link_list.settings.menu.info"
+        },
+        {
+          "type" : "header",
+          "content" : "Visibility"
+        },
+        {
+          "type" : "checkbox",
+          "id" : "visible_large",
+          "label" : "Large Screens",
+          "default" :true
+        },
+        {
+          "type" : "checkbox",
+          "id" : "visible_medium",
+          "label" : "Medium Screens",
+          "default" :true
+        },
+        {
+          "type" : "checkbox",
+          "id" : "visible_small",
+          "label" : "Small Screens",
+          "default" :true
         }
       ]
     },
@@ -59,6 +123,28 @@
           "type": "checkbox",
           "id": "include_copyright",
           "label": "Include Copyright?"
+        },
+         {
+          "type" : "header",
+          "content" : "Visibility"
+        },
+        {
+          "type" : "checkbox",
+          "id" : "visible_large",
+          "label" : "Large Screens",
+          "default" :true
+        },
+        {
+          "type" : "checkbox",
+          "id" : "visible_medium",
+          "label" : "Medium Screens",
+          "default" :true
+        },
+        {
+          "type" : "checkbox",
+          "id" : "visible_small",
+          "label" : "Small Screens",
+          "default" :true
         }
       ]
     },
@@ -124,6 +210,28 @@
           ],
           "default": "none",
           "label": "t:sections.footer.settings.color_scheme.label"
+        },
+         {
+          "type" : "header",
+          "content" : "Visibility"
+        },
+        {
+          "type" : "checkbox",
+          "id" : "visible_large",
+          "label" : "Large Screens",
+          "default" :true
+        },
+        {
+          "type" : "checkbox",
+          "id" : "visible_medium",
+          "label" : "Medium Screens",
+          "default" :true
+        },
+        {
+          "type" : "checkbox",
+          "id" : "visible_small",
+          "label" : "Small Screens",
+          "default" :true
         }
       ]
     }

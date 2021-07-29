@@ -262,13 +262,13 @@
         {
           "type"  : "url",
           "id" : "video",
-          "label"  : "Video Asset URL",
+          "label"  : "Video URL",
           "info" : "You need to add a small MP4 of the video to 'Files' to add here."
         },
         {
           "type"  : "url",
           "id" : "video_small",
-          "label"  : "Video Asset URL",
+          "label"  : "Video URL (small)",
           "info" : "You need to add a small MP4 of the video to 'Files' to add here."
         },
          {

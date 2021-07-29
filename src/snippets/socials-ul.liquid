@@ -1,4 +1,4 @@
-<ul class="list list-social list-unstyled" role="list">
+<ul class="list list-social list-unstyled" role="list" {{   attrs }}>
   {%- if settings.social_twitter_link != blank -%}
     <li class="list-social__item">
       <a href="{{ settings.social_twitter_link }}" class="link link--text list-social__link" aria-describedby="a11y-external-message">
@@ -60,6 +60,38 @@
       <a href="{{ settings.social_vimeo_link }}" class="link link--text list-social__link" aria-describedby="a11y-external-message">
         {%- render 'icon-vimeo' -%}
         <span class="visually-hidden">{{ 'general.social.links.vimeo' | t }}</span>
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_apple_link != blank -%}
+    <li class="list-social__item">
+      <a href="{{ settings.social_apple_link }}" class="link link--text list-social__link" aria-describedby="a11y-external-message">
+        {%- render 'icon-apple' -%}
+        <span class="visually-hidden">{{ 'general.social.links.apple' | t }}</span>
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_spotify_link != blank -%}
+    <li class="list-social__item">
+      <a href="{{ settings.social_spotify_link }}" class="link link--text list-social__link" aria-describedby="a11y-external-message">
+        {%- render 'icon-spotify' -%}
+        <span class="visually-hidden">{{ 'general.social.links.spotify' | t }}</span>
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_pandora_link != blank -%}
+    <li class="list-social__item">
+      <a href="{{ settings.social_pandora_link }}" class="link link--text list-social__link" aria-describedby="a11y-external-message">
+        {%- render 'icon-pandora' -%}
+        <span class="visually-hidden">{{ 'general.social.links.pandora' | t }}</span>
+      </a>
+    </li>
+  {%- endif -%}
+  {%- if settings.social_amazon_link != blank -%}
+    <li class="list-social__item">
+      <a href="{{ settings.social_amazon_link }}" class="link link--text list-social__link" aria-describedby="a11y-external-message">
+        {%- render 'icon-amazon' -%}
+        <span class="visually-hidden">{{ 'general.social.links.amazon' | t }}</span>
       </a>
     </li>
   {%- endif -%}

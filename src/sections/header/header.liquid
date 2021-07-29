@@ -30,16 +30,20 @@
 {% assign is_first_button = true %}
 <style>
 .header-wrapper {
- --bg: {{ section.setting.background-color | default: "var(--color-background)"" }};
- --obg:{{  section.setting.background-color | default: '#ffffff' }};
- --txt: {{ section.setting.background-color | default: "rgba(var(--color-foreground), 0.75)" }};
- --txt-h: {{ section.setting.background-color | default: "rgba(var(--color-foreground), 1))" }};
- --otxt: {{ section.setting.background-color | default: "rgba(255, 255,255,0.75)" }};
- --otxt-h: {{ section.setting.background-color | default: '#ffffff' }};
+  {% if section.settings.background != blank %}
+ --bg: {{ section.settings.background | default: "var(--color-background)" }};
+ --color-background: {{ section.settings.background.red}}, {{ section.settings.background.green}}, {{ section.settings.background.blue}};
+ {% endif %}
+ {% if section.settings.color != blank %}
+ --txt: {{ section.settings.color | default: "rgba(var(--color-foreground), 0.75)" }};
+ --color-foreground: {{ section.settings.color.red }}, {{ section.settings.color.green }}, {{ section.settings.color.blue }} ;
+ {% endif %}
+ --txt-h: {{ section.settings.color_hover | default: "rgba(var(--color-foreground), 1))" }};
+ --otxt: {{ section.settings.color_overlay | default: "rgba(255, 255,255,0.75)" }};
+ --otxt-h: {{ section.settings.color_overlay_hover | default: '#ffffff' }};
 }</style>
-<site-header{% if section.settings.enable_sticky_header %} data-sticky {% endif %}{% if section.settings.enable_overlay %} data-overlay {% endif %} class="header-wrapper{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}">
+<site-header{% if section.settings.enable_sticky_header %} data-sticky {% endif %}{% if section.settings.enable_overlay %} data-overlay="true" {% endif %} class="header-wrapper{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}">
   <header class="header first--{{ first_type }} layout--{{ section.settings.layout }} page-width{% if section.settings.menu != blank %} header--has-menu{% endif %}" data-breakpoint="{{ section.settings.mobile_menu_breakpoint | default : 'small' }}">
-    <
     {% assign index = 0 %}
     {% assign in_group = false %}
     {%- for block in section.blocks -%}
@@ -58,7 +62,7 @@
     {% comment %} Group Contents {% endcomment %}
     <div class="header__item type--{{ block.type }}{% unless block.settings.visible_large %} hide--desktop {% endunless %}{% unless block.settings.visible_medium %} hide--medium {% endunless %}{% unless block.settings.visible_small %} hide--small {% endunless %} {% if block.type == 'button' and is_first_button %}{% assign is_first_button = false %}first-button{% endif %}" {% if block.settings.align %} data-align="{{ block.settings.align }}" {% endif %}>
         {% case block.type %}
-        {% when "button" %}
+        {% when "link" %}
           {%- if block.settings.button_label != blank -%}
             <a{% if block.settings.button_link != blank %} href="{{ block.settings.button_link }}"{% endif %} class="{% if block.settings.button_style %} button {% else %} link--text link {% endif %} {% if block.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}"{% if block.settings.button_link == blank %} aria-disabled="true"{% endif %} {{ block.shopify_attributes }}>
               {{ block.settings.button_label | escape }}
@@ -95,7 +99,7 @@
             {%- if block.settings.image != blank -%}
               {% assign json_logo = block.settings.image | img_url: block.settings.image.width | prepend: "https:" | json %}
               {%- assign image_size = block.settings.logo_width | append: 'x' -%}
-              {% if block.settings.overlay_image != blank and section.settings.overlay == true %}
+              {% if block.settings.overlay_image != blank and section.settings.enable_overlay == true %}
                 <img srcset="{{ block.settings.overlay_image | img_url: image_size }} 1x, {{ block.settings.overlay_image | img_url: image_size, scale: 2 }} 2x"
                   src="{{ block.settings.overlay_image | img_url: image_size }}"
                   loading="lazy"

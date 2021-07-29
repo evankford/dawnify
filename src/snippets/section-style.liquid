@@ -1,0 +1,68 @@
+{% comment %} Renders section style. Requires id and section settings object {% endcomment %}
+<style>
+  #{% unless inner %}shopify-section-{% endunless %}{{ id }} {
+    {% if settings.background_color != blank %}
+    background-color: {{ settings.background_color | default: "transparent" }};
+    --color-background: {{ settings.background_color.red }}, {{ settings.background_color.green }},{{ settings.background_color.blue }};
+    {% endif %}
+    {% if settings.text_color != blank%}
+    color: {{ settings.text_color | default: "inherit" }};
+    --color-foreground: {{ settings.text_color.red }}, {{ settings.text_color.green }}, {{ settings.text_color.blue }};
+    {%endif%}
+
+    {% if settings.background_image != blank %}
+    background-position: 50% 50%;
+    {% if settings.background_style == "cover" or settings.background_style == "contain" %}
+    background_image: url({{ settings.background_image | img_url: "450x" }});
+    background-size: {{ settings.background_style }};
+    background-repeat: no-repeat;
+    {% else %}
+    background-image: url({{ settings.background_image | img_url: "master" }});
+    {% if settings.background_style == "repeat-x"%}
+    background-size: auto 100%;
+    {% elsif settings.background_style == "repeat-y" %}
+    background-size: 100% auto;
+    {% else %}
+    background-size: {{ settings.background_image.width | divided_by: 2 }}px;
+    {% endif %}
+
+    background-repeat: {{ settings.background_style }};
+    {% endif %}
+    {% endif %}
+    padding-top: {{ settings.spacing_top | divided_by: 2.5 | default: 1}}rem;
+    padding-bottom: {{ settings.spacing_bottom | divided_by: 2.5 | default: 1}}rem;
+  }
+  {% if settings.background_image != blank and  settings.background_style == "cover" or settings.background_style == "contain" %}
+
+  @media (min-width: 450px) {
+    #shopify-section-{{ id }} {
+      background-image: url({{ settings.background_image | img_url: "720x" }});
+    }
+  }
+  @media (min-width: 720px) {
+    #shopify-section-{{ id }} {
+      background-image: url({{ settings.background_image | img_url: "1080x" }});
+    }
+  }
+  @media (min-width: 1080px) {
+    #shopify-section-{{ id }} {
+      background-image: url({{ settings.background_image | img_url: "1400x" }});
+    }
+  }
+  @media (min-width: 1080px) {
+    #shopify-section-{{ id }} {
+      background-image: url({{ settings.background_image | img_url: "1750x" }});
+    }
+  }
+  @media (min-width: 1750px) {
+    #shopify-section-{{ id }} {
+      background-image: url({{ settings.background_image | img_url: "2000x" }});
+    }
+  }
+  @media (min-width: 2000px) {
+    #shopify-section-{{ id }} {
+      background-image: url({{ settings.background_image | img_url: "2400x" }});
+    }
+  }
+  {% endif %}
+</style>

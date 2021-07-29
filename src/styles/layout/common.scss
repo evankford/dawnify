@@ -1,0 +1,7 @@
+main#MainContent {
+  position: relative;
+  z-index: 1;
+  &:not(.has-overlay) {
+    padding-top: var(--header-bottom, 65px);
+  }
+}

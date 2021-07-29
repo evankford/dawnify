@@ -1,5 +1,6 @@
 {
   "name": "t:sections.main-cart-items.name",
+  "class" : "cart-items__wrap",
   "settings": [
     {
       "type": "checkbox",

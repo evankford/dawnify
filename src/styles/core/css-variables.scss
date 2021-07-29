@@ -26,12 +26,16 @@ TODO: Not sure we want these?
   --color-background: var(--color-base-accent-2);
 }
 .color-transparent-light {
-  --color-foreground: #ffffff;
+  --color-foreground: 255, 255, 255;
   --color-background: transparent;
 }
 .color-transparent-dark {
   --color-foreground: var(--color-base-text);
   --color-background: transparent;
+}
+.color-card {
+  --color-foreground: var(--color-card-text);
+  --color-background: var(--color-card-background);;
 }
 
 .color-foreground-outline-button {

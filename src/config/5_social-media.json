@@ -58,6 +58,26 @@
       "id": "social_vimeo_link",
       "label": "t:settings_schema.social-media.settings.social_vimeo_link.label",
       "info": "t:settings_schema.social-media.settings.social_vimeo_link.info"
+    },
+    {
+      "type": "text",
+      "id": "social_apple_link",
+      "label": "Apple"
+    },
+    {
+      "type": "text",
+      "id": "social_spotify_link",
+      "label": "Spotify"
+    },
+    {
+      "type": "text",
+      "id": "social_pandora_link",
+      "label": "Pandora"
+    },
+    {
+      "type": "text",
+      "id": "social_amazon_link",
+      "label": "Amazon"
     }
   ]
 }

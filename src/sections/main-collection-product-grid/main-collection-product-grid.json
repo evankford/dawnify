@@ -1,6 +1,6 @@
 {
   "name": "t:sections.main-collection-product-grid.name",
-  "class": "spaced-section collection-grid-section",
+  "class": "collection-grid-section",
   "settings": [
     {
       "type": "range",
@@ -10,6 +10,34 @@
       "step": 4,
       "default": 16,
       "label": "t:sections.main-collection-product-grid.settings.products_per_page.label"
+    },
+    {
+      "type" : "checkbox",
+      "id" : "full_width",
+      "label"  :"Full Width"
+    },
+    {
+      "type" : "select",
+      "id" : "grid_size",
+      "label" : "Product Size",
+      "options" : [
+        {
+          "value" : "small",
+          "label": "Small"
+        },
+        {
+          "value" : "medium",
+          "label": "Medium"
+        },
+        {
+          "value" : "large",
+          "label": "Large"
+        },
+        {
+          "value" : "huge",
+          "label": "Huge"
+        }
+      ]
     },
     {
       "type": "header",
@@ -69,6 +97,28 @@
       "id": "enable_sorting",
       "default": true,
       "label": "t:sections.main-collection-product-grid.settings.enable_sorting.label"
-    }
+    },
+    {
+      "type" : "header",
+      "content" : "Spacing"
+    },
+    {
+    "id" :"spacing_top",
+    "label" : "Section Spacing Top",
+    "type" : "range",
+    "default" : 5,
+    "min" : 0,
+    "max": 30,
+    "step" : 1
+  },
+  {
+    "id" :"spacing_bottom",
+    "label" : "Section Spacing Bottom",
+    "type" : "range",
+    "default" : 5,
+    "min" : 0,
+    "max": 30,
+    "step" : 1
+  }
   ]
 }

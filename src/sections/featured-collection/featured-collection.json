@@ -1,7 +1,7 @@
 {
   "name": "t:sections.featured-collection.name",
   "tag": "section",
-  "class": "spaced-section",
+  "class": "standard-section collection-section",
   "settings": [
     {
       "type": "text",
@@ -20,9 +20,57 @@
       "label": "Subtitle"
     },
     {
+      "type" : "select",
+      "id" : "text_align",
+      "label" : "Text Align",
+      "default" : "spaced",
+      "options" : [
+        {
+          "value" : "spaced",
+          "label" : "Spaced"
+        },
+        {
+          "value" : "centered",
+          "label" : "Centered"
+        }
+      ]
+    },
+    {
+      "type" : "header",
+      "content" :"Collection Settings"
+    },
+    {
       "type": "collection",
       "id": "collection",
       "label": "t:sections.featured-collection.settings.collection.label"
+    },
+    {
+      "type" : "select",
+      "id" : "grid_size",
+      "label" : "Product Size",
+      "options" : [
+        {
+          "value" : "small",
+          "label": "Small"
+        },
+        {
+          "value" : "medium",
+          "label": "Medium"
+        },
+        {
+          "value" : "large",
+          "label": "Large"
+        },
+        {
+          "value" : "huge",
+          "label": "Huge"
+        }
+      ]
+    },
+    {
+      "type" : "checkbox",
+      "id" : "full_width",
+      "label"  :"Full Width"
     },
     {
       "type": "range",
@@ -86,6 +134,75 @@
       "id": "show_vendor",
       "default": false,
       "label": "t:sections.featured-collection.settings.show_vendor.label"
+    },
+    {
+      "type" : "header",
+      "content" : "Section Settings"
+    },
+    {
+      "id" :"spacing_top",
+      "label" : "Section Spacing Top",
+      "type" : "range",
+      "default" : 5,
+      "min" : 0,
+      "max": 30,
+      "step" : 1
+    },
+    {
+      "id" :"spacing_bottom",
+      "label" : "Section Spacing Bottom",
+      "type" : "range",
+      "default" : 5,
+      "min" : 0,
+      "max": 30,
+      "step" : 1
+    },
+    {
+      "id" : "background_color",
+      "label" : "Background Color",
+      "type" : "color"
+    },
+    {
+      "id" : "text_color",
+      "label" : "Text Color",
+      "type" : "color"
+    },
+    {
+      "type" :"image_picker",
+      "id" : "background_image",
+      "label" : "Background Image"
+    },
+    {
+      "type" : "select",
+      "id" : "background_style",
+      "label" : "Background Style",
+      "options" : [
+        {
+          "group" : "Large Image",
+          "value" : "cover",
+          "label": "Cover"
+        },
+        {
+          "group" : "Large Image",
+          "value" : "contain",
+          "label" : "Contain"
+        },
+        {
+          "group" : "Image Pattern",
+          "value" : "repeat",
+          "label" : "Repeat"
+        },
+        {
+          "group" : "Image Pattern",
+          "value" : "repeat-x",
+          "label" : "Repeat Horizontally"
+        },
+        {
+          "group" : "Image Pattern",
+          "value" : "repeat-y",
+          "label" : "Repeat Vertically"
+        }
+      ]
     }
   ],
   "presets": [

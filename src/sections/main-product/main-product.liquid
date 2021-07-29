@@ -9,7 +9,10 @@
 <link rel="stylesheet" href="{{ 'component-deferred-media.css' | asset_url }}" media="print" onload="this.media='all'">
 
 <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
-
+<style>
+#shopify-section-{{section.id}} {
+  margin: {{section.settings.spacing_top | minus: 5 | divided_by: 3.0 | default: 1}}rem auto {{section.settings.spacing_bottom | minus: 5 | divided_by: 3.0 | default: 1}}rem auto;
+}</style>
 {%- assign first_3d_model = product.media | where: "media_type", "model" | first -%}
 {%- if first_3d_model -%}
   {{ 'component-product-model.css' | asset_url | stylesheet_tag }}
@@ -18,13 +21,16 @@
 {%- endif -%}
 
 <section class="page-width">
+  {% if section.settings.breadcrumbs %}
+  {% render 'breadcrumbs' %}
+  {% endif %}
   <div class="product grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
     <div class="grid__item product__media-wrapper">
       <slider-component class="slider-mobile-gutter">
         <a class="skip-to-content-link button visually-hidden" href="#ProductInfo-{{ section.id }}">
           {{ "accessibility.skip_to_product_info" | t }}
         </a>
-        <ul class="product__media-list grid grid--peek list-unstyled slider slider--mobile" role="list">
+        <ul class="product__media-list grid grid--peek list-unstyled slider " role="list">
           {%- if product.selected_or_first_available_variant.featured_media != null -%}
             {%- assign media = product.selected_or_first_available_variant.featured_media -%}
             <li class="product__media-item grid__item slider__slide{% if media.media_type != 'image' %} product__media-item--full{% endif %}" data-media-id="{{ section.id }}-{{ media.id }}">
@@ -78,7 +84,7 @@
               {{- block.settings.text -}}
             </p>
           {%- when 'title' -%}
-            <h1 class="product__title" {{ block.shopify_attributes }}>
+            <h1 class="product__title heading" {{ block.shopify_attributes }}>
               {{ product.title | escape }}
             </h1>
           {%- when 'price' -%}
@@ -180,21 +186,45 @@
               </details>
             </share-button>
             <script src="{{ 'share.js' | asset_url }}" defer="defer"></script>
+          {%- when 'tag' -%}
+            {% render 'product-tag' %}
+              {% render 'product-tag' with tag: product.metafields.custom.tag %}
           {%- when 'variant_picker' -%}
             {%- unless product.has_only_default_variant -%}
               {%- if block.settings.picker_type == 'button' -%}
                 <variant-radios class="no-js-hidden" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
                   {%- for option in product.options_with_values -%}
                       <fieldset class="js product-form__input">
-                        <legend class="form__label">{{ option.name }}</legend>
+                        <legend class="form__label label">{{ option.name }}</legend>
+                        {% if option.name contains "color" or option.name contains "Color" %}
+                          {% assign is_color = true %}
+                        {% endif %}
                         {%- for value in option.values -%}
+                        {% comment %} color swatches  {% endcomment %}
+                          {% if is_color %}
+                            {% assign bg_color = false %}
+                            {% assign color_name = "color"  | append: forloop.index %}
+                            {% if product.metafields.colors[color_name] != blank %}
+                              {% assign bg_color = product.metafields.colors[color_name] | strip %}
+                              {% assign dark_text_contrast = bg_color | color_contrast: "#2f2f2f" %}
+                              {% assign light_text_contrast = bg_color | color_contrast: "#efefef" %}
+                              {% if dark_text_contrast > light_text_contrast %}
+                                {% assign text_color = "#2f2f2f" %}
+                              {% else %}
+                                {% assign text_color = "#efefef" %}
+                              {% endif %}
+                            {% endif %}
+                            {% comment %} TODO: Color images {% endcomment %}
+                          {%endif%}
                           <input type="radio" id="{{ section.id }}-{{ option.name }}-{{ forloop.index0 }}"
                                 name="{{ option.name }}"
                                 value="{{ value | escape }}"
                                 form="product-form-{{ section.id }}"
                                 {% if option.selected_value == value %}checked{% endif %}
                           >
-                          <label for="{{ section.id }}-{{ option.name }}-{{ forloop.index0 }}">
+                          <label for="{{ section.id }}-{{ option.name }}-{{ forloop.index0 }}" {% if bg_color %}
+                                class="color-swatch" aria-label="{{option.name}}" style="background: {{bg_color}}; color: {{text_color}};"
+                                {% endif %}>
                             {{ value }}
                           </label>
                         {%- endfor -%}
@@ -208,7 +238,7 @@
                 <variant-selects class="no-js-hidden" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
                   {%- for option in product.options_with_values -%}
                     <div class="product-form__input product-form__input--dropdown">
-                      <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
+                      <label class="form__label label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
                         {{ option.name }}
                       </label>
                       <div class="select">
@@ -227,7 +257,6 @@
                       </div>
                     </div>
                   {%- endfor -%}
-
                   <script type="application/json">
                     {{ product.variants | json }}
                   </script>
@@ -407,7 +436,7 @@
       <div role="dialog" aria-label="{{ block.settings.link_label }}" aria-modal="true" class="product-popup-modal__content" tabindex="-1">
         <button id="ModalClose-{{ block.id }}" type="button" class="product-popup-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
         <div class="product-popup-modal__content-info">
-          <h1 class="h2">{{ block.settings.page.title }}</h1>
+          <h1 class="h2 heading {% if block.settings.page.title.length > 20%}long{%endif%}">{{ block.settings.page.title }}</h1>
           {{ block.settings.page.content }}
         </div>
       </div>

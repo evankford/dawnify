@@ -36,7 +36,6 @@ class Slider extends HTMLElement {
     }
 
     if (this.getAttribute('data-navigation')) {
-      console.log("Has Nav")
       params.navigation = {
         prevEl: this.querySelector('[data-prev]'),
         nextEl: this.querySelector('[data-next]'),

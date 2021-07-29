@@ -1,5 +1,3 @@
-console.log("Something brewing here");
-
 //Load all modules
 const modules = document.querySelectorAll('[data-module]');
 

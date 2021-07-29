@@ -6,17 +6,17 @@
 
 @include media-query($small) {
   .small-hide, .hide--small {
-    display: none;
+    display: none !important;
   }
 }
 @include media-query($medium) {
   .medium-hide, .hide--medium {
-    display: none;
+    display: none !important;
   }
 }
 @include media-query($large-up) {
   .large-up-hide, .hide--desktop {
-    display: none;
+    display: none !important;
   }
 }
 .visually-hidden {

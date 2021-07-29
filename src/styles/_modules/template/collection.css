@@ -7,10 +7,6 @@
     flex: 0 0 100%;
     max-width: 100%;
   }
-
-  .collection .title:not(.title--no-heading) {
-    margin-top: -1rem;
-  }
 }
 
 @media screen and (min-width: 750px) {

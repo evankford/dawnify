@@ -1,4 +1,4 @@
-
+@use '../abstracts' as *;
 /* component-grid */
 .grid {
   display: flex;
@@ -7,6 +7,89 @@
   margin-left: -0.5rem;
   padding: 0;
   list-style: none;
+
+  &.product-grid {
+    --pg-w: 200px;
+    --pg-g: 12px;
+     @include media-query($medium-up) {
+      --pg-w: 240px;
+      --pg-g: 15px;
+    }
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(var(--pg-w), 1fr) );
+    grid-gap: var(--pg-g);
+    width: 100%;
+    margin: 0 auto 2rem;
+
+
+
+    @include media-query($tiny) {
+      &:not(.product-grid--large):not(.product-grid--huge) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+
+    &[data-max="2"] {
+      max-width: calc(2 * var(--pg-w));
+    }
+
+    &[data-max="3"] {
+      max-width: calc(3 * var(--pg-w));
+    }
+
+    &[data-max="4"] {
+      max-width: calc(4 * var(--pg-w));
+    }
+
+    .grid__item, .card-wrapper {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+  }
+
+  &.product-grid--small {
+    --pg-w: 170px;
+    --pg-g: 10px;
+     @include media-query($medium-up) {
+      --pg-w: 220px;
+      --pg-g: 12px;
+    }
+
+  }
+  &.product-grid--large {
+    --pg-w: 260px;
+    --pg-g: 15px;
+     @include media-query($medium-up) {
+      --pg-w: 300px;
+      --pg-g: 15px;
+    }
+  }
+  &.product-grid--huge {
+    --pg-w: 300px;
+    --pg-g: 15px;
+     @include media-query($medium-up) {
+      --pg-w: 340px;
+      --pg-g: 15px;
+    }
+  }
+}
+.product-grid {
+    .card-wrapper > a {
+    padding: 0;
+    margin: auto 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+  }
 }
 
 @media screen and (min-width: 750px) {
@@ -45,17 +128,17 @@
   }
 }
 
-@media screen and (min-width: 750px) and (max-width: 989px) {
-  .grid--one-third-max.grid--3-col-tablet .grid__item {
-    max-width: 33.33%;
-  }
-}
+// @media screen and (min-width: 750px) and (max-width: 989px) {
+//   .grid--one-third-max.grid--3-col-tablet .grid__item {
+//     max-width: 33.33%;
+//   }
+// }
 
-@media screen and (min-width: 990px) {
-  .grid--quarter-max.grid--4-col-desktop .grid__item {
-    max-width: 25%;
-  }
-}
+// @media screen and (min-width: 990px) {
+//   .grid--quarter-max.grid--4-col-desktop .grid__item {
+//     max-width: 25%;
+//   }
+// }
 
 .grid--1-col .grid__item {
   max-width: 100%;
@@ -75,6 +158,11 @@
 .grid--2-col .grid__item {
   width: calc(50% - 0.5rem / 2);
 }
+
+// .product-grid .grid__item.grid__item--product {
+//   flex-grow: 0;
+//   padding-bottom: 0.5rem;
+// }
 
 @media screen and (min-width: 750px) {
   .grid--2-col .grid__item {

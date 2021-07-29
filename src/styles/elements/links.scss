@@ -55,6 +55,11 @@
   text-underline-offset: 0.3rem;
   text-decoration-thickness: 0.1rem;
   transition: text-decoration-thickness ease 100ms;
+
+}
+
+.title-wrapper-with-link .underlined-link {
+  font-size: 1.1em;
 }
 
 .underlined-link:hover {

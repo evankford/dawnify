@@ -17,40 +17,7 @@
 {% endcomment %}
 
 <noscript>
-  {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}
-    <a href="{% if media.media_type == 'video' %}{{ media.sources[1].url }}{% else %}{{ media | external_video_url }}{% endif %}" aria-label="{{ 'products.product.video_exit_message' | t: title: product.title | escape }}">
-      <span class="product__media-icon motion-reduce">{% render 'icon-play' %}</span>
-      <div class="product__media media" style="padding-top: {{ 1 | divided_by: media.preview_image.aspect_ratio | times: 100 }}%;">
-        <img
-          srcset="{% if media.preview_image.width >= 288 %}{{ media.preview_image | img_url: '288x' }} 288w,{% endif %}
-                  {% if media.preview_image.width >= 576 %}{{ media.preview_image | img_url: '576x' }} 576w,{% endif %}
-                  {% if media.preview_image.width >= 550 %}{{ media.preview_image | img_url: '550x' }} 550w,{% endif %}
-                  {% if media.preview_image.width >= 1100 %}{{ media.preview_image | img_url: '1100x' }} 1100w{% endif %}"
-          src="{{ media | img_url: '550x550' }}"
-          sizes="(min-width: 1200px) calc((1200px - 10rem) / 2), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
-          loading="lazy"
-          width="576"
-          height="{{ 576 | divided_by: media.preview_image.aspect_ratio | ceil }}"
-          alt="{{ media.preview_image.alt | escape }}"
-        >
-      </div>
-    </a>
-  {%- else -%}
-    <div class="product__media media" style="padding-top: {{ 1 | divided_by: media.preview_image.aspect_ratio | times: 100 }}%;">
-      <img
-        srcset="{% if media.preview_image.width >= 288 %}{{ media.preview_image | img_url: '288x' }} 288w,{% endif %}
-                {% if media.preview_image.width >= 576 %}{{ media.preview_image | img_url: '576x' }} 576w,{% endif %}
-                {% if media.preview_image.width >= 550 %}{{ media.preview_image | img_url: '550x' }} 550w,{% endif %}
-                {% if media.preview_image.width >= 1100 %}{{ media.preview_image | img_url: '1100x' }} 1100w{% endif %}"
-        src="{{ media | img_url: '550x550' }}"
-        sizes="(min-width: 1200px) calc((1200px - 10rem) / 2), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
-        loading="lazy"
-        width="576"
-        height="{{ 576 | divided_by: media.preview_image.aspect_ratio | ceil }}"
-        alt="{{ media.preview_image.alt | escape }}"
-      >
-    </div>
-  {%- endif -%}
+{% render 'media' with class: "product__media" media: media , size: "large" %}
 </noscript>
 
 <modal-opener class="product__modal-opener product__modal-opener--{{ media.media_type }} no-js-hidden" data-modal="#ProductModal-{{ modal_id }}">
@@ -66,8 +33,8 @@
       endcase
     -%}
   </span>
-
-  <div class="product__media media" style="padding-top: {{ 1 | divided_by: media.preview_image.aspect_ratio | times: 100 }}%;">
+  {% render "media" with class: "product__media", media: media, size: "large" %}
+  {% comment %} <div class="product__media media" style="padding-top: {{ 1 | divided_by: media.preview_image.aspect_ratio | times: 100 }}%;">
     <img
       srcset="{% if media.preview_image.width >= 288 %}{{ media.preview_image | img_url: '288x' }} 288w,{% endif %}
               {% if media.preview_image.width >= 576 %}{{ media.preview_image | img_url: '576x' }} 576w,{% endif %}
@@ -80,7 +47,7 @@
       height="{{ 576 | divided_by: media.preview_image.aspect_ratio | ceil }}"
       alt="{{ media.preview_image.alt | escape }}"
     >
-  </div>
+  </div> {% endcomment %}
 <button class="product__media-toggle" type="button" aria-haspopup="dialog" data-media-id="{{ media.id }}">
   <span class="visually-hidden">
     {%- if position == 'featured' %}
@@ -96,7 +63,7 @@
   {%- if media.media_type == 'model' -%}
     <product-model class="deferred-media media no-js-hidden" style="padding-top: 100%" data-media-id="{{ media.id }}">
   {%- else -%}
-    <deferred-media class="deferred-media media no-js-hidden" style="padding-top: {{ 1 | divided_by: media.aspect_ratio | times: 100 }}%" data-media-id="{{ media.id }}">
+    <deferred-media class="deferred-media media no-js-hidden" style="--ar: {{ 1 | divided_by: media.aspect_ratio | times: 100 }}%" data-media-id="{{ media.id }}">
   {%- endif -%}
   <button id="Deferred-Poster-Modal-{{ media.id }}" class="deferred-media__poster" type="button">
     <span class="deferred-media__poster-button motion-reduce">

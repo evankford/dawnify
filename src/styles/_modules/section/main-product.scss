@@ -1,3 +1,5 @@
+@use "../../abstracts/" as *;
+
 .product {
   margin: 0;
 }
@@ -16,13 +18,14 @@
   padding-bottom: 0;
 }
 
-@media screen and (max-width: 749px) {
+@include media-query($small) {
   .product-section {
     margin-top: 0;
   }
 }
 
-@media screen and (min-width: 750px) {
+
+@include media-query($medium-up) {
   .product__info-container--sticky {
     position: sticky;
     top: 3rem;
@@ -38,7 +41,7 @@
   }
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($large-up) {
   .product:not(.product--no-media) .product__media-wrapper {
     max-width: 64%;
     width: calc(64% - 1rem / 2);
@@ -50,6 +53,14 @@
     width: calc(36% - 1rem / 2);
   }
 }
+
+.product__media {
+  max-height: 80vh;
+  img {
+    object-fit: contain;
+  }
+}
+
 
 /* Dynamic checkout */
 
@@ -160,6 +171,10 @@ fieldset.product-form__input .form__label {
 .product-form__input input[type='radio']:checked + label {
   background-color: rgb(var(--color-foreground));
   color: rgb(var(--color-background));
+}
+.product-form__input input[type='radio']:checked + label.color-swatch {
+  font-weight: bold;
+  border-width: 2px;
 }
 
 .product-form__input input[type='radio']:disabled + label {

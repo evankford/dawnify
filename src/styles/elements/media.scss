@@ -15,11 +15,17 @@
     padding-bottom: 100%; //Defaults to square
   }
 
-  &>img {
+  &>img , &>video{
     @extend %psuedoish;
     object-fit: cover;
     object-position: center center;
     transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  &.product-card__media {
+    &>img {
+      object-fit: contain;
+    }
   }
 
   // &:after {
@@ -97,6 +103,7 @@
   height: 100%;
   width: 100%;
 }
+
 
 
 

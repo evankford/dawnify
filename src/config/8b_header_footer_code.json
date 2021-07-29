@@ -1,0 +1,15 @@
+{
+  "name" : "Header + Footer Code",
+  "settings" : [
+    {
+      "type" : "html",
+      "label": "Header Code",
+      "id" : "header_code"
+    },
+    {
+      "type" : "html",
+      "label": "Footer Code",
+      "id" : "footer_code"
+    }
+  ]
+}

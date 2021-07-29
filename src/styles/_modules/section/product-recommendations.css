@@ -2,7 +2,7 @@
   display: block;
 }
 
-.product-recommendations__heading {
+.product-recommendations__heading.heading {
   margin: 0;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }

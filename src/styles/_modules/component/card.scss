@@ -1,12 +1,42 @@
+@use "../../abstracts/" as *;
+
+
+.card-wrapper {
+  color: inherit;
+  display: block;
+  position: relative;
+  text-decoration: none;
+  &.color-card {
+    background: rgb(var(--color-background));
+    color: rgb(var(--color-foreground));
+
+    .card-information {
+      padding: 1em;
+      margin: 0;
+    }
+    .card--product {
+      border: 0;
+    }
+  }
+
+}
 .card {
   display: block;
   overflow: hidden;
   text-decoration: none;
+
+
+
+  &+.card-information {
+    margin-top: 1.2rem;
+  }
+
+  .icon-arrow {
+    width: 1.5rem;
+  }
 }
 
-.card + .card-information {
-  margin-top: 1.2rem;
-}
+
 
 .card.card--soft {
   background-color: rgba(var(--color-foreground), 0.04);
@@ -18,9 +48,6 @@
   align-items: center;
 }
 
-.card .icon-arrow {
-  width: 1.5rem;
-}
 
 .card .icon-wrap {
   margin-left: 0.8rem;
@@ -52,7 +79,7 @@
 }
 
 .card--product {
-  border: 0.1rem solid rgba(var(--color-foreground), 0.04);
+  border: 0.1rem solid rgba(var(--color-foreground), 0.1);
   position: relative;
 }
 
@@ -178,6 +205,12 @@
 
 .card-information__wrapper {
   width: 100%;
+
+  &.center {
+    .price {
+      display: inline-flex;
+    }
+  }
 }
 
 .card-information__wrapper > * {
@@ -190,19 +223,13 @@
 }
 
 .card-information__wrapper > *:not(.visually-hidden:first-child) + * {
-  margin-top: 1.1rem;
+  margin-top: 0.5rem;
 }
 
 .card-information__wrapper .caption {
   letter-spacing: 0.07rem;
 }
 
-.card-wrapper {
-  color: inherit;
-  display: block;
-  position: relative;
-  text-decoration: none;
-}
 
 .card-wrapper:focus-within .card {
   box-shadow: none;
@@ -292,18 +319,43 @@
   .card--search img {
     transition: transform var(--duration-default) ease;
   }
-  
+
   .card-wrapper:hover .card--search img {
     transform: scale(1.05);
   }
-  
+
   .card-wrapper:hover .card__heading {
     text-decoration: underline;
     text-underline-offset: 0.3rem;
   }
-  
+
   .card-wrapper:hover .card.card--search {
     background-color: rgba(var(--color-card-hover), 0.06);
     transition: background-color var(--duration-long) ease;
+  }
+}
+
+.product-card__media {
+  &+.product-card__media {
+    @extend %psuedoish;
+    opacity: 0;
+    pointer-events: 0;
+    z-index: 2;
+  }
+  &:first-child:not(:last-child):hover {
+    opacity: 0;
+    &+.product-card__media {
+      opacity: 1;
+
+    }
+  }
+}
+
+.card__media:hover {
+  .product-card__media:not(:last-child)  {
+    opacity: 0;
+  }
+  .product-card__media +.product-card__media {
+    opacity: 1;
   }
 }

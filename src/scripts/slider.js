@@ -1,37 +1,29 @@
-import { Swiper, Thumbs, A11y, Navigation, Pagination, Lazy } from 'swiper';
+import Swiper, { Lazy, Thumbs, A11y, Navigation, Pagination } from 'swiper';
 
-Swiper.use(Thumbs, A11y, Navigation, Pagination, Lazy);
+Swiper.use([Lazy, Thumbs, A11y, Navigation, Pagination]);
 //Returns the element
 class Slider {
-
-
-
-  checkForThumbnails() {
-
-  }
   constructor(el, options = {}, thumbEl = false, ) {
     this.el = el;
     this.options = options;
     this.thumbEl = thumbEl;
     this.params = this.setupParams(options);
-    console.log(this.params);
     this.swiper = this.createSwiper();
-
-
+    this.swiper.update();
+    console.log(this.swiper);
     this.setupWatchers();
   }
 
   setupParams() {
     const defaultOptions = {
-        thumbs: false,
-        navigation: false,
-        pagination: false,
-        lazy: {
-          loadPrevNext: true,
-        },
-        preloadImages: false,
-        slidesPerView: 1,
-        autoHeight: false,
+      thumbs: false,
+      navigation: false,
+      pagination: false,
+      lazy: true,
+      a11y: true,
+      preloadImages: false,
+      slidesPerView: 1,
+      autoHeight: false,
     }
     let toReturn = Object.assign( defaultOptions, this.options);
 

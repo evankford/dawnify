@@ -7,12 +7,30 @@ body,
 .color-transparent-dark,
 .color-accent-1,
 .color-accent-2 {
-  color: var(--color-foreground);
-  background-color: var(--color-background);
+  color: rgba(var(--color-foreground), 0.75);
+  background-color: rgb(var(--color-background));
+}
+
+.color-transparent-dark,.color-transparent-light, div[class*=color-transparent] .button--secondary {
+  --color-button: var(--color-foreground);
+  background-color: transparent
+}
+
+div[class*=color-transparent] .button--secondary {
+  --color-button-text: var(--color-foreground);
+}
+
+.color-transparent-dark {
+  color: #000000;
+  --color-button-text: 255,255,255;
+}
+.color-transparent-light {
+  color: #ffffff;
+  --color-button-text: 0,0,0;
 }
 
 .background-secondary {
-  background-color: var(--color-base-background-2);
+  background-color: rgba(var(--color-foreground), 0.04);
   padding: 4rem 0 5rem;
 }
 

@@ -22,6 +22,7 @@ header-drawer {
   .list-menu--inline {
     display: inline-flex;
     flex-wrap: wrap;
+    align-items: center;
   }
 
   summary.list-menu__item {

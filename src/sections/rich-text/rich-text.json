@@ -1,7 +1,6 @@
 {
   "name": "t:sections.rich-text.name",
   "tag": "section",
-  "class": "spaced-section spaced-section--full-width",
   "settings": [
     {
       "type": "select",
@@ -36,9 +35,130 @@
       "id": "full_width",
       "default": true,
       "label": "t:sections.rich-text.settings.full_width.label"
+    },
+    {
+  "type" : "header",
+  "content" : "Section Settings"
+},
+{
+  "id" :"spacing_top",
+  "label" : "Section Spacing Top",
+  "type" : "range",
+  "default" : 5,
+  "min" : 0,
+  "max": 30,
+  "step" : 1
+},
+{
+  "id" :"spacing_bottom",
+  "label" : "Section Spacing Bottom",
+  "type" : "range",
+  "default" : 5,
+  "min" : 0,
+  "max": 30,
+  "step" : 1
+},
+{
+  "id" : "background_color",
+  "label" : "Background Color",
+  "type" : "color"
+},
+{
+  "id" : "text_color",
+  "label" : "Text Color",
+  "type" : "color"
+},
+{
+  "type" :"image_picker",
+  "id" : "background_image",
+  "label" : "Background Image"
+},
+{
+  "type" : "select",
+  "id" : "background_style",
+  "label" : "Background Style",
+  "options" : [
+    {
+      "group" : "Large Image",
+      "value" : "cover",
+      "label": "Cover"
+    },
+    {
+      "group" : "Large Image",
+      "value" : "contain",
+      "label" : "Contain"
+    },
+    {
+      "group" : "Image Pattern",
+      "value" : "repeat",
+      "label" : "Repeat"
+    },
+    {
+      "group" : "Image Pattern",
+      "value" : "repeat-x",
+      "label" : "Repeat Horizontally"
+    },
+    {
+      "group" : "Image Pattern",
+      "value" : "repeat-y",
+      "label" : "Repeat Vertically"
     }
+  ]
+}
   ],
   "blocks": [
+    {
+      "type"  : "label",
+      "name" : "Label",
+      "settings" : [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Intro/Subtitle",
+          "label": "t:sections.rich-text.blocks.heading.settings.heading.label"
+        }
+      ]
+    },
+    {
+      "type"  : "html",
+      "name" : "HTML",
+      "limit" : 1,
+      "settings" : [
+        {
+          "type": "html",
+          "id": "html",
+          "label": "HTML"
+        },
+         {
+          "type": "select",
+          "id": "size",
+          "options": [
+            {
+              "value": "small",
+              "label": "t:sections.rich-text.blocks.heading.settings.heading_size.options__1.label"
+            },
+            {
+              "value": "medium",
+              "label": "t:sections.rich-text.blocks.heading.settings.heading_size.options__2.label"
+            },
+            {
+              "value": "large",
+              "label": "Large"
+            },
+            {
+              "value"  :"video",
+              "label"  : "video"
+            }
+          ],
+          "default": "medium",
+          "label": "Size"
+        }
+      ]
+    },
+    {
+      "type" : "socials",
+      "name" : "Socials"
+    },
     {
       "type": "heading",
       "name": "t:sections.rich-text.blocks.heading.name",
@@ -78,6 +198,26 @@
           "id": "text",
           "default": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
           "label": "t:sections.rich-text.blocks.text.settings.text.label"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "options": [
+            {
+              "value": "small",
+              "label": "t:sections.rich-text.blocks.heading.settings.heading_size.options__1.label"
+            },
+            {
+              "value": "medium",
+              "label": "t:sections.rich-text.blocks.heading.settings.heading_size.options__2.label"
+            },
+            {
+              "value": "large",
+              "label": "Large"
+            }
+          ],
+          "default": "medium",
+          "label": "t:sections.rich-text.blocks.heading.settings.heading_size.label"
         }
       ]
     },
@@ -119,6 +259,47 @@
         {
           "type": "button"
         }
+      ]
+    },
+    {
+      "name" : "instagram",
+      "blocks" : [
+        {
+          "type" : "label",
+          "settings": {
+            "heading" : "follow on"
+          }
+        },
+        {
+          "type" : "heading",
+          "settings": {
+            "heading" : "Instagram"
+          }
+        },
+        {
+          "type" : "html",
+          "settings": {
+            "html" : "<script src=\"https://apps.elfsight.com/p/platform.js\" defer></script><div class=\"elfsight-app-5c5c5c20-8dff-446a-aa50-588a4eef61c5\"></div>"
+          }
+        },
+        {
+          "type" : "label",
+          "settings": {
+            "heading" : "+ more"
+          }
+        },
+        {
+          "type" : "socials"
+        },
+        {
+          "type" : "button",
+          "settings" : {
+
+            "button_link": "https://instagram.com",
+            "button_label" : "More Photos"
+          }
+        }
+
       ]
     }
   ]

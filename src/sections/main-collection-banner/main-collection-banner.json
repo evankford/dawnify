@@ -18,6 +18,48 @@
       "default": false,
       "label": "t:sections.main-collection-banner.settings.show_collection_image.label",
       "info": "t:sections.main-collection-banner.settings.show_collection_image.info"
+    },
+    {
+      "type": "select",
+      "id": "breadcrumbs",
+      "default": "disabled",
+      "label": "Breadcrumbs",
+      "options" : [
+        {
+          "value" : "disabled",
+          "label" : "disabled"
+        },
+        {
+          "value" : "centered",
+          "label" : "Centered"
+        },
+        {
+          "value" : "tight",
+          "label" : "Tight"
+        }
+      ]
+    },
+    {
+      "type" : "header",
+      "content" : "Spacing"
+    },
+    {
+      "id" :"spacing_top",
+      "label" : "Section Spacing Top",
+      "type" : "range",
+      "default" : 5,
+      "min" : 0,
+      "max": 30,
+      "step" : 1
+    },
+    {
+      "id" :"spacing_bottom",
+      "label" : "Section Spacing Bottom",
+      "type" : "range",
+      "default" : 5,
+      "min" : 0,
+      "max": 30,
+      "step" : 1
     }
   ]
 }

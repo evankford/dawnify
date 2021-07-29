@@ -54,6 +54,22 @@
       "id": "colors_background_2",
       "default": "#FAF1E9",
       "label": "t:settings_schema.colors.settings.colors_background_2.label"
+    },
+    {
+      "type" : "header",
+      "content" : "Cards"
+    },
+    {
+      "type" : "color",
+      "id" : "colors_card_background",
+      "default" : "#ffffff",
+      "label": "Card Background"
+    },
+    {
+      "type" : "color",
+      "id" : "colors_card_text",
+      "default" : "#3f3f3f",
+      "label" : "Card Text"
     }
   ]
 }

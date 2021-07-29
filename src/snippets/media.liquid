@@ -1,7 +1,7 @@
 {%- comment -%}
-  type: "image" | "model" | "video" | "embed"
-  ratio: "image" | "model" | "video" | "embed"
-  size: "full" | "half" | "large" | "small" | "icon" | "actual"
+  type: "image" | "model" | "video" | "external_video"
+  ratio: "adapt" | square" | "cropped" | "portrait" | "16-9"
+  size: "full" | "half" | "large" | "medium" | "small" | "icon" | "actual"
   class: (optional)
   alt: (optional) override alt text
   max_width: (optional) number for
@@ -21,6 +21,21 @@
     assign size = "full"
   endunless
 
+  if media
+    if media.media_type == "image"
+      assign type = "image"
+      assign image = media
+    endif
+    if media.media_type == "video"
+      assign type = "video"
+      assign video = media | asset_url
+    endif
+    if media.media_type == "model"
+      assign type = "model"
+      assign model = media
+    endif
+  endif
+
   assign sizes = '100vw'
   assign loading_size = '300x'
 
@@ -29,7 +44,7 @@
   endif
 
   if size == "full"
-    assign loading_size = '450x'
+    assign loading_size = '300x'
     unless max_width
       if type == "image"
         assign max_width = image.width
@@ -47,7 +62,7 @@
     endunless
     assign sizes = "(min-width: 1200px) 600px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
   elsif size == "large"
-    assign loading_size = '450x'
+    assign loading_size = '300x'
     assign sizes = "(min-width: 1200px) 1200px, (min-width: 750px) 80vw, 100vw"
     unless max_width
       if type == "image"
@@ -56,28 +71,38 @@
         assign max_width = 1600
       endif
     endunless
+  elsif size == "medium"
+    assign loading_size = '180x'
+    assign sizes = "(min-width: 1200px) 700px, (min-width: 750px) 450px, 340px"
+    unless max_width
+      assign max_width = 750
+    endunless
   elsif size == "small"
     assign loading_size = '120x'
-    assign sizes = "(min-width: 1200px) 750px, (min-width: 750px) 500px, 250px"
+    assign sizes = "(min-width: 1200px) 550px, (min-width: 750px) 400px, 300px"
     unless max_width
       assign max_width = 750
     endunless
   elsif size == "icon"
-    assign sizes = "(min-width: 1200px) 300px, (min-width: 750px) 200px, 120px"
+    assign sizes = "(min-width: 1200px) 550px, (min-width: 750px) 400px, 300px"
     unless max_width
+    assign sizes = max_width
       assign max_width = 120
     endunless
     assign loading_size = max_width | append: 'x'
   elsif size == "actual"
-    assign loading_size = '500x'
-    assign sizes = "auto"
-    assign max_width = 2400
+    assign loading_size = '300x'
+    assign sizes = "(max-width: 1000px) 100vw, image.size"
+    assign max_width = image.size
+  endif
+  if is_slide
+    assign loading_size = "300x"
   endif
 -%}
 {% assign srcSetString = "srcset" %}
 {% if is_slide %}{% assign srcSetString = "data-srcset" %}{%endif%}
 
-<div class="media media--{{ ratio }} {{ class }}" style="{% if aspect_ratio > 0%}--ar: {{ aspect_ratio }}%;{% endif %}{% if size != 'full' %} --mw: {{ max_width }}px;{% endif %}">
+<div class="media type--{{type}} media--{{ ratio }} {{ class }}" style="{% if aspect_ratio > 0%}--ar: {{ aspect_ratio }}%;{% endif %}{% if size != 'full' %} --mw: {{ max_width }}px;{% endif %}">
   {%- case type -%}
     {%- when 'image' -%}
       {%- if image -%}
@@ -98,22 +123,26 @@
             {%- if max_width >= 1200 -%}{{ image | img_url: '1200x' }} 1200w,{%- endif -%}
             {%- if max_width >= 1400 -%}{{ image | img_url: '1400x' }} 1400w,{%- endif -%}
             {%- if max_width >= 1600 -%}{{ image | img_url: '1600x' }} 1600w,{%- endif -%}
-            {%- if max_width >= 2000 -%}{{ image | img_url: '2000x' }} 2000w{%- endif -%}
+            {%- if max_width >= 2000 -%}{{ image | img_url: '2000x' }} 2000w,{%- endif -%}
             {%- if max_width >= 2400 -%}{{ image | img_url: '2400x' }}{%- endif -%}"
         {% endif %}
           src="{{ image | img_url: loading_size }}"
           sizes="{{ sizes }}"
           alt="{{ alt | default: image.alt | escape }}"
-          loading="lazy"
+          {% unless is_slide %} loading="lazy" {% endunless %}
           width="{{ image.width }}"
           height="{{ image.height }}"
+          {% if zoom and image.width > 1000 %}
+          data-zoom="{{image | img_url: '3000x'}}"
+          {%endif%}
         >
+        {% if zoom and image.width >= 1000 %}<div class="zoom-helper">{% render 'icon-zoom' %}<span data-hover-text="Hover to Zoom" data-touch-text="Touch To Zoom"></span></div> {%endif%}
       {%- else -%}
         {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
       {%- endif -%}
     {%- when  'video' -%}
       {% if video %}
-        <video autoplay muted loop playsinline {% if is_slide %}data-{% endif %}src="{{video | asset_url}}" />
+        <video class="{{classes}}" {% if poster %}poster="{{poster | img_url: '450x'}}" data-poster="{{poster | img_url: '1400x'}}" {% endif %} autoplay muted loop playsinline preload="false" loading="lazy" data-src="{{ video }}" />
       {% endif %}
   {%- endcase -%}
 </div>

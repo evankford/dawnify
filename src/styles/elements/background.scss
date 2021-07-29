@@ -3,6 +3,7 @@
 .background-element {
   @extend %psuedo;
   z-index: 0;
+  background: var(--oc, #000000);
 
    &::before {
     @extend %psuedo;

@@ -67,9 +67,10 @@ function getEntries() {
     ...componentEntries,
     theme: ['./src/scripts/theme.js', './src/styles/theme.scss'],
     slider: ['./src/scripts/slider.js', './src/styles/slider.scss'],
-    product: ['./src/scripts/product.js', './src/styles/product.scss'],
+    product: ['./src/scripts/product.js'],
   };
 }
+
 
 module.exports = {
   mode: 'production',

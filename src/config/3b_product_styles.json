@@ -1,0 +1,25 @@
+{
+  "name" : "Product Styles",
+  "settings" : [
+    {
+      "type" : "header",
+      "content" : "Product Cards"
+    },
+    {
+      "type" : "checkbox",
+      "label" : "Use Card Style",
+      "id" : "pg_card"
+    },
+    {
+      "label" : "Center Product Titles",
+      "type" : "checkbox",
+      "id" : "pg_centered"
+    },
+    {
+      "label" : "Simplify Product Titles",
+      "info"  :"Makes Title + Price the same format",
+      "type" : "checkbox",
+      "id" : "pg_simple_title"
+    }
+  ]
+}

@@ -1,33 +1,32 @@
 {{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
-
+{%assign is_slide = false %}
 {% if section.blocks.size > 1 %}
+{% assign is_slide = true %}
 <slider-element class="swiper-container {% if section.settings.auto_height != true%} fixed-height {% endif %}"
   {% if section.settings.autoplay > 0 %} data-autoplay="{{section.settings.autoplay}}"{% endif %}
-  {% if section.settings.navigation %} data-navigation{% endif %}
+  {% if section.settings.navigation == true  %} data-navigation="true" {% endif %}
   {% if section.settings.pagination != "disabled" %} data-pagination="{{section.settings.pagination}}"{% endif %}
   {% if section.settings.auto_height == true %} data-auto-height {% endif %}
   >
   <ul class="swiper-wrapper">
   {% endif %}
   {% for block in section.blocks %}
-    <li class="swiper-slide color-{{ block.settings.color_scheme }}" style="--oo: {{ block.settings.overlay_opacity | divided_by: 100 | default: 0.3 }}; --oc: {{ block.settings.overlay_color | default: '#000000' }};">
-    <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-
-    <div class="background-image background-element">
+    <{% if is_slide %}li{% else %}div{% endif %} class="swiper-slide color-{{ block.settings.color_scheme }}" style="background-color: {{ block.settings.overlay_color | default: '#000000' }};">
+    <div class="background-image background-element" style="--op: {{block.settings.overlay_opacity }}; opacity: {{ 100 | minus: block.settings.overlay_opacity | divided_by: 100.00}};">
       {% if block.settings.image_wide != blank %}
-        {% render 'media' with is_slide: true, class: 'media--wide', image: block.settings.image_wide %}
+        {% render 'media' with is_slide: is_slide, class: 'media--wide', image: block.settings.image_wide %}
       {% endif %}
       {% if block.settings.image_mobile != blank %}
-        {% render 'media' with is_slide: true, class: 'media--mobile', image: block.settings.image_mobile %}
+        {% render 'media' with is_slide: is_slide, class: 'media--mobile', image: block.settings.image_mobile %}
       {% endif %}
-      {% render 'media' with  is_slide: true, image: block.settings.image %}
+      {% render 'media' with  is_slide: is_slide, image: block.settings.image %}
     </div>
     {% if block.settings.video != blank %}
     <div class="background-video background-element">
-      {% if block.settings.image_mobile != blank %}
-        {% render 'media' with is_slide: true, type: 'video', class: 'media--mobile', video: block.settings.image_mobile %}
+      {% if block.settings.video_small != blank %}
+        {% render 'media' with is_slide: is_slide, type: 'video',  ratio: "16-9", class: 'media--mobile', video: block.settings.video_small, poster: block.settings.image %}
       {% endif %}
-      {% render 'media' with  is_slide: true, type: 'video', video: block.settings.image %}
+      {% render 'media' with  is_slide: is_slide, type: 'video', ratio: "16-9", video: block.settings.video, poster: block.settings.image %}
     </div>
     {% endif %}
     {% if block.type != 'video' and block.type != 'image' %}
@@ -65,7 +64,10 @@
         </div>
     </div>
     {% endif %}
-    </li>
+    {% if is_slide %}
+      <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+    {% endif %}
+    </{% if is_slide %}li{% else %}div{% endif %}>
   {% endfor %}
 
   {% comment %} Resume swiper markup if block size > 1   {% endcomment %}
@@ -74,10 +76,10 @@
   {% if section.settings.pagination != "disabled" %}
     <div class="swiper-pagination" data-pagination></div>
   {% endif %}
-  {% if section.settings.navigation %}
+  {% if section.settings.navigation == true %}
     <div class="swiper-navigation">
-      <button class="button-icon" data-prev aria-label="Previous Slide"></button>
-      <button class="button-icon" data-next aria-label="Next Slide"></button>
+      <button class="button-icon" data-prev aria-label="Previous Slide">{% render 'icon-caret' %}</button>
+      <button class="button-icon" data-next aria-label="Next Slide">{% render 'icon-caret' %}</button>
     </div>
   {% endif %}
 </slider-element>
@@ -85,16 +87,16 @@
 
 {% if section.settings.auto_height != true %}
 <style>
-#shopify-section-{{section.id}} slider-element {
+#shopify-section-{{section.id}} .swiper-slide {
   height: {{ section.settings.height_mobile | default: 350}}px
 }
 @media (min-width: 790px) {
-  #shopify-section-{{section.id}} slider-element {
+  #shopify-section-{{section.id}} .swiper-slide {
     height: {{ section.settings.height_standard | default: 460}}px
   }
 }
 @media (min-width: 1250px) {
-  #shopify-section-{{section.id}} slider-element {
+  #shopify-section-{{section.id}} .swiper-slide {
     height: {{ section.settings.height_standard | default: 510}}px
   }
 }

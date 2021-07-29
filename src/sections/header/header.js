@@ -1,42 +1,57 @@
- class StickyHeader extends HTMLElement {
+ class SiteHeader extends HTMLElement {
     constructor() {
       super();
+      this.init();
     }
 
     connectedCallback() {
+      this.init();
+    }
+
+    init() {
       this.header = document.getElementById('shopify-section-header');
       this.headerBounds = {};
       this.currentScrollTop = 0;
+      if (this.getAttribute('data-overlay')) {
+        this.checkOverlay();
+      }
 
       this.onScrollHandler = this.onScroll.bind(this);
-
       window.addEventListener('scroll', this.onScrollHandler, false);
 
-      this.createObserver();
+      this.handleResize();
+      window.addEventListener('resize', this.handleResize.bind(this));
+      //init
+
+      this.handleResize()
+      this.onScroll()
     }
 
     disconnectedCallback() {
       window.removeEventListener('scroll', this.onScrollHandler);
     }
 
-    createObserver() {
-      let observer = new IntersectionObserver((entries, observer) => {
-        this.headerBounds = entries[0].intersectionRect;
-        observer.disconnect();
-      });
-
-      observer.observe(this.header);
-    }
-
     onScroll() {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
       if (scrollTop > this.currentScrollTop && scrollTop > this.headerBounds.bottom) {
         requestAnimationFrame(this.hide.bind(this));
       } else if (scrollTop < this.currentScrollTop && scrollTop > this.headerBounds.bottom) {
         requestAnimationFrame(this.reveal.bind(this));
       } else if (scrollTop <= this.headerBounds.top) {
         requestAnimationFrame(this.reset.bind(this));
+      }
+
+      if (this.overlay) {
+        const self = this;
+        if (scrollTop > this.overlayLine) {
+          requestAnimationFrame(function() {
+            self.header.classList.remove('overlay-active');
+          })
+        } else if  (scrollTop < this.overlayLine) {
+          requestAnimationFrame(function() {
+            self.header.classList.add('overlay-active');
+          });
+        }
       }
 
       this.currentScrollTop = scrollTop;
@@ -66,6 +81,46 @@
       this.searchModal = this.searchModal || this.header.querySelector('details-modal');
       this.searchModal.close(false);
     }
+    checkOverlay() {
+      if (this.pageHasOverlay()) {
+        this.overlay = true;
+        this.header.classList.add('has-overlay');
+      }
+      this.checkOverlaySize();
+      window.addEventListener('resize', this.checkOverlaySize.bind(this))
+    }
+    pageHasOverlay() {
+      const main = document.getElementById('MainContent');
+      const children = main.querySelectorAll('.shopify-section')
+      if (children && children[0].classList.contains('image-section')) {
+        this.overlaySection = children[0];
+        main.classList.add('has-overlay');
+        return true;
+      } else {
+        main.classList.remove('has-overlay');
+        return false;
+      }
+    }
+
+    handleResize() {
+      if (this.overlay) {
+        this.checkOverlaySize();
+      }
+      this.headerBounds = {
+        top: this.header.offsetTop,
+        bottom: this.header.offsetTop + this.header.offsetHeight,
+      },
+
+      document.body.style.setProperty('--header-bottom', this.header.offsetHeight + this.header.offsetTop + 'px');
+    }
+    checkOverlaySize() {
+      if (this.overlaySection) {
+        const overlayBounds = this.overlaySection.getBoundingClientRect();
+        this.overlayLine = overlayBounds.bottom;
+      } else {
+        return 0;
+      }
+    }
   }
 
-  customElements.define('sticky-header', StickyHeader);
+  customElements.define('site-header', SiteHeader);

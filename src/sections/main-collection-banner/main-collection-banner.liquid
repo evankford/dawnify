@@ -1,9 +1,16 @@
 {{ 'component-collection-hero.css' | asset_url | stylesheet_tag }}
-
+<style>
+div.collection-hero:not(.collection-hero--with-image) {
+  margin: {{section.settings.spacing_top | divided_by: 3.0 | default: 1}}rem auto {{section.settings.spacing_bottom | divided_by: 3.0 | default: 1}}rem auto;
+}
+</style>
 <div class="collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %}">
   <div class="collection-hero__inner page-width">
     <div class="collection-hero__text-wrapper">
-      <h1 class="collection-hero__title">
+    {% if section.settings.breadcrumbs != "disabled" %}
+    {% render 'breadcrumbs' with style: section.settings.breadcrumbs %}
+    {%endif %}
+      <h1 class="collection-hero__title heading">
         <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
         {{- collection.title | escape -}}
       </h1>

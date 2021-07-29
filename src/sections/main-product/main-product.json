@@ -44,6 +44,11 @@
       "limit": 1
     },
     {
+      "type": "tag",
+      "name": "Visible Tag",
+      "limit": 1
+    },
+    {
       "type": "price",
       "name": "t:sections.main-product.blocks.price.name",
       "limit": 1,
@@ -279,6 +284,47 @@
       "id": "enable_video_looping",
       "default": false,
       "label": "t:sections.main-product.settings.enable_video_looping.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "breadcrumbs",
+      "default": false,
+      "label": "Enable Breadcrumbs"
+    },
+    {
+      "type": "checkbox",
+      "id": "zoom",
+      "default": true,
+      "label": "Enable Hover Zoom"
+    },
+    {
+      "type": "checkbox",
+      "id": "disable_image_modal",
+      "default": true,
+      "label": "Disable image modal"
+    },
+    {
+      "type" : "header",
+      "content"  :"Spacing",
+      "info" : "Only works when no image"
+    },
+    {
+      "id" :"spacing_top",
+      "label" : "Section Spacing Top",
+      "type" : "range",
+      "default" : 5,
+      "min" : 0,
+      "max": 30,
+      "step" : 1
+    },
+    {
+      "id" :"spacing_bottom",
+      "label" : "Section Spacing Bottom",
+      "type" : "range",
+      "default" : 5,
+      "min" : 0,
+      "max": 30,
+      "step" : 1
     }
   ]
 }

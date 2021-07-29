@@ -1,0 +1,10 @@
+{
+  "name" : "Custom CSS",
+  "settings" : [
+    {
+      "type" : "html",
+      "label": "CSS",
+      "id" : "custom_css"
+    }
+  ]
+}
