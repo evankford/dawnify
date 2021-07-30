@@ -24,8 +24,7 @@
 
 
               <div data-image="{{foundvariantimage}}" data-url="{{collection.url}}{{foundvarianturl}}" data-value="{{ color_option | escape }}" class="grid-swatch style--{{settings.grid_swatch_style | default: 'round'}} color swatch--{{ color_option | handle }} {% if forloop.index == 1%} selected {%endif%} {% if foundvarianturl %}available{% else %}soldout{% endif %}">
-                <div class="swatch-tooltip label tiny">{{ color_option }}</div>
-
+                <details class="swatch-tooltip label tiny">{{ color_option }}</details>
                 {% capture filename %}{{color_option | handle }}.{{file_extension}}{%endcapture%}
                 {% assign colorSlug = "color" | append: forloop.index %}
                 {% capture the_color %}{% if product.metafields.colors[colorSlug] %}{{ product.metafields.colors[colorSlug] }}{% else %}{{ color_option | split: ' ' | last | handle }}{% endif %}{% endcapture %}

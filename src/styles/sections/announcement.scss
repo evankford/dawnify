@@ -3,11 +3,18 @@
 /* section-announcement-bar */
 #shopify-section-announcement-bar {
   z-index: 4;
+  position: absolute;
+  bottom: 100%;
+  width: 100%;
 }
 
-.announcement-bar {
+announcement-bar {
   border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.2);
   color: rgb(var(--color-foreground));
+
+  [data-close] svg{
+    width: 20px;
+  }
 }
 
 .announcement-bar__link {

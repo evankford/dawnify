@@ -120,7 +120,7 @@
 
 .banner__box > * + .banner__buttons {
   margin: 0 auto;
-  margin-top: 2.3rem;
+  margin-top: 0.8rem;
   transform: translateX(1rem);
 }
 
@@ -134,7 +134,7 @@
 
 @media screen and (min-width: 750px) {
   .banner__box > * + .banner__buttons {
-    margin-top: 2rem;
+    margin-top: 0.5rem;
   }
 }
 

@@ -63,8 +63,13 @@
       "content" :"Uploaded fonts"
     },
     {
+      "id" : "type_asset_name",
+      "type": "text",
+      "label" : "Asset 1 Font Name"
+    },
+    {
       "id" : "type_asset_woff",
-      "label" : "Asset URL (woff)",
+      "label" : "Asset 1 URL (woff)",
       "type" : "url",
       "info" : "URL for custom font from files"
     },
@@ -128,6 +133,11 @@
       ]
     },
     {
+      "id": "type_asset2_name",
+      "type": "text",
+      "label": "Asset 2 Font Name"
+    },
+    {
       "id" : "type_asset2_woff",
       "label" : "Asset URL (woff)",
       "type" : "url",
@@ -142,6 +152,76 @@
     {
       "type": "select",
       "id": "type_asset2_weight",
+      "label": "Asset 2 Font Weight",
+      "default": "400",
+      "options": [
+        {
+          "group": "Light",
+          "value": "100",
+          "label": "Thin"
+        },
+        {
+          "group": "Light",
+          "value": "200",
+          "label": "Extra-Light"
+        },
+        {
+          "group": "Light",
+          "value": "300",
+          "label": "Light"
+        },
+        {
+          "group": "Normal",
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "group": "Normal",
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "group": "Bold",
+          "value": "600",
+          "label": "Semi-Bold"
+        },
+        {
+          "group": "Bold",
+          "value": "700",
+          "label": "Bold"
+        },
+        {
+          "group": "Black",
+          "value": "800",
+          "label": "Semi-Black"
+        },
+        {
+          "group": "Black",
+          "value": "900",
+          "label": "Black"
+        }
+      ]
+    },
+    {
+      "id": "type_asset3_name",
+      "type": "text",
+      "label": "Asset 3 Font Name"
+    },
+    {
+      "id" : "type_asset3_woff",
+      "label" : "Asset URL (woff)",
+      "type" : "url",
+      "info" : "URL for custom font from files"
+    },
+    {
+      "id" : "type_asset3_woff2",
+      "label" : "Asset URL (woff2)",
+      "type" : "url",
+      "info" : "URL for custom font from files"
+    },
+    {
+      "type": "select",
+      "id": "type_asset3_weight",
       "label": "Asset 2 Font Weight",
       "default": "400",
       "options": [

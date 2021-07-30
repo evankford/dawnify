@@ -30,6 +30,31 @@
       justify-content: space-between;
     }
   }
+  &.layout--stacked {
+    width: 100%;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    @include media-query($medium-up) {
+      justify-content: space-between;
+    }
+
+    .footer-block.grid__item {
+      margin: auto;
+      width: 100%;
+      text-align: center;
+      max-width: 100%;
+      .list-social {
+        justify-content: center;
+      }
+    }
+    .list-unstyled {
+      margin: auto;
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+  }
   @include media-query($small) {
     display: block;
     margin-left: 0;

@@ -442,8 +442,8 @@
       "id" : "introduction",
       "label": "Introduction"
     },
-     {
-        "type": "image_picker",
+      {
+          "type": "image_picker",
           "id": "content_image",
           "label": "Content Image"
         },

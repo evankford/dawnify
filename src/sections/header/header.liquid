@@ -56,20 +56,20 @@
       {% endif %}
 
       {% unless in_group %}
-        <div class="header__group {% if block.type == 'logo' %}header__group--logo{% endif %} {% if block.type == 'mobile_menu' %}header__group--mobile_menu{% endif %} {% if block.type == 'logo' %} {% unless block.settings.visible_large %} hide--desktop {% endunless %}{% unless block.settings.visible_medium %} hide--medium {% endunless %}{% unless block.settings.visible_small %} hide--small {% endunless %}{% endif %}">
+        <div class="header__group {% if block.type == 'logo' %}header__group--logo{% endif %} {% if block.type == 'mobile_menu' %}header__group--mobile_menu{% endif %} {% if block.type == 'logo' or block.type == 'spacer' or block.type == 'mobile_menu' %} {% unless block.settings.visible_large %} hide--desktop {% endunless %}{% unless block.settings.visible_medium %} hide--medium {% endunless %}{% unless block.settings.visible_small %} hide--small {% endunless %}{% endif %}">
         {% assign in_group = true %}
       {%endunless%}
     {% comment %} Group Contents {% endcomment %}
-    <div class="header__item type--{{ block.type }}{% unless block.settings.visible_large %} hide--desktop {% endunless %}{% unless block.settings.visible_medium %} hide--medium {% endunless %}{% unless block.settings.visible_small %} hide--small {% endunless %} {% if block.type == 'button' and is_first_button %}{% assign is_first_button = false %}first-button{% endif %}" {% if block.settings.align %} data-align="{{ block.settings.align }}" {% endif %}>
+    <div class="header__item type--{{ block.type }}{% unless block.settings.visible_large %} hide--desktop {% endunless %}{% unless block.settings.visible_medium %} hide--medium {% endunless %}{% unless block.settings.visible_small %} hide--small {% endunless %} {% if block.type == 'button' and is_first_button %}{% assign is_first_button = false %}first-button{% endif %}" {% if block.settings.align %} data-align="{{ block.settings.align }}" {% endif %} {{ block.shopify_attributes }}>
         {% case block.type %}
         {% when "link" %}
           {%- if block.settings.button_label != blank -%}
-            <a{% if block.settings.button_link != blank %} href="{{ block.settings.button_link }}"{% endif %} class="{% if block.settings.button_style %} button {% else %} link--text link {% endif %} {% if block.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}"{% if block.settings.button_link == blank %} aria-disabled="true"{% endif %} {{ block.shopify_attributes }}>
+            <a{% if block.settings.button_link != blank %} href="{{ block.settings.button_link }}"{% endif %} class="{% if block.settings.button_style %} button {% else %} link--text link {% endif %} {% if block.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}"{% if block.settings.button_link == blank %} aria-disabled="true"{% endif %}>
               {{ block.settings.button_label | escape }}
             </a>
           {%- endif -%}
         {% when "content" %}
-          <h4 class="heading">{{ block.settings.title | escape }}</h4>
+          <h4 class="heading" >{{ block.settings.title | escape }}</h4>
         {% when "logo" %}
           {% liquid
             if block.settings.socials_layout == "before" or block.settings.social_layout == "above"
@@ -155,8 +155,8 @@
           %}
         {% endcase %}
     </div><!--\.header__item-->
-{% comment %} Close  group if logo, mobile menu, or last item{% endcomment %}    {% assign index = index | plus: 1 %}
-    {% if index == section.settings.size or block.type == 'logo' %}
+{% comment %} Close  group if logo, mobile menu, spacer, or last item{% endcomment %}    {% assign index = index | plus: 1 %}
+    {% if index == section.settings.size or block.type == 'spacer' or block.type == 'logo' or block.type == 'mobile_menu'  %}
       </div><!--\.header__group-->
       {% assign in_group = false %}
     {% endif %}

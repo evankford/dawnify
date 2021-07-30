@@ -81,6 +81,11 @@
           "group" : "Horizontal",
           "value" : "spaced",
           "label" : "Spaced"
+        },
+        {
+          "group" : "desktop",
+          "value" : "logo-first",
+          "label" : "Logo First"
         }
       ]
     }
@@ -180,7 +185,7 @@
           "type": "range",
           "id": "logo_width",
           "min": 50,
-          "max": 250,
+          "max": 440,
           "step": 10,
           "default": 100,
           "unit": "t:sections.header.settings.logo_width.unit",
@@ -428,6 +433,35 @@
           "default": "main-menu",
           "label": "t:sections.header.settings.menu.label"
         },
+        {
+          "type" : "header",
+          "content" : "visibility"
+        },
+        {
+          "type" : "checkbox",
+          "id" : "visible_large",
+          "label" : "Large Screens",
+          "default" :true
+        },
+        {
+          "type" : "checkbox",
+          "id" : "visible_medium",
+          "label" : "Medium Screens",
+          "default" :true
+        },
+        {
+          "type" : "checkbox",
+          "id" : "visible_small",
+          "label" : "Small Screens",
+          "default" :true
+        }
+      ]
+    },
+    {
+      "type" : "spacer",
+      "name" : "Spacer",
+      "limit" : 2,
+      "settings" : [
         {
           "type" : "header",
           "content" : "visibility"

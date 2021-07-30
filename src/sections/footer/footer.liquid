@@ -30,7 +30,7 @@
             assign footer_grid_class = 'grid--3-col-tablet'
           endif
         -%}
-        <div class="layout--{{ section.settings.layout }} footer__blocks-wrapper grid grid--1-col grid--2-col grid--4-col-tablet {{ footer_grid_class }}">
+        <div class="layout--{{ section.settings.layout }} footer__blocks-wrapper {% if section.settings.layout != 'stacked' %} grid grid--1-col grid--2-col grid--4-col-tablet {{ footer_grid_class }} {% endif %}">
           {%- for block in section.blocks -%}
             <div class="footer-block grid__item{% if block.type == 'link_list' and block.settings.heading != blank %} footer-block--menu small-hide{% endif %} {% unless block.settings.visible_large %} hide--desktop {% endunless %} {% unless block.settings.visible_medium %} hide--medium {% endunless %} {% unless block.settings.visible_small %} hide--small {% endunless %}" {{ block.shopify_attributes }}>
               {%- if block.settings.title != blank and block.type != 'accordion' -%}
@@ -86,7 +86,7 @@
                     <ul class="footer-block__details-content list-unstyled">
                       {%- for link in block.settings.menu.links -%}
                         <li>
-                          <a href="{{ link.url }}" class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}">
+                          <a href="{{ link.url }}" class="footer-menu__item link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}">
                             {{ link.title }}
                           </a>
                         </li>

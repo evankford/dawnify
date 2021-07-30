@@ -151,6 +151,27 @@
       ]
     },
     {
+      "type" : "image",
+      "name" : "Image",
+      "settings" :  [
+        {
+          "type" : "image_picker",
+          "id" : "image",
+          "label" : "Image"
+        },
+        {
+          "type": "range",
+          "id": "image_width",
+          "min": 50,
+          "max": 250,
+          "step": 10,
+          "default": 100,
+          "unit": "t:sections.header.settings.logo_width.unit",
+          "label": "t:sections.header.settings.logo_width.label"
+        }
+      ]
+    },
+    {
       "type": "buttons",
       "name": "t:sections.image-banner.blocks.buttons.name",
       "limit": 1,
