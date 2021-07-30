@@ -14,8 +14,10 @@
       this.currentScrollTop = 0;
       if (this.getAttribute('data-overlay')) {
         this.checkOverlay();
+      } else {
+        const main = document.getElementById("MainContent");
+        main.classList.remove('has-overlay');
       }
-
       this.onScrollHandler = this.onScroll.bind(this);
       window.addEventListener('scroll', this.onScrollHandler, false);
 
@@ -79,9 +81,12 @@
 
     closeSearchModal() {
       this.searchModal = this.searchModal || this.header.querySelector('details-modal');
-      this.searchModal.close(false);
+      if (this.searchModal) {
+        this.searchModal.close(false);
+      }
     }
     checkOverlay() {
+      console.log("Checking overlay");
       if (this.pageHasOverlay()) {
         this.overlay = true;
         this.header.classList.add('has-overlay');
@@ -89,6 +94,7 @@
       this.checkOverlaySize();
       window.addEventListener('resize', this.checkOverlaySize.bind(this))
     }
+
     pageHasOverlay() {
       const main = document.getElementById('MainContent');
       const children = main.querySelectorAll('.shopify-section')
@@ -113,6 +119,7 @@
 
       document.body.style.setProperty('--header-bottom', this.header.offsetHeight + this.header.offsetTop + 'px');
     }
+
     checkOverlaySize() {
       if (this.overlaySection) {
         const overlayBounds = this.overlaySection.getBoundingClientRect();

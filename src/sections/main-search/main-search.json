@@ -1,0 +1,157 @@
+{
+  "name": "t:sections.main-search.name",
+  "tag": "section",
+  "class": "spaced-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.main-search.settings.header__1.content"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.main-search.settings.image_ratio.options__1.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.main-search.settings.image_ratio.options__2.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.main-search.settings.image_ratio.options__3.label"
+        }
+      ],
+      "default": "adapt",
+      "label": "t:sections.main-search.settings.image_ratio.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "default": false,
+      "label": "t:sections.main-search.settings.show_secondary_image.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_image_padding",
+      "default": false,
+      "label": "t:sections.main-search.settings.enable_image_padding.label"
+    },
+    {
+      "type": "select",
+      "id": "grid_size",
+      "label": "Product Size",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        },
+        {
+          "value": "huge",
+          "label": "Huge"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": false,
+      "label": "t:sections.main-search.settings.show_vendor.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-search.settings.header__2.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "article_show_date",
+      "default": true,
+      "label": "t:sections.main-search.settings.article_show_date.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "article_show_author",
+      "default": false,
+      "label": "t:sections.main-search.settings.article_show_author.label"
+    },
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "id": "spacing_top",
+      "label": "Section Spacing Top",
+      "type": "range",
+      "default": 5,
+      "min": 0,
+      "max": 30,
+      "step": 1
+    },
+    {
+      "id": "spacing_bottom",
+      "label": "Section Spacing Bottom",
+      "type": "range",
+      "default": 5,
+      "min": 0,
+      "max": 30,
+      "step": 1
+    },
+    {
+      "id": "background_color",
+      "label": "Background Color",
+      "type": "color"
+    },
+    {
+      "id": "text_color",
+      "label": "Text Color",
+      "type": "color"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "select",
+      "id": "background_style",
+      "label": "Background Style",
+      "options": [
+        {
+          "group": "Large Image",
+          "value": "cover",
+          "label": "Cover"
+        },
+        {
+          "group": "Large Image",
+          "value": "contain",
+          "label": "Contain"
+        },
+        {
+          "group": "Image Pattern",
+          "value": "repeat",
+          "label": "Repeat"
+        },
+        {
+          "group": "Image Pattern",
+          "value": "repeat-x",
+          "label": "Repeat Horizontally"
+        },
+        {
+          "group": "Image Pattern",
+          "value": "repeat-y",
+          "label": "Repeat Vertically"
+        }
+      ]
+    }
+  ]
+}

@@ -14,12 +14,13 @@
     <{% if is_slide %}li{% else %}div{% endif %} class="swiper-slide color-{{ block.settings.color_scheme }}" style="background-color: {{ block.settings.overlay_color | default: '#000000' }};">
     <div class="background-image background-element" style="--op: {{block.settings.overlay_opacity }}; opacity: {{ 100 | minus: block.settings.overlay_opacity | divided_by: 100.00}};">
       {% if block.settings.image_wide != blank %}
-        {% render 'media' with is_slide: is_slide, class: 'media--wide', image: block.settings.image_wide %}
+        {% render 'media' with is_slide: is_slide, class: 'media--wide', image: block.settings.image_wide , center_x: block.settings.image_center_x, center_y: block.setings.image_center_y %}
       {% endif %}
       {% if block.settings.image_mobile != blank %}
-        {% render 'media' with is_slide: is_slide, class: 'media--mobile', image: block.settings.image_mobile %}
+        {% render 'media' with is_slide: is_slide, class: 'media--mobile', image: block.settings.image_mobile , center_x: block.settings.image_center_x, center_y: block.setings.image_center_y %}
       {% endif %}
-      {% render 'media' with  is_slide: is_slide, image: block.settings.image %}
+      {{ block.settings.image_center_x }}
+      {% render 'media' with  is_slide: is_slide, image: block.settings.image , center_x: block.settings.image_center_x, center_y: block.settings.image_center_y %}
     </div>
     {% if block.settings.video != blank %}
     <div class="background-video background-element">

@@ -312,18 +312,18 @@
       "id" :"spacing_top",
       "label" : "Section Spacing Top",
       "type" : "range",
-      "default" : 5,
+      "default" : 10,
       "min" : 0,
-      "max": 30,
+      "max": 40,
       "step" : 1
     },
     {
       "id" :"spacing_bottom",
       "label" : "Section Spacing Bottom",
       "type" : "range",
-      "default" : 5,
+      "default" : 10,
       "min" : 0,
-      "max": 30,
+      "max": 40,
       "step" : 1
     }
   ]

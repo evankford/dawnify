@@ -118,8 +118,12 @@
   width: 100%;
 }
 
+.banner__box *:last-child{
+  margin-bottom: 0;
+}
+
 .banner__box > * + .banner__buttons {
-  margin: 0 auto;
+  margin: -1rem auto 0;
   margin-top: 0.8rem;
   transform: translateX(1rem);
 }
@@ -134,11 +138,11 @@
 
 @media screen and (min-width: 750px) {
   .banner__box > * + .banner__buttons {
-    margin-top: 0.5rem;
+    margin-top: -1.5rem;
   }
 }
 
-.banner__content .button + .button {
+.banner__content .button  {
   margin-top: 1.5rem;
 }
 

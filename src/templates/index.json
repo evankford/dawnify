@@ -1,15 +1,56 @@
 {
   "sections": {
+    "16276673415005ec74": {
+      "type": "slider",
+      "blocks": {
+        "16276673415005ec74-0": {
+          "type": "image-text",
+          "settings": {
+            "overlay_color": "#504e4e",
+            "overlay_opacity": 30,
+            "image": "shopify:\/\/shop_images\/main_banner.png",
+            "image_wide": "shopify:\/\/shop_images\/wide_banner.png",
+            "image_mobile": "shopify:\/\/shop_images\/square_banner.png",
+            "image_center_x": 50,
+            "image_center_y": 9,
+            "introduction": "The new Album",
+            "heading": "Jesus People",
+            "subtitle": "",
+            "content": "",
+            "desktop_text_box_position": "center",
+            "color_scheme": "transparent-light",
+            "button_label_1": "Shop Music",
+            "button_link_1": "shopify:\/\/collections\/music",
+            "button_style_secondary_1": true,
+            "button_label_2": "Shop Featured",
+            "button_link_2": "shopify:\/\/collections\/frontpage",
+            "button_style_secondary_2": true
+          }
+        }
+      },
+      "block_order": [
+        "16276673415005ec74-0"
+      ],
+      "settings": {
+        "pagination": "dots",
+        "navigation": true,
+        "autoplay_speed": 7,
+        "auto_height": false,
+        "height_mobile": 350,
+        "height_standard": 460,
+        "height_widescreen": 510
+      }
+    },
     "image_banner": {
       "type": "image-banner",
-      "settings": {
-        "desktop_text_box_position": "flex-end"
-      },
+      "disabled": true,
       "blocks": {
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Talk about your brand"
+            "introduction": "",
+            "heading": "Talk about your brand",
+            "subtitle": ""
           }
         },
         "button": {
@@ -17,42 +58,86 @@
           "settings": {
             "button_label_1": "Shop all",
             "button_link_1": "shopify:\/\/collections\/all",
-            "button_label_2": ""
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
           }
         }
       },
       "block_order": [
         "heading",
         "button"
-      ]
+      ],
+      "settings": {
+        "desktop_text_box_position": "flex-end",
+        "text_box_size": "small",
+        "color_scheme": "background-1",
+        "stack_images_on_mobile": true,
+        "adapt_height_first_image": false
+      }
     },
     "featured_products": {
       "type": "featured-collection",
       "settings": {
-        "title": "Featured products"
+        "introduction": "",
+        "title": "Featured products",
+        "subtitle": "",
+        "text_align": "spaced",
+        "collection": "frontpage",
+        "grid_size": "small",
+        "full_width": false,
+        "products_to_show": 12,
+        "show_view_all": true,
+        "swipe_on_mobile": false,
+        "image_ratio": "adapt",
+        "show_secondary_image": false,
+        "add_image_padding": false,
+        "show_vendor": false,
+        "spacing_top": 5,
+        "spacing_bottom": 5,
+        "background_color": "",
+        "text_color": "",
+        "background_style": "cover"
       }
     },
     "image_text": {
       "type": "image-with-text",
       "blocks": {
         "heading": {
-          "type": "heading"
+          "type": "heading",
+          "settings": {
+            "heading": "Image with text"
+          }
         },
         "text": {
-          "type": "text"
+          "type": "text",
+          "settings": {
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>"
+          }
         },
         "button": {
-          "type": "button"
+          "type": "button",
+          "settings": {
+            "button_label": "Button label",
+            "button_link": ""
+          }
         }
       },
       "block_order": [
         "heading",
         "text",
         "button"
-      ]
+      ],
+      "settings": {
+        "height": "adapt",
+        "color_scheme": "background-1",
+        "layout": "image_first"
+      }
     }
   },
   "order": [
+    "16276673415005ec74",
     "image_banner",
     "featured_products",
     "image_text"

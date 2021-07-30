@@ -51,7 +51,7 @@
     {
       "type": "checkbox",
       "id": "show_secondary_image",
-      "default": false,
+      "default": true,
       "label": "t:sections.product-recommendations.settings.show_secondary_image.label"
     },
     {

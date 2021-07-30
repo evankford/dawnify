@@ -52,6 +52,29 @@
     },
     {
       "type": "select",
+      "id": "grid_size",
+      "label": "Grid Size",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        },
+        {
+          "value": "huge",
+          "label": "Huge"
+        }
+      ]
+    },
+    {
+      "type": "select",
       "id": "color_scheme",
       "options": [
         {
@@ -150,36 +173,42 @@
   "label" : "Background Image"
 },
 {
-  "type" : "select",
-  "id" : "background_style",
-  "label" : "Background Style",
-  "options" : [
-    {
-      "group" : "Large Image",
-      "value" : "cover",
-      "label": "Cover"
-    },
-    {
-      "group" : "Large Image",
-      "value" : "contain",
-      "label" : "Contain"
-    },
-    {
-      "group" : "Image Pattern",
-      "value" : "repeat",
-      "label" : "Repeat"
-    },
-    {
-      "group" : "Image Pattern",
-      "value" : "repeat-x",
-      "label" : "Repeat Horizontally"
-    },
-    {
-      "group" : "Image Pattern",
-      "value" : "repeat-y",
-      "label" : "Repeat Vertically"
-    }
-  ]
+      "type" : "select",
+      "id" : "background_style",
+      "label" : "Background Style",
+      "options" : [
+        {
+          "group" : "Large Image",
+          "value" : "cover",
+          "label": "Cover"
+        },
+        {
+          "group" : "Large Image",
+          "value" : "contain",
+          "label" : "Contain"
+        },
+        {
+          "group" : "Large Image",
+          "value" : "fixed",
+          "label" : "Fixed"
+        },
+        {
+          "group" : "Image Pattern",
+          "value" : "repeat",
+          "label" : "Repeat"
+        },
+        {
+          "group" : "Image Pattern",
+          "value" : "repeat-x",
+          "label" : "Repeat Horizontally"
+        },
+        {
+          "group" : "Image Pattern",
+          "value" : "repeat-y",
+          "label" : "Repeat Vertically"
+        }
+      ]
+
 }
   ],
   "blocks": [

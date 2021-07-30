@@ -1,3 +1,8 @@
+body {
+  position: relative;
+  transition: margin 300ms ease;
+}
+
 main#MainContent {
   position: relative;
   z-index: 1;

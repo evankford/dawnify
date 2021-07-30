@@ -132,6 +132,9 @@
           {% unless is_slide %} loading="lazy" {% endunless %}
           width="{{ image.width }}"
           height="{{ image.height }}"
+          {% if center_x or center_y %}
+          style="object-position: {{ center_x | default: 50 }}% {{ center_y | default: 50 }}%"
+          {% endif %}
           {% if zoom and image.width > 1000 %}
           data-zoom="{{image | img_url: '3000x'}}"
           {%endif%}

@@ -36,34 +36,40 @@
   "label" : "Background Image"
 },
 {
-  "type" : "select",
-  "id" : "background_style",
-  "label" : "Background Style",
-  "options" : [
-    {
-      "group" : "Large Image",
-      "value" : "cover",
-      "label": "Cover"
-    },
-    {
-      "group" : "Large Image",
-      "value" : "contain",
-      "label" : "Contain"
-    },
-    {
-      "group" : "Image Pattern",
-      "value" : "repeat",
-      "label" : "Repeat"
-    },
-    {
-      "group" : "Image Pattern",
-      "value" : "repeat-x",
-      "label" : "Repeat Horizontally"
-    },
-    {
-      "group" : "Image Pattern",
-      "value" : "repeat-y",
-      "label" : "Repeat Vertically"
-    }
-  ]
+      "type" : "select",
+      "id" : "background_style",
+      "label" : "Background Style",
+      "options" : [
+        {
+          "group" : "Large Image",
+          "value" : "cover",
+          "label": "Cover"
+        },
+        {
+          "group" : "Large Image",
+          "value" : "contain",
+          "label" : "Contain"
+        },
+        {
+          "group" : "Large Image",
+          "value" : "fixed",
+          "label" : "Fixed"
+        },
+        {
+          "group" : "Image Pattern",
+          "value" : "repeat",
+          "label" : "Repeat"
+        },
+        {
+          "group" : "Image Pattern",
+          "value" : "repeat-x",
+          "label" : "Repeat Horizontally"
+        },
+        {
+          "group" : "Image Pattern",
+          "value" : "repeat-y",
+          "label" : "Repeat Vertically"
+        }
+      ]
+
 }

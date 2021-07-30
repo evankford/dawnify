@@ -122,6 +122,26 @@
           "id": "image_mobile",
           "label": "Image (mobile)"
         },
+        {
+          "type" : "range",
+          "id" : "image_center_x",
+          "label" : "Image Center (Horizontal)",
+          "default" : 50,
+          "step" : 1,
+          "min" : 0,
+          "max" : 100,
+          "unit" : "%"
+        },
+        {
+          "type" : "range",
+          "id" : "image_center_y",
+          "label" : "Image Center (Vert)",
+          "default" : 50,
+          "step" : 1,
+          "min" : 0,
+          "max" : 100,
+          "unit" : "%"
+        },
 
     {
       "type" : "header",
@@ -433,6 +453,26 @@
           "id": "image_mobile",
           "label": "Image (mobile)"
         },
+        {
+          "type": "range",
+          "id": "image_center_x",
+          "label": "Image Center (Horizontal)",
+          "default": 50,
+          "step": 1,
+          "min": 0,
+          "max": 100,
+          "unit": "%"
+        },
+        {
+          "type": "range",
+          "id": "image_center_y",
+          "label": "Image Center (Vert)",
+          "default": 50,
+          "step": 1,
+          "min": 0,
+          "max": 100,
+          "unit": "%"
+        },
       {
       "type" : "header",
       "content" : "content"
@@ -592,17 +632,19 @@
         {
           "type": "image_picker",
           "id": "image",
-          "label": "t:sections.image-banner.settings.image.label"
+          "label": "Fallback Image"
         },
         {
-          "type": "image_picker",
-          "id": "image_wide",
-          "label": "Image (wide)"
+          "type": "url",
+          "id": "video",
+          "label": "Video URL",
+          "info": "You need to add a small MP4 of the video to 'Files' to add here."
         },
         {
-          "type": "image_picker",
-          "id": "image_mobile",
-          "label": "Image (mobile)"
+          "type": "url",
+          "id": "video_small",
+          "label": "Video URL (small)",
+          "info": "You need to add a small MP4 of the video to 'Files' to add here."
         },
          {
       "type" : "header",
@@ -762,6 +804,26 @@
           "label": "Image (mobile)"
         },
         {
+          "type": "range",
+          "id": "image_center_x",
+          "label": "Image Center (Horizontal)",
+          "default": 50,
+          "step": 1,
+          "min": 0,
+          "max": 100,
+          "unit": "%"
+        },
+        {
+          "type": "range",
+          "id": "image_center_y",
+          "label": "Image Center (Vert)",
+          "default": 50,
+          "step": 1,
+          "min": 0,
+          "max": 100,
+          "unit": "%"
+        },
+        {
           "type" : "url",
           "id" : "url",
           "label" : "url"
@@ -791,17 +853,19 @@
         {
           "type": "image_picker",
           "id": "image",
-          "label": "t:sections.image-banner.settings.image.label"
+          "label": "Fallback Image"
         },
         {
-          "type": "image_picker",
-          "id": "image_wide",
-          "label": "Image (wide)"
+          "type": "url",
+          "id": "video",
+          "label": "Video URL",
+          "info": "You need to add a small MP4 of the video to 'Files' to add here."
         },
         {
-          "type": "image_picker",
-          "id": "image_mobile",
-          "label": "Image (mobile)"
+          "type": "url",
+          "id": "video_small",
+          "label": "Video URL (small)",
+          "info": "You need to add a small MP4 of the video to 'Files' to add here."
         },
         {
           "type" : "url",

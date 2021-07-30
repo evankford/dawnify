@@ -10,11 +10,38 @@
     --color-foreground: {{ settings.text_color.red }}, {{ settings.text_color.green }}, {{ settings.text_color.blue }};
     {%endif%}
 
-    {% if settings.background_image != blank %}
+    padding-top: {{ settings.spacing_top | divided_by: 2.5 | default: 1}}rem;
+    padding-bottom: {{ settings.spacing_bottom | divided_by: 2.5 | default: 1}}rem;
+  }
+  {% if settings.background_image != blank %}
+  #{% unless inner %}shopify-section-{% endunless %}{{ id }} {
+    position:relative;
+    z-index: 1;
+    {% if settings.background_style == "fixed" %}
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      backface-visibility: hidden;
+    {% endif %}
+  }
+  #{% unless inner %}shopify-section-{% endunless %}{{ id }}::before {
+    position: absolute;
+    height: 100%;
+    content: "";
+    display: block;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
     background-position: 50% 50%;
     {% if settings.background_style == "cover" or settings.background_style == "contain" %}
     background_image: url({{ settings.background_image | img_url: "450x" }});
     background-size: {{ settings.background_style }};
+    background-repeat: no-repeat;
+    {% elsif settings.background_style == "fixed" %}
+    position: fixed;
+    height: 100vh;
+    background-size: cover;
     background-repeat: no-repeat;
     {% else %}
     background-image: url({{ settings.background_image | img_url: "master" }});
@@ -28,39 +55,38 @@
 
     background-repeat: {{ settings.background_style }};
     {% endif %}
-    {% endif %}
-    padding-top: {{ settings.spacing_top | divided_by: 2.5 | default: 1}}rem;
-    padding-bottom: {{ settings.spacing_bottom | divided_by: 2.5 | default: 1}}rem;
   }
-  {% if settings.background_image != blank and  settings.background_style == "cover" or settings.background_style == "contain" %}
+  {% endif %}
+
+  {% if settings.background_image != blank and  settings.background_style == "cover" or settings.background_style == "contain" or settings.background_style == "fixed" %}
 
   @media (min-width: 450px) {
-    #shopify-section-{{ id }} {
+    #shopify-section-{{ id }}::before {
       background-image: url({{ settings.background_image | img_url: "720x" }});
     }
   }
   @media (min-width: 720px) {
-    #shopify-section-{{ id }} {
+    #shopify-section-{{ id }}::before {
       background-image: url({{ settings.background_image | img_url: "1080x" }});
     }
   }
   @media (min-width: 1080px) {
-    #shopify-section-{{ id }} {
+    #shopify-section-{{ id }}::before {
       background-image: url({{ settings.background_image | img_url: "1400x" }});
     }
   }
   @media (min-width: 1080px) {
-    #shopify-section-{{ id }} {
+    #shopify-section-{{ id }}::before {
       background-image: url({{ settings.background_image | img_url: "1750x" }});
     }
   }
   @media (min-width: 1750px) {
-    #shopify-section-{{ id }} {
+    #shopify-section-{{ id }}::before {
       background-image: url({{ settings.background_image | img_url: "2000x" }});
     }
   }
   @media (min-width: 2000px) {
-    #shopify-section-{{ id }} {
+    #shopify-section-{{ id }}::before {
       background-image: url({{ settings.background_image | img_url: "2400x" }});
     }
   }

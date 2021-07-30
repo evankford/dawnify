@@ -6,7 +6,18 @@ class AnnouncementBar extends HTMLElement {
     //Setup admin
     this.duringThemeEditor();
     this.height = 0;
-    window.addEventListener('resize', this.handleResize.bind(this));
+    if (localStorage.getItem(`${this.id}-dismissed`) ==  true) {
+      this.close();
+    } else {
+      window.addEventListener('DOMContentLoaded', () => {
+        this.checkForButton();
+        this.handleResize();
+        window.addEventListener('resize', this.handleResize.bind(this));
+      })
+    }
+
+
+
   }
 
   duringThemeEditor()  {
@@ -27,7 +38,7 @@ class AnnouncementBar extends HTMLElement {
 
   handleResize() {
     const newHeight = this.getBoundingClientRect().height;
-
+    console.log(newHeight);
     if (this.height != newHeight) {
       this.newHeight =  newHeight;
       this.changeBodyOffset()
@@ -36,14 +47,20 @@ class AnnouncementBar extends HTMLElement {
   }
   changeBodyOffset() {
     let offset = document.body.getBoundingClientRect().top;
+
+    //Fixes combined offsets
     if (this.heightAdded) {
       offset = offset - this.height
     }
-    document.body.style.marginTop = offset + this.newHeight + 'px';
-    this.height = this.newHeight
+    const newOffset = offset + this.newHeight + 'px';
+    document.body.style.marginTop = newOffset;
+    this.heightAdded = true;
+    this.height = this.newHeight;
   }
 
   close() {
+    this.newHeight = 0;
+    this.changeBodyOffset();
     this.classList.add('announcement-dismissed');
     localStorage.setItem(`${this.id}-dismissed`, true);
   }

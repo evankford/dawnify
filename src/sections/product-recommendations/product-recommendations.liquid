@@ -20,7 +20,7 @@
   {% if section.settings.subtitle != blank %}
     <div class="h4 label">{{ section.settings.subtitle | escape }}</div>
   {%endif %}
-    <ul class="grid grid--2-col product-grid product-grid--{{section.settings.grid_size}}{% if recommendations.products_count > 3 %} grid--4-col-desktop grid--quarter-max{% else %} grid--{{ recommendations.products_count }}-col-tablet{% endif %}" role="list">
+    <ul class="grid grid-grid grid-grid--{{section.settings.grid_size}}" data-max="{{ recommendations.products_count }}" role="list">
       {% for recommendation in recommendations.products %}
         <li class="grid__item grid__item--product">
           {% render 'product-card',

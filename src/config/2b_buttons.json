@@ -100,34 +100,15 @@
         "type": "header",
         "content": "Style Choices"
       },
-
       {
-        "type": "select",
-        "id": "button_style",
-        "label": "Style",
-        "default": "outline",
-        "options": [
-          {
-            "value": "solid",
-            "label": "Solid"
-          },
-          {
-            "value": "outline",
-            "label": "Outline"
-          },
-          {
-            "value": "underline",
-            "label": "Underline"
-          },
-          {
-            "value": "gradient",
-            "label": "Gradient"
-          },
-          {
-            "value": "minimal",
-            "label": "Minimal"
-          }
-        ]
+        "id": "button_border_radius",
+        "label": "Border Radius",
+        "type": "range",
+        "unit": "em",
+        "default": 0,
+        "step": 1,
+        "max": 20,
+        "min": 0
       },
       {
         "type": "select",

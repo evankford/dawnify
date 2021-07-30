@@ -17,7 +17,7 @@
     {
       "type": "checkbox",
       "id": "enable_overlay",
-      "default": true,
+      "default": false,
       "info" : "Overlays header over image banner sections if they are the first section",
       "label": "Overlay header?"
     },
@@ -71,6 +71,7 @@
       "type" : "select",
       "id" : "layout",
       "label" : "Layout",
+      "default" : "logo-first",
       "options" : [
         {
           "group" : "Horizontal",
@@ -418,7 +419,7 @@
           "type" : "checkbox",
           "id" : "visible_small",
           "label" : "Small Screens",
-          "default" :true
+          "default" :false
         }
       ]
     },
@@ -441,13 +442,13 @@
           "type" : "checkbox",
           "id" : "visible_large",
           "label" : "Large Screens",
-          "default" :true
+          "default" :false
         },
         {
           "type" : "checkbox",
           "id" : "visible_medium",
           "label" : "Medium Screens",
-          "default" :true
+          "default" :false
         },
         {
           "type" : "checkbox",
@@ -486,5 +487,30 @@
         }
       ]
     }
-  ]
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "mobile_menu"
+      },
+      {
+        "type": "logo"
+      },
+      {
+        "type": "menu"
+      },
+      {
+        "type": "button",
+        "settings" : {
+          "type" : "search"
+        }
+      },
+      {
+        "type": "button",
+        "settings" : {
+          "type" : "cart"
+        }
+      }
+    ]
+  }
 }

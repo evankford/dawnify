@@ -32,6 +32,17 @@
     },
     {
       "type" : "header",
+      "content" : "General Font settings"
+    },
+    {
+      "type" : "checkbox",
+      "id" : "type_smooth",
+      "label" : "Smooth fonts",
+      "info" : "Makes typfaces appear lighter on most backgrounds",
+      "default" : true
+    },
+    {
+      "type" : "header",
       "content" :"Custom Fonts"
     },
     {

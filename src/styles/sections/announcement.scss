@@ -1,4 +1,4 @@
-
+@use "../abstracts" as *;
 
 /* section-announcement-bar */
 #shopify-section-announcement-bar {
@@ -11,9 +11,35 @@
 announcement-bar {
   border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.2);
   color: rgb(var(--color-foreground));
+  background: rgb(var(--color-background));
+  padding-right: 32px;
 
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+
+  @include media-query($medium-up) {
+    padding-left: 32px;
+  }
+
+  [data-close] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   [data-close] svg{
     width: 20px;
+  }
+
+  &.announcement-dismissed {
+    height: 0;
   }
 }
 

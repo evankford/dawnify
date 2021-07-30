@@ -16,7 +16,7 @@
   <a href="{{ product_card_product.url | default: '#' }}" class="full-unstyled-link">
     <span class="visually-hidden">{{ product_card_product.title | escape }}</span>
 
-    <div class="card card--product{% if product_card_product.featured_media == nil %} card--text-only card--soft{% endif %}" tabindex="-1">
+    <div class="card card--product {% if settings.pg_border == true %} card--border {% endif %}{% if product_card_product.featured_media == nil %} card--text-only card--soft{% endif %}" tabindex="-1">
       <div class="card__inner">
         {%- if product_card_product.featured_media -%}
           {%- liquid
@@ -62,7 +62,7 @@
         {%- endif -%}
 
         {%- if product_card_product.featured_media -%}
-          <span class="card-information__text {% unless settings.pg_simple_title %} h5 heading{% endunless %}">
+          <span class="card-information__text {% if settings.product_font == 'heading' %} h5 {% elsif settings.pg_simple_title != true %} h4 {% endif %} {{ settings.product_font }}">
             {{ product_card_product.title | escape }}
           </span>
         {%- endif -%}

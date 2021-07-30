@@ -2,6 +2,30 @@
   "name" : "Product Styles",
   "settings" : [
     {
+      "type": "select",
+      "id": "product_font",
+      "label": "Product Font Style",
+      "default": "standard",
+      "options": [
+        {
+          "value": "standard",
+          "label": "Standard"
+        },
+        {
+          "value": "heading",
+          "label": "Heading"
+        },
+        {
+          "value": "label",
+          "label": "Label"
+        },
+        {
+          "value": "script",
+          "label": "Script"
+        }
+      ]
+    },
+    {
       "type" : "header",
       "content" : "Product Cards"
     },
@@ -9,6 +33,12 @@
       "type" : "checkbox",
       "label" : "Use Card Style",
       "id" : "pg_card"
+    },
+    {
+      "type" : "checkbox",
+      "label" : "Use Image Border",
+      "id" : "pg_border",
+      "default" : true
     },
     {
       "label" : "Center Product Titles",

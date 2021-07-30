@@ -25,7 +25,7 @@
   </div>
 
   <slider-component class="slider-mobile-gutter">
-    <ul class="collection-list grid grid--1-col{% if section.blocks.size < 5 %} grid--{{ section.blocks.size }}-col-tablet{% else %} grid--3-col-tablet{% endif %}{% if section.settings.swipe_on_mobile %} slider slider--tablet grid--peek{% endif %} collection-list--{{ section.blocks.size }}-items"
+    <ul class="collection-list grid grid-grid {% if section.settings.swipe_on_mobile %} slider slider--tablet grid--peek{% endif %}" data-max="{{section.blocks.size}}"
       id="Slider-{{ section.id }}"
       role="list"
     >

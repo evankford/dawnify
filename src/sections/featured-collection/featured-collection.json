@@ -76,7 +76,7 @@
       "type": "range",
       "id": "products_to_show",
       "min": 2,
-      "max": 12,
+      "max": 32,
       "step": 2,
       "default": 4,
       "label": "t:sections.featured-collection.settings.products_to_show.label"
@@ -120,7 +120,7 @@
     {
       "type": "checkbox",
       "id": "show_secondary_image",
-      "default": false,
+      "default": true,
       "label": "t:sections.featured-collection.settings.show_secondary_image.label"
     },
     {
@@ -186,6 +186,11 @@
           "group" : "Large Image",
           "value" : "contain",
           "label" : "Contain"
+        },
+        {
+          "group" : "Large Image",
+          "value" : "fixed",
+          "label" : "Fixed"
         },
         {
           "group" : "Image Pattern",

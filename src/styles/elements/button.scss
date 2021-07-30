@@ -1,4 +1,4 @@
-
+@use "../abstracts/" as *;
 
 /* component-button */
 /* Button - default */
@@ -147,4 +147,22 @@
   text-align: right;
   display: block;
   margin-top: 0.5rem;
+}
+
+.icon-button {
+  padding: 0.75rem;
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: rgb(var(--color-foreground));
+
+  svg {
+    width: 1.3rem;
+    height: auto;
+    transition: transform 300ms $ease;
+  }
+
+  &:hover svg {
+    transform: scale(1.05);
+  }
 }
