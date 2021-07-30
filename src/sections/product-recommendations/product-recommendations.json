@@ -2,7 +2,7 @@
 {
   "name": "t:sections.product-recommendations.name",
   "tag": "section",
-  "class": "spaced-section",
+  "class": "recommendations-section",
   "settings": [
     {
       "type": "paragraph",
@@ -59,6 +59,22 @@
       "id": "add_image_padding",
       "default": false,
       "label": "t:sections.product-recommendations.settings.add_image_padding.label"
+    },
+    {
+      "type" : "select",
+      "id" : "header_layout",
+      "label" : "Header Layout",
+      "default" : "left",
+      "options" : [
+        {
+          "value"  :"left",
+          "label" : "left"
+        },
+        {
+          "value" : "center",
+          "label" : "Center"
+        }
+      ]
     },
     {
       "type": "checkbox",
@@ -157,6 +173,11 @@
           "label": "Huge"
         }
       ]
+    },
+    {
+        "id": "center_insufficient",
+        "label" : "Center insufficient products?",
+      "type" : "checkbox"
     }
   ]
 }

@@ -74,6 +74,11 @@
       ]
     },
     {
+      "id": "center_insufficient",
+      "label" : "Center insufficient products?",
+    "type" : "checkbox"
+  },
+    {
       "type": "select",
       "id": "color_scheme",
       "options": [

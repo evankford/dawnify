@@ -21,7 +21,7 @@
   grid-template-columns: repeat( auto-fit, minmax(var(--pg-w), 1fr) );
   grid-gap: var(--pg-g);
   width: 100%;
-  margin: 2rem auto 4rem;
+  margin: 2rem 0 4rem;
 
   @include media-query($tiny) {
     &:not(.grid-grid--large):not(.grid-grid--huge) {
@@ -29,6 +29,10 @@
     }
   }
 
+  &.center-insufficient {
+    margin-left: auto;
+    margin-right: auto;
+  }
 
   &[data-max="2"] {
     max-width: calc(2 * (var(--pg-mw) + var(--pg-g)));

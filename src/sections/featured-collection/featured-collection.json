@@ -68,6 +68,11 @@
       ]
     },
     {
+      "id": "center_insufficient",
+      "label" : "Center insufficient products?",
+      "type" : "checkbox"
+    },
+    {
       "type" : "checkbox",
       "id" : "full_width",
       "label"  :"Full Width"

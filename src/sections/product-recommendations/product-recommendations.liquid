@@ -13,13 +13,15 @@
 
 <product-recommendations class="product-recommendations page-width" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit=4">
   {% if recommendations.performed and recommendations.products_count > 0 %}
-  {% if section.settings.introduction != blank %}
-    <div class="h4 label">{{ section.settings.introduction | escape }}</div>
-  {%endif %}
-    <h2 class="product-recommendations__heading heading">{{ section.settings.heading | escape }}</h2>
-  {% if section.settings.subtitle != blank %}
-    <div class="h4 label">{{ section.settings.subtitle | escape }}</div>
-  {%endif %}
+  <div class="common-header {{ header-layout }}">
+    {% if section.settings.introduction != blank %}
+      <div class="h4 label">{{ section.settings.introduction | escape }}</div>
+    {%endif %}
+      <h2 class="product-recommendations__heading heading">{{ section.settings.heading | escape }}</h2>
+    {% if section.settings.subtitle != blank %}
+      <div class="h4 label">{{ section.settings.subtitle | escape }}</div>
+    {%endif %}
+  </div>
     <ul class="grid grid-grid grid-grid--{{section.settings.grid_size}}" data-max="{{ recommendations.products_count }}" role="list">
       {% for recommendation in recommendations.products %}
         <li class="grid__item grid__item--product">

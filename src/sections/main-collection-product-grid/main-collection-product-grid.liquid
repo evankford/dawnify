@@ -470,8 +470,8 @@
           {{ 'sections.collection_template.product_count' | t: product_count: collection.products_count, count: collection.all_products_count }}
         </p>
 
-        <ul id="main-collection-product-grid" data-id="{{ section.id }}" class="
-          grid  grid-grid  grid-grid--{{section.settings.grid_size}}" data-max="{{ collection.products_count }}">
+        <ul id="main-collection-product-grid" data-id="{{ section.id }}" class="{% unless section.settings.full_width == true %} page-width {% endunless %}
+          grid  grid-grid  grid-grid--{{section.settings.grid_size}} {% if section.settings.center_insufficient == true %} center-insufficient {% endif %}" data-max="{{ collection.products_count }}">
           {%- for product in collection.products -%}
             <li class="grid__item">
               {% render 'product-card',

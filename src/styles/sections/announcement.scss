@@ -20,6 +20,7 @@ announcement-bar {
   justify-content: center;
   flex-wrap: wrap;
   position: relative;
+  overflow: hidden;
 
   @include media-query($medium-up) {
     padding-left: 32px;
