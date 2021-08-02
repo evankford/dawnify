@@ -21,9 +21,10 @@
   grid-template-columns: repeat( auto-fit, minmax(var(--pg-w), 1fr) );
   grid-gap: var(--pg-g);
   width: 100%;
-  margin: 2rem 0 4rem;
+  margin:3rem 0 4rem;
 
   @include media-query($tiny) {
+    margin: 2rem 0 3rem;
     &:not(.grid-grid--large):not(.grid-grid--huge) {
       grid-template-columns: repeat(2, 1fr);
     }
@@ -34,6 +35,9 @@
     margin-right: auto;
   }
 
+  &[data-max="1"] {
+    max-width: calc(1 * (var(--pg-mw) + var(--pg-g)));
+  }
   &[data-max="2"] {
     max-width: calc(2 * (var(--pg-mw) + var(--pg-g)));
   }
