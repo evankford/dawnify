@@ -3,13 +3,6 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "vendor": {
-          "type": "text",
-          "settings": {
-            "text": "{{ product.vendor }}",
-            "text_style": "uppercase"
-          }
-        },
         "title": {
           "type": "title",
           "settings": {
@@ -37,11 +30,7 @@
           "settings": {
           }
         },
-        "buy_buttons": {
-          "type": "buy_buttons",
-          "settings": {
-          }
-        },
+
         "description": {
           "type": "description",
           "settings": {
@@ -54,13 +43,13 @@
         }
       },
       "block_order": [
-        "vendor",
+
         "title",
         "subtitle",
         "price",
         "variant_picker",
         "quantity_selector",
-        "buy_buttons",
+
         "description",
         "share"
       ],
@@ -71,10 +60,38 @@
       "type": "product-recommendations",
       "settings": {
       }
+    },
+    "collection-list": {
+      "type": "collection-list",
+      "settings": {
+        "introduction": "Shop By",
+        "heading": "Collection",
+        "spacing_top": 10,
+        "spacing_bottom": 10,
+        "color_scheme": "background-2",
+        "box_color_scheme": "accent-1"
+      },
+      "blocks": {
+        "defaultclblock1": {
+          "type": "featured_collection"
+        },
+        "defaultclblock2": {
+          "type": "featured_collection"
+        },
+        "defaultclblock3": {
+          "type": "featured_collection"
+        }
+      },
+      "block_order": [
+        "defaultclblock1",
+        "defaultclblock2",
+        "defaultclblock3"
+      ]
     }
   },
   "order": [
     "main",
-    "product-recommendations"
+    "product-recommendations",
+    "collection-list"
   ]
 }

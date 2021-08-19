@@ -23,6 +23,12 @@
   .media {
     margin: 0.4em 0;
   }
+
+  &.layout--stacked {
+    .media {
+      margin: 0.4em auto;
+    }
+  }
 }
 .footer__blocks-wrapper {
   &.layout--spaced {

@@ -1,7 +1,7 @@
-const outputDirectory = "./dist"
+const outputDirectory = './dist';
 const path = require('path');
 const glob = require('glob');
-const CopyPlugin = require('copy-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin');
 const ConcatFilesPlugin = require('webpack-concat-files-plugin');
 const MergeJsonPlugin = require('merge-json-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -10,11 +10,11 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 var sass = require('sass');
 
-const env = process.env.WEBPACK_ENV ? process.env.WEBPACK_ENV : "development";
+const env = process.env.WEBPACK_ENV ? process.env.WEBPACK_ENV : 'development';
 function getSections() {
-  let sectionBundles = []
+  let sectionBundles = [];
   const allSections = glob.sync(path.resolve('./src/sections/**/*/*.liquid'));
-  allSections.forEach(fileName=> {
+  allSections.forEach((fileName) => {
     const name = fileName.match(/\/src\/sections\/(.*)\//)[1];
     const dir = fileName.substring(0, fileName.lastIndexOf('/'));
     sectionBundles.push({
@@ -25,16 +25,15 @@ function getSections() {
           if (filePath.indexOf('json') >= 0) {
             return '{% schema %}' + content + '{% endschema %}\n';
           } else if (filePath.indexOf('js') >= 0) {
-            return '{% javascript %}' + content + '{% endjavascript %}'
-          } else if (filePath.indexOf('css') >=0){
+            return '{% javascript %}' + content + '{% endjavascript %}';
+          } else if (filePath.indexOf('css') >= 0) {
             if (filePath.indexOf('scss') >= 0) {
               return (
                 '{% stylesheet %}' +
                 sass.render({ data: content, includePaths: [dir] }) +
                 '{% endstylesheet %}'
               );
-            }
-            else {
+            } else {
               return '{% stylesheet %}' + content + '{% endstylesheet %}';
             }
           } else {
@@ -43,7 +42,7 @@ function getSections() {
         },
       },
     });
-  })
+  });
 
   return sectionBundles;
 }
@@ -51,17 +50,30 @@ function getSections() {
 function getEntries() {
   let componentEntries = {};
 
-  const allCssComponents = glob.sync(path.resolve('./src/styles/_modules/*/*css'))
-  allCssComponents.forEach(file=> {
-    const type = file.substring(file.indexOf('_modules/') + 9, file.lastIndexOf('/'));
-    const name = file.substring(file.lastIndexOf('/') + 1, file.lastIndexOf('.'));
+  const allCssComponents = glob.sync(
+    path.resolve('./src/styles/_modules/*/*css')
+  );
+  allCssComponents.forEach((file) => {
+    const type = file.substring(
+      file.indexOf('_modules/') + 9,
+      file.lastIndexOf('/')
+    );
+    const name = file.substring(
+      file.lastIndexOf('/') + 1,
+      file.lastIndexOf('.')
+    );
     componentEntries[`${type}-${name}`] = [file];
-  })
-  const allJsElements = glob.sync(path.resolve('./src/scripts/_elements/*/*.js'))
-  allJsElements.forEach(file=> {
-    const name = file.substring(file.lastIndexOf('/') + 1, file.lastIndexOf('.'));
+  });
+  const allJsElements = glob.sync(
+    path.resolve('./src/scripts/_elements/*/*.js')
+  );
+  allJsElements.forEach((file) => {
+    const name = file.substring(
+      file.lastIndexOf('/') + 1,
+      file.lastIndexOf('.')
+    );
     componentEntries[`${name}`] = [file];
-  })
+  });
 
   return {
     ...componentEntries,
@@ -70,7 +82,6 @@ function getEntries() {
     product: ['./src/scripts/product.js'],
   };
 }
-
 
 module.exports = {
   mode: 'production',
@@ -173,7 +184,7 @@ module.exports = {
       },
       group: [
         {
-          files: './src/config/**.json',
+          files: './src/config/!(settings_)**.json',
           to: './config/settings_schema.json',
         },
       ],

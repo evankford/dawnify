@@ -19,7 +19,6 @@
       {% if block.settings.image_mobile != blank %}
         {% render 'media' with is_slide: is_slide, class: 'media--mobile', image: block.settings.image_mobile , center_x: block.settings.image_center_x, center_y: block.setings.image_center_y %}
       {% endif %}
-      {{ block.settings.image_center_x }}
       {% render 'media' with  is_slide: is_slide, image: block.settings.image , center_x: block.settings.image_center_x, center_y: block.settings.image_center_y %}
     </div>
     {% if block.settings.video != blank %}

@@ -130,9 +130,15 @@ a.header__menu-item, summary.header__menu-item, .header__icon {
     align-items: center;
     justify-content: center;
   }
-  &__group--mobile-menu {
+
+  &__group--mobile_menu {
     &:first-child {
       margin-right: auto;
+      justify-content:flex-start ;
+    }
+    &:last-child {
+      margin-left: auto;
+      justify-content:flex-end ;
     }
   }
 
@@ -164,12 +170,18 @@ a.header__menu-item, summary.header__menu-item, .header__icon {
 }
 
 .header__heading-link:hover .h2 {
-  color: rgb(var(--color-foreground));
+  color: var(--txt-h);
+  .overlay-active & {
+    color: var(--otxt-h);
+  }
 }
 
 .header__heading-link .h2 {
   line-height: 1;
-  color: rgba(var(--color-foreground), 0.75);
+  color: var(--txt);
+  .overlay-active & {
+    color: var(--otxt);
+  }
 }
 
 .header-logo {
@@ -189,7 +201,7 @@ a.header__menu-item, summary.header__menu-item, .header__icon {
 .header__heading-logo {
   height: auto;
   width: 100%;
-  transition: opacit 300ms $ease;
+  transition: opacity 300ms $ease;
 }
 
 @include media-query($medium-up) {

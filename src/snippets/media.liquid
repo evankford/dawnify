@@ -34,11 +34,14 @@
       assign type = "model"
       assign model = media
     endif
+    if media contains ".jpg" or media contains ".png"
+      assign type = "image"
+      assign image = media
+    endif
   endif
 
   assign sizes = '100vw'
   assign loading_size = '300x'
-
   if type == "image" and ratio == "adapt" and image
     assign aspect_ratio = 1 | divided_by: image.aspect_ratio | times: 100
   endif

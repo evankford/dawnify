@@ -43,14 +43,14 @@
 
 @include media-query($large-up) {
   .product:not(.product--no-media) .product__media-wrapper {
-    max-width: 64%;
-    width: calc(64% - 1rem / 2);
+    max-width: 60%;
+    width: calc(60% - 1rem / 2);
   }
 
   .product:not(.product--no-media) .product__info-wrapper {
     padding-left: 4rem;
-    max-width: 36%;
-    width: calc(36% - 1rem / 2);
+    max-width: 40%;
+    width: calc(40% - 1rem / 2);
   }
 }
 

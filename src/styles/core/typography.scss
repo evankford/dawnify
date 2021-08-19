@@ -1,3 +1,5 @@
+@use '../abstracts/' as *;
+
 h1,
 h2,
 h3,
@@ -30,6 +32,10 @@ h5,
 h1,
 .h1 {
   font-size: 3rem;
+
+  @include media-query ($small) {
+    font-size: 2.6rem;
+  }
 }
 
 @media only screen and (min-width: 750px) {

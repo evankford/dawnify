@@ -16,7 +16,9 @@
         {%- when 'label' -%}
           <div block.shopify_attributes  class="label {% if block.settings.heading_size == 'small' %}h5{% elsif block.settings.heading_size == 'medium' %}h4 {% else %}h3{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.heading | escape }}</div>
         {%- when 'html' -%}
+        {% unless block.settings.html == blank %}
           <div block.shopify_attributes  class="html-wrap size--{{block.settings.size}}">{{block.settings.html}}</div>
+        {% endunless %}
         {%- when 'text' -%}
           <div class="rich-text__text rte" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
         {%- when 'socials' -%}

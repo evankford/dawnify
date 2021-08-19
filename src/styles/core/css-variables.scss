@@ -8,6 +8,7 @@ TODO: Not sure we want these?
 }
 
 .color-background-2 {
+  --color-foreground: var(--color-base-text);
   --color-background: var(--color-base-background-2);
 }
 
@@ -30,7 +31,7 @@ TODO: Not sure we want these?
   --color-background: transparent;
 }
 .color-transparent-dark {
-  --color-foreground: var(--color-base-text);
+  --color-foreground: 0,0,0;
   --color-background: transparent;
 }
 .color-card {
