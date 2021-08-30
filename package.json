@@ -13,18 +13,18 @@
     "swiper": "^6.8.0"
   },
   "scripts": {
-    "start": "npm run build && run-p watch serve",
+    "start": "pnpm  build && run-p watch serve",
     "dev": "run-p watch serve",
-    "deploy": "npm run webpack -env=production && cd dist && shopify theme push",
-    "theme-check": "npm run webpack --env=development && cd dist && shopify theme check",
+    "deploy": "pnpm  webpack -env=production && cd dist && shopify theme push",
+    "theme-check": "pnpm  webpack --env=development && cd dist && shopify theme check",
     "pull": "cd dist && rm .shopifyignore && touch .shopifyignore && shopify theme pull",
-    "push": "npm run webpack --env=production && cd dist && shopify theme push --unpublished --nodelete",
+    "push": "pnpm  webpack --env=production && cd dist && shopify theme push --unpublished --nodelete",
     "push:dry": "cd dist && shopify theme push --unpublished --nodelete",
-    "update": "npm run webpack --env=production && cd dist && shopify theme push --nodelete -x 'config/settings_data.json' -x templates/*.json",
-    "publish": "npm run webpack --env=production && cd dist && shopify theme push --publish --nodelete ",
-    "watch": "npm run webpack --watch --env=development",
+    "update": "pnpm  webpack -- --env=production && cd dist && shopify theme push --nodelete -x 'config/settings_data.json' -x templates/*.json",
+    "publish": "pnpm  webpack -- --env=production && cd dist && shopify theme push --publish --nodelete ",
+    "watch": "pnpm  webpack --watch --env=development",
     "serve": "cd dist && shopify theme serve",
-    "build": "npm run webpack --env=production"
+    "build": "pnpm  webpack -- --env=production"
   },
   "devDependencies": {
      "file-loader": "^6.2.0",
