@@ -8,9 +8,7 @@
   "private": true,
   "dependencies": {
     "@atmtfy/schema-loader": "^0.0.5",
-    "babel-loader": "^8.2.2",
-    "file-loader": "^6.2.0",
-    "merge-jsons-webpack-plugin": "^2.0.0-alpha",
+
     "normalize.css": "^8.0.1",
     "swiper": "^6.8.0"
   },
@@ -18,20 +16,19 @@
     "start": "npm run build && run-p watch serve",
     "dev": "run-p watch serve",
     "deploy": "npm run webpack -env=production && cd dist && shopify theme push",
-    "theme-check": "npm run webpack --env=development && shopify theme check",
+    "theme-check": "npm run webpack --env=development && cd dist && shopify theme check",
     "pull": "cd dist && rm .shopifyignore && touch .shopifyignore && shopify theme pull",
     "push": "npm run webpack --env=production && cd dist && shopify theme push --unpublished --nodelete",
     "push:dry": "cd dist && shopify theme push --unpublished --nodelete",
-    "update": "npm run webpack --env=production && cd dist && shopify theme push --nodelete",
-    "publish": "npm run webpack --env=production && cd dist && shopify theme push --publish --nodelete",
+    "update": "npm run webpack --env=production && cd dist && shopify theme push --nodelete -x 'config/settings_data.json' -x templates/*.json",
+    "publish": "npm run webpack --env=production && cd dist && shopify theme push --publish --nodelete ",
     "watch": "npm run webpack --watch --env=development",
     "serve": "cd dist && shopify theme serve",
-    "build": "npm run webpack --env=production",
-    "ignore:backup" : "cd ../src || cd ./src || true && ./src/.shopifyignore.backup || true && touch ./src/.shopifyignore",
-    "ignore:restore" : "cd ../src || cd ./src || true && rm -f .shopifyignore || true && mv ./src/.shopifyignore.backup ./src/.shopifyignore || true ",
-    "ignore:default" : "cd ../src || cd ./src || true && rm -f .shopifyignore || true && mv ./src/.shopifyignore.default ./src/.shopifyignore "
+    "build": "npm run webpack --env=production"
   },
   "devDependencies": {
+     "file-loader": "^6.2.0",
+    "merge-jsons-webpack-plugin": "^2.0.0-alpha",
     "clean-webpack-plugin": "^4.0.0-alpha.0",
     "concurrently": "^6.2.0",
     "copy-webpack-plugin": "^9.0.1",
@@ -42,7 +39,7 @@
     "npm-run-all": "^4.1.5",
     "sass": "^1.36.0",
     "sass-loader": "^12.1.0",
-    "webpack": "^5.46.0",
+    "webpack": "^5.51.1",
     "webpack-cli": "^4.7.2",
     "webpack-concat-files-plugin": "^0.5.2",
     "webpack-remove-empty-scripts": "^0.7.1"
