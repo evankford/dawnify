@@ -110,7 +110,7 @@
         {
           "type": "image_picker",
           "id": "image",
-          "label": "t:sections.image-banner.settings.image.label"
+          "label": "Image"
         },
         {
           "type": "image_picker",
@@ -441,7 +441,7 @@
         {
           "type": "image_picker",
           "id": "image",
-          "label": "t:sections.image-banner.settings.image.label"
+          "label": "Image"
         },
         {
           "type": "image_picker",
@@ -791,7 +791,7 @@
         {
           "type": "image_picker",
           "id": "image",
-          "label": "t:sections.image-banner.settings.image.label"
+          "label": "Image"
         },
         {
           "type": "image_picker",

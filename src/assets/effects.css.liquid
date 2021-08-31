@@ -1,0 +1,30 @@
+{% if settings.fx_underline_menu  == true %}
+.header__menu-item {
+  position: relative;
+  overflow-x: hidden;
+}
+
+.header__menu-item::after {
+  content:'';
+  width: 100%;
+  height: 1px;
+  left: 0;
+  transform: translateY(-110%) scaleY(0.5);
+  background: currentColor;
+  transition: transform 200ms ease;
+}
+
+.header__menu-item:hover::after {
+  transform: translateY(0%) scaleY(0.5);
+}
+
+.header__active-menu-item::after{
+  transform: translateY(-110%) scale(1)
+}
+
+.header__active-menu-item:hover::after{
+  transform: translateY(0%) scale(1)
+}
+{% endif %}
+{% if settings.fx_underline_menu  == all %}
+{% endif %}

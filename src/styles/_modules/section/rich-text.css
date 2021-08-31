@@ -33,7 +33,7 @@
     width: calc(100% - 10rem);
   }
 
-  .rich-text__blocks {
+  .rich-text__blocks > *:not([class*=size]) {
     max-width: 50rem;
   }
 
@@ -44,16 +44,25 @@
 }
 
 @media screen and (min-width: 990px) {
-  .rich-text__blocks {
+  .rich-text__blocks > *:not([class*=size]){
     max-width: 78rem;
   }
+}
+
+.rich-text__blocks > .size--large {
+  max-width: 90rem;
+  margin: 1em auto;
+}
+
+.rich-text__blocks > .size--huge {
+  max-width: 100%;
+  margin: 1.5em auto;
 }
 
 /* Blocks */
 
 .rich-text__blocks > * {
-  margin-top: 0;
-  margin-bottom: 0;
+  margin: 0 auto 0;
 }
 
 .rich-text__blocks > * + * {

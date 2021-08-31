@@ -84,7 +84,7 @@
               {{- block.settings.text -}}
             </p>
           {%- when 'title' -%}
-            <h1 class="product__title heading" {{ block.shopify_attributes }}>
+            <h1 class="product__title heading h3 {% if product.title.size > 12 %}long {%endif%}" {{ block.shopify_attributes }}>
               {{ product.title | escape }}
             </h1>
           {%- when 'price' -%}

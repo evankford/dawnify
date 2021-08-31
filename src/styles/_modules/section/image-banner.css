@@ -182,7 +182,8 @@
 @media screen and (min-width: 750px) {
   .banner__box {
     padding: 4rem;
-    width: 54.8rem;
+    width: 80%;
+    max-width: 70.8rem;
   }
 
   .banner__box > .banner__buttons:only-child .button {

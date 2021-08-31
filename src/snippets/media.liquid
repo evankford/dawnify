@@ -10,6 +10,8 @@
   video: video url required if type is "video"
   embed: embed url required if type is "embed"
 {%- endcomment -%}
+
+
 {%- liquid
   unless type
     assign type = "image"
@@ -24,11 +26,15 @@
   if media
     if media.media_type == "image"
       assign type = "image"
-      assign image = media
+      unless image
+        assign image = media
+      endunless
     endif
     if media.media_type == "video"
       assign type = "video"
-      assign video = media | asset_url
+      unless video
+        assign video = media | asset_url
+      endunless
     endif
     if media.media_type == "model"
       assign type = "model"
@@ -36,7 +42,9 @@
     endif
     if media contains ".jpg" or media contains ".png"
       assign type = "image"
-      assign image = media
+      unless image
+        assign image = media
+      endunless
     endif
   endif
 
@@ -104,10 +112,10 @@
 -%}
 {% assign srcSetString = "srcset" %}
 {% if is_slide %}{% assign srcSetString = "data-srcset" %}{%endif%}
-
 <div class="media type--{{type}} media--{{ ratio }} {{ class }}" style="{% if aspect_ratio > 0%}--ar: {{ aspect_ratio }}%;{% endif %}{% if size != 'full' %} --mw: {{ max_width }}px;{% endif %}">
   {%- case type -%}
     {%- when 'image' -%}
+
       {%- if image -%}
         {% comment %} Requires an image input, that's it! {% endcomment %}
         <img

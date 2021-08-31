@@ -202,8 +202,8 @@
           "min": 0,
           "max": 80,
           "step": 1,
-          "default": 20,
-          "info" : "Less than 10 is negative!",
+          "default": 40,
+          "info" : "Less than 40 is negative!",
           "label": "Logo Spacing Top "
         },
         {
@@ -212,8 +212,8 @@
           "min": 0,
           "max": 80,
           "step": 1,
-          "default": 20,
-          "info" : "Less than 20 is negative!",
+          "default": 40,
+          "info" : "Less than 40 is negative!",
           "label": "Logo Spacing Bottom "
         },
         {

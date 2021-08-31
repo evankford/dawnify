@@ -128,6 +128,26 @@
       "label": "Box Font Style"
     },
     {
+      "type": "select",
+      "id": "box_font_size",
+      "default": "normal",
+      "label": "Box Font Size",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        },
+        {
+          "value": "huge",
+          "label": "Huge"
+        }
+      ]
+    },
+    {
       "type" : "select",
       "id" : "style",
       "label" : "Style",

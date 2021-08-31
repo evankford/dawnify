@@ -43,14 +43,14 @@
 
 @include media-query($large-up) {
   .product:not(.product--no-media) .product__media-wrapper {
-    max-width: 60%;
-    width: calc(60% - 1rem / 2);
+    max-width: 55%;
+    width: calc(55% - 1rem / 2);
   }
 
   .product:not(.product--no-media) .product__info-wrapper {
     padding-left: 4rem;
-    max-width: 40%;
-    width: calc(40% - 1rem / 2);
+    max-width: 45%;
+    width: calc(45% - 1rem / 2);
   }
 }
 
@@ -587,7 +587,7 @@ a.product__text {
 
   .product-media-modal__toggle {
     right: 4.3rem;
-    top: 3rem;
+    top: calc(3rem + var(--header-bottom, 50px) + var(--announcement-ht, 0px));
   }
 }
 

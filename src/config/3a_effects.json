@@ -1,0 +1,38 @@
+{
+  "name": "Effects",
+  "settings": [
+    {
+      "type": "header",
+      "content": "underline effects"
+    },
+    {
+      "type" : "checkbox",
+      "id" : "fx_underline_menu",
+      "label" : "Underline effect for menu?",
+      "default": true
+    },
+    {
+      "type" : "checkbox",
+      "id" : "fx_underline_all",
+      "label" : "Underline effect for body links?",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Animation Effect"
+    },
+    {
+      "type" : "checkbox",
+      "label" : "Enable scroll animation",
+      "id" : "fx_scroll"
+    },
+    {
+      "type" : "range",
+      "min": 0,
+      "max" : 99,
+      "default" : 50,
+      "label" : "FX Scroll Offset Fix",
+      "id" : "fx_scroll_offset_fix"
+    }
+  ]
+}
