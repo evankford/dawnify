@@ -9,9 +9,9 @@ menu-drawer + .header__search {
   justify-self: start;
 }
 
-.header:not(.header--has-menu) * > .header__search {
-  display: none;
-}
+// .header:not(.header--has-menu) * > .header__search {
+//   display: none;
+// }
 
 .header__search {
   display: inline-flex;

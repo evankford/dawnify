@@ -12,14 +12,12 @@ class GridSwatch extends HTMLElement {
     this.swatches =  [].slice.call(this.el.querySelectorAll('.grid-swatch'));
     this.linkWrap = this.getClosest(this.el, 'a');
     this.imgWrap = this.linkWrap.querySelector('.card__media');
-    console.log(this.imgWrap)
 
     this.setupListener();
   }
 
   setupListener() {
     if (this.linkWrap) {
-      console.log("set up listener")
       this.linkWrap.addEventListener('click', this.handleClick.bind(this));
     }
   }

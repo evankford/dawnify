@@ -1,7 +1,7 @@
 {
   "name": "t:sections.image-banner.name",
   "tag": "section",
-  "class": "image-section spaced-section spaced-section--full-width",
+  "class": "spaced-section spaced-section--full-width",
   "settings": [
     {
       "type": "image_picker",
@@ -12,6 +12,12 @@
       "type": "image_picker",
       "id": "image_2",
       "label": "t:sections.image-banner.settings.image_2.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "adapt_height_first_image",
+      "default": false,
+      "label": "t:sections.image-banner.settings.adapt_height_first_image.label"
     },
     {
       "type": "select",
@@ -34,37 +40,25 @@
       "label": "t:sections.image-banner.settings.desktop_text_box_position.label"
     },
     {
-      "type" : "select",
-      "id" : "text_box_size",
-      "label" : "Text Box Size",
-      "default" : "small",
-      "options": [
-        {
-          "value" : "small",
-          "label" : "small"
-        },
-        {
-          "value" : "medium",
-          "label" : "medium"
-        },
-        {
-          "value" : "large",
-          "label" : "Large"
-        }
-      ]
+      "type": "checkbox",
+      "id": "show_text_box",
+      "default": true,
+      "label": "t:sections.image-banner.settings.show_text_box.label"
+    },
+    {
+      "type": "range",
+      "id": "image_overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "t:sections.image-banner.settings.image_overlay_opacity.label",
+      "default": 0
     },
     {
       "type": "select",
       "id": "color_scheme",
       "options": [
-        {
-          "value" : "transparent-dark",
-          "label" : "Dark Text (no bg)"
-        },
-        {
-          "value" : "transparent-light",
-          "label" : "Light Text (no bg)"
-        },
         {
           "value": "accent-1",
           "label": "t:sections.image-banner.settings.color_scheme.options__1.label"
@@ -87,7 +81,12 @@
         }
       ],
       "default": "background-1",
-      "label": "t:sections.image-banner.settings.color_scheme.label"
+      "label": "t:sections.image-banner.settings.color_scheme.label",
+      "info": "t:sections.image-banner.settings.color_scheme.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.image-banner.settings.header.content"
     },
     {
       "type": "checkbox",
@@ -97,9 +96,9 @@
     },
     {
       "type": "checkbox",
-      "id": "adapt_height_first_image",
-      "default": false,
-      "label": "t:sections.image-banner.settings.adapt_height_first_image.label"
+      "id": "show_text_below",
+      "default": true,
+      "label": "t:sections.image-banner.settings.show_text_below.label"
     }
   ],
   "blocks": [
@@ -109,20 +108,26 @@
       "limit": 1,
       "settings": [
         {
-          "type" : "text",
-          "id" : "introduction",
-          "label": "Introduction"
-        },
-        {
           "type": "text",
           "id": "heading",
           "default": "Image banner",
           "label": "t:sections.image-banner.blocks.heading.settings.heading.label"
         },
         {
-          "type" : "text",
-          "id" : "subtitle",
-          "label": "Subtitle"
+          "type": "select",
+          "id": "heading_size",
+          "options": [
+            {
+              "value": "medium",
+              "label": "t:sections.image-banner.blocks.heading.settings.heading_size.options__1.label"
+            },
+            {
+              "value": "large",
+              "label": "t:sections.image-banner.blocks.heading.settings.heading_size.options__2.label"
+            }
+          ],
+          "default": "medium",
+          "label": "t:sections.image-banner.blocks.heading.settings.heading_size.label"
         }
       ]
     },
@@ -136,38 +141,6 @@
           "id": "text",
           "default": "Give customers details about the banner image(s) or content on the template.",
           "label": "t:sections.image-banner.blocks.text.settings.text.label"
-        }
-      ]
-    },
-    {
-      "type" : "embed",
-      "name" : "Embed",
-      "settings" : [
-        {
-          "type" : "html",
-          "label" : "HTML",
-          "id" : "html"
-        }
-      ]
-    },
-    {
-      "type" : "image",
-      "name" : "Image",
-      "settings" :  [
-        {
-          "type" : "image_picker",
-          "id" : "image",
-          "label" : "Image"
-        },
-        {
-          "type": "range",
-          "id": "image_width",
-          "min": 50,
-          "max": 250,
-          "step": 10,
-          "default": 100,
-          "unit": "t:sections.header.settings.logo_width.unit",
-          "label": "t:sections.header.settings.logo_width.label"
         }
       ]
     },

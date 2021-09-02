@@ -1,6 +1,7 @@
 {
   "name": "t:sections.footer.name",
   "blocks": [
+
     {
       "type": "link_list",
       "name": "t:sections.footer.blocks.link_list.name",
@@ -108,7 +109,7 @@
           "type": "range",
           "id": "image_width",
           "min": 50,
-          "max": 200,
+          "max": 400,
           "step": 5,
           "unit": "px",
           "label": "Image width",
@@ -148,6 +149,39 @@
         }
       ]
     },
+      {
+        "type": "html",
+        "name": "HTML",
+        "settings": [
+          {
+            "label": "HTML",
+            "id": "html",
+            "type": "html"
+          },
+          {
+            "type": "header",
+            "content": "Visibility"
+          },
+          {
+            "type": "checkbox",
+            "id": "visible_large",
+            "label": "Large Screens",
+            "default": true
+          },
+          {
+            "type": "checkbox",
+            "id": "visible_medium",
+            "label": "Medium Screens",
+            "default": true
+          },
+          {
+            "type": "checkbox",
+            "id": "visible_small",
+            "label": "Small Screens",
+            "default": true
+          }
+        ]
+      },
     {
       "type": "newsletter",
       "name": "Newsletter",

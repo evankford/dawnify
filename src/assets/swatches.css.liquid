@@ -1,0 +1,27 @@
+{%- assign swatch_object = settings.swatch-hexes | split: '\n' -%}
+{%- assign swatch_hexes = settings.swatch-hexes | strip | newline_to_br | split: '<br />' -%}
+{%- for hex in swatch_hexes -%}
+  {% assign hex_info = hex | split: ':' %}
+
+  {% assign hex_color = hex_info[0] | strip %}
+  {% assign offset = hex_color | size | plus: 2 %}
+  {% assign remainder = hex.size | minus: offset %}
+  {% comment %} {% assign hex_code = hex_info[1] | strip %}
+  {% if hex_info[2] %}
+    {% assign hex_code = hex_code | append: hex_info[2] %}
+  {%endif%} {% endcomment %}
+  {% assign hex_code = hex | slice: offset, remainder %}
+  .swatch--{{hex_color}} label {
+  {% if hex_code contains "image" or hex_code contains "jpg" %}
+    {% capture img %}{{ hex_color }}.jpg{% endcapture %}
+
+    background-image: url({{ img | file_img_url: "90x90" }});
+  {% elsif hex_code contains "png" %}
+    {% capture img %}{{ hex_color }}.png{% endcapture %}
+
+    background-image: url({{ img | file_img_url: "90x90" }});
+  {% else %}
+    background: {{ hex_code }} !important;
+  {%endif %}
+  }
+{%-endfor-%}

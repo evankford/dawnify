@@ -1,0 +1,53 @@
+.background-slider {
+  position: relative;
+  z-index: 1;
+}
+
+.background-slider.fixed-height {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.background-slider__content {
+  z-index: 2;
+  margin: auto;
+}
+
+.fixed-height .background-slider__content {
+  max-width: var(--page-width);
+  position: relative;
+}
+
+.background-slider:not(.fixed-height) .background-slider__content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  .banner__box {
+    margin: auto;
+    pointer-events: all;
+  }
+}
+
+.background-slider__background {
+  width: 100%;
+  z-index: 1;
+}
+
+.fixed-height .background-slider__background {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.fixed-height .background-slider__background slider-element {
+  height: 100%;
+  position: relative;
+}

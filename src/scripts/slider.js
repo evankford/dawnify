@@ -10,7 +10,6 @@ class Slider {
     this.params = this.setupParams(options);
     this.swiper = this.createSwiper();
     this.swiper.update();
-    console.log(this.swiper);
     this.setupWatchers();
   }
 
@@ -110,3 +109,61 @@ class Slider {
 }
 
 window.Slider = Slider;
+
+
+if (!customElements.get('slider-element')) {
+  customElements.define('slider-element', class Slider extends HTMLElement {
+  constructor() {
+    super();
+
+  //this == the element
+    const params = this.generateParams();
+    this.slider  = new window.Slider(this, params );
+    console.log(this.slider);
+  }
+
+  generateParams() {
+    let params = {}
+
+    if (this.getAttribute('data-pagination')) {
+      params.pagination = {
+        type: 'bullets',
+        el: this.querySelector('[data-pagination]'),
+        dynamicBullets: true,
+      }
+
+      if (this.getAttribute('data-pagination') == "progress") {
+        params.pagination.type = "progressbar"
+      }
+    }
+
+    if (this.getAttribute('data-autoplay')) {
+console.log("Should have autoplay");
+      params.autoplay = {
+        delay: this.getAttribute('data-autoplay'),
+        disableOnInteraction: true,
+        pauseOnMouseEnter: true
+      }
+    }
+
+    if (this.getAttribute('data-auto-height')) {
+      params.autoHeight = true;
+    }
+
+    if (this.getAttribute('data-navigation')) {
+      params.navigation = {
+        prevEl: this.querySelector('[data-prev]'),
+        nextEl: this.querySelector('[data-next]'),
+      };
+    }
+
+    if (this.getAttribute('data-effect')) {
+      if (this.getAttribute('data-effect') == "fade" || this.getAttribute('data-effect') == 'slide') {
+        params.effect = this.getAttribute('data-effect');
+      }
+    }
+    return params;
+  }
+})
+}
+

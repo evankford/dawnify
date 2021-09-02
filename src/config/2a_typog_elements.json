@@ -412,7 +412,13 @@
         "type" : "header",
         "content" : "Menu"
       },
-        {
+      {
+        "type" :"checkbox",
+        "id" : "style_footer_menus",
+        "default" : true,
+        "label" : "Style footer menu items?"
+      },
+      {
         "type": "select",
         "id": "menu_font_family",
         "label": "Font Family",

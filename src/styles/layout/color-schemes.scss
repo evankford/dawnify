@@ -39,3 +39,28 @@ div[class*=color-transparent] .button--secondary {
     padding: 6rem 0 5rem;
   }
 }
+
+.gradient, .gradient-standard {
+  background: var(--color-background);
+  background: var(--gradient-background);
+}
+.gradient {
+  background-attachment: fixed;
+}
+
+:root,
+.color-icon-text {
+  --color-icon: rgb(var(--color-base-text));
+}
+
+.color-icon-accent-1 {
+  --color-icon: rgb(var(--color-base-accent-1));
+}
+
+.color-icon-accent-2 {
+  --color-icon: rgb(var(--color-base-accent-2));
+}
+
+.color-icon-outline-button {
+  --color-icon: rgb(var(--color-base-outline-button-labels));
+}

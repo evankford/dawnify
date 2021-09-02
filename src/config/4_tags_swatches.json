@@ -104,9 +104,21 @@
       "content" : "Swatches"
     },
     {
+      "type": "html",
+      "id": "swatch-hexes",
+      "label": "Swatch Hexes"
+    },
+    {
       "type" : "checkbox",
       "id" : "grid_swatches_enabled",
       "label" : "Enable Grid Swatches",
+      "default" : true,
+      "info" : "Only works on options named 'color' or 'Color'"
+    },
+    {
+      "type" : "checkbox",
+      "id" : "replace_default_color_swatches",
+      "label" : "Replace Default Color Swatches",
       "default" : true,
       "info" : "Only works on options named 'color' or 'Color'"
     },

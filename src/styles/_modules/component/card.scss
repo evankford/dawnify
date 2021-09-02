@@ -48,6 +48,7 @@
 }
 
 .card__text {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
 }
@@ -58,6 +59,7 @@
   white-space: nowrap;
   transition: transform var(--duration-short) ease;
   overflow: hidden;
+  display: inline-block;
 }
 
 .card .h1 .icon-arrow,
@@ -226,6 +228,10 @@
 
 .card-information__wrapper > .price {
   color: rgb(var(--color-foreground));
+}
+
+.card-information__wrapper > .rating {
+  margin-top: 0.4rem;
 }
 
 .card-information__wrapper > *:not(.visually-hidden:first-child) + * {

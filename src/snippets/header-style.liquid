@@ -37,7 +37,14 @@
         --color-base-accent-2: {{ settings.colors_accent_2.red }}, {{ settings.colors_accent_2.green }}, {{ settings.colors_accent_2.blue }};
         --color-card-background: {{ settings.colors_card_background.red }}, {{ settings.colors_card_background.green }},{{ settings.colors_card_background.blue }};
         --color-card-text: {{ settings.colors_card_text.red }}, {{ settings.colors_card_text.green }}, {{ settings.colors_card_text.blue }};
+
+        --gradient-base-background-1: {% if settings.gradient_background_1 != blank %}{{ settings.gradient_background_1 }}{% else %}{{ settings.colors_background_1 }}{% endif %};
+        --gradient-base-background-2: {% if settings.gradient_background_2 != blank %}{{ settings.gradient_background_2 }}{% else %}{{ settings.colors_background_2 }}{% endif %};
+        --gradient-base-accent-1: {% if settings.gradient_accent_1 != blank %}{{ settings.gradient_accent_1 }}{% else %}{{ settings.colors_accent_1 }}{% endif %};
+        --gradient-base-accent-2: {% if settings.gradient_accent_2 != blank %}{{ settings.gradient_accent_2 }}{% else %}{{ settings.colors_accent_2 }}{% endif %};
+
         --payment-terms-background-color: {{ settings.colors_background_1 }};
+        --page-width: {{ settings.page_width | divided_by: 10 }}rem;
       }
 
       *,

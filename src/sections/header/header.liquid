@@ -12,6 +12,11 @@
 <script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
 
+{%- if settings.predictive_search_enabled -%}
+  <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="{{ 'component-loading-overlay.css' | asset_url }}" media="print" onload="this.media='all'">
+{%- endif -%}
+
 {% comment %} Icons {% endcomment %}
 <svg xmlns="http://www.w3.org/2000/svg" class="hidden">
   <symbol id="icon-search" viewbox="0 0 18 19" fill="none">
@@ -54,9 +59,33 @@
           {% assign in_group = false %}
         {% endif %}
       {% endif %}
-
       {% unless in_group %}
-        <div class="header__group {% if block.type == 'logo' %}header__group--logo{% endif %} {% if block.type == 'mobile_menu' %}header__group--mobile_menu{% endif %} {% if block.type == 'logo' or block.type == 'spacer' or block.type == 'mobile_menu' %} {% unless block.settings.visible_large %} hide--desktop {% endunless %}{% unless block.settings.visible_medium %} hide--medium {% endunless %}{% unless block.settings.visible_small %} hide--small {% endunless %}{% endif %}">
+
+      {% comment %}Check children to see if all group children are invisible {% endcomment %}
+        {% assign vb_small = "hide--small" %}
+        {% assign vb_medium = "hide--medium" %}
+        {% assign vb_desktop = "hide--desktop" %}
+        {% for i in (forloop.index0 .. section.blocks.size) %}
+          {% assign sub_block = section.blocks[i] %}
+          {% assign next_index = i | plus: 1 %}
+          {% assign next_block = section.blocks[next_index] %}
+          {% if sub_block.settings.visible_small == true %}
+            {% assign vb_small = '' %}
+          {% endif %}
+          {% if sub_block.settings.visible_medium == true %}
+            {% assign vb_medium = '' %}
+          {% endif %}
+          {% if sub_block.settings.visible_large == true %}
+            {% assign vb_desktop = '' %}
+          {% endif %}
+          {% comment %} {% if next_block.type == 'spacer' or next_block.type == 'logo' or next_block.type == 'mobile_menu' %}
+            {% break %}
+          {% endif %} {% endcomment %}
+          {% if sub_block.type == 'spacer' or sub_block.type == 'logo' or sub_block.type == 'mobile_menu' %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+        <div class="header__group {% if block.type == 'logo' %}header__group--logo{% endif %} {% if block.type == 'mobile_menu' %}header__group--mobile_menu{% endif %} {{ vb_small }} {{ vb_medium }} {{ vb_desktop }}">
         {% assign in_group = true %}
       {%endunless%}
     {% comment %} Group Contents {% endcomment %}
@@ -156,7 +185,7 @@
         {% endcase %}
     </div><!--\.header__item-->
 {% comment %} Close  group if logo, mobile menu, spacer, or last item{% endcomment %}    {% assign index = index | plus: 1 %}
-    {% if index == section.settings.size or block.type == 'spacer' or block.type == 'logo' or block.type == 'mobile_menu'  %}
+    {% if index == section.blocks.size or block.type == 'spacer' or block.type == 'logo' or block.type == 'mobile_menu'  %}
       </div><!--\.header__group-->
       {% assign in_group = false %}
     {% endif %}
@@ -165,9 +194,7 @@
 
 </site-header>
 
-{%- if request.page_type != 'cart' -%}
-  {%- render 'cart-notification' -%}
-{%- endif -%}
+{%- render 'cart-notification', color_scheme: section.settings.color_scheme -%}
 
 <script type="application/ld+json">
   {

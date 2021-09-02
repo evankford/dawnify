@@ -10,7 +10,7 @@ summary .icon-caret {
   position: absolute;
   height: 0.6rem;
   right: 1.5rem;
-  top: calc(50% - 0.35rem);
+  top: calc(50% - 0.2rem);
 }
 
 summary::-webkit-details-marker {
@@ -40,4 +40,14 @@ summary::-webkit-details-marker {
 
 .disclosure-has-popup[open] > summary + * {
   z-index: 100;
+}
+
+@media screen and (min-width: 750px) {
+  .disclosure-has-popup[open] > summary + * {
+    z-index: 4;
+  }
+
+  .facets .disclosure-has-popup[open] > summary + * {
+    z-index: 2;
+  }
 }

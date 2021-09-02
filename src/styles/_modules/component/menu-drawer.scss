@@ -18,13 +18,15 @@
   opacity: 0;
   visibility: hidden;
   z-index: 2;
-  transition: opacity var(--duration-default) ease,
-    visibility var(--duration-default) ease;
+  transition: opacity 0s,
+    visibility 0s;
 }
 
 menu-drawer > details[open] > summary::before {
   visibility: visible;
   opacity: 1;
+  transition: opacity var(--duration-default) ease,
+    visibility var(--duration-default) ease;
 }
 
 .menu-drawer {
@@ -114,6 +116,7 @@ details[open].menu-opening > .menu-drawer__submenu {
 .menu-drawer__menu-item {
   padding: 1.1rem 3.2rem;
   text-decoration: none;
+  display: flex;
   font-size: 1.8rem;
 }
 
@@ -153,10 +156,6 @@ details[open].menu-opening > .menu-drawer__submenu {
 .js .menu-drawer__menu-item .icon-caret,
 .no-js .menu-drawer .icon-arrow {
   display: none;
-}
-
-.menu-drawer .icon-arrow {
-  width: 1.3rem;
 }
 
 .menu-drawer__menu-item > .icon-arrow {

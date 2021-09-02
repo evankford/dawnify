@@ -35,13 +35,28 @@
 
     onScroll() {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
       if (scrollTop > this.currentScrollTop && scrollTop > this.headerBounds.bottom) {
         requestAnimationFrame(this.hide.bind(this));
       } else if (scrollTop < this.currentScrollTop && scrollTop > this.headerBounds.bottom) {
-        requestAnimationFrame(this.reveal.bind(this));
+        if (!this.preventReveal) {
+          requestAnimationFrame(this.reveal.bind(this));
+        } else {
+          window.clearTimeout(this.isScrolling);
+
+          this.isScrolling = setTimeout(() => {
+            this.preventReveal = false;
+          }, 66);
+
+          requestAnimationFrame(this.hide.bind(this));
+        }
       } else if (scrollTop <= this.headerBounds.top) {
         requestAnimationFrame(this.reset.bind(this));
       }
+
+
+      this.currentScrollTop = scrollTop;
+
 
       if (this.overlay) {
         const self = this;
@@ -56,7 +71,6 @@
         }
       }
 
-      this.currentScrollTop = scrollTop;
     }
 
     hide() {
@@ -86,7 +100,7 @@
       }
     }
     checkOverlay() {
-      console.log("Checking overlay");
+      //Checking overlay
       if (this.pageHasOverlay()) {
         this.overlay = true;
         this.header.classList.add('has-overlay');

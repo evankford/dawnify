@@ -4,10 +4,11 @@
   z-index: 3;
   will-change: transform;
   position: absolute;
+  transition: opacity 150ms linear, transform 100ms linear;
   top: 0;
   .js & {
     opacity: 0;
-    animation: slide-down 200ms 100ms $ease 1 forwards;
+    animation: slide-down 200ms 50ms $ease 1 forwards;
     width: 100%;
   }
   // .animate &  {
@@ -54,7 +55,7 @@
   &::before {
     @extend %psuedo;
     .animate & {
-      transition: opacity 300ms $ease;
+      transition: opacity 200ms $ease;
     }
     background-color: var(--bg);
     z-index: -1;
@@ -75,6 +76,7 @@
 a.header__menu-item, summary.header__menu-item, .header__icon {
   color: var(--txt);
   transition: color 200ms $ease;
+  line-height: 1.1;
   &:hover {
     color: var(--txt-h);
   }
@@ -166,6 +168,10 @@ a.header__menu-item, summary.header__menu-item, .header__icon {
     }
     &[data-align=left] {
       margin:auto auto auto 0;
+    }
+
+    @include media-query($small) {
+      padding: 0.3rem;
     }
   }
   &__heading {

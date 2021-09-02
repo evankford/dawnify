@@ -43,14 +43,14 @@
 
 @include media-query($large-up) {
   .product:not(.product--no-media) .product__media-wrapper {
-    max-width: 55%;
-    width: calc(55% - 1rem / 2);
+    max-width: 50%;
+    width: calc(50% - 1rem / 2);
   }
 
   .product:not(.product--no-media) .product__info-wrapper {
     padding-left: 4rem;
-    max-width: 45%;
-    width: calc(45% - 1rem / 2);
+    max-width: 50%;
+    width: calc(50% - 1rem / 2);
   }
 }
 
@@ -151,7 +151,6 @@ fieldset.product-form__input .form__label {
 .product-form__input input[type='radio'] + label {
   border: 0.1rem solid rgba(var(--color-foreground), 0.55);
   border-radius: 4rem;
-  background-color: rgb(var(--color-background));
   color: rgb(var(--color-foreground));
   display: inline-block;
   margin: 0.7rem 0.5rem 0.2rem 0;
@@ -334,11 +333,19 @@ a.product__text {
 /* Product media */
 
 @media screen and (max-width: 749px) {
+  .grid.product {
+    flex-wrap:wrap;
+  }
   .product__media-list {
     margin-left: -2.5rem;
     padding-bottom: 2rem;
     margin-bottom: 3rem;
     width: calc(100% + 4rem);
+    flex: 0 0 100%;
+  }
+
+  .product__media-wrapper {
+    flex: 0 0 100%;
   }
 
   .product__media-wrapper slider-component {
@@ -365,6 +372,8 @@ a.product__text {
 
   .product__media-list .product__media-item {
     width: calc(100% - 3rem);
+    flex: 0 0 calc(100% - 3rem);
+    max-width: 100%;
   }
 
   .product__media-list .product__media-item:first-of-type {
@@ -372,9 +381,15 @@ a.product__text {
   }
 }
 
+.product__media-item {
+  flex: 1 1 35%
+}
+
 @media screen and (min-width: 750px) {
   .product__media-item:first-child {
     width: 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
   }
 }
 
@@ -426,6 +441,7 @@ a.product__text {
 @media screen and (min-width: 750px) {
   .grid__item.product__media-item--full {
     width: 100%;
+    max-width: 100%;
   }
 }
 
@@ -722,3 +738,4 @@ a.product__text {
   margin: 0;
   width: 2.2rem;
 }
+

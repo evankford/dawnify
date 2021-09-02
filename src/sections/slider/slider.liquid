@@ -1,75 +1,20 @@
+<script defer src="{{ 'slider.js' | asset_url  }}"></script>
+{{ 'slider.css' | append: '?enable_css_minification=1' | asset_url | stylesheet_tag }}
 {{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
 {%assign is_slide = false %}
 {% if section.blocks.size > 1 %}
 {% assign is_slide = true %}
+
 <slider-element class="swiper-container {% if section.settings.auto_height != true%} fixed-height {% endif %}"
   {% if section.settings.autoplay > 0 %} data-autoplay="{{section.settings.autoplay}}"{% endif %}
   {% if section.settings.navigation == true  %} data-navigation="true" {% endif %}
   {% if section.settings.pagination != "disabled" %} data-pagination="{{section.settings.pagination}}"{% endif %}
-  {% if section.settings.auto_height == true %} data-auto-height {% endif %}
+  {% if section.settings.auto_height == true %} data-auto-height="true" {% endif %}
   >
   <ul class="swiper-wrapper">
   {% endif %}
   {% for block in section.blocks %}
-    <{% if is_slide %}li{% else %}div{% endif %} class="swiper-slide color-{{ block.settings.color_scheme }}" style="background-color: {{ block.settings.overlay_color | default: '#000000' }};">
-    <div class="background-image background-element" style="--op: {{block.settings.overlay_opacity }}; opacity: {{ 100 | minus: block.settings.overlay_opacity | divided_by: 100.00}};">
-
-      {% if block.settings.image_wide != blank %}
-        {% render 'media' with is_slide: is_slide, size: "full" , class: 'media--wide', media: block.settings.image_wide , center_x: block.settings.image_center_x, type: "image" , center_y: block.setings.image_center_y %}
-      {% endif %}
-      {% if block.settings.image_mobile != blank %}
-        {% render 'media' with is_slide: is_slide, size: "full" , class: 'media--mobile', media: block.settings.image_mobile , center_x: block.settings.image_center_x, type: "image" , center_y: block.setings.image_center_y %}
-      {% endif %}
-
-      {% render 'media' with media: block.settings.image, is_slide: is_slide, size: "full", , center_x: block.settings.image_center_x, center_y: block.settings.image_center_y, type: "image"  %}
-    </div>
-    {% if block.settings.video != blank %}
-    <div class="background-video background-element">
-      {% if block.settings.video_small != blank %}
-        {% render 'media' with is_slide: is_slide, type: 'video',  ratio: "16-9", class: 'media--mobile', video: block.settings.video_small, poster: block.settings.image %}
-      {% endif %}
-      {% render 'media' with  is_slide: is_slide, type: 'video', ratio: "16-9", video: block.settings.video, poster: block.settings.image %}
-    </div>
-    {% endif %}
-    {% if block.type != 'video' and block.type != 'image' %}
-    <div class="banner__content" style="align-items: {{ block.settings.desktop_text_box_position }};">
-      <div class="banner__box color-{{ block.settings.color_scheme }}">
-          {%- if block.settings.introduction != blank -%}
-          <div class="h4 label">{{ block.settings.introduction }}</div>
-          {%- endif -%}
-          {% if block.settings.content_image != blank %}
-            {% render 'media' with class: "content-image", size: 'half', type: "image", image: block.settings.content_image, max_width: block.settings.content_image_width %}
-          {% endif %}
-          {% if block.settings.heading != blank %}
-          <h2 class="banner__heading h0 heading" {{ block.shopify_attributes }}>
-            <span>{{ block.settings.heading | escape }}</span>
-          </h2>
-          {% endif %}
-          {%- if block.settings.subtitle != blank -%}
-          <div class="h4 label">{{ block.settings.subtitle }}</div>
-          {%- endif -%}
-          {% if block.settings.content != blank %}
-          <div class="banner__text" {{ block.shopify_attributes }}>
-            <span>{{ block.settings.text | escape }}</span>
-          </div>
-          {% endif %}
-          {% if block.settings.button_label_1 != blank and block.settings.button_link_1 != blank %}
-          <div class="banner__buttons{% if block.settings.button_label_1 != blank and block.settings.button_link_1 != blank and block.settings.button_label_2 != blank and block.settings.button_link_2 != blank %} banner__buttons--multiple{% endif %}" {{ block.shopify_attributes }}>
-            {%- if block.settings.button_label_1 != blank and block.settings.button_link_1 != blank -%}
-              <a{% if block.settings.button_link_1 != blank %} href="{{ block.settings.button_link_1 }}"{% endif %} class="button{% if block.settings.button_style_secondary_1 %} button--secondary{% else %} button--primary{% endif %}"{% if block.settings.button_link_1 == blank %} aria-disabled="true"{% endif %}>{{ block.settings.button_label_1 | escape }}</a>
-            {%- endif -%}
-            {%- if block.settings.button_label_2 != blank and block.settings.button_link_2 != blank -%}
-              <a{% if block.settings.button_link_2 != blank %} href="{{ block.settings.button_link_2 }}"{% endif %} class="button{% if block.settings.button_style_secondary_2 %} button--secondary{% else %} button--primary{% endif %}"{% if block.settings.button_link_2 == blank %} aria-disabled="true"{% endif %}>{{ block.settings.button_label_2 | escape }}</a>
-            {%- endif -%}
-          </div>
-          {%endif%}
-        </div>
-    </div>
-    {% endif %}
-    {% if is_slide %}
-      <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-    {% endif %}
-    </{% if is_slide %}li{% else %}div{% endif %}>
+      {% render 'media-slide' with color_scheme: block.settings.color_scheme, type: block.type, overlay_color: block.settings.overlay_color, overlay_opacity: block.settings.overlay_opacity, settings: block.settings, is_slide %}
   {% endfor %}
 
   {% comment %} Resume swiper markup if block size > 1   {% endcomment %}

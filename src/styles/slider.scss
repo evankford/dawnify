@@ -28,7 +28,7 @@ slider-element {
 div.swiper-slide, li.swiper-slide {
   height: 100%;
 
-  .auto-height & {
+  .swiper-container-autoheight & {
     height: auto;
   }
 
@@ -108,3 +108,18 @@ button[data-next] {
   }
 }
 
+
+.swiper-container-autoheight {
+
+  .background-element,
+  .background-element .media {
+      height: auto;
+      position: relative;
+  }
+
+  .background-element .media {
+    &::before {
+
+    }
+  }
+}

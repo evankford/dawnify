@@ -1,8 +1,14 @@
 
 /* component-form */
+
+.button.newsletter-form__button {
+  height: 4.5rem;
+}
+
 .field__input,
 .select__select,
 .customer .field input,
+
 .customer select {
   -webkit-appearance: none;
   appearance: none;

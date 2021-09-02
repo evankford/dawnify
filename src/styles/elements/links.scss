@@ -5,15 +5,24 @@
   display: inline-block;
   border: none;
   box-shadow: none;
-  text-decoration: underline;
-  text-underline-offset: 0.3rem;
+
   color: rgb(var(--color-link));
   background-color: transparent;
   font-size: 1.4rem;
 }
 
+
+.customer a {
+  text-decoration: underline;
+    text-underline-offset: 0.3rem;
+
+}
+
 .link--text {
   color: rgb(var(--color-foreground));
+    text-underline-offset: 0.3rem;
+
+  text-decoration: underline;
 }
 
 .link--text:hover {

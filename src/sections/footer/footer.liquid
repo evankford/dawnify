@@ -17,16 +17,16 @@
 
 {%- capture copyright_text -%}<small class="copyright__content">&copy; {{ 'now' | date: "%Y" }} {{ section.settings.copyright_text | strip_html }}</small>{%- endcapture -%}
 
-<footer class="footer color-{{ section.settings.color_scheme }}">
+<footer class="footer color-{{ section.settings.color_scheme }} gradient-standard">
   {%- if section.blocks.size > 0 or section.settings.newsletter_enable or section.settings.show_social -%}
     <div class="footer__content-top page-width">
       {%- if section.blocks.size > 0 -%}
         {%- liquid
           if section.blocks.size == 9
             assign footer_grid_class = 'grid--3-col-tablet'
-          elsif section.blocks.size > 6
+          elsif section.blocks.size >= 7
             assign footer_grid_class = 'grid--4-col-desktop'
-          elsif section.blocks.size > 4
+          elsif section.blocks.size >= 5
             assign footer_grid_class = 'grid--3-col-tablet'
           endif
         -%}
@@ -54,6 +54,10 @@
                         {%- endif -%}
                       </details>
                     </div>
+                {% when 'html' %}
+                <div class="code-wrap">
+                  {{ block.settings.html }}
+                </div>
                 {%- when 'content' -%}
                   {% if block.settings.image %}
                     {% render "media" with size: "icon", image: block.settings.image, max_width: block.settings.image_width %}

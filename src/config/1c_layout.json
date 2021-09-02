@@ -1,0 +1,22 @@
+{
+  "name": "Layout",
+  "settings": [
+
+        {
+        "type": "select",
+        "id": "page_width",
+        "options": [
+          {
+            "value": "1200",
+            "label": "1200px"
+          },
+          {
+            "value": "1600",
+            "label": "1600px"
+          }
+        ],
+        "default": "1600",
+        "label": "Page Width"
+      }
+  ]
+}

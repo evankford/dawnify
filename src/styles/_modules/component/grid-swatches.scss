@@ -1,5 +1,5 @@
 grid-swatches {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   margin: 0.5rem auto 0.2rem;
@@ -29,7 +29,8 @@ grid-swatches {
    margin: 0;
    opacity: 0.9;
    border: 0.1rem solid rgba(var(--color-foreground), 0.6);
-
+    background-size: cover;
+    background-repeat: repeat;
 
 
   }

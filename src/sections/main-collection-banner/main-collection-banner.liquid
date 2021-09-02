@@ -1,8 +1,17 @@
 {{ 'component-collection-hero.css' | asset_url | stylesheet_tag }}
 <style>
 div.collection-hero:not(.collection-hero--with-image) {
-  margin: {{section.settings.spacing_top | divided_by: 3.0 | default: 1}}rem auto {{section.settings.spacing_bottom | divided_by: 3.0 | default: 1}}rem auto;
+  margin-top: {{section.settings.spacing_top | minus: 5 | divided_by: 3.0 | default: 1}}rem;
+  margin-bottom: {{section.settings.spacing_bottom | minus: 5 | divided_by: 3.0 | default: 1}}rem;
 }
+@media (max-width: 749px) {
+
+  div.collection-hero:not(.collection-hero--with-image) {
+    margin-top: {{section.settings.spacing_top | minus: 5 | divided_by: 6.0 | default: 1}}rem;
+    margin-bottom: {{section.settings.spacing_bottom | minus: 5 | divided_by: 6.0 | default: 1}}rem;
+  }
+}
+</style>
 </style>
 <div class="collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %}">
   <div class="collection-hero__inner page-width">

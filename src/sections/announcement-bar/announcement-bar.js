@@ -38,7 +38,6 @@ class AnnouncementBar extends HTMLElement {
 
   handleResize() {
     const newHeight = this.getBoundingClientRect().height;
-    console.log(newHeight);
     if (this.height != newHeight) {
       this.newHeight =  newHeight;
       this.changeBodyOffset()

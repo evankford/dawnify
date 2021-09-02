@@ -241,8 +241,8 @@ a.button, button.button,a.customer-button, button.shopify-challenge-button, [typ
   padding: {{settings.button_padding_top | divided_by: 13.0 }}em  {{settings.button_padding_horiz | divided_by: 13.0 }}em {{settings.button_padding_bottom | divided_by: 13.0 }}em ;
 }
 
-
-a.header__menu-item, a.list-menu__item--link, summary.header__menu-item > span {
+{% if settings.style_footer_menus == true %}a.list-menu__item--link,{%endif%}
+a.header__menu-item , summary.header__menu-item > span {
   {% case settings.menu_font_family %}
     {%when 'body' %}
       font-family: var(--font-body-family);
@@ -265,25 +265,18 @@ a.header__menu-item, a.list-menu__item--link, summary.header__menu-item > span {
   font-style: {{settings.menu_text_style | default : "normal"}};
   font-size: {{settings.menu_font_size | default: '17'}}px;
   text-decoration: none;
+  padding: {{settings.menu_padding_top | divided_by: 10.0 }}em  {{settings.menu_padding_horiz | divided_by: 10.0 }}em {{settings.menu_padding_bottom | divided_by: 10.0 }}em;
   @media (max-width: 720px) {
     font-size: {{settings.menu_font_size_mobile | default: '16'}}px;
   }
 }
 
-a.list-menu__item {
-  padding: {{settings.menu_padding_top | divided_by: 10.0 }}em  {{settings.menu_padding_horiz | divided_by: 10.0 }}em {{settings.menu_padding_bottom | divided_by: 10.0 }}em;
-}
-
-summary.header__menu-item  {
-  padding: {{settings.menu_padding_top | divided_by: 10.0 }}em  {{settings.menu_padding_horiz | divided_by: 10.0 | plus: 1.25 }}em {{settings.menu_padding_bottom | divided_by: 10.0 }}em {{settings.menu_padding_horiz | divided_by: 10.0 }}em;
+summary.list-menu__item.header__menu-item  {
+  padding: 0 1em 0 0;
   font-size: {{settings.menu_font_size | default: '17'}}px;
   @media (max-width: 720px) {
     font-size: {{settings.menu_font_size_mobile | default: '16'}}px;
   }
-}
-
-.summary.list-menu__item {
-  padding-right: 0;
 }
 
 summary .header-menu__item {

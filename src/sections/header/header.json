@@ -39,29 +39,67 @@
       "content" : "Colors"
     },
     {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "accent-1",
+          "label": "t:sections.footer.settings.color_scheme.options__1.label"
+        },
+        {
+          "value": "accent-2",
+          "label": "t:sections.footer.settings.color_scheme.options__2.label"
+        },
+        {
+          "value": "background-1",
+          "label": "t:sections.footer.settings.color_scheme.options__3.label"
+        },
+        {
+          "value": "background-2",
+          "label": "t:sections.footer.settings.color_scheme.options__4.label"
+        },
+        {
+          "value": "inverse",
+          "label": "t:sections.footer.settings.color_scheme.options__5.label"
+        }
+      ],
+      "default": "none",
+      "info" : "Determines the cart notification color scheme",
+      "label": "t:sections.footer.settings.color_scheme.label"
+    },
+    {
       "type" : "color",
       "label" : "Background",
-      "id" : "background"
+      "id" : "background",
+      "default" : "#ffffff"
     },
     {
       "type" : "color",
       "label" : "Text Color",
-      "id" : "color"
+      "id" : "color",
+      "default" : "#3f3f3f"
     },
     {
       "type" : "color",
       "label" : "Color (Hover)",
-      "id" : "color_hover"
+      "id" : "color_hover",
+      "default" : "#1f1f1f"
     },
     {
       "type" : "color",
       "label" : "Color (Overlay)",
-      "id" : "color_overlay"
+      "id" : "color_overlay",
+      "default" : "#ffffff"
     },
     {
       "type" : "color",
       "label" : "Color (Overlay Hover)",
-      "id" : "color_overlay_hover"
+      "id" : "color_overlay_hover",
+      "default" : "#fafafa"
     },
     {
       "type" : "header" ,

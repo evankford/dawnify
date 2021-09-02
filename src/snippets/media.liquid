@@ -109,7 +109,17 @@
   if is_slide
     assign loading_size = "300x"
   endif
+
+  assign is_external = false
+  if media contains "https://youtu" or media contains "https://vim" or media contains 'https://www.youtube' or media  contains 'youtube.com' or media contains 'vimeo.com'
+    assign is_external = true
+  endif
+  if video contains "https://youtu" or video contains "https://vim" or video contains 'https://www.youtube' or video contains 'youtube.com' or video contains 'vimeo.com'
+    assign is_external = true
+  endif
 -%}
+
+
 {% assign srcSetString = "srcset" %}
 {% if is_slide %}{% assign srcSetString = "data-srcset" %}{%endif%}
 <div class="media type--{{type}} media--{{ ratio }} {{ class }}" style="{% if aspect_ratio > 0%}--ar: {{ aspect_ratio }}%;{% endif %}{% if size != 'full' %} --mw: {{ max_width }}px;{% endif %}">
@@ -155,8 +165,48 @@
         {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
       {%- endif -%}
     {%- when  'video' -%}
+    {% unless is_external %}
       {% if video %}
         <video class="{{classes}}" {% if poster %}poster="{{poster | img_url: '450x'}}" data-poster="{{poster | img_url: '1400x'}}" {% endif %} autoplay muted loop playsinline preload="false" loading="lazy" data-src="{{ video }}" />
       {% endif %}
+    {% else %}
+      {% liquid
+        if poster
+          assign image = poster
+          assign max_width = 2000
+        endif %}
+        <video-background class="video-bg" data-bg-video-url="{{video}}">
+          {% if poster %}
+          <img
+          class="custom-fallback-image{% if is_slide %} swiper-lazy{% endif %}"
+
+            {{srcSetString}}="{%- if max_width >= 165 -%}{{ image | img_url: '165x' }} 165w,{%- endif -%}
+              {%- if max_width >= 240 -%}{{ image | img_url: '240x' }} 240w,{%- endif -%}
+              {%- if max_width >= 360 -%}{{ image | img_url: '360x' }} 360w,{%- endif -%}
+              {%- if max_width >= 535 -%}{{ image | img_url: '535x' }} 535w,{%- endif -%}
+              {%- if max_width >= 720 -%}{{ image | img_url: '720x' }} 720w,{%- endif -%}
+              {%- if max_width >= 940 -%}{{ image | img_url: '940x' }} 940w,{%- endif -%}
+              {%- if max_width >= 1200 -%}{{ image | img_url: '1200x' }} 1200w,{%- endif -%}
+              {%- if max_width >= 1400 -%}{{ image | img_url: '1400x' }} 1400w,{%- endif -%}
+              {%- if max_width >= 1600 -%}{{ image | img_url: '1600x' }} 1600w,{%- endif -%}
+              {%- if max_width >= 2000 -%}{{ image | img_url: '2000x' }} 2000w,{%- endif -%}
+              {%- if max_width >= 2400 -%}{{ image | img_url: '2400x' }}{%- endif -%}"
+
+            src="{{ image | img_url: loading_size }}"
+            sizes="{{ sizes }}"
+            alt="{{ alt | default: image.alt | escape }}"
+            {% unless is_slide %} loading="lazy" {% endunless %}
+            width="{{ image.width }}"
+            height="{{ image.height }}"
+            {% if center_x or center_y %}
+            style="object-position: {{ center_x | default: 50 }}% {{ center_y | default: 50 }}%"
+            {% endif %}
+          >
+          {% endif %}
+        </video-background>
+              <script src="{{ 'component-external-video-bg.js' | asset_url  }}" defer></script>
+
+
+    {%endunless %}
   {%- endcase -%}
 </div>

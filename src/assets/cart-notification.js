@@ -3,7 +3,7 @@ class CartNotification extends HTMLElement {
     super();
 
     this.notification = document.getElementById('cart-notification');
-    this.header = document.querySelector('site-header');
+    this.header = document.querySelector('sticky-header');
     this.onBodyClick = this.handleBodyClick.bind(this);
 
     this.notification.addEventListener('keyup', (evt) => evt.code === 'Escape' && this.close());
@@ -38,7 +38,7 @@ class CartNotification extends HTMLElement {
           this.getSectionInnerHTML(parsedState.sections[section.id], section.selector);
       }));
 
-      this.header?.reveal();
+      if (this.header) this.header.reveal();
       this.open();
   }
 

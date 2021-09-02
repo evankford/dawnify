@@ -1,4 +1,4 @@
-
+@use '../../abstracts/' as *;
 /* Header icons */
 .header__icons {
   display: flex;
@@ -37,7 +37,9 @@
 
   &--cart {
     position: relative;
-    margin-right: -1.2rem;
+    @include media-query($medium-up) {
+      margin-right: -1.2rem;
+    }
   }
 }
 

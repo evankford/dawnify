@@ -19,3 +19,18 @@ hr {
   color: rgba(var(--color-foreground), 0.55);
   fill: rgba(var(--color-foreground), 0.55);
 }
+
+.icon-arrow {
+  width: 1.5rem;
+}
+
+
+/* arrow animation */
+.animate-arrow .icon-arrow path {
+  transform: translateX(-0.25rem);
+  transition: transform var(--duration-short) ease;
+}
+
+.animate-arrow:hover .icon-arrow path {
+  transform: translateX(-0.05rem);
+}

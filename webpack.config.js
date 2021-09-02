@@ -27,19 +27,28 @@ function getSections() {
           } else if (filePath.indexOf('js') >= 0) {
             return '{% javascript %}' + content + '{% endjavascript %}';
           } else if (filePath.indexOf('css') >= 0) {
+
+            //Render scss
             if (filePath.indexOf('scss') >= 0) {
+              let renderedSass = "";
+              try{
+                renderedSass = sass.renderSync({ data: content }).css.toString();
+              } catch(err) {
+                console.log(err);
+                renderedSass = "/* Error parsing scss:" + err + '*/';
+              }
               return (
-                '{% stylesheet %}' +
-                sass.render({ data: content, includePaths: [dir] }) +
-                '{% endstylesheet %}'
+                '{% stylesheet %}/* Rendered SCSS in section file */\n' + renderedSass + '{% endstylesheet %}'
               );
             } else {
+
+              //Default css behavior
               return '{% stylesheet %}' + content + '{% endstylesheet %}';
             }
           } else {
             return content;
           }
-        },
+        }
       },
     });
   });
@@ -65,7 +74,7 @@ function getEntries() {
     componentEntries[`${type}-${name}`] = [file];
   });
   const allJsElements = glob.sync(
-    path.resolve('./src/scripts/_elements/*/*.js')
+    path.resolve('./src/scripts/_elements/*.js')
   );
   allJsElements.forEach((file) => {
     const name = file.substring(
@@ -91,6 +100,7 @@ module.exports = {
     filename: 'assets/[name].js',
     chunkFilename: 'assets/[name].js',
     // publicPath: 'dist/',
+
     path: path.resolve(__dirname, outputDirectory),
   },
   module: {
@@ -114,26 +124,6 @@ module.exports = {
         },
       },
     ],
-  },
-
-  optimization: {
-    splitChunks: {
-      cacheGroups: {
-        commons: {
-          test: /[\\/]node_modules[\\/]/,
-          // cacheGroupKey here is `commons` as the key of the cacheGroup
-          name(module, chunks, cacheGroupKey) {
-            const moduleFileName = module
-              .identifier()
-              .split('/')
-              .reduceRight((item) => item);
-            const allChunksNames = chunks.map((item) => item.name).join('~');
-            return `${cacheGroupKey}-${allChunksNames}-${moduleFileName}`;
-          },
-          chunks: 'all',
-        },
-      },
-    },
   },
 
   plugins: [

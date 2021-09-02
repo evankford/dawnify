@@ -1,0 +1,90 @@
+
+<script defer src="{{ 'slider.js' | asset_url  }}"></script>
+{{ 'slider.css' | append: '?enable_css_minification=1' | asset_url | stylesheet_tag }}
+{{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
+
+<div class="background-slider {% if section.settings.auto_height != true%} fixed-height {% endif %}">
+  <div class="background-slider__content banner__content" style="align-items: {{ settings.desktop_text_box_position }};">
+    <div class="banner__box color-{{ section.settings.color_scheme }}">
+
+    {%- if section.settings.introduction != blank -%}
+      <div class="h4 label">{{ section.settings.introduction }}</div>
+    {%- endif -%}
+    {% if section.settings.content_image != blank %}
+      {% render 'media' with class: "content-image", size: 'half', type: "image", image: section.settings.content_image, max_width: section.settings.content_image_width %}
+    {% endif %}
+    {% if section.settings.heading != blank %}
+      <h2 class="banner__heading h0 heading" {{ block.shopify_attributes }}>
+        <span>{{ section.settings.heading | escape }}</span>
+      </h2>
+    {% endif %}
+    {%- if section.settings.subtitle != blank -%}
+      <div class="h4 label">{{ section.settings.subtitle }}</div>
+    {%- endif -%}
+    {% if section.settings.content != blank %}
+      <div class="banner__text" {{ block.shopify_attributes }}>
+        <span>{{ section.settings.text | escape }}</span>
+      </div>
+    {% endif %}
+    {%- if section.settings.button_label_1 != blank and section.settings.button_link_1 != blank -%}
+      <div class="banner__buttons{% if section.settings.button_label_1 != blank and section.settings.button_link_1 != blank and section.settings.button_label_2 != blank and section.settings.button_link_2 != blank %} banner__buttons--multiple{% endif %}" {{ block.shopify_attributes }}>
+      {%- if section.settings.button_label_1 != blank and section.settings.button_link_1 != blank -%}
+        <a{% if section.settings.button_link_1 != blank %} href="{{ section.settings.button_link_1 }}"{% endif %} class="button{% if section.settings.button_style_secondary_1 %} button--secondary{% else %} button--primary{% endif %}"{% if section.settings.button_link_1 == blank %} aria-disabled="true"{% endif %}>{{ section.settings.button_label_1 | escape }}</a>
+      {%- endif -%}
+      {%- if section.settings.button_label_2 != blank and section.settings.button_link_2 != blank -%}
+        <a{% if section.settings.button_link_2 != blank %} href="{{ section.settings.button_link_2 }}"{% endif %} class="button{% if section.settings.button_style_secondary_2 %} button--secondary{% else %} button--primary{% endif %}"{% if section.settings.button_link_2 == blank %} aria-disabled="true"{% endif %}>{{ section.settings.button_label_2 | escape }}</a>
+      {%- endif -%}
+      </div>
+    {%- endif -%}
+    </div>
+  </div>
+  <div class="background-slider__background">
+  {%assign is_slide = false %}
+    {% if section.blocks.size > 1 %}
+    {% assign is_slide = true %}
+    <slider-element class="swiper-container {% if section.settings.auto_height != true%} fixed-height {% endif %}"
+      {% if section.settings.autoplay > 0 %} data-autoplay="{{section.settings.autoplay}}"{% endif %}
+      {% if section.settings.navigation == true  %} data-navigation="true" {% endif %}
+      {% if section.settings.pagination != "disabled" %} data-pagination="{{section.settings.pagination}}"{% endif %}
+      {% if section.settings.auto_height == true %} data-auto-height="true" {% endif %}
+      {% if section.settings.effect  %} data-effect="{{section.settings.effect }}" {% endif %}
+      >
+      <ul class="swiper-wrapper">
+      {%endif%}
+      {% for block in section.blocks %}
+        {% render 'media-slide' with color_scheme: section.settings.color_scheme, overlay_opacity: section.settings.overlay_opacity, overlay_color: section.settings.overlay_color, settings: block.settings, type: block.type, is_slide %}
+      {% endfor %}
+      {% if section.blocks.size > 1 %}
+      </ul>
+      {% if section.settings.pagination != "disabled" %}
+        <div class="swiper-pagination" data-pagination></div>
+      {% endif %}
+      {% if section.settings.navigation == true %}
+        <div class="swiper-navigation">
+          <button class="button-icon" data-prev aria-label="Previous Slide">{% render 'icon-caret' %}</button>
+          <button class="button-icon" data-next aria-label="Next Slide">{% render 'icon-caret' %}</button>
+        </div>
+      {% endif %}
+    </slider-element>
+    {% endif %}
+  </div>
+</div>
+
+
+{% if section.settings.auto_height != true %}
+<style>
+  #shopify-section-{{section.id}} .background-slider {
+    height: {{ section.settings.height_mobile | default: 350}}px
+  }
+  @media (min-width: 790px) {
+    #shopify-section-{{section.id}} .background-slider {
+      height: {{ section.settings.height_standard | default: 460}}px
+    }
+  }
+  @media (min-width: 1250px) {
+    #shopify-section-{{section.id}} .background-slider {
+      height: {{ section.settings.height_standard | default: 510}}px
+    }
+  }
+</style>
+{% endif %}
