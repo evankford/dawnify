@@ -333,9 +333,7 @@ a.product__text {
 /* Product media */
 
 @media screen and (max-width: 749px) {
-  .grid.product {
-    flex-wrap:wrap;
-  }
+
   .product__media-list {
     margin-left: -2.5rem;
     padding-bottom: 2rem;
