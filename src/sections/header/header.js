@@ -21,11 +21,12 @@
       this.onScrollHandler = this.onScroll.bind(this);
       window.addEventListener('scroll', this.onScrollHandler, false);
 
-      this.handleResize();
       window.addEventListener('resize', this.handleResize.bind(this));
       //init
 
-      this.handleResize()
+      // this.handleResize();
+      // this.handleResize()
+      window.addEventListener('load', this.handleResize.bind(this));
       this.onScroll()
     }
 

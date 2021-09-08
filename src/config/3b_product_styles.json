@@ -27,7 +27,12 @@
     },
     {
       "type" : "header",
-      "content" : "Product Cards"
+      "content" : "Grid Appearance"
+    },
+    {
+      "type" : "checkbox",
+      "id" : "pg_details_on_hover",
+      "label" : "Only show details on hover?"
     },
     {
       "type" : "checkbox",

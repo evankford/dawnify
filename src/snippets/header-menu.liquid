@@ -1,6 +1,6 @@
 {% if menu %}
- <nav class="header__inline-menu">
-  <ul class="list-menu list-menu--inline" role="list">
+ <nav class="{% unless is_sidebar %}header__inline-menu {%else%} sidebar__menu {% endunless %}">
+  <ul class="list-menu {% unless is_sidebar %}list-menu--inline{% endunless %}" role="list">
     {%- for link in menu.links -%}
       <li>
         {%- if link.links != blank -%}

@@ -1,0 +1,180 @@
+{% comment %}
+  TODO: Add collapsible
+{% endcomment %}
+
+
+{% comment %} Icons {% endcomment %}
+<svg xmlns="http://www.w3.org/2000/svg" class="hidden">
+  <symbol id="icon-search" viewbox="0 0 18 19" fill="none">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M11.03 11.68A5.784 5.784 0 112.85 3.5a5.784 5.784 0 018.18 8.18zm.26 1.12a6.78 6.78 0 11.72-.7l5.4 5.4a.5.5 0 11-.71.7l-5.41-5.4z" fill="currentColor"/>
+  </symbol>
+
+  <symbol id="icon-close" class="icon icon-close" fill="none" viewBox="0 0 18 17">
+    <path d="M.865 15.978a.5.5 0 00.707.707l7.433-7.431 7.579 7.282a.501.501 0 00.846-.37.5.5 0 00-.153-.351L9.712 8.546l7.417-7.416a.5.5 0 10-.707-.708L8.991 7.853 1.413.573a.5.5 0 10-.693.72l7.563 7.268-7.418 7.417z" fill="currentColor">
+  </symbol>
+</svg>
+
+{% comment %} figure out if the first thing is the logo, then add a class if so {% endcomment %}
+{% assign first_type = section.blocks.first.type %}
+{% assign is_first_button = true %}
+<style>
+.sidebar-wrapper {
+  {% if section.settings.background != blank %}
+ --bg: {{ section.settings.background | default: "var(--color-background)" }};
+ --color-background: {{ section.settings.background.red}}, {{ section.settings.background.green}}, {{ section.settings.background.blue}};
+ {% endif %}
+ {% if section.settings.color != blank %}
+ --txt: {{ section.settings.color | default: "rgba(var(--color-foreground), 0.75)" }};
+ --color-foreground: {{ section.settings.color.red }}, {{ section.settings.color.green }}, {{ section.settings.color.blue }} ;
+ {% endif %}
+ --txt-h: {{ section.settings.color_hover | default: "rgba(var(--color-foreground), 1))" }};
+ --otxt: {{ section.settings.color_overlay | default: "rgba(255, 255,255,0.75)" }};
+ --otxt-h: {{ section.settings.color_overlay_hover | default: '#ffffff' }};
+}</style>
+<aside class="sidebar first--{{ first_type }} layout--{{ section.settings.layout }} page-width{% if section.settings.menu != blank %} sidebar--has-menu{% endif %}" >
+  <div class="sidebar__inner">
+      {% assign index = 0 %}
+      {% assign in_group = false %}
+      {%- for block in section.blocks -%}
+        {% comment %} Start new group if logo, mobile menu, or last item{% endcomment %}
+        {% if index >= 1 and in_group == true %}
+          {% if block.type == "logo" %}
+            </div><!--\.sidebar__group-->
+            {% assign in_group = false %}
+          {% endif %}
+        {% endif %}
+        {% unless in_group %}
+
+        {% comment %}Check children to see if all group children are invisible {% endcomment %}
+          {% assign vb_small = "hide--small" %}
+          {% assign vb_medium = "hide--medium" %}
+          {% assign vb_desktop = "hide--desktop" %}
+          {% for i in (forloop.index0 .. section.blocks.size) %}
+            {% assign sub_block = section.blocks[i] %}
+            {% assign next_index = i | plus: 1 %}
+            {% assign next_block = section.blocks[next_index] %}
+            {% if sub_block.settings.visible_small == true %}
+              {% assign vb_small = '' %}
+            {% endif %}
+            {% if sub_block.settings.visible_medium == true %}
+              {% assign vb_medium = '' %}
+            {% endif %}
+            {% if sub_block.settings.visible_large == true %}
+              {% assign vb_desktop = '' %}
+            {% endif %}
+            {% comment %} {% if next_block.type == 'spacer' or next_block.type == 'logo' or next_block.type == 'mobile_menu' %}
+              {% break %}
+            {% endif %} {% endcomment %}
+            {% if sub_block.type == 'spacer' or sub_block.type == 'logo' or sub_block.type == 'mobile_menu' %}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+          <div class="sidebar__group {% if block.type == 'logo' %}sidebar__group--logo{% endif %} {% if block.type == 'mobile_menu' %}sidebar__group--mobile_menu{% endif %} {{ vb_small }} {{ vb_medium }} {{ vb_desktop }}">
+          {% assign in_group = true %}
+        {%endunless%}
+      {% comment %} Group Contents {% endcomment %}
+      <div class="sidebar__item type--{{ block.type }}{% unless block.settings.visible_large %} hide--desktop {% endunless %}{% unless block.settings.visible_medium %} hide--medium {% endunless %}{% unless block.settings.visible_small %} hide--small {% endunless %} {% if block.type == 'button' and is_first_button %}{% assign is_first_button = false %}first-button{% endif %}" {% if block.settings.align %} data-align="{{ block.settings.align }}" {% endif %} {{ block.shopify_attributes }}>
+          {% case block.type %}
+          {% when "link" %}
+            {%- if block.settings.button_label != blank -%}
+              <a{% if block.settings.button_link != blank %} href="{{ block.settings.button_link }}"{% endif %} class="{% if block.settings.button_style %} button {% else %} link--text link {% endif %} {% if block.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}"{% if block.settings.button_link == blank %} aria-disabled="true"{% endif %}>
+                {{ block.settings.button_label | escape }}
+              </a>
+            {%- endif -%}
+          {% when "content" %}
+            <h4 class="heading" >{{ block.settings.title | escape }}</h4>
+          {% when "logo" %}
+            {% liquid
+              if block.settings.socials_layout == "before" or block.settings.social_layout == "above"
+                render 'socials-ul'
+              endif
+              if request.page_type == 'index'
+                echo '<h1 class="sidebar__heading">'
+              endif
+            %}
+            <style>
+              .sidebar-logo {
+                --ar: {{ 1 | divided_by: block.settings.image.aspect_ratio | times: 100 }}%;
+                --mw: {{ block.settings.logo_width }}px;
+                max-width: 100%; /* needed for the psuedoelement */
+                width: {{ block.settings.logo_width | default: 150 }}px;
+                margin: {{ block.settings.logo_spacing_top | minus: 40 | default: 0 }}% auto {{ block.settings.logo_spacing_bottom | minus: 40 | default: 0 }}%;
+              }
+
+              @media (max-width: 790px) {
+                .sidebar-logo {
+                --mw: {{ block.settings.logo_width_mobile }};
+                  width: {{ block.settings.logo_width_mobile | default: 100 }}px;
+                }
+              }
+            </style>
+            <a href="{{ routes.root_url }}" class="sidebar-logo media media--adapt sidebar__heading-link link link--text focus-inset {% if block.settings.socials_layout == 'before' or block.settings.socials_layout == 'after' %} flex-center {%endif%}">
+              {%- if block.settings.image != blank -%}
+                {% assign json_logo = block.settings.image | img_url: block.settings.image.width | prepend: "https:" | json %}
+                {%- assign image_size = block.settings.logo_width | append: 'x' -%}
+                {% if block.settings.overlay_image != blank and section.settings.enable_overlay == true %}
+                  <img srcset="{{ block.settings.overlay_image | img_url: image_size }} 1x, {{ block.settings.overlay_image | img_url: image_size, scale: 2 }} 2x"
+                    src="{{ block.settings.overlay_image | img_url: image_size }}"
+                    loading="lazy"
+                    class="sidebar__heading-logo overlay-image"
+                    width="{{ block.settings.overlay_image.width }}"
+                    height="{{ block.settings.overlay_image.height }}"
+                    alt="{{ block.settings.overlay_image.alt | default: shop.name | escape }}"
+                  >
+                {% endif %}
+                <img srcset="{{ block.settings.image | img_url: image_size }} 1x, {{ block.settings.image | img_url: image_size, scale: 2 }} 2x"
+                  src="{{ block.settings.image | img_url: image_size }}"
+                  loading="lazy"
+                  class="sidebar__heading-logo"
+                  width="{{ block.settings.image.width }}"
+                  height="{{ block.settings.image.height }}"
+                  alt="{{ block.settings.image.alt | default: shop.name | escape }}"
+                >
+              {%- else -%}
+                <span class="h2">{{ shop.name }}</span>
+              {%- endif -%}
+            </a>
+              {% liquid
+                if request.page_type == 'index'
+                  echo '</h1>'
+                endif
+                if block.settings.socials_layout == 'below' or block.settings.socials_layout == 'after'
+                  render 'socials-ul'
+                endif
+              %}
+          {% when "socials" %}
+            {%- render 'socials-ul' %}
+          {% when "button" %}
+            {% if block.settings.type == "search" %}
+                {%- render 'search-modal' -%}
+            {% elsif block.settings.type == "cart" %}
+                {%- render 'cart-button' -%}
+            {% elsif block.settings.type == "account" %}
+                {%- render 'account-button' -%}
+            {% endif %}
+          {% when "menu" %}
+            {% render 'header-menu' with menu: block.settings.menu, align: block.settings.align, is_sidebar: true %}
+          {% when "mobile_menu" %}
+            {% liquid
+              if block.settings.menu != blank
+                assign breakpoint = 'tablet'
+                if block.settings.visibility_large == true
+                    assign breakpoint = ''
+                elsif block.settings.visibility_medium == false
+                  assign breakpoint = 'mobile'
+                endif
+                render 'menu-drawer' with menu: block.settings.menu, breakpoint: breakpoint
+              endif
+            %}
+          {% endcase %}
+      </div><!--\.sidebar__item-->
+  {% comment %} Close  group if logo, mobile menu, spacer, or last item{% endcomment %}    {% assign index = index | plus: 1 %}
+      {% if index == section.blocks.size or block.type == 'spacer' or block.type == 'logo' or block.type == 'mobile_menu'  %}
+        </div><!--\.sidebar__group-->
+        {% assign in_group = false %}
+      {% endif %}
+    {% endfor %}
+  </div>
+
+</aside>
+

@@ -1,0 +1,54 @@
+@use "../abstracts/index.scss" as *;
+
+body.has-sidebar {
+  display: flex;
+  flex-wrap: wrap;
+
+  .sidebar-section {
+    flex: 1 1 140px;
+    height: auto;
+    max-width: calc(210px + 5vw);
+    display: none;
+    @include media-query($medium-up) {
+      display: block;
+    }
+  }
+  main.main-content {
+    flex: 2 1 400px;
+    min-width: 120px;
+  }
+
+  main.main-content {
+    padding-top: var(--header-bottom, 65px);
+  }
+  .sidebar-section {
+    position: sticky;
+    top: 0;
+    margin-top: var(--header-bottom, 65px);
+  }
+
+
+ #shopify-section-footer {
+    flex: 0 0 100%;
+  }
+}
+
+.sidebar {
+  padding:2.5rem;
+  @include media-query($medium-up) {
+    padding:  3rem;
+  }
+  @include media-query($large-up) {
+    padding:  4rem;
+  }
+  &__menu {
+
+  }
+  &__inner {
+    transition: transform 300ms ease;
+  }
+}
+
+.shopify-section-header-sticky.animate:not(.shopify-section-header-hidden) ~ .sidebar-section .sidebar__inner {
+    transform: translateY(var(--header-bottom));
+}

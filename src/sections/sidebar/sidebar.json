@@ -1,38 +1,14 @@
 {
-  "name": "t:sections.header.name",
+  "name": "Sidebar",
+  "class" : "sidebar-section",
   "settings": [
     {
       "type" : "header",
-      "content" : "About The Header"
+      "content" : "About The Sidebar"
     },
     {
       "type" : "paragraph",
-      "content" : "Use blocks to add content and the header. You can hide/show different blocks on mobile, medium, and large screens."
-    },
-
-     {
-      "type" : "header",
-      "content" : "General Settings"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_overlay",
-      "default": false,
-      "info" : "Overlays header over image banner sections if they are the first section",
-      "label": "Overlay header?"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_line_separator",
-      "default": true,
-      "label": "t:sections.header.settings.show_line_separator.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_sticky_header",
-      "default": true,
-      "label": "t:sections.header.settings.enable_sticky_header.label",
-      "info": "t:sections.header.settings.enable_sticky_header.info"
+      "content" : "Use blocks to add content and the sidebar  . You can hide/show different blocks on mobile, medium, and large screens."
     },
     {
       "type" : "header",
@@ -127,7 +103,7 @@
           "label" : "Logo First"
         },
         {
-          "group" : "Sidebar",
+          "group" : "Sodebar",
           "value" : "sidebar-all",
           "label"  : "All in sidebar"
         },
@@ -278,45 +254,7 @@
           "unit": "t:sections.header.settings.logo_width.unit",
           "label": "Logo Width (mobile)"
         },
-        {
-          "type": "image_picker",
-          "id": "overlay_image",
-          "label": "Logo (overlay)",
-          "info" : "Logo to show over transparent header"
-        },
-        {
-          "type" : "select",
-          "id" : "include_socials",
-          "label" : "Socials Included",
-          "default" : "disabled",
-          "options" : [
-            {
-              "value": "disabled",
-              "group" : "None",
-              "label" : "Disabled"
-            },
-            {
-              "value": "above",
-              "group" : "Vertical",
-              "label" : "Above"
-            },
-            {
-              "value": "below",
-              "group" : "Vertical",
-              "label" : "Below"
-            },
-            {
-              "value": "before",
-              "group" : "Horizontal",
-              "label" : "Before"
-            },
-            {
-              "value": "after",
-              "group" : "Horizontal",
-              "label" : "After"
-            }
-          ]
-        },
+
         {
           "type" : "header",
           "content" : "visibility"

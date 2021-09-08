@@ -27,12 +27,21 @@
     width: 2rem;
     fill: none;
     vertical-align: middle;
+    @include media-query($tiny) {
+      width: 1.8rem;
+      height: 1.8rem;
+    }
   }
+
 
   &,
   &--cart .icon {
     height: 4rem;
     width: 4rem;
+    @include media-query($tiny) {
+      width: 3.6rem;
+      height: 3.6rem;
+    }
   }
 
   &--cart {

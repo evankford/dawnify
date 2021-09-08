@@ -48,7 +48,7 @@
  --otxt-h: {{ section.settings.color_overlay_hover | default: '#ffffff' }};
 }</style>
 <site-header{% if section.settings.enable_sticky_header %} data-sticky {% endif %}{% if section.settings.enable_overlay %} data-overlay="true" {% endif %} class="header-wrapper{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}">
-  <header class="header first--{{ first_type }} layout--{{ section.settings.layout }} page-width{% if section.settings.menu != blank %} header--has-menu{% endif %}" data-breakpoint="{{ section.settings.mobile_menu_breakpoint | default : 'small' }}">
+  <header class="header first--{{ first_type }} layout--{{ section.settings.layout }} page-width{% if section.settings.menu != blank %} header--has-menu{% endif %}">
     {% assign index = 0 %}
     {% assign in_group = false %}
     {%- for block in section.blocks -%}
@@ -70,6 +70,7 @@
           {% assign next_index = i | plus: 1 %}
           {% assign next_block = section.blocks[next_index] %}
           {% if sub_block.settings.visible_small == true %}
+            {% comment %} Type: {{block.type}} - VBSmall: {{sub_block.settings.visible_small}} {% endcomment %}
             {% assign vb_small = '' %}
           {% endif %}
           {% if sub_block.settings.visible_medium == true %}
@@ -78,9 +79,9 @@
           {% if sub_block.settings.visible_large == true %}
             {% assign vb_desktop = '' %}
           {% endif %}
-          {% comment %} {% if next_block.type == 'spacer' or next_block.type == 'logo' or next_block.type == 'mobile_menu' %}
+         {% if next_block.type == 'spacer' or next_block.type == 'logo' or next_block.type == 'mobile_menu' %}
             {% break %}
-          {% endif %} {% endcomment %}
+          {% endif %}
           {% if sub_block.type == 'spacer' or sub_block.type == 'logo' or sub_block.type == 'mobile_menu' %}
             {% break %}
           {% endif %}
@@ -89,7 +90,7 @@
         {% assign in_group = true %}
       {%endunless%}
     {% comment %} Group Contents {% endcomment %}
-    <div class="header__item type--{{ block.type }}{% unless block.settings.visible_large %} hide--desktop {% endunless %}{% unless block.settings.visible_medium %} hide--medium {% endunless %}{% unless block.settings.visible_small %} hide--small {% endunless %} {% if block.type == 'button' and is_first_button %}{% assign is_first_button = false %}first-button{% endif %}" {% if block.settings.align %} data-align="{{ block.settings.align }}" {% endif %} {{ block.shopify_attributes }}>
+    <div class="header__item type--{{ block.type }}{% unless block.settings.visible_large %} hide--desktop {% endunless %}{% unless block.settings.visible_medium %} hide--medium {% endunless %}{% unless block.settings.visible_small %} hide--small {% endunless %} {% if block.type == 'button' and is_first_button %}{% assign is_first_button = false %}first-button{% endif %} {% if block.settings.include_socials != blank %}socials-layout--{{ block.settings.include_socials }}{% endif %}" {% if block.settings.align %} data-align="{{ block.settings.align }}" {% endif %} {{ block.shopify_attributes }}>
         {% case block.type %}
         {% when "link" %}
           {%- if block.settings.button_label != blank -%}
@@ -104,6 +105,9 @@
             if block.settings.socials_layout == "before" or block.settings.social_layout == "above"
               render 'socials-ul'
             endif
+            if block.settings.include_socials == 'before' or block.settings.include_socials == "above"
+                  render 'socials-ul'
+              endif
             if request.page_type == 'index'
               echo '<h1 class="header__heading">'
             endif
@@ -156,6 +160,9 @@
               endif
               if block.settings.socials_layout == 'below' or block.settings.socials_layout == 'after'
                 render 'socials-ul'
+              endif
+              if block.settings.include_socials == 'below' or block.settings.include_socials == "after"
+                  render 'socials-ul'
               endif
             %}
         {% when "socials" %}

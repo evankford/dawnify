@@ -17,6 +17,12 @@
         ],
         "default": "1600",
         "label": "Page Width"
+      },
+      {
+        "id" : "enable_sidebar_menu",
+        "type" : "checkbox",
+        "label" : "Enable Sidebar Menu",
+        "info" : "Enables an extra place for menus/buttons as a site-wide sidebar."
       }
   ]
 }

@@ -50,6 +50,7 @@
 
     {{ 'theme.css' | asset_url | stylesheet_tag }}
     {{'typography.scss.css' | asset_url | | stylesheet_tag}}
+    {{'styles.css' | asset_url | | stylesheet_tag}}
     {{'swatches.css' | asset_url | stylesheet_tag}}
 
     {%- unless settings.type_body_font.system? -%}
@@ -62,15 +63,16 @@
     <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
   </head>
 
-  <body class="template-{{template.name}} gradient">
+  <body class="template-{{template.name}} gradient {% if settings.enable_sidebar_menu == true%} has-sidebar{% endif %}">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ "accessibility.skip_to_text" | t }}
     </a>
-
     {% section 'announcement-bar' %}
     {% section 'header' %}
-
-    <main id="MainContent" class="content-for-layout focus-none {% if template.name == 'index' %} has-overlay {% endif %}" role="main" tabindex="-1">
+    {% if settings.enable_sidebar_menu %}
+        {% section 'sidebar' %}
+    {% endif %}
+    <main id="MainContent" class="main-content content-for-layout focus-none {% if template.name == 'index' %} has-overlay {% endif %}" role="main" tabindex="-1">
       {{ content_for_layout }}
     </main>
 

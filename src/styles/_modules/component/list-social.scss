@@ -2,6 +2,13 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+
+  &:hover a {
+    opacity: 0.5;
+  }
+  &:hover a:hover {
+    opacity: 1;
+  }
 }
 
 // @media only screen and (max-width: 749px) {
@@ -19,6 +26,7 @@
   align-items: center;
   display: flex;
   padding: 1.3rem;
+  transition: opacity 300ms ease;
 }
 
 .list-social__link:hover .icon {

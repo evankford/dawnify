@@ -3,7 +3,7 @@ body {
   transition: margin 300ms ease;
 }
 
-main#MainContent {
+main.main-content {
   position: relative;
   z-index: 1;
   &:not(.has-overlay) {
