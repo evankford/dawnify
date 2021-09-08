@@ -31,7 +31,7 @@
  --otxt: {{ section.settings.color_overlay | default: "rgba(255, 255,255,0.75)" }};
  --otxt-h: {{ section.settings.color_overlay_hover | default: '#ffffff' }};
 }</style>
-<aside class="sidebar first--{{ first_type }} layout--{{ section.settings.layout }} page-width{% if section.settings.menu != blank %} sidebar--has-menu{% endif %}" >
+<aside class="sidebar first--{{ first_type }} layout--{{ section.settings.layout }}{% if section.settings.menu != blank %} sidebar--has-menu{% endif %}" >
   <div class="sidebar__inner">
       {% assign index = 0 %}
       {% assign in_group = false %}
