@@ -6,6 +6,7 @@
 {% assign inner_id = "rt" | append : section.id %}
 
 {% render 'section-style' with inner: true, id: inner_id, settings: section.settings %}
+<div class="page-width">
 
 <div id="{{ inner_id }}" class="rich-text{% if section.settings.full_width %} rich-text--full-width{% endif %} color-{{ section.settings.color_scheme }}">
   <div class="rich-text__blocks">
@@ -30,4 +31,5 @@
       {%- endcase -%}
     {%- endfor -%}
   </div>
+</div>
 </div>
