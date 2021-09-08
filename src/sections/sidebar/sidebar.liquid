@@ -21,7 +21,7 @@
 .sidebar-wrapper {
   {% if section.settings.background != blank %}
  --bg: {{ section.settings.background | default: "var(--color-background)" }};
- --color-background: {{ section.settings.background.red}}, {{ section.settings.background.green}}, {{ section.settings.background.blue}};
+ --color-background: {{ section.settings.background.red }}, {{ section.settings.background.green }}, {{ section.settings.background.blue }};
  {% endif %}
  {% if section.settings.color != blank %}
  --txt: {{ section.settings.color | default: "rgba(var(--color-foreground), 0.75)" }};
@@ -62,9 +62,9 @@
             {% if sub_block.settings.visible_large == true %}
               {% assign vb_desktop = '' %}
             {% endif %}
-            {% comment %} {% if next_block.type == 'spacer' or next_block.type == 'logo' or next_block.type == 'mobile_menu' %}
+            {% if next_block.type == 'spacer' or next_block.type == 'logo' or next_block.type == 'mobile_menu' %}
               {% break %}
-            {% endif %} {% endcomment %}
+            {% endif %}
             {% if sub_block.type == 'spacer' or sub_block.type == 'logo' or sub_block.type == 'mobile_menu' %}
               {% break %}
             {% endif %}
@@ -108,9 +108,8 @@
                 }
               }
             </style>
-            <a href="{{ routes.root_url }}" class="sidebar-logo media media--adapt sidebar__heading-link link link--text focus-inset {% if block.settings.socials_layout == 'before' or block.settings.socials_layout == 'after' %} flex-center {%endif%}">
+            <a href="{{ routes.root_url }}" class="sidebar-logo media media--adapt sidebar__heading-link link link--text focus-inset {% if block.settings.socials_layout == 'before' or block.settings.socials_layout == 'after' %} flex-center {% endif %}">
               {%- if block.settings.image != blank -%}
-                {% assign json_logo = block.settings.image | img_url: block.settings.image.width | prepend: "https:" | json %}
                 {%- assign image_size = block.settings.logo_width | append: 'x' -%}
                 {% if block.settings.overlay_image != blank and section.settings.enable_overlay == true %}
                   <img srcset="{{ block.settings.overlay_image | img_url: image_size }} 1x, {{ block.settings.overlay_image | img_url: image_size, scale: 2 }} 2x"
@@ -169,7 +168,7 @@
           {% endcase %}
       </div><!--\.sidebar__item-->
   {% comment %} Close  group if logo, mobile menu, spacer, or last item{% endcomment %}    {% assign index = index | plus: 1 %}
-      {% if index == section.blocks.size or block.type == 'spacer' or block.type == 'logo' or block.type == 'mobile_menu'  %}
+      {% if index == section.blocks.size or block.type == 'spacer' or block.type == 'logo' or block.type == 'mobile_menu' %}
         </div><!--\.sidebar__group-->
         {% assign in_group = false %}
       {% endif %}

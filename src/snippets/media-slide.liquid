@@ -9,25 +9,25 @@ Parameters
 
 {% endcomment %}
 
-<{% if is_slide %}li{% else %}div{% endif %} class="swiper-slide swiper-slide--{{type}} color-{{ color_scheme | default: 'transparent-light' }}" style="background-color: {{ overlay_color | default: '#000000' }}; --oc: {{ overlay_color | default: '#000000' }};">
+<{% if is_slide %}li{% else %}div{% endif %} class="swiper-slide swiper-slide--{{ type }} color-{{ color_scheme | default: 'transparent-light' }}" style="background-color: {{ overlay_color | default: '#000000' }}; --oc: {{ overlay_color | default: '#000000' }};">
 {% if settings.video != blank and type contains 'video' %}
-    <div class="background-video background-element" style="--oo: {{overlay_opacity }}; opacity: {{ 100 | minus: overlay_opacity | divided_by: 100.00}};">
+    <div class="background-video background-element" style="--oo: {{overlay_opacity }}; opacity: {{ 100 | minus: overlay_opacity | divided_by: 100.00 }};">
       {% if settings.video_small != blank %}
-        {% render 'media' with type: 'video',  ratio: "16-9", class: 'media--mobile', video: settings.video_small, poster: settings.image, is_slide: is_slide %}
+        {% render 'media' with type: 'video', ratio: "16-9", class: 'media--mobile', video: settings.video_small, poster: settings.image, is_slide: is_slide %}
       {% endif %}
       {% render 'media' with   type: 'video', ratio: "16-9", video: settings.video, poster: settings.image, is_slide: is_slide %}
     </div>
-    {%else  %}
+    {%else %}
     <div class="background-image background-element" style="--oo: {{ overlay_opacity }}; opacity: {{ 100 | minus: overlay_opacity | divided_by: 100.00 }};">
 
       {% if settings.image_wide != blank %}
-        {% render 'media' with media: settings.image_wide , size: "full" , class: 'media--wide',  center_x: settings.image_center_x, type: "image" , center_y: block.setings.image_center_y , is_slide: is_slide %}
+        {% render 'media' with media: settings.image_wide , size: "full" , class: 'media--wide', center_x: settings.image_center_x, type: "image" , center_y: block.setings.image_center_y , is_slide: is_slide %}
       {% endif %}
       {% if settings.image_mobile != blank %}
-        {% render 'media' with media: settings.image_mobile, size: "full" , class: 'media--mobile',  center_x: settings.image_center_x, type: "image" , center_y: block.setings.image_center_y, is_slide: is_slide %}
+        {% render 'media' with media: settings.image_mobile, size: "full" , class: 'media--mobile', center_x: settings.image_center_x, type: "image" , center_y: block.setings.image_center_y, is_slide: is_slide %}
       {% endif %}
 
-      {% render 'media' with media: settings.image,  size: "full", , center_x: settings.image_center_x, center_y: settings.image_center_y, type: "image"  , is_slide: is_slide%}
+      {% render 'media' with media: settings.image, size: "full", center_x: settings.image_center_x, center_y: settings.image_center_y, type: "image"  , is_slide: is_slide %}
     </div>
 
     {% endif %}
@@ -63,7 +63,7 @@ Parameters
               <a{% if settings.button_link_2 != blank %} href="{{ settings.button_link_2 }}"{% endif %} class="button{% if settings.button_style_secondary_2 %} button--secondary{% else %} button--primary{% endif %}"{% if settings.button_link_2 == blank %} aria-disabled="true"{% endif %}>{{ settings.button_label_2 | escape }}</a>
             {%- endif -%}
           </div>
-          {%endif%}
+          {% endif %}
         </div>
     </div>
     {% endif %}

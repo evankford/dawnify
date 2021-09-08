@@ -1,14 +1,14 @@
 {{ 'component-collection-hero.css' | asset_url | stylesheet_tag }}
 <style>
 div.collection-hero:not(.collection-hero--with-image) {
-  margin-top: {{section.settings.spacing_top | minus: 5 | divided_by: 3.0 | default: 1}}rem;
-  margin-bottom: {{section.settings.spacing_bottom | minus: 5 | divided_by: 3.0 | default: 1}}rem;
+  margin-top: {{ section.settings.spacing_top | minus: 5 | divided_by: 3.0 | default: 1 }}rem;
+  margin-bottom: {{ section.settings.spacing_bottom | minus: 5 | divided_by: 3.0 | default: 1 }}rem;
 }
 @media (max-width: 749px) {
 
   div.collection-hero:not(.collection-hero--with-image) {
-    margin-top: {{section.settings.spacing_top | minus: 5 | divided_by: 6.0 | default: 1}}rem;
-    margin-bottom: {{section.settings.spacing_bottom | minus: 5 | divided_by: 6.0 | default: 1}}rem;
+    margin-top: {{ section.settings.spacing_top | minus: 5 | divided_by: 6.0 | default: 1 }}rem;
+    margin-bottom: {{ section.settings.spacing_bottom | minus: 5 | divided_by: 6.0 | default: 1 }}rem;
   }
 }
 </style>
@@ -18,7 +18,7 @@ div.collection-hero:not(.collection-hero--with-image) {
     <div class="collection-hero__text-wrapper">
     {% if section.settings.breadcrumbs != "disabled" %}
     {% render 'breadcrumbs' with style: section.settings.breadcrumbs %}
-    {%endif %}
+    {% endif %}
       <h1 class="collection-hero__title heading">
         <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
         {{- collection.title | escape -}}

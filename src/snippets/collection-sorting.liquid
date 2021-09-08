@@ -1,0 +1,29 @@
+
+{% comment %}
+    Renders collection sorting on a main collection template
+
+    Accepts:
+    - collection: {Object} Colection object
+
+    Usage:
+    {% render 'collection-sorting' with collection: collection %}
+{% endcomment %}
+
+<div class="collection-filters__item sorting caption">
+  <div class="collection-filters__field">
+    <label class="collection-filters__label caption-large" for="SortBy">{{ 'sections.collection_template.sort_by_label' | t }}</label>
+    <div class="select">
+      {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+      <select name="sort_by" class="collection-filters__sort select__select caption-large" id="SortBy" aria-describedby="a11y-refresh-page-message">
+        {%- for option in collection.sort_options -%}
+          <option value="{{ option.value | escape }}"{% if option.value == sort_by %} selected="selected"{% endif %}>{{ option.name | escape }}</option>
+        {%- endfor -%}
+      </select>
+      {% render 'icon-caret' %}
+    </div>
+  </div>
+
+  <noscript>
+    <button type="submit" class="facets__button-no-js button button--tertiary">{{ 'sections.collection_template.sort_button' | t }}</button>
+  </noscript>
+</div>

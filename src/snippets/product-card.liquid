@@ -19,18 +19,11 @@
     <div class="card card--product {% if settings.pg_border == true %} card--border {% endif %}{% if product_card_product.featured_media == nil %} card--text-only card--soft{% endif %}" tabindex="-1">
       <div class="card__inner">
         {%- if product_card_product.featured_media -%}
-          {%- liquid
-            assign featured_media_aspect_ratio = product_card_product.featured_media.aspect_ratio
-
-            if product_card_product.featured_media.aspect_ratio == nil
-              assign featured_media_aspect_ratio = 1
-            endif
-          -%}
           <div class="card__media {% if add_image_padding %} card__media-full-spacer{% endif %}">
           {%- capture media_class -%}media--transparent  media--hover-effect product-card__media{%- endcapture -%}
-            {% render 'media' with ratio: media_size, class: media_class, media: product_card_product.featured_media, size:"small" %}
+            {% render 'media' with ratio: media_size, class: media_class, media: product_card_product.featured_media, size: "small" %}
             {%- if product_card_product.media[1] != nil and show_secondary_image -%}
-              {% render 'media' with ratio: media_size, class: media_class, media: product_card_product.media[1], size:"small" %}
+              {% render 'media' with ratio: media_size, class: media_class, media: product_card_product.media[1], size: "small" %}
             {%- endif -%}
           </div>
         {%- else -%}
@@ -47,13 +40,13 @@
 
         {% if settings.tag_location == "top"  or settings.tag_location == "bottom" %}
           {% render 'product-tag' with tag: product_card_product.metafields.custom.tag %}
-        {%endif%}
+        {% endif %}
       </div>
     </div>
 
     <div class="card-information">
       <div class="card-information__wrapper {% if settings.pg_centered %} center {% endif %}">
-      {% if settings.tag_location == "above"%}
+      {% if settings.tag_location == "above" %}
         {% render 'product-tag' with tag: product_card_product.metafields.custom.tag %}
       {% endif %}
         {%- if show_vendor -%}

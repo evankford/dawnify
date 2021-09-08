@@ -1,5 +1,4 @@
 {% assign color_handle = color | handleize %}
-{%- assign swatch_object = settings.swatch-hexes | split: '\n' -%}
 {%- assign swatch_hexes = settings.swatch-hexes | strip | newline_to_br | split: '<br />' -%}
 {%- for hex in swatch_hexes -%}
   {%- assign hex_info = hex | split: ':' -%}

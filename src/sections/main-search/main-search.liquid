@@ -118,7 +118,7 @@
   {%- if search.performed and search.results.size > 0 -%}
     {% paginate search.results by 16 %}
       <div class="template-search__results page-width">
-        <ul class="grid grid-grid {% if section.settings.center_insufficient == true %} center-insufficient {% endif %} grid-grid--{{ section.settings.grid_size }}" data-max="{{items.size}}" role="list">
+        <ul class="grid grid-grid {% if section.settings.center_insufficient == true %} center-insufficient {% endif %} grid-grid--{{ section.settings.grid_size }}" data-max="{{ search.results.size }}" role="list">
           {%- for item in search.results -%}
             <li class="grid__item{% unless item.object_type == 'product' %} grid__item--small{% endunless %}">
               {%- case item.object_type -%}

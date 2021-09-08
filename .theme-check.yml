@@ -44,7 +44,7 @@ SyntaxError:
 TemplateLength:
   enabled: true
   ignore: []
-  max_length: 500
+  max_length: 700
   # Exclude content of {% schema %} in line count
   exclude_schema: true
   # Exclude content of {% stylesheet %} in line count
@@ -149,7 +149,7 @@ ImgWidthAndHeight:
   ignore: []
 
 RemoteAsset:
-  enabled: true
+  enabled: false
   ignore: []
 
 AssetUrlFilters:

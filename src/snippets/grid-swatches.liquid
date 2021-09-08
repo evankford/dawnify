@@ -2,7 +2,7 @@
     {% assign downcased_option = option.name | downcase %}
     {% if downcased_option contains 'color' or downcased_option contains 'colour' %}
       {% if option.values.size > 1 %}
-      <grid-swatches data-option-index="{{option}}">
+      <grid-swatches data-option-index="{{ option }}">
           {% for color_option in option.values %}
           {%comment %}
               getting a variant link
@@ -10,22 +10,22 @@
             {% assign foundvarianturl = false %}
             {% assign foundvariantimage = false %}
             {% for variant in product.variants %}
-              {% if foundvarianturl == false or foundvariandimage == false%}
+              {% if foundvarianturl == false or foundvariandimage == false %}
                 {% if variant.option1 == color_option or variant.option2 == color_option or variant.option3 == color_option %}
                   {% if foundvarianturl == false %}
                     {% assign foundvarianturl = variant.url %}
-                  {%endif%}
-                  {% if variant.image  %}
+                  {% endif %}
+                  {% if variant.image %}
                     {% assign foundvariantimage = variant.image | img_url: '700x' %}
-                  {%endif%}
-                {%endif%}
-              {%endif%}
+                  {% endif %}
+                {% endif %}
+              {% endif %}
             {%endfor%}{%comment%}End variant loop{%endcomment%}
 
 
-              <div data-image="{{foundvariantimage}}" data-url="{{collection.url}}{{foundvarianturl}}" data-value="{{ color_option | escape }}" class="grid-swatch style--{{settings.grid_swatch_style | default: 'round'}} color swatch--{{ color_option | handle }} {% if forloop.index == 1%} selected {%endif%} {% if foundvarianturl %}available{% else %}soldout{% endif %}">
+              <div data-image="{{ foundvariantimage }}" data-url="{{ collection.url }}{{ foundvarianturl }}" data-value="{{ color_option | escape }}" class="grid-swatch style--{{ settings.grid_swatch_style | default: 'round' }} color swatch--{{ color_option | handle }} {% if forloop.index == 1 %} selected {% endif %} {% if foundvarianturl %}available{% else %}soldout{% endif %}">
                 <span class="swatch-tooltip label tiny">{{ color_option }}</span>
-                {% capture filename %}{{color_option | handle }}.{{file_extension}}{%endcapture%}
+                {% capture filename %}{{ color_option | handle }}.{{ file_extension }}{%endcapture%}
                 {% assign colorSlug = "color" | append: forloop.index %}
                 {% capture the_color %}{% if product.metafields.colors[colorSlug] %}{{ product.metafields.colors[colorSlug] }}{% else %}{{ color_option | split: ' ' | last | handle }}{% endif %}{% endcapture %}
                 <label style="background-color: {{ the_color }};">
@@ -43,8 +43,8 @@
 
           {%endfor%}{%comment%}End color_option loop{%endcomment%}
         </grid-swatches>
-      {%endif%}{%comment%}End size check{%endcomment%}
-    {%endif%}{%comment%}End check for color/colour{%endcomment%}
+      {% endif %}{%comment%}End size check{%endcomment%}
+    {% endif %}{%comment%}End check for color/colour{%endcomment%}
 
 
   {%endfor%}{%comment%}End option loop{%endcomment%}

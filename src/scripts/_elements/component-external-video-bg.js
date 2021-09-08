@@ -12,7 +12,7 @@ class VideoBackground extends HTMLElement {
 
   //this == the element
 
-    this.observer = new IntersectionObserver(this.handleIntersection.bind(this), {threshold:  [0,  1]})
+    this.observer = new IntersectionObserver(this.handleIntersection.bind(this), {threshold:  [0, 1]})
     this.observer.observe(this.el);
   }
 

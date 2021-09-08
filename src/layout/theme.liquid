@@ -36,12 +36,12 @@
     {% render 'header-style' %}
 
     {% if settings.header_code != blank %}
-    {{settings.header_code}}
+    {{ settings.header_code }}
     {% endif %}
     {% if settings.custom_css != blank %}
-    <style>
-      {{settings.custom_css}}
-    </style>
+      {% style %}
+        {{ settings.custom_css }}
+      {% endstyle %}
     {% endif %}
 
      {%- if settings.predictive_search_enabled -%}
@@ -49,9 +49,9 @@
     {%- endif -%}
 
     {{ 'theme.css' | asset_url | stylesheet_tag }}
-    {{'typography.scss.css' | asset_url | | stylesheet_tag}}
-    {{'styles.css' | asset_url | | stylesheet_tag}}
-    {{'swatches.css' | asset_url | stylesheet_tag}}
+    {{ 'typography.css' | asset_url | stylesheet_tag }}
+    {{ 'styles.css' | asset_url | stylesheet_tag }}
+    {{ 'swatches.css' | asset_url | stylesheet_tag }}
 
     {%- unless settings.type_body_font.system? -%}
       <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
@@ -63,7 +63,7 @@
     <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
   </head>
 
-  <body class="template-{{template.name}} gradient {% if settings.enable_sidebar_menu == true%} has-sidebar{% endif %}">
+  <body class="template-{{ template.name }} gradient {% if settings.enable_sidebar_menu == true%} has-sidebar{% endif %}">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ "accessibility.skip_to_text" | t }}
     </a>
@@ -106,13 +106,13 @@
     {%- endif -%}
 
     {% if settings.grid_swatches_enabled == true %}
-      {{ 'grid-swatches.js' | asset_url | script_tag }}
+      <script defer src="{{ 'grid-swatches.js' | asset_url }}"></script>
       {{ 'component-grid-swatches.css' | asset_url | stylesheet_tag }}
     {% endif %}
 
 
     {% if settings.footer_code != blank %}
-    {{settings.footer_code}}
+    {{ settings.footer_code }}
     {% endif %}
     {% render 'browser-update' %}
   </body>

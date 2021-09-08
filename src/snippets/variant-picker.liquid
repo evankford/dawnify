@@ -65,7 +65,7 @@
                                 {% if option.selected_value == value %}checked{% endif %}
                           >
                           <label for="{{ id }}-{{ option.name }}-{{ forloop.index0 }}" {% if is_color and bg_color != blank and bg_color != false %}
-                                class="color-swatch" aria-label="{{option.name}}" style="background: {{ bg_color }};{% if bg_color contains '.jpg' or bg_color contains '.png' or bg_color contains 'gradient' %}color: white; text-shadow: 0 0 2px black; {% else %} {% if text_color != blank %} color: {{ text_color }} !important; {% endif %}{% endif %}"
+                                class="color-swatch" aria-label="{{option.name }}" style="background: {{ bg_color }};{% if bg_color contains '.jpg' or bg_color contains '.png' or bg_color contains 'gradient' %}color: white; text-shadow: 0 0 2px black; {% else %} {% if text_color != blank %} color: {{ text_color }} !important; {% endif %}{% endif %}"
                                 {% endif %}>
                             {{ value }}
                           </label>

@@ -1,12 +1,11 @@
 
-<script defer src="{{ 'slider.js' | asset_url  }}"></script>
+<script defer src="{{ 'slider.js' | asset_url }}"></script>
 {{ 'slider.css' | append: '?enable_css_minification=1' | asset_url | stylesheet_tag }}
 {{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
 
 <div class="background-slider {% if section.settings.auto_height != true%} fixed-height {% endif %}">
-  <div class="background-slider__content banner__content" style="align-items: {{ settings.desktop_text_box_position }};">
+  <div class="background-slider__content banner__content" style="align-items: {{ settings.desktop_text_box_position | default: 'center' }};">
     <div class="banner__box color-{{ section.settings.color_scheme }}">
-
     {%- if section.settings.introduction != blank -%}
       <div class="h4 label">{{ section.settings.introduction }}</div>
     {%- endif -%}
@@ -43,16 +42,16 @@
     {% if section.blocks.size > 1 %}
     {% assign is_slide = true %}
     <slider-element class="swiper-container {% if section.settings.auto_height != true%} fixed-height {% endif %}"
-      {% if section.settings.autoplay > 0 %} data-autoplay="{{section.settings.autoplay}}"{% endif %}
-      {% if section.settings.navigation == true  %} data-navigation="true" {% endif %}
-      {% if section.settings.pagination != "disabled" %} data-pagination="{{section.settings.pagination}}"{% endif %}
+      {% if section.settings.autoplay > 0 %} data-autoplay="{{ section.settings.autoplay}}"{% endif %}
+      {% if section.settings.navigation == true %} data-navigation="true" {% endif %}
+      {% if section.settings.pagination != "disabled" %} data-pagination="{{ section.settings.pagination }}"{% endif %}
       {% if section.settings.auto_height == true %} data-auto-height="true" {% endif %}
-      {% if section.settings.effect  %} data-effect="{{section.settings.effect }}" {% endif %}
+      {% if section.settings.effect %} data-effect="{{ section.settings.effect }}" {% endif %}
       >
       <ul class="swiper-wrapper">
-      {%endif%}
+      {% endif %}
       {% for block in section.blocks %}
-        {% render 'media-slide' with color_scheme: section.settings.color_scheme, overlay_opacity: section.settings.overlay_opacity, overlay_color: section.settings.overlay_color, settings: block.settings, type: block.type, is_slide %}
+        {% render 'media-slide' with color_scheme: section.settings.color_scheme, overlay_opacity: section.settings.overlay_opacity, overlay_color: section.settings.overlay_color, settings: block.settings, type: block.type, is_slide: is_slide %}
       {% endfor %}
       {% if section.blocks.size > 1 %}
       </ul>
@@ -72,19 +71,19 @@
 
 
 {% if section.settings.auto_height != true %}
-<style>
-  #shopify-section-{{section.id}} .background-slider {
-    height: {{ section.settings.height_mobile | default: 350}}px
+{% style %}
+  #shopify-section-{{ section.id }} .background-slider {
+    height: {{ section.settings.height_mobile | default: 350 }}px
   }
   @media (min-width: 790px) {
-    #shopify-section-{{section.id}} .background-slider {
-      height: {{ section.settings.height_standard | default: 460}}px
+    #shopify-section-{{ section.id }} .background-slider {
+      height: {{ section.settings.height_standard | default: 460 }}px
     }
   }
   @media (min-width: 1250px) {
-    #shopify-section-{{section.id}} .background-slider {
-      height: {{ section.settings.height_standard | default: 510}}px
+    #shopify-section-{{ section.id }} .background-slider {
+      height: {{ section.settings.height_standard | default: 510 }}px
     }
   }
-</style>
+{% endstyle %}
 {% endif %}

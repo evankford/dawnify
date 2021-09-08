@@ -10,14 +10,14 @@
 
 <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 <style>
-#shopify-section-{{section.id}} {
-  margin-top: {{section.settings.spacing_top | minus: 5 | divided_by: 3.0 | default: 1}}rem;
-  margin-bottom: {{section.settings.spacing_bottom | minus: 5 | divided_by: 3.0 | default: 1}}rem;
+#shopify-section-{{ section.id }} {
+  margin-top: {{ section.settings.spacing_top | minus: 5 | divided_by: 3.0 | default: 1 }}rem;
+  margin-bottom: {{ section.settings.spacing_bottom | minus: 5 | divided_by: 3.0 | default: 1 }}rem;
 }
 @media (max-width: 749px) {
-  #shopify-section-{{section.id}} {
-  margin-top: {{section.settings.spacing_top | minus: 5 | divided_by: 6.0 | default: 1}}rem;
-  margin-bottom: {{section.settings.spacing_bottom | minus: 5 | divided_by: 6.0 | default: 1}}rem;
+  #shopify-section-{{ section.id }} {
+  margin-top: {{ section.settings.spacing_top | minus: 5 | divided_by: 6.0 | default: 1 }}rem;
+  margin-bottom: {{ section.settings.spacing_bottom | minus: 5 | divided_by: 6.0 | default: 1 }}rem;
 }
 }
 </style>
@@ -93,7 +93,7 @@
               {{- block.settings.text -}}
             </p>
           {%- when 'title' -%}
-            <h1 class="product__title heading h3 {% if product.title.size > 12 %}long {%endif%}" {{ block.shopify_attributes }}>
+            <h1 class="product__title heading h3 {% if product.title.size > 12 %}long {% endif %}" {{ block.shopify_attributes }}>
               {{ product.title | escape }}
             </h1>
           {%- when 'price' -%}
@@ -107,7 +107,7 @@
                 {{ form | payment_terms }}
               {%- endform -%}
             </div>
-            {%endif%}
+            {% endif %}
           {%- when 'description' -%}
             {%- if product.description != blank -%}
               <div class="product__description rte">
@@ -261,7 +261,7 @@
       <div role="dialog" aria-label="{{ block.settings.link_label }}" aria-modal="true" class="product-popup-modal__content" tabindex="-1">
         <button id="ModalClose-{{ block.id }}" type="button" class="product-popup-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
         <div class="product-popup-modal__content-info">
-          <h1 class="h2 heading {% if block.settings.page.title.length > 20%}long{%endif%}">{{ block.settings.page.title }}</h1>
+          <h1 class="h2 heading {% if block.settings.page.title.length > 20%}long{% endif %}">{{ block.settings.page.title }}</h1>
           {{ block.settings.page.content }}
         </div>
       </div>

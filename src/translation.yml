@@ -6,10 +6,10 @@ components:
     audience: buyer
     scheme: 'online-store-theme'
     paths:
-      - locales/{{language}}.json
+      - locales/{{language }}.json
   - name: merchant
     target_languages: []
     audience: merchant
     scheme: 'online-store-theme'
     paths:
-      - locales/{{language}}.schema.json
+      - locales/{{language }}.schema.json

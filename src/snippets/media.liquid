@@ -1,12 +1,11 @@
 {%- comment -%}
-  type: "image" | "model" | "video" | "external_video"
+  type: "image" | | "video" | "external_video"
   ratio: "adapt" | square" | "cropped" | "portrait" | "16-9"
   size: "full" | "half" | "large" | "medium" | "small" | "icon" | "actual"
   class: (optional)
   alt: (optional) override alt text
   max_width: (optional) number for
   image: image object required if type is "image"
-  model: model object required if type is "model"
   video: video url required if type is "video"
   embed: embed url required if type is "embed"
 {%- endcomment -%}
@@ -35,10 +34,6 @@
       unless video
         assign video = media | asset_url
       endunless
-    endif
-    if media.media_type == "model"
-      assign type = "model"
-      assign model = media
     endif
     if media contains ".jpg" or media contains ".png"
       assign type = "image"
@@ -121,8 +116,8 @@
 
 
 {% assign srcSetString = "srcset" %}
-{% if is_slide %}{% assign srcSetString = "data-srcset" %}{%endif%}
-<div class="media type--{{type}} media--{{ ratio }} {{ class }}" style="{% if aspect_ratio > 0%}--ar: {{ aspect_ratio }}%;{% endif %}{% if size != 'full' %} --mw: {{ max_width }}px;{% endif %}">
+{% if is_slide %}{% assign srcSetString = "data-srcset" %}{% endif %}
+<div class="media type--{{ type }} media--{{ ratio }} {{ class }}" style="{% if aspect_ratio > 0 %}--ar: {{ aspect_ratio }}%;{% endif %}{% if size != 'full' %} --mw: {{ max_width }}px;{% endif %}">
   {%- case type -%}
     {%- when 'image' -%}
 
@@ -133,9 +128,9 @@
         class="swiper-lazy"
         {% endif %}
         {% if size == "icon" %}
-          {{srcSetString}}="{{ image | img_url: max_width }} 1x, {{ image | img_url: max_width, scale: 2 }} 2x"
+          {{ srcSetString }}="{{ image | img_url: max_width }} 1x, {{ image | img_url: max_width, scale: 2 }} 2x"
         {% else %}
-          {{srcSetString}}="{%- if max_width >= 165 -%}{{ image | img_url: '165x' }} 165w,{%- endif -%}
+          {{ srcSetString }}="{%- if max_width >= 165 -%}{{ image | img_url: '165x' }} 165w,{%- endif -%}
             {%- if max_width >= 240 -%}{{ image | img_url: '240x' }} 240w,{%- endif -%}
             {%- if max_width >= 360 -%}{{ image | img_url: '360x' }} 360w,{%- endif -%}
             {%- if max_width >= 535 -%}{{ image | img_url: '535x' }} 535w,{%- endif -%}
@@ -158,16 +153,16 @@
           {% endif %}
           {% if zoom and image.width > 1000 %}
           data-zoom="{{image | img_url: '3000x'}}"
-          {%endif%}
+          {% endif %}
         >
-        {% if zoom and image.width >= 1000 %}<div class="zoom-helper">{% render 'icon-zoom' %}<span data-hover-text="Hover to Zoom" data-touch-text="Touch To Zoom"></span></div> {%endif%}
+        {% if zoom and image.width >= 1000 %}<div class="zoom-helper">{% render 'icon-zoom' %}<span data-hover-text="Hover to Zoom" data-touch-text="Touch To Zoom"></span></div> {% endif %}
       {%- else -%}
         {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
       {%- endif -%}
     {%- when  'video' -%}
     {% unless is_external %}
       {% if video %}
-        <video class="{{classes}}" {% if poster %}poster="{{poster | img_url: '450x'}}" data-poster="{{poster | img_url: '1400x'}}" {% endif %} autoplay muted loop playsinline preload="false" loading="lazy" data-src="{{ video }}" />
+        <video class="{{ classes}}" {% if poster %}poster="{{poster | img_url: '450x'}}" data-poster="{{poster | img_url: '1400x'}}" {% endif %} autoplay muted loop playsinline preload="false" loading="lazy" data-src="{{ video }}" />
       {% endif %}
     {% else %}
       {% liquid
@@ -175,12 +170,12 @@
           assign image = poster
           assign max_width = 2000
         endif %}
-        <video-background class="video-bg" data-bg-video-url="{{video}}">
+        <video-background class="video-bg" data-bg-video-url="{{ video }}">
           {% if poster %}
           <img
           class="custom-fallback-image{% if is_slide %} swiper-lazy{% endif %}"
 
-            {{srcSetString}}="{%- if max_width >= 165 -%}{{ image | img_url: '165x' }} 165w,{%- endif -%}
+            {{ srcSetString }}="{%- if max_width >= 165 -%}{{ image | img_url: '165x' }} 165w,{%- endif -%}
               {%- if max_width >= 240 -%}{{ image | img_url: '240x' }} 240w,{%- endif -%}
               {%- if max_width >= 360 -%}{{ image | img_url: '360x' }} 360w,{%- endif -%}
               {%- if max_width >= 535 -%}{{ image | img_url: '535x' }} 535w,{%- endif -%}
@@ -204,7 +199,7 @@
           >
           {% endif %}
         </video-background>
-              <script src="{{ 'component-external-video-bg.js' | asset_url  }}" defer></script>
+              <script src="{{ 'component-external-video-bg.js' | asset_url }}" defer></script>
 
 
     {%endunless %}

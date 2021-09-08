@@ -32,7 +32,7 @@ function getSections() {
             if (filePath.indexOf('scss') >= 0) {
               let renderedSass = "";
               try{
-                renderedSass = sass.renderSync({ data: content }).css.toString();
+                renderedSass = sass.renderSync({ file: filePath }).css.toString();
               } catch(err) {
                 console.log(err);
                 renderedSass = "/* Error parsing scss:" + err + '*/';

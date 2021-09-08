@@ -37,7 +37,7 @@
 .header-wrapper {
   {% if section.settings.background != blank %}
  --bg: {{ section.settings.background | default: "var(--color-background)" }};
- --color-background: {{ section.settings.background.red}}, {{ section.settings.background.green}}, {{ section.settings.background.blue}};
+ --color-background: {{ section.settings.background.red }}, {{ section.settings.background.green }}, {{ section.settings.background.blue }};
  {% endif %}
  {% if section.settings.color != blank %}
  --txt: {{ section.settings.color | default: "rgba(var(--color-foreground), 0.75)" }};
@@ -70,7 +70,7 @@
           {% assign next_index = i | plus: 1 %}
           {% assign next_block = section.blocks[next_index] %}
           {% if sub_block.settings.visible_small == true %}
-            {% comment %} Type: {{block.type}} - VBSmall: {{sub_block.settings.visible_small}} {% endcomment %}
+            {% comment %} Type: {{block.type }} - VBSmall: {{ sub_block.settings.visible_small }} {% endcomment %}
             {% assign vb_small = '' %}
           {% endif %}
           {% if sub_block.settings.visible_medium == true %}
@@ -128,7 +128,7 @@
               }
             }
           </style>
-          <a href="{{ routes.root_url }}" class="header-logo media media--adapt header__heading-link link link--text focus-inset {% if block.settings.socials_layout == 'before' or block.settings.socials_layout == 'after' %} flex-center {%endif%}">
+          <a href="{{ routes.root_url }}" class="header-logo media media--adapt header__heading-link link link--text focus-inset {% if block.settings.socials_layout == 'before' or block.settings.socials_layout == 'after' %} flex-center {% endif %}">
             {%- if block.settings.image != blank -%}
               {% assign json_logo = block.settings.image | img_url: block.settings.image.width | prepend: "https:" | json %}
               {%- assign image_size = block.settings.logo_width | append: 'x' -%}
@@ -192,7 +192,7 @@
         {% endcase %}
     </div><!--\.header__item-->
 {% comment %} Close  group if logo, mobile menu, spacer, or last item{% endcomment %}    {% assign index = index | plus: 1 %}
-    {% if index == section.blocks.size or block.type == 'spacer' or block.type == 'logo' or block.type == 'mobile_menu'  %}
+    {% if index == section.blocks.size or block.type == 'spacer' or block.type == 'logo' or block.type == 'mobile_menu' %}
       </div><!--\.header__group-->
       {% assign in_group = false %}
     {% endif %}

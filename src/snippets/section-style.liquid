@@ -5,13 +5,13 @@
     background-color: {{ settings.background_color | default: "transparent" }};
     --color-background: {{ settings.background_color.red }}, {{ settings.background_color.green }},{{ settings.background_color.blue }};
     {% endif %}
-    {% if settings.text_color != blank%}
+    {% if settings.text_color != blank %}
     color: {{ settings.text_color | default: "inherit" }};
     --color-foreground: {{ settings.text_color.red }}, {{ settings.text_color.green }}, {{ settings.text_color.blue }};
-    {%endif%}
+    {% endif %}
 
-    padding-top: {{ settings.spacing_top | divided_by: 2.5 | default: 1}}rem;
-    padding-bottom: {{ settings.spacing_bottom | divided_by: 2.5 | default: 1}}rem;
+    padding-top: {{ settings.spacing_top | divided_by: 2.5 | default: 1 }}rem;
+    padding-bottom: {{ settings.spacing_bottom | divided_by: 2.5 | default: 1 }}rem;
   }
   {% if settings.background_image != blank %}
   #{% unless inner %}shopify-section-{% endunless %}{{ id }} {
@@ -45,7 +45,7 @@
     background-repeat: no-repeat;
     {% else %}
     background-image: url({{ settings.background_image | img_url: "master" }});
-    {% if settings.background_style == "repeat-x"%}
+    {% if settings.background_style == "repeat-x" %}
     background-size: auto 100%;
     {% elsif settings.background_style == "repeat-y" %}
     background-size: 100% auto;
