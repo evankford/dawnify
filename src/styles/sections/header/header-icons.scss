@@ -23,24 +23,24 @@
   }
 
   .icon {
-    height: 2rem;
-    width: 2rem;
+    height: 1.2em;
+    width: 1.2em;
     fill: none;
     vertical-align: middle;
     @include media-query($tiny) {
-      width: 1.8rem;
-      height: 1.8rem;
+      width: 1em;
+      height: 1em;
     }
   }
 
 
   &,
   &--cart .icon {
-    height: 4rem;
-    width: 4rem;
+    height: 2.4em;
+    width: 2.4em;
     @include media-query($tiny) {
-      width: 3.6rem;
-      height: 3.6rem;
+      width: 2em;
+      height: 2em;
     }
   }
 

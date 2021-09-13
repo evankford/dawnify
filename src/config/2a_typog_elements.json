@@ -503,8 +503,37 @@
         "id": "menu_padding_horiz",
         "label": "Padding Left/Right",
         "min": 0,
-        "default": 12,
-        "max": 26,
+        "default": 6,
+        "max": 15,
+        "step": 1
+      },
+       {
+        "type": "range",
+        "id": "menu_margin_top",
+        "label": "Margin Top",
+        "min": 0,
+        "default": 0,
+        "max": 15,
+        "step": 1,
+        "info" : "Usually should be zero."
+      },
+       {
+        "type": "range",
+        "id": "menu_margin_bottom",
+        "label": "Margin Bottom",
+        "min": 0,
+        "default": 0,
+        "max": 15,
+        "step": 1,
+        "info" : "Usually should be zero."
+      },
+       {
+        "type": "range",
+        "id": "menu_margin_horiz",
+        "label": "Margin Left/Right",
+        "min": 0,
+        "default": 6,
+        "max": 15,
         "step": 1
       },
       {

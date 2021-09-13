@@ -57,6 +57,7 @@
 .card .icon-wrap {
   margin-left: 0.8rem;
   white-space: nowrap;
+  vertical-align: top;
   transition: transform var(--duration-short) ease;
   overflow: hidden;
   display: inline-block;

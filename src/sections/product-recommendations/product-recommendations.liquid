@@ -13,7 +13,7 @@
 
 <product-recommendations class="product-recommendations page-width" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit=4">
   {% if recommendations.performed and recommendations.products_count > 0 %}
-  <div class="common-header">
+  <div class="common-header text--{{ section.settings.text_align | default: 'left' }}">
     {% if section.settings.introduction != blank %}
       <div class="h4 label">{{ section.settings.introduction | escape }}</div>
     {% endif %}

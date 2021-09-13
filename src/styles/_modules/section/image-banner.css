@@ -99,6 +99,11 @@
   position: relative;
   width: 100%;
   justify-content: center;
+  pointer-events: none;
+}
+
+.banner__content > * {
+  pointer-events: all;
 }
 
 @media screen and (min-width: 750px) {

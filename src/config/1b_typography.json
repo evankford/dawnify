@@ -42,6 +42,16 @@
       "default" : true
     },
     {
+      "type" : "range",
+      "id" : "base_letter_spacing",
+      "min" : 0,
+      "max" : 40,
+      "step" : 1,
+      "default": 20,
+      "label" : "Base Letter Spacing",
+      "info" :"20 is normal!"
+    },
+    {
       "type" : "header",
       "content" :"Custom Fonts"
     },
@@ -57,6 +67,7 @@
       "label": "Typekit/GF Body Font Family",
       "info": "Usually all lowercase + hyphenated"
     },
+
     {
       "type": "text",
       "id": "header_typekit",

@@ -25,6 +25,25 @@
       "label": "Subtitle"
     },
     {
+      "type" : "select",
+      "id" : "text_align",
+      "label" :"Header Text Align",
+      "options" : [
+        {
+          "value" : "left",
+          "label" : "Left"
+        },
+        {
+          "value" : "center",
+          "label" : "Center"
+        },
+        {
+          "value" : "right",
+          "label" : "Right"
+        }
+      ]
+    },
+    {
       "type": "header",
       "content": "t:sections.product-recommendations.settings.header__2.content"
     },

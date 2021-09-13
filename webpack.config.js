@@ -93,9 +93,10 @@ function getEntries() {
 }
 
 module.exports = {
-  mode: 'production',
+  mode: env == 'development' ? 'development' : 'production',
   stats: env == 'development' ? 'errors-only' : 'detailed',
   entry: getEntries(),
+  devtool: env == 'development' ? 'inline-source-map' : false,
   output: {
     filename: 'assets/[name].js',
     chunkFilename: 'assets/[name].js',

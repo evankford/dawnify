@@ -124,7 +124,7 @@
   {%- endif -%}
 
 {% comment %} Super Footer Stuff {% endcomment %}
-  <div class="footer__content-bottom">
+  <div class="footer__content-bottom layout--{{ section.settings.layout }}">
     <div class="footer__content-bottom-wrapper page-width">
     {% if section.settings.agency_logo != blank or section.settings.credits != blank %}
         <div class="footer__column footer__attribution">

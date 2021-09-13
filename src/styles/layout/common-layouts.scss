@@ -14,11 +14,11 @@
 @include media-query($medium-up) {
 
   .page-width {
-    padding: 0 5rem;
+    padding: 0 3.5rem;
   }
 
   .page-width--narrow {
-    padding: 0 9rem;
+    padding: 0 7rem;
   }
 
   .page-width-desktop {
@@ -27,6 +27,12 @@
 }
 
 @include media-query($large-up) {
+  .page-width {
+    padding: 0 5rem;
+  }
+  .page-width--narrow {
+    padding: 0 9rem;
+  }
   .page-width--narrow {
     max-width: 72.6rem;
     padding: 0;

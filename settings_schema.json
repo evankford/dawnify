@@ -483,7 +483,7 @@
         "options": [
           {
             "value": "italic",
-            "label": "italic"
+            "label": "Italic"
           },
           {
             "value": "normal",
@@ -694,7 +694,7 @@
         "options": [
           {
             "value": "italic",
-            "label": "italic"
+            "label": "Italic"
           },
           {
             "value": "normal",
@@ -875,7 +875,7 @@
         "options": [
           {
             "value": "italic",
-            "label": "italic"
+            "label": "Italic"
           },
           {
             "value": "normal",
@@ -1075,7 +1075,7 @@
         "options": [
           {
             "value": "italic",
-            "label": "italic"
+            "label": "Italic"
           },
           {
             "value": "normal",

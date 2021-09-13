@@ -1,4 +1,7 @@
 {%- comment -%}
+
+
+Accepts:
   type: "image" | | "video" | "external_video"
   ratio: "adapt" | square" | "cropped" | "portrait" | "16-9"
   size: "full" | "half" | "large" | "medium" | "small" | "icon" | "actual"
@@ -7,14 +10,12 @@
   max_width: (optional) number for
   image: image object required if type is "image"
   video: video url required if type is "video"
-  embed: embed url required if type is "embed"
+  allow_unmute: allow unmuting of video
 {%- endcomment -%}
 
 
 {%- liquid
-  unless type
-    assign type = "image"
-  endunless
+
   unless ratio
     assign ratio = "adapt"
   endunless
@@ -22,26 +23,30 @@
     assign size = "full"
   endunless
 
-  if media
-    if media.media_type == "image"
+  unless type
+    if media and media.media_type
+      if media.media_type == "image"
+        assign type = "image"
+        unless image
+          assign image = media
+        endunless
+      endif
+      if media.media_type == "video"
+        assign type = "video"
+        unless video
+          echo "Assigning video?"
+          assign video = media | asset_url
+        endunless
+      endif
+    elsif media contains ".jpg" or media contains ".png"
       assign type = "image"
       unless image
         assign image = media
       endunless
-    endif
-    if media.media_type == "video"
-      assign type = "video"
-      unless video
-        assign video = media | asset_url
-      endunless
-    endif
-    if media contains ".jpg" or media contains ".png"
+    else
       assign type = "image"
-      unless image
-        assign image = media
-      endunless
     endif
-  endif
+  endunless
 
   assign sizes = '100vw'
   assign loading_size = '300x'
@@ -114,7 +119,6 @@
   endif
 -%}
 
-
 {% assign srcSetString = "srcset" %}
 {% if is_slide %}{% assign srcSetString = "data-srcset" %}{% endif %}
 <div class="media type--{{ type }} media--{{ ratio }} {{ class }}" style="{% if aspect_ratio > 0 %}--ar: {{ aspect_ratio }}%;{% endif %}{% if size != 'full' %} --mw: {{ max_width }}px;{% endif %}">
@@ -162,7 +166,12 @@
     {%- when  'video' -%}
     {% unless is_external %}
       {% if video %}
-        <video class="{{ classes}}" {% if poster %}poster="{{poster | img_url: '450x'}}" data-poster="{{poster | img_url: '1400x'}}" {% endif %} autoplay muted loop playsinline preload="false" loading="lazy" data-src="{{ video }}" />
+        {% if video_small %}
+          <video class="{{ classes}} hide--desktop" {% if poster %}poster="{{poster | img_url: '450x'}}" data-poster="{{poster | img_url: '800x'}}" {% endif %} autoplay muted loop playsinline preload="false" loading="lazy" data-src="{{ video_small }}" />
+          <video class="{{ classes}} hide--small" {% if poster %}poster="{{poster | img_url: '450x'}}" data-poster="{{poster | img_url: '1400x'}}" {% endif %} autoplay muted loop playsinline preload="false" loading="lazy" data-src="{{ video }}" />
+        {% else %}
+          <video class="{{ classes}}" {% if poster %}poster="{{poster | img_url: '450x'}}" data-poster="{{poster | img_url: '1400x'}}" {% endif %} autoplay muted loop playsinline preload="false" loading="lazy" data-src="{{ video }}" />
+        {% endif %}
       {% endif %}
     {% else %}
       {% liquid
@@ -170,7 +179,7 @@
           assign image = poster
           assign max_width = 2000
         endif %}
-        <video-background class="video-bg" data-bg-video-url="{{ video }}">
+        <video-background class="video-bg" {% if allow_unmute == true %} data-allow-unmute="true" {% endif %} data-bg-video-url="{{ video }}">
           {% if poster %}
           <img
           class="custom-fallback-image{% if is_slide %} swiper-lazy{% endif %}"
@@ -199,7 +208,10 @@
           >
           {% endif %}
         </video-background>
-              <script src="{{ 'component-external-video-bg.js' | asset_url }}" defer></script>
+        {% if allow_unmute == true %}
+          {% render 'audio-controls' %}
+        {% endif %}
+            <script src="{{ 'component-external-video-bg.js' | asset_url }}" defer></script>
 
 
     {%endunless %}

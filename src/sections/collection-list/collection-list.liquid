@@ -8,7 +8,7 @@
 
 <div class="collection-list-wrapper style--{{ section.settings.style }} page-width{% if section.settings.swipe_on_mobile == true %} page-width-desktop{% endif %}{% if section.settings.title == blank %} no-heading{% endif %}{% if section.settings.show_view_all == false or section.blocks.size > collections.size %} no-mobile-link{% endif %}">
   <div class="title-wrapper-with-link{% if section.settings.swipe_on_mobile == true %} title-wrapper--self-padded-tablet-down{% else %} title-wrapper--self-padded-mobile{% endif %}{% if section.settings.title == blank %} title-wrapper-with-link--no-heading{% endif %}">
-    <div class="common-header">
+    <div class="common-header text--{{ section.settings.text_align | default: 'left' }}">
       {% if section.settings.introduction != blank %}
         <div class="h4 label">{{ section.settings.introduction }}</div>
       {% endif %}
