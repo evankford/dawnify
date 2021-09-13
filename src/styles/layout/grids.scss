@@ -55,11 +55,19 @@
     max-width: 100%;
     margin: 0;
     padding: 0;
-    height: 100%;
+    height: auto;
     display: flex;
+  }
+  .grid__item {
+    align-self: stretch;
+    align-items: stretch;
+    justify-content: stretch;
+  }
+
+  .card-wrapper {
     align-items: center;
-    justify-content: flex-start;
     flex-direction: column;
+    justify-content: flex-start;
   }
 
   &.grid-grid--small {

@@ -1,6 +1,9 @@
-class ProductModal extends ModalDialog {
+if (!customElements.get('product-modal')) {
+    customElements.define('product-modal', class ProductModal extends ModalDialog {
   constructor() {
     super();
+    document.body.appendChild(this);
+    console.log("Moved product modal")
   }
 
   hide() {
@@ -35,6 +38,4 @@ class ProductModal extends ModalDialog {
     )
       activeMedia.loadContent();
   }
-}
-
-customElements.define('product-modal', ProductModal);
+})};

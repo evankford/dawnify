@@ -11,11 +11,15 @@
             "label": "1200px"
           },
           {
+            "value": "1400",
+            "label": "1400px"
+          },
+          {
             "value": "1600",
             "label": "1600px"
           }
         ],
-        "default": "1600",
+        "default": "1400",
         "label": "Page Width"
       },
       {

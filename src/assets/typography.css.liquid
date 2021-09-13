@@ -192,12 +192,9 @@ a.button, button.button,a.customer-button, button.shopify-challenge-button, [typ
 
   font-size: {{ settings.button_font_size | default: '17' }}px;
 
-
-
-  {% if settings.button_rounded == true %}
+  {% if settings.button_border_radius > 0 %}
     border-radius: {{ settings.button_border_radius | divided_by: 10.0 | default: 0 }}em;
   {% endif %}
-
 }
 
 
@@ -265,7 +262,7 @@ summary .header-menu__item {
   }
 
   .h0.heading, .heading.mega {
-    font-size: {{ settings.heading_font_size | default : 50 }}px;
+    font-size: {{ settings.heading_font_size_mobile  | times: 1.2 | default : 42 }}px;
   }
    h1.heading,
   .h1.heading,
@@ -277,7 +274,7 @@ summary .header-menu__item {
   div.heading,
   span.heading,
   h4.heading,.h4.heading,h5.heading,.h5.heading {
-    font-size: {{ settings.heading_font_size_smallest | times: 0.9 | default : 24 }}px;
+    font-size: {{ settings.heading_font_size_smallest | times: 0.8 | default : 24 }}px;
   }
 
   .label

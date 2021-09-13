@@ -94,7 +94,8 @@
 }
 
 .banner__content {
-  padding: 0;
+  padding: calc(12px + 1vw);
+  padding: calc(12px + 1vmax);
   display: flex;
   position: relative;
   width: 100%;
@@ -182,7 +183,7 @@
   .banner__box {
     padding: 4rem;
     width: 80%;
-    max-width: 70.8rem;
+    max-width: 65.8rem;
   }
 
   .banner__box > .banner__buttons:only-child .button {

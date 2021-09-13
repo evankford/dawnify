@@ -212,7 +212,7 @@
           {%- if section.settings.enable_sorting -%}
               {% render 'collection-sorting' with collection: collection %}
           {%- endif -%}
-          {% if  section.settings.show_product_count == true %}
+          {% if section.settings.show_product_count == true %}
           <div class="collection-product-count light" role="status">
             <p id="CollectionProductCountDesktop" class="collection-product-count__text">
               {%- if collection.products_count == collection.all_products_count -%}
@@ -438,6 +438,7 @@
         </a>
       </facet-remove>
     </div>
+    {%- if section.settings.show_product_count == true -%}
     <div class="collection-product-count light{% unless section.settings.collapse_on_larger_devices %} medium-hide large-up-hide{% endunless %}" role="status">
       <p id="CollectionProductCount" class="collection-product-count__text">
         {%- if collection.products_count == collection.all_products_count -%}
@@ -452,6 +453,7 @@
         </svg>
       </div>
     </div>
+    {%- endif -%}
   {%- endif -%}
 </div>
 

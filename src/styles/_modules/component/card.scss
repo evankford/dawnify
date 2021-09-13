@@ -1,6 +1,7 @@
 @use "../../abstracts/" as *;
 
 
+
 .card-wrapper {
   color: inherit;
   display: block;
@@ -10,20 +11,51 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  transition: transform 200ms ease, opacity 200ms ease;
   &.color-card {
-    background: rgb(var(--color-background));
-    color: rgb(var(--color-foreground));
+    z-index: 1;
+    align-items: stretch;
+    &>a {
+      height: 100%;
+      position: relative;z-index: 2;
+      display: block;
+      display: flex;
+      flex-direction: column;
+      background: rgb(var(--color-background));
+      color: rgb(var(--color-foreground));
+    }
 
     .card-information {
       padding: 1em;
       margin: 0;
+
     }
     .card--product {
       border: 0;
     }
+
+    &::before {
+      @extend %psuedo;
+      z-index: 0;
+      box-shadow: 0 0 32px rgb(0 0 0 / 30%);
+      z-index: -1;
+      transform: scale(0.95);
+      transition: transform 200ms ease, opacity 200ms ease;
+
+    }
+
+    &:hover {
+      transform: translate3d(0, -2px, 5px);
+      &::before {
+        opacity: 1;
+        transform: scale(1)
+      }
+    }
   }
 
 }
+
+
 .card {
   display: block;
   overflow: hidden;
