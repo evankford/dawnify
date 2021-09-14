@@ -122,8 +122,11 @@
                 "value": "large",
                 "label": "Large"
             }, {
+                "value": "full",
+                "label": "Full-width"
+            }, {
                 "value": "video",
-                "label": "video"
+                "label": "Video"
             }],
             "default": "medium",
             "label": "Size"

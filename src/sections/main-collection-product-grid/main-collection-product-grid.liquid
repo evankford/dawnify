@@ -468,10 +468,11 @@
             </svg>
           </div>
         </div>
-
+        {%- if section.settings.show_product_count == true -%}
         <p class="collection-product-count light" role="status">
           {{ 'sections.collection_template.product_count' | t: product_count: collection.products_count, count: collection.all_products_count }}
         </p>
+        {%- endif -%}
 
         <div class="title-wrapper center">
           <h2 class="title title--primary">
@@ -490,9 +491,11 @@
           </div>
         </div>
 
+        {%- if section.settings.show_product_count == true -%}
         <p class="collection-product-count light" role="status">
           {{ 'sections.collection_template.product_count' | t: product_count: collection.products_count, count: collection.all_products_count }}
         </p>
+        {%- endif -%}
 
         <ul id="main-collection-product-grid" data-id="{{ section.id }}" class="{% unless section.settings.full_width == true %} page-width {% endunless %}
           grid grid-grid product-grid grid-grid--{{ section.settings.grid_size }} {% if section.settings.center_insufficient == true %} center-insufficient {% endif %}" data-max="{{ collection.products_count }}">

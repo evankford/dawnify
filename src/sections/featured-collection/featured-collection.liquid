@@ -33,9 +33,13 @@
       assign products_to_display = section.settings.products_to_show
     endif
   %}
-
+  {% assign max = section.settings.collection.all_products_count %}
+  {% if section.settings.limit <= section.settings.collection.all_products_count %}
+    {% assign max = section.settings.limit %}
+    {% assign is_limited = true %}
+  {% endif %}
   <slider-component class="slider-mobile-gutter">
-    <ul data-max="{{ section.settings.collection.all_products_count }}" class="{% unless section.settings.full_width == true %} page-width {% endunless %} grid grid-grid {% if section.settings.center_insufficient == true %} center-insufficient {% endif %} grid-grid--{{ section.settings.grid_size }} product-grid {% if section.settings.collection.all_products_count > 2 and section.settings.swipe_on_mobile and section.settings.products_to_show > 2 %} slider slider--tablet grid--peek{% endif %}" role="list">
+    <ul data-max="{{ max }}" class="{% unless section.settings.full_width == true %} page-width {% endunless %} grid grid-grid {% if section.settings.center_insufficient == true %} center-insufficient {% endif %} grid-grid--{{ section.settings.grid_size }} product-grid {% if section.settings.collection.all_products_count > 2 and section.settings.swipe_on_mobile and section.settings.products_to_show > 2 %} slider slider--tablet grid--peek{% endif %}" role="list">
       {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
         <li class="grid__item{% if section.settings.collection.all_products_count > 2 and section.settings.swipe_on_mobile and section.settings.products_to_show > 2 %} slider__slide{% endif %} grid__item--product">
           {% render 'product-card',

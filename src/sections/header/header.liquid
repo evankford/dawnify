@@ -47,7 +47,7 @@
  --otxt: {{ section.settings.color_overlay | default: "rgba(255, 255,255,0.75)" }};
  --otxt-h: {{ section.settings.color_overlay_hover | default: '#ffffff' }};
 }</style>
-<site-header{% if section.settings.enable_sticky_header %} data-sticky {% endif %}{% if section.settings.enable_overlay %} data-overlay="true" {% endif %} class="header-wrapper{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}">
+<site-header{% if section.settings.enable_sticky_header %} data-sticky {% endif %}{% if section.settings.enable_overlay %} data-overlay="true" {% endif %} class="header-wrapper{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %} {% if section.settings.header_shadow == true %} shadow {% endif %}">
   <header class="header first--{{ first_type }} layout--{{ section.settings.layout }} page-width{% if section.settings.menu != blank %} header--has-menu{% endif %}">
     {% assign index = 0 %}
     {% assign in_group = false %}
@@ -133,7 +133,7 @@
               {% assign json_logo = block.settings.image | img_url: block.settings.image.width | prepend: "https:" | json %}
               {%- assign image_size = block.settings.logo_width | append: 'x' -%}
               {% if block.settings.overlay_image != blank and section.settings.enable_overlay == true %}
-                <img srcset="{{ block.settings.overlay_image | img_url: image_size }} 1x, {{ block.settings.overlay_image | img_url: image_size, scale: 2 }} 2x"
+                <img srcset="{{ block.settings.overlay_image | img_url: image_size, scale: 2 }} 1x, {{ block.settings.overlay_image | img_url: image_size, scale: 4 }} 2x"
                   src="{{ block.settings.overlay_image | img_url: image_size }}"
                   loading="lazy"
                   class="header__heading-logo overlay-image"
@@ -142,7 +142,7 @@
                   alt="{{ block.settings.overlay_image.alt | default: shop.name | escape }}"
                 >
               {% endif %}
-              <img srcset="{{ block.settings.image | img_url: image_size }} 1x, {{ block.settings.image | img_url: image_size, scale: 2 }} 2x"
+              <img srcset="{{ block.settings.image | img_url: image_size, scale: 2 }} 1x, {{ block.settings.image | img_url: image_size, scale: 4 }} 2x"
                 src="{{ block.settings.image | img_url: image_size }}"
                 loading="lazy"
                 class="header__heading-logo"

@@ -29,10 +29,9 @@
     },
     {
       "type": "checkbox",
-      "id": "enable_sticky_header",
+      "id": "enable_shadow",
       "default": true,
-      "label": "t:sections.header.settings.enable_sticky_header.label",
-      "info": "t:sections.header.settings.enable_sticky_header.info"
+      "label": "Enable Shadow"
     },
     {
       "type" : "header",

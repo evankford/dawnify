@@ -5,7 +5,6 @@ body {
 
 main.main-content {
   position: relative;
-  z-index: 1;
   &:not(.has-overlay) {
     padding-top: var(--header-bottom, 75px);
   }

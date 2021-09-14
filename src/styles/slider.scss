@@ -93,6 +93,10 @@ button[data-next] {
     height: auto;
     fill: currentColor;
   }
+
+  &.swiper-button-disabled {
+    opacity: 0.2;
+  }
 }
 
 button[data-prev] {

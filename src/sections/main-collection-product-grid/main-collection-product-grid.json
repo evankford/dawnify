@@ -71,12 +71,6 @@
     },
     {
       "type": "checkbox",
-      "id": "show_product_count",
-      "default": false,
-      "label": "Show Product Count"
-    },
-    {
-      "type": "checkbox",
       "id": "add_image_padding",
       "default": false,
       "label": "t:sections.main-collection-product-grid.settings.add_image_padding.label"
@@ -92,6 +86,26 @@
       "content": "t:sections.main-collection-product-grid.settings.header__1.content"
     },
     {
+      "type" : "select",
+      "id" : "filter_behavior",
+      "label" : "Filter Behavior",
+      "options" : [
+        {
+          "value" : "responsive",
+          "label" : "Responsive"
+        },
+        {
+          "value" : "filter_button",
+          "label" : "Filter Button"
+        },
+        {
+          "value" : "disabled",
+          "label" : "disabled"
+        }
+      ],
+      "default" : "responsive"
+    },
+    {
       "type": "checkbox",
       "id": "enable_filtering",
       "default": true,
@@ -103,6 +117,12 @@
       "id": "enable_sorting",
       "default": true,
       "label": "t:sections.main-collection-product-grid.settings.enable_sorting.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_product_count",
+      "default": false,
+      "label": "Show Product Count"
     },
     {
       "type" : "header",

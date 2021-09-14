@@ -306,6 +306,7 @@
   flex-wrap: wrap;
   left: 1rem;
   position: absolute;
+  z-index: 20;
 }
 
 .card__badge > * {
