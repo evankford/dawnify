@@ -56,12 +56,17 @@
   color: inherit;
 }
 
+.article-content:hover .article-card__title {
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+}
+
 .article-card__image {
   overflow: hidden;
 }
 
 .article-content img {
-  transition: transform var(--duration-default) ease;
+  transition: transform var(--duration-long) ease;
 }
 
 .article-content:hover img {
@@ -95,7 +100,7 @@
 }
 
 .article-card__header h2 {
-  margin: 0 0 0.2rem;
+  margin: 0 0 0.6rem;
 }
 
 .article-card__header h2:only-child {

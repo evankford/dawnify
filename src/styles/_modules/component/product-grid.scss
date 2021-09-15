@@ -30,14 +30,14 @@
     max-width: 100%;
   }
   .product-grid .grid__item {
-    padding-bottom: 5rem;
+    padding-bottom: calc(5rem + var(--page-width-margin));
   }
 
   .product-grid.negative-margin {
-    margin-bottom: -5rem;
+    margin-bottom: calc(-5rem - var(--page-width-margin));
   }
 
   .product-grid.negative-margin--small {
-    margin-bottom: -1rem;
+    margin-bottom: calc(-1rem - var(--page-width-margin));
   }
 }

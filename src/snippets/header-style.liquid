@@ -43,6 +43,7 @@
 
         --payment-terms-background-color: {{ settings.colors_background_1 }};
         --page-width: {{ settings.page_width | divided_by: 10 }}rem;
+        --page-width-margin: {% if settings.page_width == '1600' %}2{% else %}0{% endif %}rem;
 
         --base-letter-spacing: {{ settings.base_letter_spacing | plus: 80 | divided_by: 100.00 | minus: 1.00 | default: 0.00 }}em;
       }

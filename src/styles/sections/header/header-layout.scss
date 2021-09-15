@@ -1,7 +1,7 @@
 @use "../../abstracts/" as *;
 /* section-header */
 #shopify-section-header {
-  z-index: 3;
+  z-index: 99;
   will-change: transform;
   position: absolute;
   transition: opacity 150ms linear, transform 100ms linear;
