@@ -130,7 +130,7 @@
         <div class="footer__column footer__attribution">
         {%- if section.settings.agency_logo != blank -%}
           {%- if section.settings.agency_link != blank -%}
-            <a href="{{ section.settings.agency_link }}" target="_blank" rel="nofollow noopener noreferrer">
+            <a href="{{ section.settings.agency_link }}" target="_blank" rel="nofollow noopener noreferrer" style="display: inline-block; width: {{ section.settings.agency_logo_width }}px;">
           {%- endif -%}
           {% render 'media' with image: section.settings.agency_logo, type: 'image', size: 'icon', max_width: section.settings.agency_logo_width %}
           {%- if section.settings.agency_link != blank -%}

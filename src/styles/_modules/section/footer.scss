@@ -1,15 +1,34 @@
 @use "../../abstracts/" as *;
 
-.footer {
-  // border-top: 0.1rem solid rgba(var(--color-foreground), 0.2);
 
+.footer__content-bottom.layout--stacked {
+  .footer__content-bottom-wrapper {
+    display: block;
+    text-align: center;
+  }
+  .footer__column {
+    width: auto;
+    text-align: center;
+    margin:1rem auto;
+  }
+  .footer__attribution {
+    margin: 1rem auto;
+  }
+  .footer__copyright {
+    margin: 1rem auto;
+    text-align: inherit;
+  }
+  .list-payment {
+    justify-content: center;
+  }
+}
+
+.footer {
   &:not(.color-background-1) {
     border-top: none;
   }
 
   &__content-top {
-    padding-bottom: 2rem;
-    padding-top: 4rem;
     display: block;
   }
 
@@ -53,7 +72,9 @@
   }
 }
 .footer__blocks-wrapper {
+  padding-top: 4rem;
   &.layout--spaced {
+    padding-bottom: 2rem;
     @include media-query($medium-up) {
       justify-content: space-between;
     }
@@ -63,6 +84,7 @@
     max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
+    padding-bottom: 0;
     @include media-query($medium-up) {
       justify-content: space-between;
     }
@@ -74,6 +96,9 @@
       max-width: 100%;
       .list-social {
         justify-content: center;
+      }
+      &:last-child {
+        padding-bottom: 0;
       }
     }
     .list-unstyled {
