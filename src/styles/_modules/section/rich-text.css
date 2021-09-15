@@ -49,8 +49,12 @@
   }
 }
 
-.rich-text__blocks > .size--large {
+.rich-text__blocks > .size--medium {
   max-width: 90rem;
+  margin: 1em auto;
+}
+.rich-text__blocks > .size--large {
+  max-width: var(--page-width);
   margin: 1em auto;
 }
 
