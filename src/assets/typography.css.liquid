@@ -52,15 +52,6 @@ h6.heading,
 span.heading,
 div.heading
 {
-  line-height: {{ settings.heading_line_height | divided_by: 10.0 }};
-  margin-top: {{ settings.heading_margin_top | minus: 5 | divided_by: 10.0 }}em;
-  margin-bottom: {{ settings.heading_margin_bottom | minus: 5 | divided_by: 10.0 }}em;
-  text-transform: {{ settings.heading_capitalization | default: "none" }};
-  font-weight: {{ settings.heading_font_weight | default: "700" }};
-  letter-spacing: {{ settings.heading_letter_spacing | divided_by: 40.0 | minus: 0.25 | default: 0 }}em;
-  font-style: {{ settings.heading_text_style | default : "normal" }};
-  font-size: {{ settings.heading_font_size | default: '17' }}px;
-
    {% case settings.heading_font_family %}
    {% when 'body' %}
     font-family: var(--font-body-family);
@@ -75,6 +66,17 @@ div.heading
     font-family: var(--font-script-real);
     font-weight: 400;
   {% endcase %}
+
+  line-height: {{ settings.heading_line_height | divided_by: 10.0 }};
+  margin-top: {{ settings.heading_margin_top | minus: 5 | divided_by: 10.0 }}em;
+  margin-bottom: {{ settings.heading_margin_bottom | minus: 5 | divided_by: 10.0 }}em;
+  text-transform: {{ settings.heading_capitalization | default: "none" }};
+  font-weight: {{ settings.heading_font_weight | default: "700" }};
+  letter-spacing: {{ settings.heading_letter_spacing | divided_by: 40.0 | minus: 0.25 | default: 0 }}em;
+  font-style: {{ settings.heading_text_style | default : "normal" }};
+  font-size: {{ settings.heading_font_size | default: '17' }}px;
+
+
 }
 
 .h0.heading, .heading.mega {
