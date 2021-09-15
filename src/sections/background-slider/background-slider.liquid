@@ -75,14 +75,14 @@
   #shopify-section-{{ section.id }} .background-slider {
     height: {{ section.settings.height_mobile | default: 350 }}px
   }
-  @media (min-width: 790px) {
+  @media screen and (min-width: 790px) {
     #shopify-section-{{ section.id }} .background-slider {
       height: {{ section.settings.height_standard | default: 460 }}px
     }
   }
-  @media (min-width: 1250px) {
+  @media screen and (min-width: 1250px) {
     #shopify-section-{{ section.id }} .background-slider {
-      height: {{ section.settings.height_standard | default: 510 }}px
+      height: {{ section.settings.height_widescreen | default: 510 }}px
     }
   }
 {% endstyle %}
