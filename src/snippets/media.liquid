@@ -166,7 +166,7 @@ Accepts:
     {%- when  'video' -%}
     {% unless is_external %}
       {% if video %}
-        {% if video_small %}
+        {% if video_small and video_small != blank %}
           <video class="{{ classes}} hide--desktop" {% if poster %}poster="{{poster | img_url: '450x'}}" data-poster="{{poster | img_url: '800x'}}" {% endif %} autoplay muted loop playsinline preload="false" loading="lazy" data-src="{{ video_small }}" />
           <video class="{{ classes}} hide--small" {% if poster %}poster="{{poster | img_url: '450x'}}" data-poster="{{poster | img_url: '1400x'}}" {% endif %} autoplay muted loop playsinline preload="false" loading="lazy" data-src="{{ video }}" />
         {% else %}

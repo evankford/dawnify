@@ -24,7 +24,7 @@
     {%- endif -%}
   </div>
   <slider-component class="slider-mobile-gutter">
-    <ul class="collection-list grid grid-grid grid-grid--{{ section.settings.grid_size }} {% if section.settings.swipe_on_mobile %} slider slider--tablet grid--peek{% endif %}" data-max="{{ section.blocks.size }}"
+    <ul class="collection-list grid grid-grid {% if section.settings.center_insufficient == true %} center-insufficient {% endif %} grid-grid--{{ section.settings.grid_size }} {% if section.settings.swipe_on_mobile %} slider slider--tablet grid--peek{% endif %}" data-max="{{ section.blocks.size }}"
       id="Slider-{{ section.id }}"
       role="list"
     >

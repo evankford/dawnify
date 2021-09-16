@@ -24,7 +24,7 @@
     {
       "type" : "select",
       "id" : "text_align",
-      "label" :"Text Align",
+      "label" :"Header Text Align",
       "options" : [
         {
           "value" : "left",
