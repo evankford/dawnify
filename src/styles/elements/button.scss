@@ -31,6 +31,7 @@
   transition: box-shadow var(--duration-short) ease;
   -webkit-appearance: none;
   appearance: none;
+  position: relative;
 }
 
 .button:focus-visible {
@@ -92,6 +93,7 @@
 
 .button.loading {
   color: transparent;
+  position: relative;
 }
 
 .button.loading > .loading-overlay__spinner {

@@ -540,6 +540,7 @@ class VariantSelects extends HTMLElement {
     this.updateMasterId();
     this.toggleAddButton(true, '', false);
     this.updatePickupAvailability();
+    this.removeErrorMessage();
 
     if (!this.currentVariant) {
       this.toggleAddButton(true, '', true);
@@ -553,14 +554,19 @@ class VariantSelects extends HTMLElement {
   }
 
   updateOptions() {
-    this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
+    this.options = Array.from(
+      this.querySelectorAll('select'),
+      (select) => select.value
+    );
   }
 
   updateMasterId() {
     this.currentVariant = this.getVariantData().find((variant) => {
-      return !variant.options.map((option, index) => {
-        return this.options[index] === option;
-      }).includes(false);
+      return !variant.options
+        .map((option, index) => {
+          return this.options[index] === option;
+        })
+        .includes(false);
     });
   }
 
@@ -572,26 +578,41 @@ class VariantSelects extends HTMLElement {
     );
 
     if (!newMedia) return;
-    const modalContent = document.querySelector(`#ProductModal-${this.dataset.section} .product-media-modal__content`);
-    const newMediaModal = modalContent.querySelector( `[data-media-id="${this.currentVariant.featured_media.id}"]`);
+    const modalContent = document.querySelector(
+      `#ProductModal-${this.dataset.section} .product-media-modal__content`
+    );
+    const newMediaModal = modalContent.querySelector(
+      `[data-media-id="${this.currentVariant.featured_media.id}"]`
+    );
     const parent = newMedia.parentElement;
     if (parent.firstChild == newMedia) return;
     modalContent.prepend(newMediaModal);
     parent.prepend(newMedia);
-    this.stickyHeader = this.stickyHeader || document.querySelector('sticky-header');
-    if(this.stickyHeader) {
+    this.stickyHeader =
+      this.stickyHeader || document.querySelector('sticky-header');
+    if (this.stickyHeader) {
       this.stickyHeader.dispatchEvent(new Event('preventHeaderReveal'));
     }
-    window.setTimeout(() => { parent.querySelector('li.product__media-item').scrollIntoView({behavior: "smooth"}); });
+    window.setTimeout(() => {
+      parent
+        .querySelector('li.product__media-item')
+        .scrollIntoView({ behavior: 'smooth' });
+    });
   }
 
   updateURL() {
     if (!this.currentVariant || this.dataset.updateUrl === 'false') return;
-    window.history.replaceState({ }, '', `${this.dataset.url}?variant=${this.currentVariant.id}`);
+    window.history.replaceState(
+      {},
+      '',
+      `${this.dataset.url}?variant=${this.currentVariant.id}`
+    );
   }
 
   updateVariantInput() {
-    const productForms = document.querySelectorAll(`#product-form-${this.dataset.section}, #product-form-installment`);
+    const productForms = document.querySelectorAll(
+      `#product-form-${this.dataset.section}, #product-form-installment`
+    );
     productForms.forEach((productForm) => {
       const input = productForm.querySelector('input[name="id"]');
       input.value = this.currentVariant.id;
@@ -611,12 +632,22 @@ class VariantSelects extends HTMLElement {
     }
   }
 
+  removeErrorMessage() {
+    const section = this.closest('section');
+    if (!section) return;
+
+    const productForm = section.querySelector('product-form');
+    if (productForm) productForm.handleErrorMessage();
+  }
+
   renderProductInfo() {
-    fetch(`${this.dataset.url}?variant=${this.currentVariant.id}&section_id=${this.dataset.section}`)
+    fetch(
+      `${this.dataset.url}?variant=${this.currentVariant.id}&section_id=${this.dataset.section}`
+    )
       .then((response) => response.text())
       .then((responseText) => {
         const id = `price-${this.dataset.section}`;
-        const html = new DOMParser().parseFromString(responseText, 'text/html')
+        const html = new DOMParser().parseFromString(responseText, 'text/html');
         const destination = document.getElementById(id);
         const source = html.getElementById(id);
 
@@ -625,30 +656,46 @@ class VariantSelects extends HTMLElement {
         const price = document.getElementById(`price-${this.dataset.section}`);
 
         if (price) price.classList.remove('visibility-hidden');
-        this.toggleAddButton(!this.currentVariant.available, window.variantStrings.soldOut);
+        this.toggleAddButton(
+          !this.currentVariant.available,
+          window.variantStrings.soldOut
+        );
       });
   }
 
   toggleAddButton(disable = true, text, modifyClass = true) {
-    const productForm = document.getElementById(`product-form-${this.dataset.section}`);
-    if (!productForm) return;
-    const addButton = productForm.querySelector('[name="add"]');
+    const productForm = document.getElementById(
+      `product-form-${this.dataset.section}`
+      );
+      if (!productForm) return;
+      const addButton = productForm.querySelector('[name="add"]');
 
-    if (!addButton) return;
+      if (!addButton) return;
 
+    const spinner = addButton.querySelector('.loading-overlay__spinner')
     if (disable) {
       addButton.setAttribute('disabled', true);
       if (text) addButton.textContent = text;
     } else {
+      let clonedSpinner = false;
+      if (spinner) {
+        clonedSpinner = spinner.cloneNode(true);
+      }
       addButton.removeAttribute('disabled');
       addButton.textContent = window.variantStrings.addToCart;
+
+      if (spinner && clonedSpinner) {
+        addButton.appendChild(clonedSpinner);
+      }
     }
 
     if (!modifyClass) return;
   }
 
   setUnavailable() {
-    const button = document.getElementById(`product-form-${this.dataset.section}`);
+    const button = document.getElementById(
+      `product-form-${this.dataset.section}`
+    );
     const addButton = button.querySelector('[name="add"]');
     const price = document.getElementById(`price-${this.dataset.section}`);
     if (!addButton) return;
@@ -657,7 +704,9 @@ class VariantSelects extends HTMLElement {
   }
 
   getVariantData() {
-    this.variantData = this.variantData || JSON.parse(this.querySelector('[type="application/json"]').textContent);
+    this.variantData =
+      this.variantData ||
+      JSON.parse(this.querySelector('[type="application/json"]').textContent);
     return this.variantData;
   }
 }
@@ -672,13 +721,14 @@ class VariantRadios extends VariantSelects {
   updateOptions() {
     const fieldsets = Array.from(this.querySelectorAll('fieldset'));
     this.options = fieldsets.map((fieldset) => {
-      return Array.from(fieldset.querySelectorAll('input')).find((radio) => radio.checked).value;
+      return Array.from(fieldset.querySelectorAll('input')).find(
+        (radio) => radio.checked
+      ).value;
     });
   }
 }
 
 customElements.define('variant-radios', VariantRadios);
-
 
 /// TODO watch all sections
 

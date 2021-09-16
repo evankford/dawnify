@@ -58,8 +58,7 @@
             </svg>
           </div>
         </div>
-        <ul id="product-grid" data-id="{{ section.id }}" class=" class="{% unless section.settings.full_width == true %} page-width {% endunless %}
-          grid grid-grid product-grid grid-grid--{{ section.settings.grid_size }} {% if section.settings.center_insufficient == true %} center-insufficient {% endif %}" data-max="{{ collection.products_count }}">
+        <ul id="product-grid" data-id="{{ section.id }}" class="{% unless section.settings.full_width == true %} page-width {% endunless %} grid grid-grid product-grid grid-grid--{{ section.settings.grid_size }} {% if section.settings.center_insufficient == true %} center-insufficient {% endif %}" data-max="{{ collection.products_count }}">
           {%- for product in collection.products -%}
             <li class="grid__item">
               {% render 'product-card',

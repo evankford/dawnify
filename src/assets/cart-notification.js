@@ -6,7 +6,10 @@ class CartNotification extends HTMLElement {
     this.header = document.querySelector('sticky-header');
     this.onBodyClick = this.handleBodyClick.bind(this);
 
-    this.notification.addEventListener('keyup', (evt) => evt.code === 'Escape' && this.close());
+    this.notification.addEventListener(
+      'keyup',
+      (evt) => evt.code === 'Escape' && this.close()
+    );
     this.querySelectorAll('button[type="button"]').forEach((closeButton) =>
       closeButton.addEventListener('click', this.close.bind(this))
     );
@@ -15,10 +18,14 @@ class CartNotification extends HTMLElement {
   open() {
     this.notification.classList.add('animate', 'active');
 
-    this.notification.addEventListener('transitionend', () => {
-      this.notification.focus();
-      trapFocus(this.notification);
-    }, { once: true });
+    this.notification.addEventListener(
+      'transitionend',
+      () => {
+        this.notification.focus();
+        trapFocus(this.notification);
+      },
+      { once: true }
+    );
 
     document.body.addEventListener('click', this.onBodyClick);
   }
@@ -32,14 +39,16 @@ class CartNotification extends HTMLElement {
   }
 
   renderContents(parsedState) {
-      this.productId = parsedState.id;
-      this.getSectionsToRender().forEach((section => {
-        document.getElementById(section.id).innerHTML =
-          this.getSectionInnerHTML(parsedState.sections[section.id], section.selector);
-      }));
+    this.productId = parsedState.id;
+    this.getSectionsToRender().forEach((section) => {
+      document.getElementById(section.id).innerHTML = this.getSectionInnerHTML(
+        parsedState.sections[section.id],
+        section.selector
+      );
+    });
 
-      if (this.header) this.header.reveal();
-      this.open();
+    if (this.header) this.header.reveal();
+    this.open();
   }
 
   getSectionsToRender() {
@@ -49,11 +58,11 @@ class CartNotification extends HTMLElement {
         selector: `#cart-notification-product-${this.productId}`,
       },
       {
-        id: 'cart-notification-button'
+        id: 'cart-notification-button',
       },
       {
-        id: 'cart-icon-bubble'
-      }
+        id: 'cart-icon-bubble',
+      },
     ];
   }
 
@@ -67,7 +76,9 @@ class CartNotification extends HTMLElement {
     const target = evt.target;
     if (target !== this.notification && !target.closest('cart-notification')) {
       const disclosure = target.closest('details-disclosure');
-      this.activeElement = disclosure ? disclosure.querySelector('summary') : null;
+      this.activeElement = disclosure
+        ? disclosure.querySelector('summary')
+        : null;
       this.close();
     }
   }

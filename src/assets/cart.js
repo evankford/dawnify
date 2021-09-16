@@ -14,10 +14,16 @@ class CartItems extends HTMLElement {
   constructor() {
     super();
 
-    this.lineItemStatusElement = document.getElementById('shopping-cart-line-item-status');
+    this.lineItemStatusElement = document.getElementById(
+      'shopping-cart-line-item-status'
+    );
 
-    this.currentItemCount = Array.from(this.querySelectorAll('[name="updates[]"]'))
-      .reduce((total, quantityInput) => total + parseInt(quantityInput.value), 0);
+    this.currentItemCount = Array.from(
+      this.querySelectorAll('[name="updates[]"]')
+    ).reduce(
+      (total, quantityInput) => total + parseInt(quantityInput.value),
+      0
+    );
 
     this.debouncedOnChange = debounce((event) => {
       this.onChange(event);
@@ -27,7 +33,11 @@ class CartItems extends HTMLElement {
   }
 
   onChange(event) {
-    this.updateQuantity(event.target.dataset.index, event.target.value, document.activeElement.getAttribute('name'));
+    this.updateQuantity(
+      event.target.dataset.index,
+      event.target.value,
+      document.activeElement.getAttribute('name')
+    );
   }
 
   getSectionsToRender() {
@@ -40,18 +50,18 @@ class CartItems extends HTMLElement {
       {
         id: 'cart-icon-bubble',
         section: 'cart-icon-bubble',
-        selector: '.shopify-section'
+        selector: '.shopify-section',
       },
       {
         id: 'cart-live-region-text',
         section: 'cart-live-region-text',
-        selector: '.shopify-section'
+        selector: '.shopify-section',
       },
       {
         id: 'main-cart-footer',
         section: document.getElementById('main-cart-footer').dataset.id,
         selector: '.js-contents',
-      }
+      },
     ];
   }
 
@@ -62,10 +72,10 @@ class CartItems extends HTMLElement {
       line,
       quantity,
       sections: this.getSectionsToRender().map((section) => section.section),
-      sections_url: window.location.pathname
+      sections_url: window.location.pathname,
     });
 
-    fetch(`${routes.cart_change_url}`, {...fetchConfig(), ...{ body }})
+    fetch(`${routes.cart_change_url}`, { ...fetchConfig(), ...{ body } })
       .then((response) => {
         return response.text();
       })
@@ -74,31 +84,43 @@ class CartItems extends HTMLElement {
         this.classList.toggle('is-empty', parsedState.item_count === 0);
         const cartFooter = document.getElementById('main-cart-footer');
 
-        if (cartFooter) cartFooter.classList.toggle('is-empty', parsedState.item_count === 0);
-        this.getSectionsToRender().forEach((section => {
-          const elementToReplace =
-            document.getElementById(section.id).querySelector(section.selector) || document.getElementById(section.id);
+        if (cartFooter)
+          cartFooter.classList.toggle('is-empty', parsedState.item_count === 0);
 
-          elementToReplace.innerHTML =
-            this.getSectionInnerHTML(parsedState.sections[section.section], section.selector);
-        }));
+        this.getSectionsToRender().forEach((section) => {
+          const elementToReplace =
+            document
+              .getElementById(section.id)
+              .querySelector(section.selector) ||
+            document.getElementById(section.id);
+
+          elementToReplace.innerHTML = this.getSectionInnerHTML(
+            parsedState.sections[section.section],
+            section.selector
+          );
+        });
 
         this.updateLiveRegions(line, parsedState.item_count);
-        const lineItem =  document.getElementById(`CartItem-${line}`);
+        const lineItem = document.getElementById(`CartItem-${line}`);
         if (lineItem) lineItem.querySelector(`[name="${name}"]`).focus();
         this.disableLoading();
-      }).catch(() => {
-        this.querySelectorAll('.loading-overlay').forEach((overlay) => overlay.classList.add('hidden'));
-        document.getElementById('cart-errors').textContent = window.cartStrings.error;
+      })
+      .catch(() => {
+        this.querySelectorAll('.loading-overlay').forEach((overlay) =>
+          overlay.classList.add('hidden')
+        );
+        document.getElementById('cart-errors').textContent =
+          window.cartStrings.error;
         this.disableLoading();
       });
   }
 
   updateLiveRegions(line, itemCount) {
     if (this.currentItemCount === itemCount) {
-      document.getElementById(`Line-item-error-${line}`)
-        .querySelector('.cart-item__error-text')
-        .innerHTML = window.cartStrings.quantityError.replace(
+      document
+        .getElementById(`Line-item-error-${line}`)
+        .querySelector('.cart-item__error-text').innerHTML =
+        window.cartStrings.quantityError.replace(
           '[quantity]',
           document.getElementById(`Quantity-${line}`).value
         );
@@ -122,14 +144,20 @@ class CartItems extends HTMLElement {
   }
 
   enableLoading(line) {
-    document.getElementById('main-cart-items').classList.add('cart__items--disabled');
-    this.querySelectorAll('.loading-overlay')[line - 1].classList.remove('hidden');
+    document
+      .getElementById('main-cart-items')
+      .classList.add('cart__items--disabled');
+    this.querySelectorAll(`#CartItem-${line} .loading-overlay`).forEach(
+      (overlay) => overlay.classList.remove('hidden')
+    );
     document.activeElement.blur();
     this.lineItemStatusElement.setAttribute('aria-hidden', false);
   }
 
   disableLoading() {
-    document.getElementById('main-cart-items').classList.remove('cart__items--disabled');
+    document
+      .getElementById('main-cart-items')
+      .classList.remove('cart__items--disabled');
   }
 }
 
