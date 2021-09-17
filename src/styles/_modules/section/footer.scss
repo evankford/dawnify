@@ -41,9 +41,7 @@
   }
   .media {
     margin: 0.4em 0;
-    @include media-query($small) {
-      margin: 0.4em auto;
-    }
+
   }
 
   .layout--stacked {
@@ -78,6 +76,12 @@
     @include media-query($medium-up) {
       justify-content: space-between;
     }
+
+    @include media-query($medium-up) {
+      .footer__payment {
+        justify-content: flex-end;
+      }
+    }
   }
   &.layout--stacked {
     width: 100%;
@@ -92,6 +96,7 @@
     .footer-block.grid__item {
       margin: auto;
       width: 100%;
+      padding-left: 0;
       text-align: center;
       max-width: 100%;
       .list-social {
@@ -348,6 +353,14 @@ small.credit {
     .media {
       margin: 0 auto 0 0;
     }
+  }
+}
+
+.footer__attribution .media
+{
+  @include media-query($small) {
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 

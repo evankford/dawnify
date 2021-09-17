@@ -77,9 +77,9 @@
   border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.2);
 }
 
-a.header__menu-item, summary.header__menu-item, .header__icon {
+a.header__menu-item, summary.header__menu-item, .header__icon, .list-social__link {
   color: var(--txt);
-  transition: color 200ms $ease;
+  transition: color 200ms $ease, opacity 200ms $ease;
   line-height: 1.1;
   &:hover {
     color: var(--txt-h);

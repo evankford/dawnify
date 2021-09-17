@@ -22,7 +22,7 @@
     "pull": "cd dist && rm .shopifyignore && touch .shopifyignore && shopify theme pull",
     "push": "pnpm  webpack --env=production && cd dist && shopify theme push --unpublished --nodelete",
     "push:new": "cd dist && shopify theme push --unpublished --nodelete",
-    "push:data": "cd dist && rm .shopifyignore && touch .shopifyignore && shopify theme push",
+    "push:dry": "cd dist && rm .shopifyignore && touch .shopifyignore && shopify theme push --unpublished --nodelete",
     "update": "pnpm  webpack -- --env=production && cd dist && shopify theme push --nodelete",
     "update:dry": "cd dist && shopify theme push --nodelete ",
     "publish": "pnpm  webpack -- --env=production && cd dist && shopify theme push --publish --nodelete ",

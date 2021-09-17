@@ -38,11 +38,7 @@
     {% if settings.header_code != blank %}
     {{ settings.header_code }}
     {% endif %}
-    {% if settings.custom_css != blank %}
-      {% style %}
-        {{ settings.custom_css }}
-      {% endstyle %}
-    {% endif %}
+
 
      {%- if settings.predictive_search_enabled -%}
       <link rel="stylesheet" href="{{ 'component-predictive-search.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -61,6 +57,11 @@
     {%- endunless -%}
 
     <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
+    {% if settings.custom_css != blank %}
+      {% style %}
+        {{ settings.custom_css }}
+      {% endstyle %}
+    {% endif %}
   </head>
 
   <body class="template-{{ template.name }} gradient {% if settings.enable_sidebar_menu == true%} has-sidebar{% endif %}">

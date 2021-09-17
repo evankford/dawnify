@@ -22,7 +22,10 @@
       -webkit-backface-visibility: hidden;
       -moz-backface-visibility: hidden;
       backface-visibility: hidden;
+    {% else %}
+    overflow: hidden;
     {% endif %}
+
   }
   #{% unless inner %}shopify-section-{% endunless %}{{ id }}::before {
     position: absolute;
@@ -31,11 +34,14 @@
     display: block;
     width: 100%;
     top: 0;
+    {% if settings.background_opacity != 100 %}
+    opacity: {{ settings.background_opacity | times: 0.01 | default: 1 }};
+    {% endif %}
     left: 0;
     z-index: -1;
     background-position: 50% 50%;
     {% if settings.background_style == "cover" or settings.background_style == "contain" %}
-    background_image: url({{ settings.background_image | img_url: "450x" }});
+    background-image: url({{ settings.background_image | img_url: "800x" }});
     background-size: {{ settings.background_style }};
     background-repeat: no-repeat;
     {% elsif settings.background_style == "fixed" %}
@@ -60,11 +66,7 @@
 
   {% if settings.background_image != blank and  settings.background_style == "cover" or settings.background_style == "contain" or settings.background_style == "fixed" %}
 
-  @media (min-width: 450px) {
-    #shopify-section-{{ id }}::before {
-      background-image: url({{ settings.background_image | img_url: "720x" }});
-    }
-  }
+
   @media (min-width: 720px) {
     #shopify-section-{{ id }}::before {
       background-image: url({{ settings.background_image | img_url: "1080x" }});

@@ -21,6 +21,7 @@ announcement-bar {
   flex-wrap: wrap;
   position: relative;
   overflow: hidden;
+  padding-left: 32px;
 
   @include media-query($medium-up) {
     padding-left: 32px;
@@ -34,7 +35,7 @@ announcement-bar {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 4px;
+    padding: 4px 8px;
   }
   [data-close] svg{
     width: 16px;
@@ -67,6 +68,7 @@ announcement-bar {
   pointer-events: none;
   padding-left: 1rem;
   vertical-align: middle;
+  width: 3.5rem;
   margin-bottom: 0.2rem;
 }
 

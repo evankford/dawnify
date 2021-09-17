@@ -35,6 +35,15 @@
   "id" : "background_image",
   "label" : "Background Image"
 },
+ {
+      "type" : "range",
+      "label" : "Background Opacity",
+      "id" : "background_opacity",
+      "default" : 100,
+      "step": 1,
+      "min" : 1,
+      "max" : 100
+    },
 {
       "type" : "select",
       "id" : "background_style",
