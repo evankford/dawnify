@@ -55,6 +55,10 @@
       transform: scale(0.9);
 
     }
+    /*Fallback active, no audio controls*/
+    video-background.mobile ~ button[data-bga-button] {
+      display: none;
+    }
   {% endstyle %}
 
   <button data-bga-button  style="display: none" aria-label="Play Audio">

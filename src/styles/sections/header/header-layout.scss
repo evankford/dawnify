@@ -145,6 +145,12 @@ a.header__menu-item, summary.header__menu-item, .header__icon, .list-social__lin
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+
+    @include media-query($small) {
+      &:last-child {
+        justify-content: flex-end;
+      }
+    }
   }
 
   &__group--mobile_menu {

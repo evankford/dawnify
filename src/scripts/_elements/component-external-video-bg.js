@@ -1,3 +1,4 @@
+import { DEBUG } from '@squarespace/video-background-rendering/src/constants/instance';
 import { VideoBackground as VideoBackgroundRenderer } from '@squarespace/video-background-rendering/src/index.js';
 
 class VideoBackground extends HTMLElement {
@@ -63,7 +64,11 @@ class VideoBackground extends HTMLElement {
       container: this,
       url: this.getAttribute('data-bg-video-url'),
       useCustomFallbackImage: true,
-      fitMode: 'fill'
+      fitMode: 'fill',
+      DEBUG: {
+        enabled: true,
+        verbose: true
+      }
     });
     this.classList.add('loaded');
     this.isLoaded = true;

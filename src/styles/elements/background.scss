@@ -26,8 +26,9 @@
    @extend %psuedoish;
    height: 130%;
    top: -15%;
-  z-index: 0;
 
+  z-index: 0;
+pointer-events:  none;
   @include media-query($medium-up) {
     height: 120%;
     top: -10%;
@@ -41,9 +42,17 @@
   // }
   .custom-fallback-image {
     opacity: 1;
+    object-fit: cover;
+
+  }
+  iframe {
+    min-width: 100%;
+    min-height: 100%;
+
+
   }
   &.loaded .custom-fallback-image {
-    opacity: 0;
+    // opacity: 0;
   }
 }
 

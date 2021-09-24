@@ -25,7 +25,7 @@
 
   @include media-query($tiny) {
     margin: 2rem 0 3rem;
-    &:not(.grid-grid--large):not(.grid-grid--huge) {
+    &:not(.grid-grid--large):not(.grid-grid--huge):not([data-max="1"]) {
       grid-template-columns: repeat(2, 1fr);
     }
   }
