@@ -1,34 +1,18 @@
-
+@use "../../abstracts/" as *;
 
 .product-grid .grid__item {
   padding-bottom: 2rem;
   position: relative;
 }
 
+
+
 .product-grid.negative-margin {
   margin-bottom: -2rem;
 }
 
- .grid.product {
-    flex-wrap:wrap;
-    max-width: 600px;
-
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  @media screen and (min-width: 520px) {
-    .grid.product {
-      width: 96%;
-    }
-  }
-
 @media screen and (min-width: 750px) {
-  .grid.product {
-    flex-wrap:nowrap;
-    width: 100%;
-    max-width: 100%;
-  }
+
   .product-grid .grid__item {
     padding-bottom: calc(5rem + var(--page-width-margin));
   }
@@ -39,13 +23,5 @@
 
   .product-grid.negative-margin--small {
     margin-bottom: calc(-1rem - var(--page-width-margin));
-  }
-}
-@include media-query($small) {
-  .product > .grid__item {
-    width: auto;
-    flex: 1 1 325px;
-    margin-bottom: 1rem;
-    max-width: 450px;
   }
 }

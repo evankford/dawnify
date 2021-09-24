@@ -419,6 +419,11 @@ a.product__text {
 }
 
 @media screen and (min-width: 750px) {
+  .grid.product {
+    flex-wrap:nowrap;
+    width: 100%;
+    max-width: 100%;
+  }
   .product__media-item:first-child {
     width: 100%;
     max-width: 100%;
@@ -787,3 +792,27 @@ a.product__text {
   margin: 0;
   width: 2.2rem;
 }
+
+
+
+ .grid.product {
+    flex-wrap:wrap;
+    max-width: 600px;
+
+    margin-left: auto;
+    margin-right: auto;
+    @include media-query($small) {
+      & > .grid__item {
+        width: auto;
+        flex: 1 1 325px;
+        margin-bottom: 1rem;
+        max-width: 450px;
+      }
+    }
+  }
+
+  @media screen and (min-width: 520px) {
+    .grid.product {
+      width: 96%;
+    }
+  }
