@@ -41,3 +41,11 @@
     margin-bottom: calc(-1rem - var(--page-width-margin));
   }
 }
+@include media-query($small) {
+  .product > .grid__item {
+    width: auto;
+    flex: 1 1 325px;
+    margin-bottom: 1rem;
+    max-width: 450px;
+  }
+}
