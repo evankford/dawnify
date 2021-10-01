@@ -22,3 +22,37 @@
       </announcement-bar>
   {%- endcase -%}
 {%- endfor -%}
+<style>
+  .h5.announcement-bar__message {
+
+    {% case section.settings.type_font_family %}
+     {% when 'body' %}
+       font-family: var(--font-body-family);
+       font-weight: var(--font-body-weight);
+       {% when 'heading' %}
+       font-family: var(--font-heading-family);
+       font-weight: var(--font-heading-weight);
+       {% when 'extra' %}
+       font-family: var(--font-extra-family);
+       font-weight: var(--font-extra-weight);
+       {% when 'script' %}
+       font-family: var(--font-script-real);
+       font-weight: 400;
+     {% endcase %}
+
+   /* {{ section.settings.type_capitalization }} */
+   line-height: {{ section.settings.type_line_height | divided_by: 10.0 }};
+   padding: {{ section.settings.type_padding_top | divided_by: 10.0 }}em  {{ section.settings.type_padding_horiz | divided_by: 10.0 }}em {{ section.settings.type_padding_bottom | divided_by: 10.0 }}em ;
+   text-transform: {{ section.settings.type_capitalization | default: "none" }};
+   font-weight: {{ section.settings.type_font_weight | default: "700" }};
+   letter-spacing: {{ section.settings.type_letter_spacing | default: 10 | divided_by: 20.0 | minus: 0.5 }}em;
+   font-style: {{ section.settings.type_text_style | default : "Standard" }};
+   font-size: {{ section.settings.type_font_size | default: '17' }}px;
+  }
+
+  @media (max-width: 720px) {
+    .h5.announcement-bar__message {
+      font-size: {{ section.settings.type_font_size_mobile | default: '15' }}px;
+    }
+  }
+</style>

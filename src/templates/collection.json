@@ -15,7 +15,7 @@
       "settings": {
         "products_per_page": 16,
         "full_width": false,
-        "grid_size": "small",
+
         "image_ratio": "adapt",
         "show_secondary_image": true,
         "add_image_padding": false,

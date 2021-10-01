@@ -33,7 +33,7 @@
         "subtitle": "",
         "text_align": "spaced",
         "collection": "frontpage",
-        "grid_size": "small",
+
         "full_width": false,
         "products_to_show": 8,
         "show_view_all": true,

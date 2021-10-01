@@ -1,14 +1,19 @@
 {
-    "name": "Buttons",
-    "settings": [
+  "name" : "Main Product Styles",
+  "settings" : [
+      {
+        "type" : "checkbox",
+        "id" : "pm_price_border",
+        "label" : "Border below price?"
+      },
       {
         "type" : "header",
-        "content" : "Typography"
+        "content" : "Main Product Typography"
       },
-        {
+      {
         "type": "select",
-        "id": "button_font_family",
-        "label": "Font Family",
+        "id": "pm_font_family",
+        "label": "Title Font Family",
         "default": "heading",
         "options": [
           {
@@ -29,49 +34,85 @@
           }
         ]
       },
-
+       {
+        "type": "range",
+        "id": "pm_font_size",
+        "label": "Title Size",
+        "min": 12,
+        "default": 45,
+        "max": 90,
+        "step": 1
+      },
 
       {
         "type": "range",
-        "id": "button_font_size",
-        "label": "Font Size",
-        "min": 12,
-        "default": 17,
-        "max": 25,
-        "step": 1
-      },
-       {
-        "type": "range",
-        "id": "button_font_size_mobile",
-        "label": "Font Size (Mobile)",
+        "id": "pm_font_size_mobile",
+        "label": "Title Size (Mobile)",
         "min": 10,
-        "default": 16,
-        "max": 23,
+        "default": 34,
+        "max": 60,
         "step": 1
       },
-       {
+      {
         "type": "range",
-        "id": "button_letter_spacing",
-        "label": "Letter Spacing",
+        "id": "pm_font_size_long",
+        "label": "Title Size (Long)",
+        "min": 10,
+        "default": 34,
+        "max": 60,
+        "step": 1
+      },
+      {
+        "type": "range",
+        "id": "pm_font_size_long_mobile",
+        "label": "Title Size (Long - Mobile)",
+        "min": 10,
+        "default": 24,
+        "max": 28,
+        "step": 1
+      },
+      {
+        "type": "range",
+        "id": "pm_price_font_size",
+        "label": "Price  Size",
+        "min": 10,
+        "default": 14,
+        "max": 40,
+        "step": 1
+      },
+
+      {
+        "type": "range",
+        "id": "pm_price_font_size_mobile",
+        "label": "Price  Size ( Mobile)",
+        "min": 10,
+        "default": 14,
+        "max": 28,
+        "step": 1
+      },
+      {
+        "type": "range",
+        "id": "pm_line_height",
+        "label": "Title Line Height",
+        "min": 7,
+        "default": 12,
+        "max": 20,
+        "step": 1
+      },
+         {
+        "type": "range",
+        "id": "pm_letter_spacing",
+        "label": "Title Letter Spacing",
         "min": 0,
         "default": 10,
         "max": 30,
         "step": 1
       },
-       {
-        "type": "range",
-        "id": "button_line_height",
-        "label": "Line Height",
-        "min": 7,
-        "default": 10,
-        "max": 20,
-        "step": 1
-      },
 
        {
         "type": "range",
-        "id": "button_padding_top",
-        "label": "Padding Top",
+        "id": "pm_margin_top",
+        "label": "Title Margin Top",
         "min": 0,
         "default": 5,
         "max": 15,
@@ -79,40 +120,16 @@
       },
        {
         "type": "range",
-        "id": "button_padding_bottom",
-        "label": "Padding Bottom",
+        "id": "pm_margin_bottom",
+        "label": "Title Margin Bottom",
         "min": 0,
         "default": 5,
         "max": 15,
         "step": 1
       },
        {
-        "type": "range",
-        "id": "button_padding_horiz",
-        "label": "Padding Left/Right",
-        "min": 0,
-        "default": 12,
-        "max": 26,
-        "step": 1
-      },
-
-      {
-        "type": "header",
-        "content": "Style Choices"
-      },
-      {
-        "id": "button_border_radius",
-        "label": "Border Radius",
-        "type": "range",
-        "unit": "em",
-        "default": 0,
-        "step": 1,
-        "max": 20,
-        "min": 0
-      },
-      {
         "type": "select",
-        "id": "button_text_style",
+        "id": "pm_text_style",
         "label": "Text Style",
         "default": "normal",
         "options": [
@@ -128,10 +145,10 @@
       },
       {
         "type": "select",
-        "id": "button_font_weight",
+        "id": "pm_font_weight",
         "label": "Font Weight",
         "info" : "Make sure you're loading the correct font weight",
-        "default": "400",
+        "default": "700",
         "options": [
           {
             "group" : "Light",
@@ -182,9 +199,9 @@
       },
       {
         "type": "select",
-        "id": "button_capitalization",
+        "id": "pm_capitalization",
         "label": "Capitalization",
-        "default": "none",
+        "default": "uppercase",
         "options": [
           {
             "value": "none",
@@ -200,5 +217,6 @@
           }
         ]
       }
-    ]
-  }
+
+  ]
+}

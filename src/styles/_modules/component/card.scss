@@ -4,7 +4,8 @@
 
 .card-wrapper {
   color: inherit;
-  display: block;
+  display: flex;
+  flex-direction: column;
   position: relative;
   text-decoration: none;
   display: flex;
@@ -12,34 +13,59 @@
   justify-content: center;
   flex-direction: column;
   transition: transform 200ms ease, opacity 200ms ease;
+  .card-information {
+    order: 1;
+    width: 100%;
+    padding: 0 0 0.75em;
+  }
   &.color-card {
     z-index: 1;
     align-items: stretch;
-    &>a {
-      height: 100%;
-      position: relative;z-index: 2;
-      display: block;
-      display: flex;
-      flex-direction: column;
-      background: rgb(var(--color-background));
-      color: rgb(var(--color-foreground));
-    }
 
     .card-information {
-      padding: 1em;
+      // order: 1;
+      width: 100%;
+      padding: 0 1em 1em;
       margin: 0;
-
+      z-index: 2;
     }
+
     .card--product {
+      position: relative;
+      z-index: 2;
       border: 0;
     }
 
+    .card-wrapper .full-unstyled-link::after {
+      @extend %psuedo;
+
+      z-index: 1;
+    }
+
+    .card-wrapper .full-unstyled-link:focus-visible {
+      outline: 0;
+      box-shadow: none;
+    }
+
+    .card-wrapper .full-unstyled-link:focus-visible::after {
+      outline: .2rem solid rgba(var(--color-foreground),.5);
+      outline-offset: 0.3rem;
+      box-shadow: 0 0 0 .3rem rgb(var(--color-background)),0 0 .5rem .4rem rgba(var(--color-foreground),.3);
+    }
+
+    &::after {
+      @extend %psuedo;
+      background: rgb(var(--color-background));
+      color: rgb(var(--color-foreground));
+
+    }
     &::before {
       @extend %psuedo;
       z-index: 0;
-      box-shadow: 0 0 32px rgb(0 0 0 / 30%);
+      box-shadow: rgba(0, 0, 0, 0.15) 0px 19px 38px, rgba(0, 0, 0, 0.11) 0px 15px 12px;
       z-index: -1;
-      transform: scale(0.95);
+      transform: scale(0.925);
+      opacity: 0.75;
       transition: transform 200ms ease, opacity 200ms ease;
 
     }
@@ -63,8 +89,11 @@
 
 
 
-  &+.card-information {
-    margin-top: 1.2rem;
+  .card-information + & {
+    margin-bottom: 1.3rem;
+    @include media-query($medium-up) {
+      margin-bottom: 1.7rem;
+    }
   }
 
   .icon-arrow {
@@ -109,6 +138,10 @@
 .card--text-only {
   display: flex;
   justify-content: center;
+}
+
+.card--text-only.card--product {
+  position: static;
 }
 
 .card--text-only::before {
@@ -237,6 +270,7 @@
 
 .card-information__text {
   display: block;
+  margin: 0;
   padding-right: 1.2rem;
 }
 

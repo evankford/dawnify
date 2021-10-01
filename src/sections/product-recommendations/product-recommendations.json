@@ -182,6 +182,7 @@
     {
       "type" : "select",
       "id" : "grid_size",
+      "default" : "medium",
       "label" : "Product Size",
       "options" : [
         {

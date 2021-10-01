@@ -297,6 +297,13 @@
       "label": "t:sections.main-product.settings.enable_sticky_info.label"
     },
     {
+      "type" : "checkbox",
+      "id" : "try_centering",
+      "label" : "Try Centering Product Info",
+      "info" : "Centers when only one image on large screens",
+      "default" : true
+    },
+    {
       "type": "checkbox",
       "id": "enable_video_looping",
       "default": false,
@@ -335,7 +342,7 @@
       "id" :"spacing_top",
       "label" : "Section Spacing Top",
       "type" : "range",
-      "default" : 10,
+      "default" : 20,
       "min" : 0,
       "max": 40,
       "step" : 1

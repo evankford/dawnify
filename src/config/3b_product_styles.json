@@ -1,29 +1,10 @@
 {
-  "name" : "Product Styles",
+  "name" : "Product Grid Styles",
   "settings" : [
-    {
-      "type": "select",
-      "id": "product_font",
-      "label": "Product Font Style",
-      "default": "standard",
-      "options": [
-        {
-          "value": "standard",
-          "label": "Standard"
-        },
-        {
-          "value": "heading",
-          "label": "Heading"
-        },
-        {
-          "value": "label",
-          "label": "Label"
-        },
-        {
-          "value": "script",
-          "label": "Script"
-        }
-      ]
+     {
+      "label" : "Center Product Titles",
+      "type" : "checkbox",
+      "id" : "pg_centered"
     },
     {
       "type" : "header",
@@ -45,16 +26,355 @@
       "id" : "pg_border",
       "default" : true
     },
+     {
+        "type" : "header",
+        "content" : "Grid Typography",
+        "info" : "Product Grid Typography"
+      },
+      {
+        "type": "select",
+        "id": "pg_font_family",
+        "label": "Font Family",
+        "default": "heading",
+        "options": [
+          {
+            "value": "body",
+            "label": "Body"
+          },
+          {
+            "value": "heading",
+            "label": "Heading"
+          },
+          {
+            "value": "extra",
+            "label": "Extra"
+          },
+          {
+            "value" : "script",
+            "label" : "Script"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "pg_font_size",
+        "label": "Font Size",
+        "min": 12,
+        "default": 19,
+        "max": 30,
+        "step": 1
+      },
+
+      {
+        "type": "range",
+        "id": "pg_font_size_mobile",
+        "label": "Font Size (Mobile)",
+        "min": 10,
+        "default": 17,
+        "max": 28,
+        "step": 1
+      },
+       {
+        "type": "range",
+        "id": "pg_letter_spacing",
+        "label": "Letter Spacing",
+        "min": 0,
+        "default": 10,
+        "max": 30,
+        "step": 1
+      },
+       {
+        "type": "range",
+        "id": "pg_line_height",
+        "label": "Line Height",
+        "min": 7,
+        "default": 12,
+        "max": 20,
+        "step": 1
+      },
+
+       {
+        "type": "range",
+        "id": "pg_margin_top",
+        "label": "Margin Top",
+        "min": 0,
+        "default": 5,
+        "max": 15,
+        "step": 1
+      },
+       {
+        "type": "range",
+        "id": "pg_margin_bottom",
+        "label": "Margin Bottom",
+        "min": 0,
+        "default": 5,
+        "max": 15,
+        "step": 1
+      },
+      {
+        "type": "select",
+        "id": "pg_text_style",
+        "label": "Text Style",
+        "default": "normal",
+        "options": [
+          {
+            "value": "italic",
+            "label": "Italic"
+          },
+          {
+            "value": "normal",
+            "label": "Normal"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "pg_font_weight",
+        "label": "Font Weight",
+        "info" : "Make sure you're loading the correct font weight",
+        "default": "700",
+        "options": [
+          {
+            "group" : "Light",
+            "value": "100",
+            "label" : "Thin"
+          },
+          {
+            "group" : "Light",
+            "value": "200",
+            "label" : "Extra-Light"
+          },
+          {
+            "group" : "Light",
+            "value": "300",
+            "label" : "Light"
+          },
+          {
+            "group" : "Normal",
+            "value": "400",
+            "label" : "Normal"
+          },
+          {
+            "group" : "Normal",
+            "value": "500",
+            "label" : "Medium"
+          },
+          {
+            "group" : "Bold",
+            "value": "600",
+            "label" : "Semi-Bold"
+          },
+          {
+            "group" : "Bold",
+            "value": "700",
+            "label" : "Bold"
+          },
+          {
+            "group" : "Black",
+            "value": "800",
+            "label" : "Semi-Black"
+          },
+          {
+            "group" : "Black",
+            "value": "900",
+            "label" : "Black"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "pg_capitalization",
+        "label": "Capitalization",
+        "default": "uppercase",
+        "options": [
+          {
+            "value": "none",
+            "label": "Standard"
+          },
+          {
+            "value": "uppercase",
+            "label": "All Caps"
+          },
+          {
+            "value": "lowercase",
+            "label": "Lowercase"
+          }
+        ]
+      },
+      {
+        "type" : "header",
+        "content" : "Price Typography"
+      },
     {
-      "label" : "Center Product Titles",
-      "type" : "checkbox",
-      "id" : "pg_centered"
-    },
-    {
-      "label" : "Simplify Product Titles",
-      "info"  :"Makes Title + Price the same format",
-      "type" : "checkbox",
-      "id" : "pg_simple_title"
-    }
+        "type": "select",
+        "id": "pg_price_font_family",
+        "label": "Price Font Family",
+        "default": "body",
+        "options": [
+          {
+            "value": "body",
+            "label": "Body"
+          },
+          {
+            "value": "heading",
+            "label": "Heading"
+          },
+          {
+            "value": "extra",
+            "label": "Extra"
+          },
+          {
+            "value" : "script",
+            "label" : "Script"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "pg_price_font_size",
+        "label": "Price Font Size",
+        "min": 10,
+        "default": 14,
+        "max": 25,
+        "step": 1
+      },
+
+      {
+        "type": "range",
+        "id": "pg_price_font_size_mobile",
+        "label": "Price  Size (Mobile)",
+        "min": 10,
+        "default": 16,
+        "max": 28,
+        "step": 1
+      },
+
+       {
+        "type": "range",
+        "id": "pg_price_letter_spacing",
+        "label": "Price Letter Spacing",
+        "min": 0,
+        "default": 10,
+        "max": 30,
+        "step": 1
+      },
+       {
+        "type": "range",
+        "id": "pg_price_line_height",
+        "label": "Price Line Height",
+        "min": 7,
+        "default": 12,
+        "max": 20,
+        "step": 1
+      },
+
+       {
+        "type": "range",
+        "id": "pg_price_margin_top",
+        "label": "Price Margin Top",
+        "min": 0,
+        "default": 5,
+        "max": 15,
+        "step": 1
+      },
+       {
+        "type": "range",
+        "id": "pg_price_margin_bottom",
+        "label": "Price Margin Bottom",
+        "min": 0,
+        "default": 5,
+        "max": 15,
+        "step": 1
+      },
+      {
+        "type": "select",
+        "id": "pg_price_text_style",
+        "label": "Price Text Style",
+        "default": "normal",
+        "options": [
+          {
+            "value": "italic",
+            "label": "Italic"
+          },
+          {
+            "value": "normal",
+            "label": "Normal"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "pg_price_font_weight",
+        "label": "Price Font Weight",
+        "info" : "Make sure you're loading the correct font weight",
+        "default": "400",
+        "options": [
+          {
+            "group" : "Light",
+            "value": "100",
+            "label" : "Thin"
+          },
+          {
+            "group" : "Light",
+            "value": "200",
+            "label" : "Extra-Light"
+          },
+          {
+            "group" : "Light",
+            "value": "300",
+            "label" : "Light"
+          },
+          {
+            "group" : "Normal",
+            "value": "400",
+            "label" : "Normal"
+          },
+          {
+            "group" : "Normal",
+            "value": "500",
+            "label" : "Medium"
+          },
+          {
+            "group" : "Bold",
+            "value": "600",
+            "label" : "Semi-Bold"
+          },
+          {
+            "group" : "Bold",
+            "value": "700",
+            "label" : "Bold"
+          },
+          {
+            "group" : "Black",
+            "value": "800",
+            "label" : "Semi-Black"
+          },
+          {
+            "group" : "Black",
+            "value": "900",
+            "label" : "Black"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "pg_price_capitalization",
+        "label": "Price Capitalization",
+        "default": "uppercase",
+        "options": [
+          {
+            "value": "none",
+            "label": "Standard"
+          },
+          {
+            "value": "uppercase",
+            "label": "All Caps"
+          },
+          {
+            "value": "lowercase",
+            "label": "Lowercase"
+          }
+        ]
+      }
   ]
 }

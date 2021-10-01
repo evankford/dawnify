@@ -71,7 +71,11 @@ function getEntries() {
       file.lastIndexOf('/') + 1,
       file.lastIndexOf('.')
     );
-    componentEntries[`${type}-${name}`] = [file];
+    if (type != "base") {
+      componentEntries[`${type}-${name}`] = [file];
+    } else {
+      componentEntries[`${name}`] = [file];
+    }
   });
   const allJsElements = glob.sync(
     path.resolve('./src/scripts/_elements/*.js')

@@ -25,9 +25,13 @@
     "push:dry": "cd dist && rm .shopifyignore && touch .shopifyignore && shopify theme push --unpublished --nodelete",
     "update": "pnpm  webpack -- --env=production && cd dist && shopify theme push --nodelete",
     "update:dry": "cd dist && shopify theme push --nodelete ",
+    "update:merge": "pnpm merge && pnpm update:dry",
     "publish": "pnpm  webpack -- --env=production && cd dist && shopify theme push --publish --nodelete ",
     "watch": "pnpm  webpack --watch --env=development",
     "serve": "cd dist && shopify theme serve",
+    "merge" : "pnpm merge:pre && pnpm run build && pnpm merge:post",
+    "merge:pre" : "cd dist && cp -r templates ../ && cp config/settings_data.json ../",
+    "merge:post" : "cd dist && rm -rf templates && rm -rf config/settings_data.json && mv  ../templates ./ && mv ../settings_data.json ./config",
     "build": "pnpm  webpack -- --env=production"
   },
   "devDependencies": {

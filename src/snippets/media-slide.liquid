@@ -33,7 +33,7 @@ Usage:
       {% render 'media' with type: 'image' , image: settings.image, size: "full", center_x: settings.image_center_x, center_y: settings.image_center_y, type: "image"  , is_slide: is_slide %}
     </div>
     {% endif %}
-  {% unless settings.heading == blank and settings.content_image == blank %}
+  {% unless settings.heading == blank and settings.content_image == blank and settings.button_label_1 == blank and settings.introduction == blank and settings.content == blank %}
     {% if type != 'video' and type != 'image' %}
     <div class="banner__content" style="align-items: {{ settings.desktop_text_box_position }};">
       <div class="banner__box color-{{ color_scheme }}">

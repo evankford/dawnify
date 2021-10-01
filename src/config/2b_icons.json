@@ -1,0 +1,20 @@
+{
+    "name": "Icons",
+    "settings": [
+      {
+        "type" : "select",
+        "id" : "header_icon_style",
+        "label" : "Header Icon Style",
+        "default" : "thin",
+        "options" : [
+          {
+            "value" : "thin",
+            "label" : "Thin"
+          },{
+           "value" : "bolder",
+           "label" : "Bolder"
+          }
+        ]
+      }
+    ]
+  }

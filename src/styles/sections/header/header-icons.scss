@@ -34,8 +34,8 @@
   }
 
 
-  &,
-  &--cart .icon {
+  & {
+  // &--cart .icon {
     height: 2.4em;
     width: 2.4em;
     @include media-query($tiny) {

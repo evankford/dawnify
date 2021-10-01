@@ -129,8 +129,8 @@
 }
 
 .banner__box > * + .banner__buttons {
-  margin: -1rem auto 0;
-  margin-top: 0.8rem;
+  margin: 0.5rem auto 0;
+  /* margin-top: 1.5rem; */
   transform: translateX(1rem);
 }
 
@@ -142,13 +142,14 @@
   justify-content: center;
 }
 
-.banner__content .button  {
-  margin-top: 1.5rem;
-}
-
 .banner__content .button {
   height: auto;
   margin-right: 2rem;
+  margin-top: 1.5rem
+}
+
+.banner__content .button:last-child {
+  margin-right: 0;
 }
 
 .banner__box > * + .banner__text {
@@ -184,6 +185,10 @@
     padding: 4rem;
     width: 80%;
     max-width: 65.8rem;
+  }
+
+  .banner__box[class*=transparent] {
+    max-width:  75rem;
   }
 
   .banner__box > .banner__buttons:only-child .button {
