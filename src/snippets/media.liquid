@@ -144,7 +144,8 @@ Accepts:
             {%- if max_width >= 1400 -%}{{ image | img_url: '1400x' }} 1400w,{%- endif -%}
             {%- if max_width >= 1600 -%}{{ image | img_url: '1600x' }} 1600w,{%- endif -%}
             {%- if max_width >= 2000 -%}{{ image | img_url: '2000x' }} 2000w,{%- endif -%}
-            {%- if max_width >= 2400 -%}{{ image | img_url: '2400x' }}{%- endif -%}"
+            {%- if max_width >= 2400 -%}{{ image | img_url: '2400x' }}{%- endif -%}
+            {{ image | img_url: 'master' }} {{ image.width }}w""
         {% endif %}
           src="{{ image | img_url: loading_size }}"
           sizes="{{ sizes }}"
