@@ -376,6 +376,10 @@
     opacity: 0;
   }
 
+  .card__media > img + img {
+    object-fit: cover;
+  }
+
   .card-wrapper:hover .media.media--hover-effect > img + img {
     opacity: 1;
     transition: transform var(--duration-long) ease;
@@ -419,6 +423,12 @@
   }
 }
 
+
+.product-card__media +.product-card__media  {
+  img {
+    object-fit: cover;
+  }
+}
 .card__media:hover {
   .product-card__media:not(:last-child)  {
     opacity: 0;
