@@ -1,0 +1,42 @@
+<script defer src="{{ 'slider.js' | asset_url }}"></script>
+{{ 'slider.css' | append: '?enable_css_minification=1' | asset_url | stylesheet_tag }}
+{{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
+
+{% render 'section-style' with id: section.id, settings: section.settings %}
+<div class="page-width album-section-wrap">
+  {% if section.settings.introduction != blank or section.settings.title != blank or section.settings.subtitle != blank%}
+  <div class="common-header text--{{ section.settings.text_align | default: "left"}}">
+    {% if section.settings.introduction != blank %}
+      <div class="h4 label">{{ section.settings.introduction | escape }}</div>
+    {% endif %}
+    {% if section.settings.title != blank %}  <h2 class="title heading">{{ section.settings.title | escape }}</h2>{% endif %}
+    {% if section.settings.subtitle != blank %}
+      <div class="h4 label">{{ section.settings.subtitle | escape }}</div>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  {% assign is_slide = false%}
+  {% if section.blocks.size > 1 %}
+    {% assign is_slide = true %}
+    <album-slider class="swiper-container" data-pagination="{{ section.settings.pagination }}" data-navigation="{{ section.settings.navigation }}" data-autoplay="{{ section.settings.autoplay_speed | default: 0 }}" data-full-width="{{ section.settings.full_width }}">
+        <ul class="swiper-wrapper">
+  {% endif %}
+    {% for block in section.blocks %}
+      {% render 'album-slide' with settings: block.settings, full_width: section.settings.full_width, is_slide: is_slide %}
+      {% endfor %}
+    {% if is_slide %}
+    </ul>
+      {% if section.settings.pagination != "disabled" %}
+        <div class="swiper-pagination" data-pagination></div>
+      {% endif %}
+      {% if section.settings.navigation == true %}
+        <div class="swiper-navigation">
+          <button class="button-icon" data-prev aria-label="Previous Slide">{% render 'icon-caret' %}</button>
+          <button class="button-icon" data-next aria-label="Next Slide">{% render 'icon-caret' %}</button>
+        </div>
+      {% endif %}
+
+  </album-slider>
+  {% endif %}
+</div>

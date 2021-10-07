@@ -1,0 +1,310 @@
+{
+  "name" : "Album Slider",
+  "class" : "album-slider",
+  "settings": [
+     {
+      "type": "text",
+      "id": "introduction",
+      "label": "Introduction",
+      "default" : "The Latest"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "default": "Music",
+      "label": "t:sections.featured-collection.settings.title.label"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type" : "select",
+      "id" : "text_align",
+      "label" : "Text Align",
+      "default" : "left",
+      "options" : [
+        {
+          "value" : "left",
+          "label" : "Left"
+        },
+        {
+          "value" : "centered",
+          "label" : "Centered"
+        },
+        {
+          "value" : "right",
+          "label" : "Right"
+        }
+      ]
+    },
+    {
+        "type": "header",
+        "content": "Slider Settings"
+    }, {
+        "type": "select",
+        "id": "pagination",
+        "label": "Pagination",
+        "default": "dots",
+        "options": [{
+            "value": "dots",
+            "label": "Dots"
+        }, {
+            "value": "progress",
+            "label": "Progress Bar"
+        }, {
+            "value": "disabled",
+            "label": "Disabled"
+        }]
+    }, {
+        "type": "checkbox",
+        "id": "navigation",
+        "label": "Enable Arrows",
+        "default": true
+    }, {
+        "type": "range",
+        "label": "Autoplay Speed",
+        "id": "autoplay_speed",
+        "info": "Set to 0 for no autoplay",
+        "step": 1,
+        "min": 0,
+        "max": 15,
+        "unit": "s",
+        "default": 7
+    }, {
+      "type" : "checkbox",
+      "id" :"full_width",
+      "label" : "Full-width slides",
+      "info" : "alternate is showing many releases which will adapt to screen size"
+     },
+       {
+      "type" : "header",
+      "content" : "Section Settings"
+    },
+    {
+      "id" :"spacing_top",
+      "label" : "Section Spacing Top",
+      "type" : "range",
+      "default" : 5,
+      "min" : 0,
+      "max": 30,
+      "step" : 1
+    },
+    {
+      "id" :"spacing_bottom",
+      "label" : "Section Spacing Bottom",
+      "type" : "range",
+      "default" : 5,
+      "min" : 0,
+      "max": 30,
+      "step" : 1
+    }, {
+            "type": "select",
+            "id": "color_scheme",
+            "options": [{
+                "value": "transparent-dark",
+                "label": "Dark Text (no bg)"
+            }, {
+                "value": "transparent-light",
+                "label": "Light Text (no bg)"
+            }, {
+                "value": "accent-1",
+                "label": "t:sections.image-banner.settings.color_scheme.options__1.label"
+            }, {
+                "value": "accent-2",
+                "label": "t:sections.image-banner.settings.color_scheme.options__2.label"
+            }, {
+                "value": "background-1",
+                "label": "t:sections.image-banner.settings.color_scheme.options__3.label"
+            }, {
+                "value": "background-2",
+                "label": "t:sections.image-banner.settings.color_scheme.options__4.label"
+            }, {
+                "value": "inverse",
+                "label": "t:sections.image-banner.settings.color_scheme.options__5.label"
+            }],
+            "default": "background-1",
+            "label": "t:sections.image-banner.settings.color_scheme.label"
+    },
+    {
+      "id" : "background_color",
+      "label" : "Background Color",
+      "type" : "color"
+    },
+    {
+      "id" : "text_color",
+      "label" : "Text Color",
+      "type" : "color"
+    },
+    {
+      "type" :"image_picker",
+      "id" : "background_image",
+      "label" : "Background Image"
+    },
+     {
+      "type" : "range",
+      "label" : "Background Opacity",
+      "id" : "background_opacity",
+      "default" : 100,
+      "step": 1,
+      "min" : 1,
+      "max" : 100
+    },
+    {
+      "type" : "select",
+      "id" : "background_style",
+      "label" : "Background Style",
+      "options" : [
+        {
+          "group" : "Large Image",
+          "value" : "cover",
+          "label": "Cover"
+        },
+        {
+          "group" : "Large Image",
+          "value" : "contain",
+          "label" : "Contain"
+        },
+        {
+          "group" : "Large Image",
+          "value" : "fixed",
+          "label" : "Fixed"
+        },
+        {
+          "group" : "Image Pattern",
+          "value" : "repeat",
+          "label" : "Repeat"
+        },
+        {
+          "group" : "Image Pattern",
+          "value" : "repeat-x",
+          "label" : "Repeat Horizontally"
+        },
+        {
+          "group" : "Image Pattern",
+          "value" : "repeat-y",
+          "label" : "Repeat Vertically"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "blocks" : [
+    {
+      "type" : "album",
+      "name" : "Album",
+      "settings" : [
+        {
+          "type" : "image_picker",
+          "id" : "image",
+          "label" : "Cover"
+        },
+        {
+            "type": "text",
+            "id": "introduction",
+            "label": "Introduction"
+        }, {
+            "type": "text",
+            "id": "title",
+            "default": "Album Title",
+            "label": "Album Title"
+        }, {
+            "type": "text",
+            "id": "subtitle",
+            "label": "Subtitle"
+        },  {
+
+         "type": "richtext",
+            "id": "content",
+            "label": "Content",
+            "info" : "can be a tracklist, etc."
+        },
+        {
+          "type" : "select",
+          "id" : "text_align",
+          "label" : "Text Align",
+          "default" : "left",
+          "options" : [
+            {
+              "value" : "left",
+              "label" : "Left"
+            },
+            {
+              "value" : "centered",
+              "label" : "Centered"
+            },
+            {
+              "value" : "right",
+              "label" : "Right"
+            }
+        ]
+        }, {
+            "type": "header",
+            "content": "buttons"
+        }, {
+            "type": "text",
+            "id": "button_label_1",
+            "default": "Listen",
+            "label": "t:sections.image-banner.blocks.buttons.settings.button_label_1.label",
+            "info": "t:sections.image-banner.blocks.buttons.settings.button_label_1.info"
+
+        }, {
+            "type": "url",
+            "id": "button_link_1",
+            "label": "t:sections.image-banner.blocks.buttons.settings.button_link_1.label",
+            "info" : "Also the image url"
+        }, {
+            "type": "checkbox",
+            "id": "button_style_secondary_1",
+            "default": false,
+            "label": "t:sections.image-banner.blocks.buttons.settings.button_style_secondary_1.label"
+        }, {
+            "type": "text",
+            "id": "button_label_2",
+            "default": "Button label",
+            "label": "t:sections.image-banner.blocks.buttons.settings.button_label_2.label",
+            "info": "t:sections.image-banner.blocks.buttons.settings.button_label_2.info"
+        }, {
+            "type": "url",
+            "id": "button_link_2",
+            "label": "t:sections.image-banner.blocks.buttons.settings.button_link_2.label"
+        }, {
+            "type": "checkbox",
+            "id": "button_style_secondary_2",
+            "default": false,
+            "label": "t:sections.image-banner.blocks.buttons.settings.button_style_secondary_2.label"
+        }, {
+          "type" : "url",
+          "id" : "icon_link_apple_music",
+          "label" : "Apple Music URL"
+        }, {
+          "type" : "url",
+          "id" : "icon_link_spotify",
+          "label" : "Spotify URL"
+        }, {
+          "type" : "url",
+          "id" : "icon_link_youtube",
+          "label" : "Youtube URL"
+        }, {
+          "type" : "url",
+          "id" : "icon_link_amazon",
+          "label" : "Amazon URL"
+        }
+      ]
+    }
+  ],
+  "presets" : [ {
+    "name" : "Album Slider",
+    "blocks" : [
+      {
+        "type" : "album"
+      },
+      {
+        "type" : "album"
+      }
+    ]
+
+  }
+  ]
+}
