@@ -45,7 +45,7 @@ class VideoBackground extends HTMLElement {
     // console.log('Paused video!', this.bg.player.getPlayerState());
   }
   playVideo() {
-    console.log("Playing video, hmmm");
+
     if (!this.bg || !this.bg.player) {
       this.loadVideoBG();
     }
@@ -100,7 +100,7 @@ class VideoBackground extends HTMLElement {
   }
 
   togglePlayState() {
-    console.log(this.bg.player);
+
 
     if (this.bg && this.bg.player) {
       this.muted = this.bg.player.isMuted();

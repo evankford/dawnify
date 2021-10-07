@@ -109,7 +109,7 @@ class Slider {
 }
 
 window.Slider = Slider;
-
+window.dispatchEvent(new Event('slidersReady'));
 
 if (!customElements.get('slider-element')) {
   customElements.define('slider-element', class Slider extends HTMLElement {
@@ -119,7 +119,6 @@ if (!customElements.get('slider-element')) {
   //this == the element
     const params = this.generateParams();
     this.slider  = new window.Slider(this, params );
-    console.log(this.slider);
   }
 
   generateParams() {
@@ -138,7 +137,7 @@ if (!customElements.get('slider-element')) {
     }
 
     if (this.getAttribute('data-autoplay')) {
-console.log("Should have autoplay");
+
       params.autoplay = {
         delay: this.getAttribute('data-autoplay'),
         disableOnInteraction: true,
