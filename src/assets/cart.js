@@ -102,7 +102,8 @@ class CartItems extends HTMLElement {
 
         this.updateLiveRegions(line, parsedState.item_count);
         const lineItem = document.getElementById(`CartItem-${line}`);
-        if (lineItem) lineItem.querySelector(`[name="${name}"]`).focus();
+        if (lineItem && lineItem.querySelector(`[name="${name}"]`))
+          lineItem.querySelector(`[name="${name}"]`).focus();
         this.disableLoading();
       })
       .catch(() => {

@@ -26,11 +26,11 @@ function trapFocus(container, elementToFocus = container) {
     document.addEventListener('keydown', trapFocusHandlers.keydown);
   };
 
-  trapFocusHandlers.focusout = function() {
+  trapFocusHandlers.focusout = function () {
     document.removeEventListener('keydown', trapFocusHandlers.keydown);
   };
 
-  trapFocusHandlers.keydown = function(event) {
+  trapFocusHandlers.keydown = function (event) {
     if (event.code.toUpperCase() !== 'TAB') return; // If not TAB key
     // On the last focusable element and tab forward, focus the first element.
     if (event.target === last && !event.shiftKey) {
@@ -54,6 +54,80 @@ function trapFocus(container, elementToFocus = container) {
   elementToFocus.focus();
 }
 
+// Here run the querySelector to figure out if the browser supports :focus-visible or not and run code based on it.
+try {
+  document.querySelector(':focus-visible');
+} catch {
+  focusVisiblePolyfill();
+}
+
+function focusVisiblePolyfill() {
+  const navKeys = [
+    'ARROWUP',
+    'ARROWDOWN',
+    'ARROWLEFT',
+    'ARROWRIGHT',
+    'TAB',
+    'ENTER',
+    'SPACE',
+    'ESCAPE',
+    'HOME',
+    'END',
+    'PAGEUP',
+    'PAGEDOWN',
+  ];
+  let currentFocusedElement = null;
+  let mouseClick = null;
+
+  window.addEventListener('keydown', (event) => {
+    if (navKeys.includes(event.code.toUpperCase())) {
+      mouseClick = false;
+    }
+  });
+
+  window.addEventListener('mousedown', (event) => {
+    mouseClick = true;
+  });
+
+  window.addEventListener(
+    'focus',
+    () => {
+      if (currentFocusedElement)
+        currentFocusedElement.classList.remove('focused');
+
+      if (mouseClick) return;
+
+      currentFocusedElement = document.activeElement;
+      currentFocusedElement.classList.add('focused');
+    },
+    true
+  );
+}
+
+function pauseAllMedia() {
+  document.querySelectorAll('.js-youtube').forEach((video) => {
+    video.contentWindow.postMessage(
+      '{"event":"command","func":"' + 'pauseVideo' + '","args":""}',
+      '*'
+    );
+  });
+  document.querySelectorAll('.js-vimeo').forEach((video) => {
+    video.contentWindow.postMessage('{"method":"pause"}', '*');
+  });
+  document.querySelectorAll('video').forEach((video) => video.pause());
+  document.querySelectorAll('product-model').forEach((model) => {
+    if (model.modelViewerUI) model.modelViewerUI.pause();
+  });
+}
+
+function removeTrapFocus(elementToFocus = null) {
+  document.removeEventListener('focusin', trapFocusHandlers.focusin);
+  document.removeEventListener('focusout', trapFocusHandlers.focusout);
+  document.removeEventListener('keydown', trapFocusHandlers.keydown);
+
+  if (elementToFocus) elementToFocus.focus();
+}
+
 function onKeyUpEscape(event) {
   if (event.code.toUpperCase() !== 'ESCAPE') return;
 
@@ -65,34 +139,14 @@ function onKeyUpEscape(event) {
   summaryElement.focus();
 }
 
-function pauseAllMedia() {
-  document.querySelectorAll('.js-youtube').forEach((video) => {
-    video.contentWindow.postMessage('{"event":"command","func":"' + 'pauseVideo' + '","args":""}', '*');
-  });
-  document.querySelectorAll('.js-vimeo').forEach((video) => {
-    video.contentWindow.postMessage('{"method":"pause"}', '*');
-  });
-  document.querySelectorAll('video').forEach((video) => video.pause());
-  document.querySelectorAll('product-model').forEach((model) => {
-    if (model.modelViewerUI) modelViewerUI.pause();
-  });}
-
-function removeTrapFocus(elementToFocus = null) {
-  document.removeEventListener('focusin', trapFocusHandlers.focusin);
-  document.removeEventListener('focusout', trapFocusHandlers.focusout);
-  document.removeEventListener('keydown', trapFocusHandlers.keydown);
-
-  if (elementToFocus) elementToFocus.focus();
-}
-
 class QuantityInput extends HTMLElement {
   constructor() {
     super();
     this.input = this.querySelector('input');
-    this.changeEvent = new Event('change', { bubbles: true })
+    this.changeEvent = new Event('change', { bubbles: true });
 
-    this.querySelectorAll('button').forEach(
-      (button) => button.addEventListener('click', this.onButtonClick.bind(this))
+    this.querySelectorAll('button').forEach((button) =>
+      button.addEventListener('click', this.onButtonClick.bind(this))
     );
   }
 
@@ -101,7 +155,8 @@ class QuantityInput extends HTMLElement {
     const previousValue = this.input.value;
 
     event.target.name === 'plus' ? this.input.stepUp() : this.input.stepDown();
-    if (previousValue !== this.input.value) this.input.dispatchEvent(this.changeEvent);
+    if (previousValue !== this.input.value)
+      this.input.dispatchEvent(this.changeEvent);
   }
 }
 
@@ -115,7 +170,7 @@ function debounce(fn, wait) {
   };
 }
 
-const serializeForm = form => {
+const serializeForm = (form) => {
   const obj = {};
   const formData = new FormData(form);
 
@@ -136,7 +191,10 @@ const serializeForm = form => {
 function fetchConfig(type = 'json') {
   return {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Accept': `application/${type}` }
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: `application/${type}`,
+    },
   };
 }
 
@@ -144,17 +202,17 @@ function fetchConfig(type = 'json') {
  * Shopify Common JS
  *
  */
-if ((typeof window.Shopify) == 'undefined') {
+if (typeof window.Shopify == 'undefined') {
   window.Shopify = {};
 }
 
-Shopify.bind = function(fn, scope) {
-  return function() {
+Shopify.bind = function (fn, scope) {
+  return function () {
     return fn.apply(scope, arguments);
-  }
+  };
 };
 
-Shopify.setSelectorByValue = function(selector, value) {
+Shopify.setSelectorByValue = function (selector, value) {
   for (var i = 0, count = selector.options.length; i < count; i++) {
     var option = selector.options[i];
     if (value == option.value || value == option.innerHTML) {
@@ -164,24 +222,26 @@ Shopify.setSelectorByValue = function(selector, value) {
   }
 };
 
-Shopify.addListener = function(target, eventName, callback) {
-  target.addEventListener ? target.addEventListener(eventName, callback, false) : target.attachEvent('on'+eventName, callback);
+Shopify.addListener = function (target, eventName, callback) {
+  target.addEventListener
+    ? target.addEventListener(eventName, callback, false)
+    : target.attachEvent('on' + eventName, callback);
 };
 
-Shopify.postLink = function(path, options) {
+Shopify.postLink = function (path, options) {
   options = options || {};
   var method = options['method'] || 'post';
   var params = options['parameters'] || {};
 
-  var form = document.createElement("form");
-  form.setAttribute("method", method);
-  form.setAttribute("action", path);
+  var form = document.createElement('form');
+  form.setAttribute('method', method);
+  form.setAttribute('action', path);
 
-  for(var key in params) {
-    var hiddenField = document.createElement("input");
-    hiddenField.setAttribute("type", "hidden");
-    hiddenField.setAttribute("name", key);
-    hiddenField.setAttribute("value", params[key]);
+  for (var key in params) {
+    var hiddenField = document.createElement('input');
+    hiddenField.setAttribute('type', 'hidden');
+    hiddenField.setAttribute('name', key);
+    hiddenField.setAttribute('value', params[key]);
     form.appendChild(hiddenField);
   }
   document.body.appendChild(form);
@@ -189,34 +249,44 @@ Shopify.postLink = function(path, options) {
   document.body.removeChild(form);
 };
 
-Shopify.CountryProvinceSelector = function(country_domid, province_domid, options) {
-  this.countryEl         = document.getElementById(country_domid);
-  this.provinceEl        = document.getElementById(province_domid);
-  this.provinceContainer = document.getElementById(options['hideElement'] || province_domid);
+Shopify.CountryProvinceSelector = function (
+  country_domid,
+  province_domid,
+  options
+) {
+  this.countryEl = document.getElementById(country_domid);
+  this.provinceEl = document.getElementById(province_domid);
+  this.provinceContainer = document.getElementById(
+    options['hideElement'] || province_domid
+  );
 
-  Shopify.addListener(this.countryEl, 'change', Shopify.bind(this.countryHandler,this));
+  Shopify.addListener(
+    this.countryEl,
+    'change',
+    Shopify.bind(this.countryHandler, this)
+  );
 
   this.initCountry();
   this.initProvince();
 };
 
 Shopify.CountryProvinceSelector.prototype = {
-  initCountry: function() {
+  initCountry: function () {
     var value = this.countryEl.getAttribute('data-default');
     Shopify.setSelectorByValue(this.countryEl, value);
     this.countryHandler();
   },
 
-  initProvince: function() {
+  initProvince: function () {
     var value = this.provinceEl.getAttribute('data-default');
     if (value && this.provinceEl.options.length > 0) {
       Shopify.setSelectorByValue(this.provinceEl, value);
     }
   },
 
-  countryHandler: function(e) {
-    var opt       = this.countryEl.options[this.countryEl.selectedIndex];
-    var raw       = opt.getAttribute('data-provinces');
+  countryHandler: function (e) {
+    var opt = this.countryEl.options[this.countryEl.selectedIndex];
+    var raw = opt.getAttribute('data-provinces');
     var provinces = JSON.parse(raw);
 
     this.clearOptions(this.provinceEl);
@@ -230,24 +300,24 @@ Shopify.CountryProvinceSelector.prototype = {
         this.provinceEl.appendChild(opt);
       }
 
-      this.provinceContainer.style.display = "";
+      this.provinceContainer.style.display = '';
     }
   },
 
-  clearOptions: function(selector) {
+  clearOptions: function (selector) {
     while (selector.firstChild) {
       selector.removeChild(selector.firstChild);
     }
   },
 
-  setOptions: function(selector, values) {
+  setOptions: function (selector, values) {
     for (var i = 0, count = values.length; i < values.length; i++) {
       var opt = document.createElement('option');
       opt.value = values[i];
       opt.innerHTML = values[i];
       selector.appendChild(opt);
     }
-  }
+  },
 };
 
 class MenuDrawer extends HTMLElement {
@@ -258,7 +328,11 @@ class MenuDrawer extends HTMLElement {
     const summaryElements = this.querySelectorAll('summary');
     this.addAccessibilityAttributes(summaryElements);
 
-    if (navigator.platform === 'iPhone') document.documentElement.style.setProperty('--viewport-height', `${window.innerHeight}px`);
+    if (navigator.platform === 'iPhone')
+      document.documentElement.style.setProperty(
+        '--viewport-height',
+        `${window.innerHeight}px`
+      );
 
     this.addEventListener('keyup', this.onKeyUp.bind(this));
     this.addEventListener('focusout', this.onFocusOut.bind(this));
@@ -266,12 +340,16 @@ class MenuDrawer extends HTMLElement {
   }
 
   bindEvents() {
-    this.querySelectorAll('summary').forEach(summary => summary.addEventListener('click', this.onSummaryClick.bind(this)));
-    this.querySelectorAll('button').forEach(button => button.addEventListener('click', this.onCloseButtonClick.bind(this)));
+    this.querySelectorAll('summary').forEach((summary) =>
+      summary.addEventListener('click', this.onSummaryClick.bind(this))
+    );
+    this.querySelectorAll('button').forEach((button) =>
+      button.addEventListener('click', this.onCloseButtonClick.bind(this))
+    );
   }
 
   addAccessibilityAttributes(summaryElements) {
-    summaryElements.forEach(element => {
+    summaryElements.forEach((element) => {
       element.setAttribute('role', 'button');
       element.setAttribute('aria-expanded', false);
       element.setAttribute('aria-controls', element.nextElementSibling.id);
@@ -279,12 +357,14 @@ class MenuDrawer extends HTMLElement {
   }
 
   onKeyUp(event) {
-    if(event.code.toUpperCase() !== 'ESCAPE') return;
+    if (event.code.toUpperCase() !== 'ESCAPE') return;
 
     const openDetailsElement = event.target.closest('details[open]');
-    if(!openDetailsElement) return;
+    if (!openDetailsElement) return;
 
-    openDetailsElement === this.mainDetailsToggle ? this.closeMenuDrawer(this.mainDetailsToggle.querySelector('summary')) : this.closeSubmenu(openDetailsElement);
+    openDetailsElement === this.mainDetailsToggle
+      ? this.closeMenuDrawer(this.mainDetailsToggle.querySelector('summary'))
+      : this.closeSubmenu(openDetailsElement);
   }
 
   onSummaryClick(event) {
@@ -293,10 +373,15 @@ class MenuDrawer extends HTMLElement {
     const isOpen = detailsElement.hasAttribute('open');
 
     if (detailsElement === this.mainDetailsToggle) {
-      if(isOpen) event.preventDefault();
-      isOpen ? this.closeMenuDrawer(summaryElement) : this.openMenuDrawer(summaryElement);
+      if (isOpen) event.preventDefault();
+      isOpen
+        ? this.closeMenuDrawer(summaryElement)
+        : this.openMenuDrawer(summaryElement);
     } else {
-      trapFocus(summaryElement.nextElementSibling, detailsElement.querySelector('button'));
+      trapFocus(
+        summaryElement.nextElementSibling,
+        detailsElement.querySelector('button')
+      );
 
       setTimeout(() => {
         detailsElement.classList.add('menu-opening');
@@ -316,12 +401,16 @@ class MenuDrawer extends HTMLElement {
   closeMenuDrawer(event, elementToFocus = false) {
     if (event !== undefined) {
       this.mainDetailsToggle.classList.remove('menu-opening');
-      this.mainDetailsToggle.querySelectorAll('details').forEach(details =>  {
+      this.mainDetailsToggle.querySelectorAll('details').forEach((details) => {
         details.removeAttribute('open');
         details.classList.remove('menu-opening');
       });
-      this.mainDetailsToggle.querySelector('summary').setAttribute('aria-expanded', false);
-      document.body.classList.remove(`overflow-hidden-${this.dataset.breakpoint}`);
+      this.mainDetailsToggle
+        .querySelector('summary')
+        .setAttribute('aria-expanded', false);
+      document.body.classList.remove(
+        `overflow-hidden-${this.dataset.breakpoint}`
+      );
       removeTrapFocus(elementToFocus);
       this.closeAnimation(this.mainDetailsToggle);
     }
@@ -329,7 +418,11 @@ class MenuDrawer extends HTMLElement {
 
   onFocusOut(event) {
     setTimeout(() => {
-      if (this.mainDetailsToggle.hasAttribute('open') && !this.mainDetailsToggle.contains(document.activeElement)) this.closeMenuDrawer();
+      if (
+        this.mainDetailsToggle.hasAttribute('open') &&
+        !this.mainDetailsToggle.contains(document.activeElement)
+      )
+        this.closeMenuDrawer();
     });
   }
 
@@ -359,10 +452,13 @@ class MenuDrawer extends HTMLElement {
       } else {
         detailsElement.removeAttribute('open');
         if (detailsElement.closest('details[open]')) {
-          trapFocus(detailsElement.closest('details[open]'), detailsElement.querySelector('summary'));
+          trapFocus(
+            detailsElement.closest('details[open]'),
+            detailsElement.querySelector('summary')
+          );
         }
       }
-    }
+    };
 
     window.requestAnimationFrame(handleAnimation);
   }
@@ -376,9 +472,21 @@ class HeaderDrawer extends MenuDrawer {
   }
 
   openMenuDrawer(summaryElement) {
-    this.header = this.header || document.getElementById('shopify-section-header');
-    this.borderOffset = this.borderOffset || this.closest('.header-wrapper').classList.contains('header-wrapper--border-bottom') ? 1 : 0;
-    document.documentElement.style.setProperty('--header-bottom-position', `${parseInt(this.header.getBoundingClientRect().bottom - this.borderOffset)}px`);
+    this.header =
+      this.header || document.getElementById('shopify-section-header');
+    this.borderOffset =
+      this.borderOffset ||
+      this.closest('.header-wrapper').classList.contains(
+        'header-wrapper--border-bottom'
+      )
+        ? 1
+        : 0;
+    document.documentElement.style.setProperty(
+      '--header-bottom-position',
+      `${parseInt(
+        this.header.getBoundingClientRect().bottom - this.borderOffset
+      )}px`
+    );
 
     setTimeout(() => {
       this.mainDetailsToggle.classList.add('menu-opening');
@@ -399,12 +507,22 @@ class ModalDialog extends HTMLElement {
       'click',
       this.hide.bind(this)
     );
-    this.addEventListener('click', (event) => {
-      if (event.target.nodeName === 'MODAL-DIALOG') this.hide();
-    });
-    this.addEventListener('keyup', () => {
+    this.addEventListener('keyup', (event) => {
       if (event.code.toUpperCase() === 'ESCAPE') this.hide();
     });
+    if (this.classList.contains('media-modal')) {
+      this.addEventListener('pointerup', (event) => {
+        if (
+          event.pointerType === 'mouse' &&
+          !event.target.closest('deferred-media, product-model')
+        )
+          this.hide();
+      });
+    } else {
+      this.addEventListener('click', (event) => {
+        if (event.target.nodeName === 'MODAL-DIALOG') this.hide();
+      });
+    }
   }
 
   show(opener) {
@@ -414,6 +532,7 @@ class ModalDialog extends HTMLElement {
     this.setAttribute('open', '');
     if (popup) popup.loadContent();
     trapFocus(this, this.querySelector('[role="dialog"]'));
+    window.pauseAllMedia();
   }
 
   hide() {
@@ -449,19 +568,22 @@ class DeferredMedia extends HTMLElement {
   }
 
   loadContent() {
+    window.pauseAllMedia();
     if (!this.getAttribute('loaded')) {
       const content = document.createElement('div');
-      content.appendChild(this.querySelector('template').content.firstElementChild.cloneNode(true));
+      content.appendChild(
+        this.querySelector('template').content.firstElementChild.cloneNode(true)
+      );
 
       this.setAttribute('loaded', true);
-      window.pauseAllMedia();
-      this.appendChild(content.querySelector('video, model-viewer, iframe')).focus();
+      this.appendChild(
+        content.querySelector('video, model-viewer, iframe')
+      ).focus();
     }
   }
 }
 
 customElements.define('deferred-media', DeferredMedia);
-
 
 class SliderComponent extends HTMLElement {
   constructor() {
@@ -475,7 +597,7 @@ class SliderComponent extends HTMLElement {
 
     if (!this.slider || !this.nextButton) return;
 
-    const resizeObserver = new ResizeObserver(entries => this.initPages());
+    const resizeObserver = new ResizeObserver((entries) => this.initPages());
     resizeObserver.observe(this.slider);
 
     this.slider.addEventListener('scroll', this.update.bind(this));
@@ -484,23 +606,22 @@ class SliderComponent extends HTMLElement {
   }
 
   initPages() {
-    this.checkClasses();
-
-    const sliderItemsToShow = Array.from(this.sliderItems).filter(element => element.clientWidth > 0);
+    const sliderItemsToShow = Array.from(this.sliderItems).filter(
+      (element) => element.clientWidth > 0
+    );
     this.sliderLastItem = sliderItemsToShow[sliderItemsToShow.length - 1];
     if (sliderItemsToShow.length === 0) return;
-    this.slidesPerPage = Math.floor(this.slider.clientWidth / sliderItemsToShow[0].clientWidth);
+    this.slidesPerPage = Math.floor(
+      this.slider.clientWidth / sliderItemsToShow[0].clientWidth
+    );
     this.totalPages = sliderItemsToShow.length - this.slidesPerPage + 1;
     this.update();
   }
 
-  checkClasses() {
-    console.log(this.classList);
-  }
-
   update() {
     if (!this.pageCount || !this.pageTotal) return;
-    this.currentPage = Math.round(this.slider.scrollLeft / this.sliderLastItem.clientWidth) + 1;
+    this.currentPage =
+      Math.round(this.slider.scrollLeft / this.sliderLastItem.clientWidth) + 1;
 
     if (this.currentPage === 1) {
       this.prevButton.setAttribute('disabled', true);
@@ -520,9 +641,12 @@ class SliderComponent extends HTMLElement {
 
   onButtonClick(event) {
     event.preventDefault();
-    const slideScrollPosition = event.currentTarget.name === 'next' ? this.slider.scrollLeft + this.sliderLastItem.clientWidth : this.slider.scrollLeft - this.sliderLastItem.clientWidth;
+    const slideScrollPosition =
+      event.currentTarget.name === 'next'
+        ? this.slider.scrollLeft + this.sliderLastItem.clientWidth
+        : this.slider.scrollLeft - this.sliderLastItem.clientWidth;
     this.slider.scrollTo({
-      left: slideScrollPosition
+      left: slideScrollPosition,
     });
   }
 }
@@ -666,27 +790,19 @@ class VariantSelects extends HTMLElement {
   toggleAddButton(disable = true, text, modifyClass = true) {
     const productForm = document.getElementById(
       `product-form-${this.dataset.section}`
-      );
-      if (!productForm) return;
-      const addButton = productForm.querySelector('[name="add"]');
+    );
+    if (!productForm) return;
+    const addButton = productForm.querySelector('[name="add"]');
+    const addButtonText = productForm.querySelector('[name="add"] > span');
 
-      if (!addButton) return;
+    if (!addButton) return;
 
-    const spinner = addButton.querySelector('.loading-overlay__spinner')
     if (disable) {
       addButton.setAttribute('disabled', true);
-      if (text) addButton.textContent = text;
+      if (text) addButtonText.textContent = text;
     } else {
-      let clonedSpinner = false;
-      if (spinner) {
-        clonedSpinner = spinner.cloneNode(true);
-      }
       addButton.removeAttribute('disabled');
-      addButton.textContent = window.variantStrings.addToCart;
-
-      if (spinner && clonedSpinner) {
-        addButton.appendChild(clonedSpinner);
-      }
+      addButtonText.textContent = window.variantStrings.addToCart;
     }
 
     if (!modifyClass) return;
@@ -697,9 +813,10 @@ class VariantSelects extends HTMLElement {
       `product-form-${this.dataset.section}`
     );
     const addButton = button.querySelector('[name="add"]');
+    const addButtonText = button.querySelector('[name="add"] > span');
     const price = document.getElementById(`price-${this.dataset.section}`);
     if (!addButton) return;
-    addButton.textContent = window.variantStrings.unavailable;
+    addButtonText.textContent = window.variantStrings.unavailable;
     if (price) price.classList.add('visibility-hidden');
   }
 
@@ -730,7 +847,6 @@ class VariantRadios extends VariantSelects {
 
 customElements.define('variant-radios', VariantRadios);
 
-/// TODO watch all sections
 
 //Video loader
 document.addEventListener('DOMContentLoaded', function () {
