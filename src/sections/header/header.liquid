@@ -116,9 +116,16 @@
               margin: {{ block.settings.logo_spacing_top | minus: 40 | default: 0 }}% auto {{ block.settings.logo_spacing_bottom | minus: 40 | default: 0 }}%;
             }
 
-            @media (max-width: 790px) {
+            @media (max-width: 800px) {
               .header-logo {
-              --mw: {{ block.settings.logo_width_mobile }};
+              --mw: {{ block.settings.logo_width_tablet }}px;
+                width: {{ block.settings.logo_width_tablet | default: 100 }}px;
+              }
+            }
+            @media (max-width: 600px) {
+              .header-logo {
+              --mw: {{ block.settings.logo_width_mobile }}px;
+              max-width: calc(100vw - 140px);
                 width: {{ block.settings.logo_width_mobile | default: 100 }}px;
               }
             }
