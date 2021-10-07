@@ -249,6 +249,11 @@ a.header__menu-item, a.menu-drawer__menu-item, summary.menu-drawer__menu-item, s
   margin: {{ settings.menu_margin_top | divided_by: 10.0 }}em  {{ settings.menu_margin_horiz | divided_by: 10.0 }}em {{ settings.menu_margin_bottom | divided_by: 10.0 }}em;
 }
 
+ a.menu-drawer__menu-item, summary.menu-drawer__menu-item {
+   padding: {{ settings.menu_padding_top | divided_by: 10.0 | plus: 0.2 }}em  {{ settings.menu_padding_horiz | divided_by: 10.0 | plus: 0.2 }}em {{ settings.menu_padding_bottom | divided_by: 10.0 | plus: 0.2 }}em;
+   font-size: {{ settings.menu_text_size_drawer | default : 18 }}px;
+ }
+
 h4.product-card-title , h1.product-title {
   {% case settings.pg_font_family %}
     {% when 'body' %}
