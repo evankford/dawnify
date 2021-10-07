@@ -1,8 +1,20 @@
 /* base */
-.center {
+.text--center,
+.text--centered,
+ .center {
   text-align: center;
 }
 
+.text--inherit {
+  text-align: inherit;
+}
+
+.text--left,
+.left {
+  text-align: left;
+}
+
+.text--right,
 .right {
   text-align: right;
 }
