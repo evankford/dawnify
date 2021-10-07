@@ -8,10 +8,15 @@
 @import "~swiper/components/navigation/navigation.scss";
 @import "~swiper/components/effect-fade/effect-fade.scss";
 
+.swiper-container {
+  overflow: visible;
+}
 ul.swiper-wrapper {
   list-style: none;
   padding: 0;
   margin: 0;
+  overflow: hidden;
+  --swiper-theme-color: var(--color-foreground);
 }
 
 .image-section {
@@ -79,9 +84,10 @@ html.js .swiper-slide.swiper-slide-active {
 .swiper-navigation {
   position: absolute;
   top: 50%;
-  margin: -25px 0 -25px;
-  width: 100%;
+  margin: -25px;
+  width: calc(100% + 50px);
   z-index: 12;
+  color: var(--color-foreground);
 }
 
 button[data-prev],
@@ -93,7 +99,8 @@ button[data-next] {
   position: absolute;
   top: 0;
   border-radius: 0;
-  color: var(--swiper-theme-color);
+  // color: var(--swiper-theme-color);
+  color: var(--color-foreground);
   display: inline-block;
 
   svg {

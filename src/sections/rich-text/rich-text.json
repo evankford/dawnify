@@ -133,7 +133,8 @@
         }]
     }, {
         "type": "socials",
-        "name": "Socials"
+        "name": "Socials",
+        "limit" : 1
     }, {
         "type": "heading",
         "name": "t:sections.rich-text.blocks.heading.name",
