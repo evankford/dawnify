@@ -152,6 +152,9 @@
 
 .card--product {
   position: relative;
+  &>a.full-unstyled-link:focus {
+    outline: 2px;
+  }
 }
 .card--border {
   border: 0.1rem solid rgba(var(--color-foreground), 0.1);
@@ -307,7 +310,7 @@
 
 
 .card-wrapper:focus-within .card {
-  box-shadow: none;
+  box-shadow: 0 0 4px rgba(var(--color-foreground), 0.3);
 }
 
 .card__media-spacer {

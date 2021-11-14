@@ -1,7 +1,13 @@
+//EKF Modded
+
 @use "../../abstracts/" as *;
 /* Search */
 menu-drawer + .header__search {
   display: none;
+}
+
+.header__search {
+  color: var(--color-foreground);
 }
 
 .header > .header__search {

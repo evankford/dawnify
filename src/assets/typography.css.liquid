@@ -168,7 +168,7 @@ h5.label  .h5.label, .label, .form__label, label{
   font-size: {{ settings.label_font_size_smaller | times: 0.8 | default: '13.5' }}px;
 }
 
-a.button, button.button,a.customer-button, button.shopify-challenge-button, [type=submit] {
+a.button, .button-label, button.button,a.customer-button, button.shopify-challenge-button, [type=submit] {
   {% case settings.button_font_family %}
     {% when 'body' %}
       font-family: var(--font-body-family);
@@ -245,6 +245,9 @@ a.header__menu-item, a.menu-drawer__menu-item, summary.menu-drawer__menu-item, s
   font-style: {{ settings.menu_text_style | default : "normal" }};
   font-size: {{ settings.menu_font_size | default: '17' }}px;
   text-decoration: none;
+}
+
+a.header__menu-item, summary.header--menu-item, summary.header__menu-item > span {
   padding: {{ settings.menu_padding_top | divided_by: 10.0 }}em  {{ settings.menu_padding_horiz | divided_by: 10.0 }}em {{ settings.menu_padding_bottom | divided_by: 10.0 }}em;
   margin: {{ settings.menu_margin_top | divided_by: 10.0 }}em  {{ settings.menu_margin_horiz | divided_by: 10.0 }}em {{ settings.menu_margin_bottom | divided_by: 10.0 }}em;
 }
@@ -254,7 +257,7 @@ a.header__menu-item, a.menu-drawer__menu-item, summary.menu-drawer__menu-item, s
    font-size: {{ settings.menu_text_size_drawer | default : 18 }}px;
  }
 
-h4.product-card-title , h1.product-title {
+h4.product-card-title {
   {% case settings.pg_font_family %}
     {% when 'body' %}
       font-family: var(--font-body-family);
@@ -281,6 +284,20 @@ h4.product-card-title , h1.product-title {
 }
 
 h1.product__title {
+  {% case settings.pm_font_family %}
+    {% when 'body' %}
+      font-family: var(--font-body-family);
+      font-weight: var(--font-body-weight);
+    {% when 'heading' %}
+      font-family: var(--font-heading-family);
+      font-weight: var(--font-heading-weight);
+    {% when 'extra' %}
+      font-family: var(--font-extra-family);
+      font-weight: var(--font-extra-weight);
+    {% when 'script' %}
+      font-family: var(--font-script-real);
+      font-weight: 400;
+  {% endcase %}
   line-height: {{ settings.pm_line_height | divided_by: 10.0 }};
   text-transform: {{ settings.pm_capitalization | default: "none" }};
   font-weight: {{ settings.pm_font_weight | default: "700" }};
@@ -418,7 +435,7 @@ summary .menu-drawer__menu-item {
    h5.label  .h5.label, .label, .form__label, label{
     font-size: {{ settings.label_font_size_mobile | times: 0.9 | default: '14' }}px;
   }
-   a.button, button.button,a.customer-button, button.shopify-challenge-button, [type=submit] {
+   a.button, .button-label, button.button,a.customer-button, button.shopify-challenge-button, [type=submit] {
     font-size: {{ settings.button_font_size_mobile | default: '16' }}px;
   }
 

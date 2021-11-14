@@ -49,9 +49,9 @@
 
   &--cart {
     position: relative;
-    @include media-query($medium-up) {
-      margin-right: -1.2rem;
-    }
+    // @include media-query($medium-up) {
+    //   margin-right: -1.2rem;
+    // }
   }
 }
 

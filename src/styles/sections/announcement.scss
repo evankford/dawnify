@@ -41,6 +41,8 @@ announcement-bar {
     width: 16px;
   }
 
+
+
   &.announcement-dismissed {
     height: 0;
   }
@@ -53,7 +55,7 @@ announcement-bar {
 .announcement-bar__link {
   display: block;
   width: 100%;
-  padding: 1rem 2rem;
+  padding: 0 1rem ;
   text-decoration: none;
 }
 
@@ -78,6 +80,7 @@ announcement-bar {
   }
 }
 
+
 .announcement-bar__link .announcement-bar__message {
   padding: 0;
 }
@@ -88,3 +91,8 @@ announcement-bar {
   margin: 0;
   letter-spacing: 0.1rem;
 }
+
+.announcement-bar__message p {
+    margin: 0;
+    display: inline;
+  }

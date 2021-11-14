@@ -57,7 +57,8 @@ div.swiper-slide, li.swiper-slide {
 }
 
 .content-image {
-  width: 70%;
+  // width: 70%;
+  width: 90%;
   margin: 1rem auto;
   @include media-query($medium-up) {
     width: 85%;
