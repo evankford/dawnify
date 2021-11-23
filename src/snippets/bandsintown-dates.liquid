@@ -1,0 +1,27 @@
+<link rel="stylesheet" href="{{ 'component-bandsintown-dates.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript>{{ 'component-bandsintown-dates.css' | asset_url | stylesheet_tag }}</noscript>
+
+<bandsintown-dates class="bit-wrap" {{ block.shopify_attributes }} data-artist="{{block.settings.artist}}" data-load-more="{{block.settings.load_more | default: 'true' }}" data-limit="{{block.settings.limit}}" data-date-format="{{block.settings.date-format}}" data-show-year="{{block.settings.show_year}}" data-show-lineup="{{block.settings.show_lineup}}">
+  <div class="loader"> <h2>{{ block.settings.loading_header | default : "Loading Tour Dates"}}
+
+  </div>
+  <div class="hidden error">There was an error retrieving dates. Please try again.</div>
+  <div class="hidden fallback">
+    {% if block.settings.fallback_heading != blank %}
+    <h3>{{ block.settings.fallback_heading }}</h3>
+    {% endif %}
+    {{ block.settings.fallback | default: "No upcoming dates."}}
+  </div>
+  {% if block.settings.load_more %}
+ <div class="button-wrap tour-buttons">
+        <div  class="button" data-expand-bit data-more-text="More Dates" data-less-text="Less Dates">More Dates</div>
+    </div>
+    {% endif%}
+</bandsintown-dates>
+{% if block.settings.custom_style %}
+<style>
+  {{ block.settings.custom_style}}
+</style>
+{% endif %}
+
+<script src="{{ 'component-bandsintown.js' | asset_url }}" defer></script>

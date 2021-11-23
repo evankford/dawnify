@@ -7,7 +7,6 @@
       "login_form_password_placeholder": "Parolanız",
       "login_form_error": "Yanlış parola!",
       "login_form_submit": "Gir",
-      "modal": "Parola modu",
       "admin_link_html": "Mağaza sahibi misiniz? <a href=\"/admin\" class=\"link underlined-link\">Buradan oturum açın</a>",
       "powered_by_shopify_html": "Bu mağaza {{ shopify }} tarafından desteklenir"
     },
@@ -227,7 +226,7 @@
       "checkout": "Ödeme",
       "empty": "Sepetiniz boş",
       "cart_error": "Sepetiniz güncellenirken bir hata oluştu. Lütfen tekrar deneyin.",
-      "cart_quantity_error_html": "Sepetinize bu üründen yalnızca [quantity] adet ekleyebilirsiniz.",
+      "cart_quantity_error_html": "Sepetinize bu üründen yalnızca {{ quantity }} adet ekleyebilirsiniz.",
       "taxes_and_shipping_policy_at_checkout_html": "Vergiler ve <a href=\"{{ link }}\">kargo</a>, ödeme sayfasında hesaplanır",
       "taxes_included_but_shipping_at_checkout": "Vergi dahildir ve kargo, ödeme sayfasında hesaplanır",
       "taxes_included_and_shipping_policy_html": "Vergi dahildir. <a href=\"{{ link }}\">Kargo</a>, ödeme sayfasında hesaplanır.",

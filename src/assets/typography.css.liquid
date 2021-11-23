@@ -168,7 +168,7 @@ h5.label  .h5.label, .label, .form__label, label{
   font-size: {{ settings.label_font_size_smaller | times: 0.8 | default: '13.5' }}px;
 }
 
-a.button, .button-label, button.button,a.customer-button, button.shopify-challenge-button, [type=submit] {
+a.button, .button, .button-label, button.button,a.customer-button, button.shopify-challenge-button, [type=submit] {
   {% case settings.button_font_family %}
     {% when 'body' %}
       font-family: var(--font-body-family);
@@ -186,12 +186,11 @@ a.button, .button-label, button.button,a.customer-button, button.shopify-challen
 
   /* {{ settings.button_capitalization }} */
   line-height: {{ settings.button_line_height | divided_by: 10.0 }};
-  padding: {{ settings.button_padding_top | divided_by: 10.0 }}em  {{ settings.button_padding_horiz | divided_by: 10.0 }}em {{ settings.button_padding_bottom | divided_by: 10.0 }}em ;
+  padding: {{ settings.button_padding_top | divided_by: 10.0 }}em {{ settings.button_padding_horiz | divided_by: 10.0 }}em {{ settings.button_padding_bottom | divided_by: 10.0 }}em;
   text-transform: {{ settings.button_capitalization | default: "none" }};
   font-weight: {{ settings.button_font_weight | default: "700" }};
   letter-spacing: {{ settings.button_letter_spacing | default: 10 | divided_by: 20.0 | minus: 0.5 }}em;
   font-style: {{ settings.button_text_style | default : "Standard" }};
-
   font-size: {{ settings.button_font_size | default: '17' }}px;
 
   {% if settings.button_border_radius > 0 %}
@@ -202,6 +201,7 @@ a.button, .button-label, button.button,a.customer-button, button.shopify-challen
 
 a.button.small, button.button.small {
   font-size: {{ settings.button_font_size | times: 0.85 | default: '15' }}px;
+  padding: {{ settings.button_padding_top | divided_by: 15.0 }}em {{ settings.button_padding_horiz | divided_by: 15.0 }}em {{ settings.button_padding_bottom | divided_by: 15.0 }}em
 }
 a.button.big, button.button.big {
   font-size: {{ settings.button_font_size | times: 0.12 | default: '20' }}px;

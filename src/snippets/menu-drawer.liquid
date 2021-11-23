@@ -1,6 +1,6 @@
 {% if menu %}
  <header-drawer data-breakpoint="tablet">
-        <details class="menu-drawer-container">
+        <details id="Details-menu-drawer-container" class="menu-drawer-container">
           <summary class="header__icon header__icon--menu header__icon--summary link link--text focus-inset" aria-label="{{ 'sections.header.menu' | t }}">
             <span>
               {% render 'icon-hamburger' %}
@@ -15,7 +15,7 @@
                     {%- for link in menu.links -%}
                       <li>
                         {%- if link.links != blank -%}
-                          <details>
+                          <details id="Details-menu-drawer-menu-item-{{ forloop.index }}">
                             <summary class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}">
                               {{ link.title | escape }}
                               {% render 'icon-arrow' %}
@@ -35,7 +35,7 @@
                                           {{ childlink.title | escape }}
                                         </a>
                                       {%- else -%}
-                                        <details>
+                                        <details id="Details-menu-drawer-submenu-{{ forloop.index }}">
                                           <summary class="menu-drawer__menu-item link link--text list-menu__item focus-inset">
                                             {{ childlink.title | escape }}
                                             {% render 'icon-arrow' %}

@@ -9,84 +9,116 @@ Accepts:
   overlay_opacity
 
 Usage:
-  {% render 'album-slide' with settings: block.settings, full_width: section.settings.full_width, is_slide: is_slide %}
+  {% render 'album-slide' with params: block.settings, full_width: section.params.full_width, is_slide: is_slide %}
 {% endcomment %}
 
 <{% if is_slide %}li{% else %}div{% endif %} class="swiper-slide album-slide {% if full_width or is_slide == false %} layout--full-width {% else %} layout--columns {% endif %}" >
 <div class="album-slide__cover">
-      {% if settings.image != blank %}
-      {% if settings.button_link_1 != blank %}
-      <a href="{{settings.button_link_1}}" class="full-unstyled-link">
+      {% if params.image != blank %}
+      {% if params.button_link_1 != blank %}
+      <a href="{{params.button_link_1}}" class="full-unstyled-link">
         {% endif %}
-          {% render 'media' with type: 'image', is_slide: is_slide, image: settings.image, size: 'large' %}
-        {% if settings.button_link_1 != blank %}
+          {% render 'media' with type: 'image', is_slide: is_slide, image: params.image, size: 'large' %}
+        {% if params.button_link_1 != blank %}
       </a>
       {% endif %}
       {% else %}
         {{ 'collection-1' | placeholder_svg_tag}}
       {% endif %}
     </div>
-    {% if settings.introduction != blank  or settings.title != blank or settings.content != blank or settings.button_label_1 != blank %}
-    <div class="album-slide__content text--{{ settings.text_align }}">
+    {% if params.introduction != blank  or params.title != blank or params.content != blank or params.button_label_1 != blank %}
+    <div class="album-slide__content text--{{ params.text_align }}">
 
-          {%- if settings.introduction != blank -%}
-          <div class="h5 label">{{ settings.introduction }}</div>
+          {%- if params.introduction != blank -%}
+          <div class="h5 label">{{ params.introduction }}</div>
           {%- endif -%}
-          {% if settings.title != blank %}
+          {% if params.title != blank %}
           <h3 class=" heading" {{ block.shopify_attributes }}>
-            <span>{{ settings.title | escape }}</span>
+            <span>{{ params.title | escape }}</span>
           </h2>
           {% endif %}
-          {%- if settings.subtitle != blank -%}
-          <div class="h5 label">{{ settings.subtitle }}</div>
+          {%- if params.subtitle != blank -%}
+          <div class="h5 label">{{ params.subtitle }}</div>
           {%- endif -%}
-          {% if settings.content != blank %}
+          {% if params.content != blank %}
           <div class="rte" {{ block.shopify_attributes }}>
-            <span>{{ settings.text | escape }}</span>
+            <span>{{ params.text | escape }}</span>
           </div>
           {% endif %}
-          {% if settings.button_label_1 != blank and settings.button_link_1 != blank %}
-          <div class="button-wrap {% if settings.button_label_1 != blank and settings.button_link_1 != blank and settings.button_label_2 != blank and settings.button_link_2 != blank %} banner__buttons--multiple{% endif %}" {{ block.shopify_attributes }}>
-            {%- if settings.button_label_1 != blank and settings.button_link_1 != blank -%}
-              <a{% if settings.button_link_1 != blank %} href="{{ settings.button_link_1 }}"{% endif %} class="button{% if settings.button_style_secondary_1 %} button--secondary{% else %} button--primary{% endif %}"{% if settings.button_link_1 == blank %} aria-disabled="true"{% endif %}>{{ settings.button_label_1 | escape }}</a>
+          {% if params.button_label_1 != blank and params.button_link_1 != blank %}
+          <div class="button-wrap {% if params.button_label_1 != blank and params.button_link_1 != blank and params.button_label_2 != blank and params.button_link_2 != blank %} banner__buttons--multiple{% endif %}" {{ block.shopify_attributes }}>
+            {%- if params.button_label_1 != blank and params.button_link_1 != blank -%}
+              <a{% if params.button_link_1 != blank %} href="{{ params.button_link_1 }}"{% endif %} class="button{% if params.button_style_secondary_1 %} button--secondary{% else %} button--primary{% endif %}"{% if params.button_link_1 == blank %} aria-disabled="true"{% endif %}>{{ params.button_label_1 | escape }}</a>
             {%- endif -%}
-            {%- if settings.button_label_2 != blank and settings.button_link_2 != blank -%}
-              <a{% if settings.button_link_2 != blank %} href="{{ settings.button_link_2 }}"{% endif %} class="button{% if settings.button_style_secondary_2 %} button--secondary{% else %} button--primary{% endif %}"{% if settings.button_link_2 == blank %} aria-disabled="true"{% endif %}>{{ settings.button_label_2 | escape }}</a>
+            {%- if params.button_label_2 != blank and params.button_link_2 != blank -%}
+              <a{% if params.button_link_2 != blank %} href="{{ params.button_link_2 }}"{% endif %} class="button{% if params.button_style_secondary_2 %} button--secondary{% else %} button--primary{% endif %}"{% if params.button_link_2 == blank %} aria-disabled="true"{% endif %}>{{ params.button_label_2 | escape }}</a>
             {%- endif -%}
           </div>
           {% endif %}
-          {% if settings.icon_link_spotify != blank or settings.icon_link_apple_music != blank or settings.icon_link_youtube != blank or settings.icon_link_amazon != blank%}
+          {% if params.icon_link_spotify != blank or params.icon_link_apple_music != blank or params.icon_link_youtube != blank or params.icon_link_amazon != blank%}
           <ul class="button-wrap icon-link__wrap list-unstyled text--inherit">
 
-            {% if settings.icon_link_spotify != blank %}
+            {% if params.icon_link_spotify != blank %}
             <li>
-              <a class="icon-link" href="{{ settings.icon_link_spotify }}" rel="nofollower noopener noreferrer" target="_blank">
+              <a class="icon-link" href="{{ params.icon_link_spotify }}" rel="nofollower noopener noreferrer" target="_blank">
                 {%- render 'icon-spotify' -%}
+                {% if show_icon_text == true %}<span class="icon-link__label">Spotify</span>{% endif %}
                 <span class="visually-hidden">Listen on Spotify</span>
+
               </a>
             </li>
             {% endif %}
-            {% if settings.icon_link_apple_music != blank %}
+            {% if params.icon_link_apple_music != blank %}
             <li>
-              <a class="icon-link" href="{{ settings.icon_link_apple_music }}" rel="nofollower noopener noreferrer" target="_blank">
+              <a class="icon-link" href="{{ params.icon_link_apple_music }}" rel="nofollower noopener noreferrer" target="_blank">
                 {%- render 'icon-apple' -%}
+                {% if show_icon_text == true %}<span class="icon-link__label">Apple Music</span>{% endif %}
                 <span class="visually-hidden">Listen on Apple Music</span>
               </a>
             </li>
             {% endif %}
-            {% if settings.icon_link_youtube != blank %}
+            {% if params.icon_link_youtube != blank %}
             <li>
-              <a class="icon-link" href="{{ settings.icon_link_youtube }}" rel="nofollower noopener noreferrer" target="_blank">
+              <a class="icon-link" href="{{ params.icon_link_youtube }}" rel="nofollower noopener noreferrer" target="_blank">
                 {%- render 'icon-youtube' -%}
+                {% if show_icon_text == true %}<span class="icon-link__label">Youtube</span>{% endif %}
                 <span class="visually-hidden">Listen on Youtube Music</span>
               </a>
             </li>
             {% endif %}
-            {% if settings.icon_link_amazon != blank %}
+            {% if params.icon_link_amazon != blank %}
             <li>
-              <a class="icon-link" href="{{ settings.icon_link_amazon }}" rel="nofollower noopener noreferrer" target="_blank">
+              <a class="icon-link" href="{{ params.icon_link_amazon }}" rel="nofollower noopener noreferrer" target="_blank">
                 {%- render 'icon-amazon' -%}
+                {% if show_icon_text == true %}<span class="icon-link__label">Amazon</span>{% endif %}
                 <span class="visually-hidden">Listen on Amazon Music</span>
+              </a>
+            </li>
+            {% endif %}
+            {% if params.icon_link_soundcloud != blank %}
+            <li>
+              <a class="icon-link" href="{{ params.icon_link_soundcloud }}" rel="nofollower noopener noreferrer" target="_blank">
+                {%- render 'icon-soundcloud' -%}
+                {% if show_icon_text == true %}<span class="icon-link__label">Soundcloud</span>{% endif %}
+                <span class="visually-hidden">Listen on soundcloud</span>
+              </a>
+            </li>
+            {% endif %}
+            {% if params.icon_link_deezer != blank %}
+            <li>
+              <a class="icon-link" href="{{ params.icon_link_deezer }}" rel="nofollower noopener noreferrer" target="_blank">
+                {%- render 'icon-deezer' -%}
+                {% if show_icon_text == true %}<span class="icon-link__label">Deezer</span>{% endif %}
+                <span class="visually-hidden">Listen on Deezer</span>
+              </a>
+            </li>
+            {% endif %}
+            {% if params.icon_link_pandora != blank %}
+            <li>
+              <a class="icon-link" href="{{ params.icon_link_pandora }}" rel="nofollower noopener noreferrer" target="_blank">
+                {%- render 'icon-pandora' -%}
+                {% if show_icon_text == true %}<span class="icon-link__label">Pandora</span>{% endif %}
+                <span class="visually-hidden">Listen on Pandora</span>
               </a>
             </li>
             {% endif %}

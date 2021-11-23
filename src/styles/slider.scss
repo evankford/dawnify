@@ -15,7 +15,7 @@ ul.swiper-wrapper {
   list-style: none;
   padding: 0;
   margin: 0;
-  overflow: hidden;
+  // overflow: hidden;
   --swiper-theme-color: var(--color-foreground);
 }
 
@@ -83,17 +83,24 @@ html.js .swiper-slide.swiper-slide-active {
 }
 
 .swiper-navigation {
+  --swiper-size: 24px;
   position: absolute;
   top: 50%;
-  margin: -25px;
-  width: calc(100% + 50px);
+  margin: calc(-1px - var(--swiper-size));
+  left: 0;
+  width: calc(100% + (2 * var(--swiper-size)) - 2px);
   z-index: 12;
   color: var(--color-foreground);
+  .image-section &  {
+    width: 98%;
+    margin: calc(-0.5 * var(--swiper-size)) auto;
+    left: 1%;
+  }
 }
 
 button[data-prev],
 button[data-next] {
-  padding: 12px;
+  padding: calc(var(--swiper-size) * 0.5) ;
   appearance: none;
   border: 0;
   background: transparent;
@@ -105,7 +112,7 @@ button[data-next] {
   display: inline-block;
 
   svg {
-    width: 24px;
+    width: var(--swiper-size, 24px);
     height: auto;
     fill: currentColor;
   }

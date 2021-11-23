@@ -58,13 +58,13 @@
 
                           %}
 
-                          <input type="radio" id="{{ id }}-{{ option.name }}-{{ forloop.index0 }}"
+                          <input type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
                                 name="{{ option.name }}"
                                 value="{{ value | escape }}"
-                                form="product-form-{{ id }}"
+                                form="{{ product_form_id }}"
                                 {% if option.selected_value == value %}checked{% endif %}
                           >
-                          <label for="{{ id }}-{{ option.name }}-{{ forloop.index0 }}" {% if is_color and bg_color != blank and bg_color != false %}
+                          <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" {% if is_color and bg_color != blank and bg_color != false %}
                                 class="color-swatch" aria-label="{{option.name }}" style="background: {{ bg_color }};{% if bg_color contains '.jpg' or bg_color contains '.png' or bg_color contains 'gradient' %}color: white; text-shadow: 0 0 2px black; {% else %} {% if text_color != blank %} color: {{ text_color }} !important; {% endif %}{% endif %}"
                                 {% endif %}>
                             {{ value }}
@@ -93,7 +93,7 @@
                         <select id="Option-{{ id }}-{{ forloop.index0 }}"
                           class="select__select"
                           name="options[{{ option.name | escape }}]"
-                          form="product-form-{{ id }}"
+                          form="{{ product_form_id }}"
                         >
                           {%- for value in option.values -%}
                             <option value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>

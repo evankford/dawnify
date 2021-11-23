@@ -2,8 +2,8 @@
 {{ 'slider.css' | append: '?enable_css_minification=1' | asset_url | stylesheet_tag }}
 {{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
 
-{% render 'section-style' with id: section.id, settings: section.settings %}
-<div class="page-width album-section-wrap">
+{% render 'section-style' with id: section.id, params: section.settings %}
+<div class="page-width album-section-wrap" {% if section.settings.anchor_id != blank %} id="{{section.settings.anchor_id | handleize }}" {% endif %}>
   {% if section.settings.introduction != blank or section.settings.title != blank or section.settings.subtitle != blank%}
   <div class="common-header text--{{ section.settings.text_align | default: "left"}}">
     {% if section.settings.introduction != blank %}
@@ -23,7 +23,7 @@
         <ul class="swiper-wrapper">
   {% endif %}
     {% for block in section.blocks %}
-      {% render 'album-slide' with settings: block.settings, full_width: section.settings.full_width, is_slide: is_slide %}
+      {% render 'album-slide' with params: block.settings, full_width: section.settings.full_width, is_slide: is_slide, show_icon_text: section.settings.show_icon_text %}
       {% endfor %}
     {% if is_slide %}
     </ul>

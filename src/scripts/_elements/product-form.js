@@ -27,13 +27,17 @@ if (!customElements.get('product-form')) {
 
         const config = fetchConfig('javascript');
         config.headers['X-Requested-With'] = 'XMLHttpRequest';
-        config.body = JSON.stringify({
-          ...JSON.parse(serializeForm(this.form)),
-          sections: this.cartNotification
+        delete config.headers['Content-Type'];
+
+        const formData = new FormData(this.form);
+        formData.append(
+          'sections',
+          this.cartNotification
             .getSectionsToRender()
-            .map((section) => section.id),
-          sections_url: window.location.pathname,
-        });
+            .map((section) => section.id)
+        );
+        formData.append('sections_url', window.location.pathname);
+        config.body = formData;
 
         fetch(`${routes.cart_add_url}`, config)
           .then((response) => response.json())

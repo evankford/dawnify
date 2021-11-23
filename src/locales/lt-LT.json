@@ -7,7 +7,6 @@
       "login_form_password_placeholder": "Jūsų slaptažodis",
       "login_form_error": "Slaptažodis neteisingas!",
       "login_form_submit": "Įvesti",
-      "modal": "Slaptažodžio modalinis langas",
       "admin_link_html": "Ar esate parduotuvės savininkas? <a href=\"/admin\" class=\"link underlined-link\">Prisijunkite čia</a>",
       "powered_by_shopify_html": "Ši parduotuvė priklausys platformai „{{ shopify }}“"
     },
@@ -241,7 +240,7 @@
       "checkout": "Atsiskaityti",
       "empty": "Jūsų krepšelis tuščias",
       "cart_error": "Atnaujinant krepšelį įvyko klaida. Bandykite dar kartą.",
-      "cart_quantity_error_html": "Į krepšelį galite pridėti tik [quantity] šios prekės vnt.",
+      "cart_quantity_error_html": "Į krepšelį galite įdėti tik {{ quantity }}šios prekės vnt.",
       "taxes_and_shipping_policy_at_checkout_html": "Mokesčiai ir <a href=\"{{ link }}\">siuntimo išlaidos</a> apskaičiuojami atsiskaitant",
       "taxes_included_but_shipping_at_checkout": "Mokesčiai įtraukti, o siuntimo išlaidos apskaičiuojamos atsiskaitant",
       "taxes_included_and_shipping_policy_html": "Mokesčiai įtraukti. <a href=\"{{ link }}\">Siuntimo išlaidos</a> apskaičiuojamos atsiskaitant.",

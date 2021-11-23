@@ -88,6 +88,7 @@ function getEntries() {
     componentEntries[`${name}`] = [file];
   });
 
+  // console.log(componentEntries);
   return {
     ...componentEntries,
     theme: ['./src/scripts/theme.js', './src/styles/theme.scss'],

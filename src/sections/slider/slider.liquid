@@ -10,7 +10,7 @@
   {% if section.settings.navigation == true %} data-navigation="true" {% endif %}
   {% if section.settings.pagination != "disabled" %} data-pagination="{{ section.settings.pagination }}"{% endif %}
   {% if section.settings.auto_height == true %} data-auto-height="true" {% endif %}
-  >
+  {% if section.settings.anchor_id != blank %} id="{{section.settings.anchor_id | handleize }}" {% endif %}>
   <ul class="swiper-wrapper">
   {% endif %}
   {% for block in section.blocks %}

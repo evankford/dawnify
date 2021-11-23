@@ -6,6 +6,25 @@ function getFocusableElements(container) {
   );
 }
 
+document.querySelectorAll('[id^="Details-"] summary').forEach((summary) => {
+  summary.setAttribute('role', 'button');
+  summary.setAttribute('aria-expanded', 'false');
+
+  if (summary.nextElementSibling.getAttribute('id')) {
+    summary.setAttribute('aria-controls', summary.nextElementSibling.id);
+  }
+
+  summary.addEventListener('click', (event) => {
+    event.currentTarget.setAttribute(
+      'aria-expanded',
+      !event.currentTarget.closest('details').hasAttribute('open')
+    );
+  });
+
+  if (summary.closest('header-drawer')) return;
+  summary.parentElement.addEventListener('keyup', onKeyUpEscape);
+});
+
 const trapFocusHandlers = {};
 
 function trapFocus(container, elementToFocus = container) {
@@ -136,6 +155,7 @@ function onKeyUpEscape(event) {
 
   const summaryElement = openDetailsElement.querySelector('summary');
   openDetailsElement.removeAttribute('open');
+  summaryElement.setAttribute('aria-expanded', false);
   summaryElement.focus();
 }
 
@@ -325,8 +345,6 @@ class MenuDrawer extends HTMLElement {
     super();
 
     this.mainDetailsToggle = this.querySelector('details');
-    const summaryElements = this.querySelectorAll('summary');
-    this.addAccessibilityAttributes(summaryElements);
 
     if (navigator.platform === 'iPhone')
       document.documentElement.style.setProperty(
@@ -348,14 +366,6 @@ class MenuDrawer extends HTMLElement {
     );
   }
 
-  addAccessibilityAttributes(summaryElements) {
-    summaryElements.forEach((element) => {
-      element.setAttribute('role', 'button');
-      element.setAttribute('aria-expanded', false);
-      element.setAttribute('aria-controls', element.nextElementSibling.id);
-    });
-  }
-
   onKeyUp(event) {
     if (event.code.toUpperCase() !== 'ESCAPE') return;
 
@@ -363,7 +373,10 @@ class MenuDrawer extends HTMLElement {
     if (!openDetailsElement) return;
 
     openDetailsElement === this.mainDetailsToggle
-      ? this.closeMenuDrawer(this.mainDetailsToggle.querySelector('summary'))
+      ? this.closeMenuDrawer(
+          event,
+          this.mainDetailsToggle.querySelector('summary')
+        )
       : this.closeSubmenu(openDetailsElement);
   }
 
@@ -371,21 +384,35 @@ class MenuDrawer extends HTMLElement {
     const summaryElement = event.currentTarget;
     const detailsElement = summaryElement.parentNode;
     const isOpen = detailsElement.hasAttribute('open');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-    if (detailsElement === this.mainDetailsToggle) {
-      if (isOpen) event.preventDefault();
-      isOpen
-        ? this.closeMenuDrawer(summaryElement)
-        : this.openMenuDrawer(summaryElement);
-    } else {
+    function addTrapFocus() {
       trapFocus(
         summaryElement.nextElementSibling,
         detailsElement.querySelector('button')
       );
+      summaryElement.nextElementSibling.removeEventListener(
+        'transitionend',
+        addTrapFocus
+      );
+    }
 
+    if (detailsElement === this.mainDetailsToggle) {
+      if (isOpen) event.preventDefault();
+      isOpen
+        ? this.closeMenuDrawer(event, summaryElement)
+        : this.openMenuDrawer(summaryElement);
+    } else {
       setTimeout(() => {
         detailsElement.classList.add('menu-opening');
-      });
+        summaryElement.setAttribute('aria-expanded', true);
+        !reducedMotion || reducedMotion.matches
+          ? addTrapFocus()
+          : summaryElement.nextElementSibling.addEventListener(
+              'transitionend',
+              addTrapFocus
+            );
+      }, 100);
     }
   }
 
@@ -405,9 +432,7 @@ class MenuDrawer extends HTMLElement {
         details.removeAttribute('open');
         details.classList.remove('menu-opening');
       });
-      this.mainDetailsToggle
-        .querySelector('summary')
-        .setAttribute('aria-expanded', false);
+
       document.body.classList.remove(
         `overflow-hidden-${this.dataset.breakpoint}`
       );
@@ -433,6 +458,9 @@ class MenuDrawer extends HTMLElement {
 
   closeSubmenu(detailsElement) {
     detailsElement.classList.remove('menu-opening');
+        detailsElement
+          .querySelector('summary')
+          .setAttribute('aria-expanded', false);
     removeTrapFocus();
     this.closeAnimation(detailsElement);
   }
@@ -624,13 +652,13 @@ class SliderComponent extends HTMLElement {
       Math.round(this.slider.scrollLeft / this.sliderLastItem.clientWidth) + 1;
 
     if (this.currentPage === 1) {
-      this.prevButton.setAttribute('disabled', true);
+      this.prevButton.setAttribute('disabled', 'disabled');
     } else {
       this.prevButton.removeAttribute('disabled');
     }
 
     if (this.currentPage === this.totalPages) {
-      this.nextButton.setAttribute('disabled', true);
+      this.nextButton.setAttribute('disabled', 'disabled');
     } else {
       this.nextButton.removeAttribute('disabled');
     }
@@ -718,6 +746,7 @@ class VariantSelects extends HTMLElement {
       this.stickyHeader.dispatchEvent(new Event('preventHeaderReveal'));
     }
     window.setTimeout(() => {
+      parent.scrollLeft = 0;
       parent
         .querySelector('li.product__media-item')
         .scrollIntoView({ behavior: 'smooth' });
@@ -730,6 +759,16 @@ class VariantSelects extends HTMLElement {
       {},
       '',
       `${this.dataset.url}?variant=${this.currentVariant.id}`
+    );
+  }
+
+  updateShareUrl() {
+    const shareButton = document.getElementById(
+      `Share-${this.dataset.section}`
+    );
+    if (!shareButton) return;
+    shareButton.updateUrl(
+      `${window.shopUrl}${this.dataset.url}?variant=${this.currentVariant.id}`
     );
   }
 
@@ -798,7 +837,7 @@ class VariantSelects extends HTMLElement {
     if (!addButton) return;
 
     if (disable) {
-      addButton.setAttribute('disabled', true);
+      addButton.setAttribute('disabled', 'disabled');
       if (text) addButtonText.textContent = text;
     } else {
       addButton.removeAttribute('disabled');
@@ -847,17 +886,17 @@ class VariantRadios extends VariantSelects {
 
 customElements.define('variant-radios', VariantRadios);
 
-
 //Video loader
 document.addEventListener('DOMContentLoaded', function () {
-  var videos = [].slice.call(document.querySelectorAll('video[loading="lazy"]'));
+  var videos = [].slice.call(
+    document.querySelectorAll('video[loading="lazy"]')
+  );
   if ('IntersectionObserver' in window) {
     var videoObserver = new IntersectionObserver(function (entries, observer) {
       entries.forEach(function (video) {
         if (video.isIntersecting) {
           video.target.poster = video.target.dataset.poster;
           if (video.target.children.length) {
-
             for (var source in video.target.children) {
               var videoSource = video.target.children[source];
               if (

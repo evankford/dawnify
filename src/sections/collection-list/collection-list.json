@@ -214,6 +214,7 @@
   "max": 30,
   "step" : 1
 },
+
 {
   "id" :"spacing_bottom",
   "label" : "Section Spacing Bottom",
@@ -222,7 +223,12 @@
   "min" : 0,
   "max": 30,
   "step" : 1
-}, {
+},
+ {
+      "id" : "anchor_id",
+      "type" : "text",
+      "label" : "ID (for anchor links)"
+    },{
     "type": "select",
     "id": "color_scheme",
     "options": [{

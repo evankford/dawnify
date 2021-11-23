@@ -58,7 +58,18 @@
         "type": "image_picker",
         "id": "background_image",
         "label": "Background Image"
-    }, {
+    },
+     {
+      "type" : "range",
+      "label" : "Background Opacity",
+      "id" : "background_opacity",
+      "default" : 100,
+      "step": 1,
+      "min" : 1,
+      "max" : 100
+    },
+
+    {
         "type": "select",
         "id": "background_style",
         "label": "Background Style",
@@ -201,7 +212,108 @@
             "default": false,
             "label": "t:sections.rich-text.blocks.button.settings.button_style_secondary.label"
         }]
-    }],
+    },
+    {
+      "type" : "bandsintown",
+      "name" : "Bandsintown",
+      "settings" : [
+          {
+              "type" : "header",
+              "content" : "BIT Widget Settings"
+          },
+          {
+              "type" : "text",
+              "id" : "artist",
+              "label" : "Artist"
+          },{
+              "type" : "range",
+              "id" : "limit",
+              "default" : 8,
+              "max" : 99,
+              "min" : 0,
+              "label" : "Limit"
+          },   {
+              "type" : "checkbox",
+              "id" : "load_more",
+              "label" : "Load More",
+              "default" : true,
+              "info" : "Show a 'More Dates' | 'Less Dates' button"
+          },{
+              "type" : "select",
+              "id" : "date_format",
+              "label" : "Date Format",
+              "options" : [
+                  {
+                      "value" : "long numbers",
+                      "label": "Long Numbers"
+                  },
+                  {
+                      "value" : "long words",
+                      "label": "Long Words"
+                  },
+                  {
+                      "value" : "short numbers",
+                      "label": "Short Numbers"
+                  },
+                  {
+                      "value" : "short words",
+                      "label": "Short Words"
+                  }
+              ]
+          },
+          {
+              "type" : "checkbox",
+              "id" : "show_lineup",
+              "label" : "Show Lineup"
+          },
+          {
+              "type" : "checkbox",
+              "id" : "show_year",
+              "label" : "Show Year"
+          },
+          {
+              "type" : "header",
+              "content" : "Fallback Texts"
+          },
+          {
+              "type" : "text",
+              "label" : "Loading Title",
+              "id" : "loading_title",
+              "default" : "Loading tour dates",
+              "info" : "Shown when section is loading"
+          },
+
+          {
+              "type" : "text",
+              "label" : "Fallback Title",
+              "id" : "fallback_title",
+              "default" : "No dates found",
+              "info" : "Shown when no dates are found"
+          },
+          {
+              "type" : "richtext",
+              "label" : "Fallback Content",
+              "id" : "fallback",
+              "default" : "<p>Check back soon or follow for more news.</p>",
+              "info" : "Shown when no dates are found"
+          },
+          {
+              "type" : "header",
+              "content" : "advanced"
+          },
+          {
+              "id" : "custom_style",
+              "type": "html",
+              "label" : "Custom Style"
+          },{
+              "type" : "text",
+              "id" : "app_id",
+              "label" : "App ID",
+              "default" : "5234ca141a91a3721bdc34b061d329a2",
+              "info" : "You may get rate-limited and need to reach out to bandsintown for a new APP id for this site."
+          }
+      ]
+  }],
     "presets": [{
         "name": "t:sections.rich-text.presets.name",
         "blocks": [{
@@ -211,7 +323,32 @@
         }, {
             "type": "button"
         }]
-    }, {
+    },
+    {
+        "name" : "Tour Dates",
+        "settings" : {
+            "title" : "Tour Dates",
+            "color_scheme": "reverse"
+        },
+        "blocks" :[
+            {
+                "type" : "label",
+                "settings" : {
+                    "heading" : "Upcoming"
+                }
+            },
+            {
+                "type" : "heading",
+                "settings" : {
+                    "heading" : "Tour Dates"
+                }
+            },
+            {
+                "type" : "bandsintown"
+            }
+        ]
+    },
+    {
         "name": "Instagram",
         "settings": {
             "title": "instagram"
@@ -278,5 +415,6 @@
         }
       }
     ]
-  }]
+  }
+]
 }

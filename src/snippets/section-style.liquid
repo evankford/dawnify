@@ -1,23 +1,23 @@
 {% comment %} Renders section style. Requires id and section settings object {% endcomment %}
 <style>
   #{% unless inner %}shopify-section-{% endunless %}{{ id }} {
-    {% if settings.background_color != blank %}
-    background-color: {{ settings.background_color | default: "transparent" }};
-    --color-background: {{ settings.background_color.red }}, {{ settings.background_color.green }},{{ settings.background_color.blue }};
+    {% if params.background_color != blank %}
+    background-color: {{ params.background_color | default: "transparent" }};
+    --color-background: {{ params.background_color.red }}, {{ params.background_color.green }},{{ params.background_color.blue }};
     {% endif %}
-    {% if settings.text_color != blank %}
-    color: {{ settings.text_color | default: "inherit" }};
-    --color-foreground: {{ settings.text_color.red }}, {{ settings.text_color.green }}, {{ settings.text_color.blue }};
+    {% if params.text_color != blank %}
+    color: {{ params.text_color | default: "inherit" }};
+    --color-foreground: {{ params.text_color.red }}, {{ params.text_color.green }}, {{ params.text_color.blue }};
     {% endif %}
 
-    padding-top: {{ settings.spacing_top | divided_by: 2.5 | default: 1 }}rem;
-    padding-bottom: {{ settings.spacing_bottom | divided_by: 2.5 | default: 1 }}rem;
+    padding-top: {{ params.spacing_top | divided_by: 2.5 | default: 1 }}rem;
+    padding-bottom: {{ params.spacing_bottom | divided_by: 2.5 | default: 1 }}rem;
   }
-  {% if settings.background_image != blank %}
+  {% if params.background_image != blank %}
   #{% unless inner %}shopify-section-{% endunless %}{{ id }} {
     position:relative;
     z-index: 1;
-    {% if settings.background_style == "fixed" %}
+    {% if params.background_style == "fixed" %}
       clip-path: polygon(0 0, 100% 0, 100% 100.1%, 0 100.1%);
       -webkit-backface-visibility: hidden;
       -moz-backface-visibility: hidden;
@@ -34,71 +34,69 @@
     display: block;
     width: 100%;
     top: 0;
-    {% if settings.background_opacity != 100 %}
-    opacity: {{ settings.background_opacity | times: 0.01 | default: 1 }};
+    {% if params.background_opacity != 100 %}
+    opacity: {{ params.background_opacity | times: 0.01 | default: 1 }};
     {% endif %}
     left: 0;
     z-index: -1;
     background-position: 50% 50%;
-    {% if settings.background_style == "cover" or settings.background_style == "contain" %}
-    background-image: url({{ settings.background_image | img_url: "800x" }});
-    background-size: {{ settings.background_style }};
+    {% if params.background_style == "cover" or params.background_style == "contain" %}
+    background-image: url({{ params.background_image | img_url: "800x" }});
+    background-size: {{ params.background_style }};
     background-repeat: no-repeat;
-    {% elsif settings.background_style == "fixed" %}
+    {% elsif params.background_style == "fixed" %}
     position: fixed;
     height: 100vh;
     background-size: cover;
     background-repeat: no-repeat;
     {% else %}
-    background-image: url({{ settings.background_image | img_url: "master" }});
-    {% if settings.background_style == "repeat-x" %}
+    background-image: url({{ params.background_image | img_url: "master" }});
+    {% if params.background_style == "repeat-x" %}
     background-size: auto 100%;
-    {% elsif settings.background_style == "repeat-y" %}
+    {% elsif params.background_style == "repeat-y" %}
     background-size: 100% auto;
     {% else %}
-    background-size: {{ settings.background_image.width | divided_by: 2 }}px;
+    background-size: {{ params.background_image.width | divided_by: 2 }}px;
     {% endif %}
 
-    background-repeat: {{ settings.background_style }};
+    background-repeat: {{ params.background_style }};
     {% endif %}
   }
   {% endif %}
 
-  {% if settings.background_image != blank and  settings.background_style == "cover" or settings.background_style == "contain" or settings.background_style == "fixed" %}
-
-
+  {% if params.background_image != blank and  params.background_style == "cover" or params.background_style == "contain" or params.background_style == "fixed" %}
   @media (min-width: 720px) {
     #shopify-section-{{ id }}::before {
-      background-image: url({{ settings.background_image | img_url: "1080x" }});
+      background-image: url({{ params.background_image | img_url: "1080x" }});
     }
   }
   @media (min-width: 1080px) {
     #shopify-section-{{ id }}::before {
-      background-image: url({{ settings.background_image | img_url: "1400x" }});
+      background-image: url({{ params.background_image | img_url: "1400x" }});
     }
   }
   @media (min-width: 1080px) {
     #shopify-section-{{ id }}::before {
-      background-image: url({{ settings.background_image | img_url: "1750x" }});
+      background-image: url({{ params.background_image | img_url: "1750x" }});
     }
   }
   @media (min-width: 1750px) {
     #shopify-section-{{ id }}::before {
-      background-image: url({{ settings.background_image | img_url: "2000x" }});
+      background-image: url({{ params.background_image | img_url: "2000x" }});
     }
   }
   @media (min-width: 2000px) {
     #shopify-section-{{ id }}::before {
-      background-image: url({{ settings.background_image | img_url: "2400x" }});
+      background-image: url({{ params.background_image | img_url: "2400x" }});
     }
   }
   {% endif %}
 
-  {% if settings.color_scheme != blank and settings.color_scheme != 'disabled' and settings.background_color == blank and settings.text_color == blank %}
+  {% if params.color_scheme != blank and params.color_scheme != 'disabled' and params.background_color == blank and params.text_color == blank %}
   #{% unless inner %}shopify-section-{% endunless %}{{ id }} {
     background-color: rgb(var(--color-background));
     color: rgb(var(--color-foreground));
-    {% case settings.color_scheme %}
+    {% case params.color_scheme %}
       {% when 'accent-1' %}
     --color-foreground: var(--color-base-solid-button-labels);
     --color-background: var(--color-base-accent-1);

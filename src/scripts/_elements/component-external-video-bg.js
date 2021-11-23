@@ -39,8 +39,9 @@ class VideoBackground extends HTMLElement {
     if (!this.bg || !this.bg.player) {
       return;
     }
-
-    this.bg.player.pauseVideo();
+    if (typeof this.bg.player.pauseVideo == 'function') {
+      this.bg.player.pauseVideo();
+    }
     this.muteVideo();
     // console.log('Paused video!', this.bg.player.getPlayerState());
   }
@@ -65,10 +66,10 @@ class VideoBackground extends HTMLElement {
       url: this.getAttribute('data-bg-video-url'),
       useCustomFallbackImage: true,
       fitMode: 'fill',
-      DEBUG: {
-        enabled: true,
-        verbose: true
-      }
+      // DEBUG: {
+      //   enabled: true,
+      //   verbose: true
+      // }
     });
     this.classList.add('loaded');
     this.isLoaded = true;
@@ -89,11 +90,17 @@ class VideoBackground extends HTMLElement {
   }
 
   changeButtonToMute() {
+    if (!this.button ) {
+      return;
+    }
     this.button.setAttribute('aria-label', 'Play Music');
     this.playLogo.classList.remove('not-displayed');
     this.muteLogo.classList.add('not-displayed');
   }
   changeButtonToPlay() {
+    if (!this.button) {
+      return;
+    }
     this.button.setAttribute('aria-label', 'Mute');
     this.playLogo.classList.add('not-displayed');
     this.muteLogo.classList.remove('not-displayed');
@@ -113,7 +120,7 @@ class VideoBackground extends HTMLElement {
   }
   muteVideo() {
     this.changeButtonToPlay();
-    if (this.bg && this.bg.player) {
+    if (this.bg && this.bg.player && typeof this.bg.player.mute == 'function') {
       this.bg.player.mute();
     }
     this.muted = true;

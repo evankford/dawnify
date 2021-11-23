@@ -7,12 +7,11 @@
     Usage:
     {% render 'share-button', block: block %}
 {% endcomment %}
- <share-button class="share-button" {{ block.shopify_attributes }}>
-  <button class="share-button__button hidden">
+  <share-button id="Share-{{ section.id }}" class="share-button" {{ block.shopify_attributes }}>  <button class="share-button__button hidden">
     {% render 'icon-share' %}
     {{ block.settings.share_label | escape }}
   </button>
-  <details>
+  <details id="Details-{{ block.id }}-{{ section.id }}">
     <summary class="share-button__button">
       {% render 'icon-share' %}
       {{ block.settings.share_label | escape }}
@@ -24,8 +23,7 @@
         <input type="text"
               class="field__input"
               id="url"
-              value="{{ shop.url | append: product.url }}"
-              placeholder="{{ 'general.share.share_url' | t }}"
+              value="{{ product.selected_variant.url | default: product.url | prepend: shop.url }}"              placeholder="{{ 'general.share.share_url' | t }}"
               onclick="this.select();"
               readonly
         >

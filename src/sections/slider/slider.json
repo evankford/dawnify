@@ -67,7 +67,13 @@
         "step": 10,
         "min": 220,
         "max": 900
-    }],
+    },
+    {
+      "id" : "anchor_id",
+      "type" : "text",
+      "label" : "ID (for anchor links)"
+    }
+],
     "blocks": [{
         "type": "image-text",
         "name": "Image w/ Text Content",
@@ -156,6 +162,7 @@
         }, {
             "type": "select",
             "id": "color_scheme",
+            "default" : "transparent-light",
             "options": [{
                 "value": "transparent-dark",
                 "label": "Dark Text (no bg)"
@@ -178,7 +185,6 @@
                 "value": "inverse",
                 "label": "t:sections.image-banner.settings.color_scheme.options__5.label"
             }],
-            "default": "background-1",
             "label": "t:sections.image-banner.settings.color_scheme.label"
         }, {
             "type": "header",
@@ -311,6 +317,7 @@
         }, {
             "type": "select",
             "id": "color_scheme",
+            "default" : "transparent-light",
             "options": [{
                 "value": "transparent-dark",
                 "label": "Dark Text (no bg)"
@@ -333,7 +340,6 @@
                 "value": "inverse",
                 "label": "t:sections.image-banner.settings.color_scheme.options__5.label"
             }],
-            "default": "background-1",
             "label": "t:sections.image-banner.settings.color_scheme.label"
         }, {
             "type": "header",
@@ -465,6 +471,7 @@
         }, {
             "type": "select",
             "id": "color_scheme",
+            "default" : "transparent-light",
             "options": [{
                 "value": "transparent-dark",
                 "label": "Dark Text (no bg)"
@@ -487,7 +494,6 @@
                 "value": "inverse",
                 "label": "t:sections.image-banner.settings.color_scheme.options__5.label"
             }],
-            "default": "background-1",
             "label": "t:sections.image-banner.settings.color_scheme.label"
         }, {
             "type": "header",
@@ -620,6 +626,7 @@
         }, {
             "type": "select",
             "id": "color_scheme",
+            "default" : "transparent-light",
             "options": [{
                 "value": "transparent-dark",
                 "label": "Dark Text (no bg)"
@@ -642,7 +649,6 @@
                 "value": "inverse",
                 "label": "t:sections.image-banner.settings.color_scheme.options__5.label"
             }],
-            "default": "background-1",
             "label": "t:sections.image-banner.settings.color_scheme.label"
         }, {
             "type": "header",

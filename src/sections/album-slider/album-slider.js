@@ -21,11 +21,11 @@ class AlbumSlider extends HTMLElement {
     this.autoplay = this.getAttribute('data-autoplay');
 
     this.fullWidth = this.getAttribute('data-full-width') == 'true';
-    if (typeof window.Slider == 'function' && typeof window.Slider.constructor == 'function') {
+    if (typeof window.Slider == 'function' && window.slidersReady == true) {
       this.init();
     } else {
       window.addEventListener('slidersReady', this.init.bind(this));
-      this.init();
+      // this.init();
     }
   }
 

@@ -190,6 +190,11 @@
             "default": "background-1",
             "label": "t:sections.image-banner.settings.color_scheme.label"
     },
+     {
+      "id" : "anchor_id",
+      "type" : "text",
+      "label" : "ID (for anchor links)"
+    },
     {
       "id" : "background_color",
       "label" : "Background Color",

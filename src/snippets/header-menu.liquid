@@ -5,7 +5,7 @@
       <li>
         {%- if link.links != blank -%}
           <details-disclosure>
-            <details>
+                              <details id="Details-HeaderMenu-{{ forloop.index }}">
               <summary class="header__menu-item list-menu__item link focus-inset">
                 <span {%- if link.child_active %} class="header__active-menu-item"{% endif %}>{{ link.title | escape }}</span>
                 {% render 'icon-caret' %}
@@ -18,13 +18,11 @@
                         {{ childlink.title | escape }}
                       </a>
                     {%- else -%}
-                      <details>
-                        <summary class="header__menu-item link link--text list-menu__item focus-inset caption-large">
+                      <details id="Details-HeaderSubMenu-{{ forloop.index }}">                        <summary class="header__menu-item link link--text list-menu__item focus-inset caption-large">
                           {{ childlink.title | escape }}
                           {% render 'icon-caret' %}
                         </summary>
-                        <ul class="header__submenu list-menu motion-reduce">
-                          {%- for grandchildlink in childlink.links -%}
+                          <ul id="HeaderMenu-SubMenuList-{{ forloop.index }}" class="header__submenu list-menu motion-reduce">                          {%- for grandchildlink in childlink.links -%}
                             <li>
                               <a href="{{ grandchildlink.url }}" class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if grandchildlink.current %} list-menu__item--active{% endif %}"{% if grandchildlink.current %} aria-current="page"{% endif %}>
                                 {{ grandchildlink.title | escape }}

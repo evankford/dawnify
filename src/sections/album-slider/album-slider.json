@@ -128,6 +128,11 @@
             "label": "t:sections.image-banner.settings.color_scheme.label"
     },
     {
+      "id" : "anchor_id",
+      "type" : "text",
+      "label" : "ID (for anchor links)"
+    },
+    {
       "id" : "background_color",
       "label" : "Background Color",
       "type" : "color"
@@ -274,7 +279,17 @@
             "id": "button_style_secondary_2",
             "default": false,
             "label": "t:sections.image-banner.blocks.buttons.settings.button_style_secondary_2.label"
-        }, {
+        },  {
+          "type" : "header",
+          "content" : "Icon Links"
+        },
+        {
+          "type" : "checkbox",
+          "label" : "Show Icon Link Text",
+          "id" : "show_icon_text",
+          "default"  : false
+        },
+        {
           "type" : "url",
           "id" : "icon_link_apple_music",
           "label" : "Apple Music URL"
@@ -286,6 +301,18 @@
           "type" : "url",
           "id" : "icon_link_youtube",
           "label" : "Youtube URL"
+        }, {
+          "type" : "url",
+          "id" : "icon_link_deezer",
+          "label" : "Deezer URL"
+        }, {
+          "type" : "url",
+          "id" : "icon_link_soundcloud",
+          "label" : "Soundcloud URL"
+        }, {
+          "type" : "url",
+          "id" : "icon_link_pandora",
+          "label" : "Pandora URL"
         }, {
           "type" : "url",
           "id" : "icon_link_amazon",

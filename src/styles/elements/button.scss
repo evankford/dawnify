@@ -155,7 +155,7 @@ details[open] > .share-button__fallback {
   left: 0.1rem;
   z-index: 3;
   width: 100%;
-  min-width: 31rem;
+  min-width: max-content;
   box-shadow: 0 0 0 0.1rem rgba(var(--color-foreground), 0.55);
 }
 

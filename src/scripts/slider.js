@@ -110,6 +110,7 @@ class Slider {
 
 window.Slider = Slider;
 window.dispatchEvent(new Event('slidersReady'));
+window.slidersReady = true;
 
 if (!customElements.get('slider-element')) {
   customElements.define('slider-element', class Slider extends HTMLElement {

@@ -1,11 +1,13 @@
 <link rel="stylesheet" href="{{ 'component-rte.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'section-rich-text.css' | asset_url }}" media="print" onload="this.media='all'">
 
+
 <noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
 <noscript>{{ 'section-rich-text.css' | asset_url | stylesheet_tag }}</noscript>
+
 {% assign inner_id = "rt" | append : section.id %}
 
-{% render 'section-style' with inner: true, id: inner_id, settings: section.settings %}
+{% render 'section-style' with inner: true, id: inner_id, params: section.settings %}
 
 
 <div id="{{ inner_id }}" class="rich-text{% if section.settings.full_width %} rich-text--full-width{% endif %} color-{{ section.settings.color_scheme }}">
@@ -25,9 +27,11 @@
         {%- when 'socials' -%}
           {% render 'socials-ul' with attrs: block.shopify_attributes %}
         {%- when 'button' -%}
-          <a{% if block.settings.button_link == blank %} aria-disabled="true"{% else %} href="{{ block.settings.button_link }}"{% endif %} class="button{% if block.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}" {{ block.shopify_attributes }}>
+          <a{% if block.settings.button_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.button_link }}"{% endif %} class="button{% if block.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}" {{ block.shopify_attributes }}>
             {{ block.settings.button_label | escape }}
           </a>
+        {%- when 'bandsintown' -%}
+          {% render 'bandsintown-dates' with block: block %}
       {%- endcase -%}
     {%- endfor -%}
   </div>

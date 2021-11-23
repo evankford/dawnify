@@ -7,7 +7,6 @@
       "login_form_password_placeholder": "A sua palavra-passe",
       "login_form_error": "Palavra-passe errada!",
       "login_form_submit": "Entrar",
-      "modal": "Palavra-passe modal",
       "admin_link_html": "É o proprietário da loja? <a href=\"/admin\" class=\"link underlined-link\">Inicie a sessão aqui</a>",
       "powered_by_shopify_html": "Esta loja irá contar com tecnologia {{ shopify }}"
     },
@@ -227,7 +226,7 @@
       "checkout": "Finalizar a compra",
       "empty": "O seu carrinho está vazio",
       "cart_error": "Ocorreu um erro ao atualizar o seu carrinho. Tente novamente.",
-      "cart_quantity_error_html": "É possível adicionar apenas [quantity] desse item ao carrinho.",
+      "cart_quantity_error_html": "É possível adicionar apenas {{ quantity }} unidade(s) deste item ao carrinho.",
       "taxes_and_shipping_policy_at_checkout_html": "Impostos e <a href=\"{{ link }}\">shipping</a> calculados na finalização da compra",
       "taxes_included_but_shipping_at_checkout": "Imposto incluído e envio calculado na finalização da compra",
       "taxes_included_and_shipping_policy_html": "Imposto incluído. <a href=\"{{ link }}\">Envio</a> calculado na finalização da compra.",
