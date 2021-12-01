@@ -78,14 +78,27 @@ class AlbumSlider extends HTMLElement {
       params.slidesPerView = 1;
       params.breakpoints = null;
     } else {
-      params.slidesPerView = 'auto'
-      params.breakpoints = null
+      params.slidesPerView = 1
+      params.breakpoints  = {
+        1200: {
+          slidesPerView: 4,
+          spaceBetween: 15,
+        },
+        800: {
+          slidesPerView:3,
+          spaceBetween:12,
+        },
+        320: {
+          slidesPerView:1,
+        }
+      }
     }
     return params;
   }
   init () {
     this.params = this.getParams();
     this.slider = new window.Slider(this, this.params)
+    console.log(this.slider)
   }
 }
 

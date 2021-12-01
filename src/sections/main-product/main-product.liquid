@@ -41,7 +41,7 @@
         <a class="skip-to-content-link button visually-hidden" href="#ProductInfo-{{ section.id }}">
           {{ "accessibility.skip_to_product_info" | t }}
         </a>
-         <ul class="product__media-list grid grid--peek list-unstyled slider slider--mobile" role="list">
+         <ul class="grid product__media-list grid--peek list-unstyled slider slider--mobile" role="list">
           {%- assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' -%}
           {%- if product.selected_or_first_available_variant.featured_media != null -%}
             {%- assign media = product.selected_or_first_available_variant.featured_media -%}
@@ -182,7 +182,7 @@
 
               {% render 'product-tag' with tag: product.metafields.custom.tag %}
           {%- when 'variant_picker' -%}
-           {% render 'variant-picker', product: product, problock: block, id: section.id, product_form_id: product_form_id %}
+           {% render 'variant-picker', product: product, block: block, id: section.id, product_form_id: product_form_id %}
           {%- when 'buy_buttons' -%}
             <div {{ block.shopify_attributes }}>
               <product-form class="product-form">
@@ -201,7 +201,7 @@
                         {%- else -%}
                           {{ 'products.product.sold_out' | t }}
                         {%- endif -%}
-                        <div class="loading-overlay__spinner hidden">
+                        <div class="hidden loading-overlay__spinner">
                           <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
                             <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
                           </svg>

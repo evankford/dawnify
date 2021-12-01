@@ -101,7 +101,7 @@ h2.loader {
 }
 .bit-date {
 	padding:  var(--bit-elem-padding);
-	flex: 0 1 80px;
+	flex: 0 1 3em;
 	text-align: center;
 
 	opacity: 0.6;
@@ -150,7 +150,7 @@ h2.loader {
 	}
 }
 .bit-info {
-	flex: 20 1 210px;
+	flex: 20 1 190px;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;

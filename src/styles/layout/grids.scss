@@ -32,7 +32,7 @@
 
   @include media-query($widescreen) {
     grid-template-columns: repeat(4, 1fr);
-    &.grid--huge {
+    &.grid-grid--huge, &[data-max="3"] {
       grid-template-columns: repeat(3, 1fr);
     }
   }
@@ -45,20 +45,39 @@
   &[data-max="1"] {
     grid-template-columns: 1fr;
     max-width: calc(1 * (var(--pg-mw) + var(--pg-g)));
+
   }
   &[data-max="2"] {
     max-width: calc(2 * (var(--pg-mw) + var(--pg-g)));
+    @include media-query($medium-up) {
+
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
+  &[data-max="3"] {
+     @include media-query($widescreen) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
   &[data-max="3"],
   &[data-max="6"] {
     max-width: calc(3 * (var(--pg-mw) + var(--pg-g)));
+
   }
+
 
   &[data-max="4"],
   &[data-max="7"],
   &[data-max="8"] {
     max-width: calc(4 * (var(--pg-mw) + var(--pg-g)));
+
+  }
+
+  &[data-max="4"] {
+    &.grid-grid--huge {
+      max-width: calc(2 * (var(--pg-mw) + var(--pg-g)));
+    }
   }
 
   .grid__item, .card-wrapper {
@@ -102,7 +121,7 @@
   }
   &.grid-grid--huge {
     --pg-w: 300px;
-    --pg-mw: 550px;
+    --pg-mw: 520px;
     --pg-g: 15px;
      @include media-query($medium-up) {
       --pg-w: 340px;

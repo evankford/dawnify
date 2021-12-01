@@ -402,6 +402,14 @@ summary .menu-drawer__menu-item {
   .h2.heading {
     font-size: {{ settings.heading_font_size_mobile | default : 36 }}px;
   }
+   h3.heading,
+  .h3.heading{
+    font-size: {{ settings.heading_font_size_mobile | times: 0.9 | default : 22 }}px;
+  }
+  h4.heading,
+  .h4.heading{
+    font-size: {{ settings.heading_font_size_mobile | times: 0.725 | default : 22 }}px;
+  }
 
   div.heading,
   span.heading,
