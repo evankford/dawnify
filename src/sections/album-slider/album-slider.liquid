@@ -1,5 +1,10 @@
+<link rel="stylesheet" href="{{ 'section-album-slider.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript>{{ 'section-album-slider.css' | asset_url | stylesheet_tag }}</noscript>
+
 <script defer src="{{ 'slider.js' | asset_url }}"></script>
-{{ 'slider.css' | append: '?enable_css_minification=1' | asset_url | stylesheet_tag }}
+<script defer src="{{ 'component-album-slider.js' | asset_url }}"></script>
+<link rel="stylesheet" href="{{ 'component-slider.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript>{{ 'component-slider.css' | asset_url | stylesheet_tag }}</noscript>
 {{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
 
 {% render 'section-style' with id: section.id, params: section.settings %}
@@ -27,13 +32,16 @@
       {% endfor %}
     {% if is_slide %}
     </ul>
-      {% if section.settings.pagination != "disabled" %}
+      {% if section.settings.pagination != "disabled" and section.settings.navigation_style == 'classic' %}
         <div class="swiper-pagination" data-pagination></div>
       {% endif %}
       {% if section.settings.navigation == true %}
-        <div class="swiper-navigation">
-          <button class="button-icon" data-prev aria-label="Previous Slide">{% render 'icon-caret' %}</button>
-          <button class="button-icon" data-next aria-label="Next Slide">{% render 'icon-caret' %}</button>
+        <div class="swiper-navigation style--{{section.settings.navigation_style | default: 'modern'}}">
+          <button class="button-icon" data-prev aria-label="Previous Slide">{% if section.settings.navigation_style == "classic" %}{% render 'icon-caret' %}{% else %} {% render 'icon-arrow' %} {% endif %}</button>
+          {% if section.settings.pagination != "disabled" and section.settings.navigation_style != 'classic' %}
+          <div class="swiper-pagination" data-pagination></div>
+          {% endif %}
+          <button class="button-icon" data-next aria-label="Next Slide">{% if section.settings.navigation_style == "classic" %}{% render 'icon-caret' %}{% else %} {% render 'icon-arrow' %} {% endif %}</button>
         </div>
       {% endif %}
 

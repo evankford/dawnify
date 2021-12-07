@@ -335,7 +335,7 @@ small.credit {
   }
   .layout--stacked .footer-block__newsletter .footer__newsletter {
     margin: auto;
-  justify-content: center;
+    justify-content: center;
   }
 }
 
@@ -363,7 +363,7 @@ small.credit {
 .layout--stacked .footer__attribution {
   @include media-query($medium-up) {
     .media {
-      margin: 0 auto 0 0;
+      // margin: 0 auto 0 0;
     }
   }
 }
@@ -626,8 +626,7 @@ footer details[open] summary ~ * {
 
 @media screen and (max-width: 989px) {
   .footer-block__details-content .list-menu__item--link {
-    padding-top: 0.4rem;
-    padding-bottom: 0.4rem;
+    padding: 0.5rem 0.5rem 0.4rem;
     margin-top: 0.5rem;
   }
 }

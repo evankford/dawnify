@@ -7,8 +7,8 @@
   </div>
   <div class="hidden error">There was an error retrieving dates. Please try again.</div>
   <div class="hidden fallback">
-    {% if block.settings.fallback_heading != blank %}
-    <h3>{{ block.settings.fallback_heading }}</h3>
+    {% if block.settings.fallback_title != blank %}
+    <h3 class="heading h3">{{ block.settings.fallback_title }}</h3>
     {% endif %}
     {{ block.settings.fallback | default: "No upcoming dates."}}
   </div>

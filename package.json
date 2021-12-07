@@ -16,6 +16,7 @@
     "start": "pnpm build && run-p watch serve",
     "start:new": "pnpm  build && cd dist && rm .shopifyignore && touch .shopifyignore && cd ../ && run-p watch serve",
     "dev": "run-p watch serve",
+    "dev:new": "cd dist && rm .shopifyignore && touch .shopifyignore && cd ../ && run-p watch serve",
     "dev:dry": "pnpm serve",
     "deploy": "pnpm webpack -env=production && cd dist && shopify theme push",
     "theme-check": "pnpm build && shopify theme check",

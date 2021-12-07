@@ -7,8 +7,9 @@ class AlbumSlider extends HTMLElement {
     this.prevEl = null;
     this.nextEl = null;
 
+    this.slidesCount = this.el.querySelectorAll('.album-slide').length;
     this.pagination = this.getAttribute('data-pagination');
-    if (this.pagination == "progress" || this.pagination == "dots") {
+    if (this.pagination == "progressbar" || this.pagination == "bullets") {
       this.paginationEl = this.el.querySelector('[data-pagination]')
     }
 
@@ -28,7 +29,6 @@ class AlbumSlider extends HTMLElement {
       // this.init();
     }
   }
-
   getParams() {
     let params = {
       slidesPerView: 2,
@@ -76,20 +76,25 @@ class AlbumSlider extends HTMLElement {
     }
     if (this.fullWidth) {
       params.slidesPerView = 1;
-      params.breakpoints = null;
+      params.breakpoints = {};
     } else {
-      params.slidesPerView = 1
-      params.breakpoints  = {
-        1200: {
-          slidesPerView: 4,
-          spaceBetween: 15,
-        },
-        800: {
+      params.breakpoints = {};
+      params.slidesPerView = 1;
+      if(this.slidesCount >=2) {
+        params.breakpoints[350] = {
+          slidesPerView:2,
+        }
+      }
+      if (this.slidesCount >=3) {
+         params.breakpoints[800] = {
           slidesPerView:3,
           spaceBetween:12,
-        },
-        320: {
-          slidesPerView:1,
+        }
+      }
+      if (this.slidesCount >= 4) {
+        params.breakpoints[1100] = {
+          slidesPerView: 4,
+          spaceBetween: 15
         }
       }
     }
@@ -101,5 +106,6 @@ class AlbumSlider extends HTMLElement {
     console.log(this.slider)
   }
 }
-
+if (!customElements.get('album-slider')) {
 customElements.define('album-slider',  AlbumSlider);
+}

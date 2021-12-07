@@ -92,7 +92,7 @@ function getEntries() {
   return {
     ...componentEntries,
     theme: ['./src/scripts/theme.js', './src/styles/theme.scss'],
-    slider: ['./src/scripts/slider.js', './src/styles/slider.scss'],
+    slider: ['./src/scripts/slider.js'],
     product: ['./src/scripts/product.js'],
   };
 }

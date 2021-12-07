@@ -4,8 +4,11 @@
 
 <noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
 <noscript>{{ 'section-rich-text.css' | asset_url | stylesheet_tag }}</noscript>
-
+{% if section.settings.id == blank %}
 {% assign inner_id = "rt" | append : section.id %}
+{% else %}
+{% assign inner_id = section.settings.id %}
+{% endif %}
 
 {% render 'section-style' with inner: true, id: inner_id, params: section.settings %}
 

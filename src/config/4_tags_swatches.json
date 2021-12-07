@@ -7,7 +7,7 @@
     },
     {
       "type" : "paragraph",
-      "content" : "Set tags on products using the 'Tag' metafield on the product editor (bottom of the page)."
+      "content" : "Set tags on products using the 'Tag' metafield on the product editor (bottom of the page). Requires developer setup first!"
     },
 
     {
@@ -45,6 +45,23 @@
     },
     {
       "type" : "select",
+      "id" : "tag_size",
+      "label" : "Tag Suze",
+      "default" : "small",
+      "options" : [
+        {
+
+          "label" : "Small",
+          "value" : "small"
+        },
+        {
+          "label" : "Standard",
+          "value" : "standard"
+        }
+      ]
+    },
+    {
+      "type" : "select",
       "id" : "tag_style",
       "label" : "Tag style",
       "default" : "standard",
@@ -65,7 +82,7 @@
     },
     {
       "type": "select",
-      "id": "color_scheme",
+      "id": "tag_color_scheme",
       "options": [
         {
           "value" : "transparent-dark",

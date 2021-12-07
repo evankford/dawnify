@@ -57,7 +57,7 @@
 
   &[data-max="3"] {
      @include media-query($widescreen) {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
     }
   }
   &[data-max="3"],

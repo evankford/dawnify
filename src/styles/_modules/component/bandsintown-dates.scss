@@ -16,7 +16,7 @@ h2.loader {
   animation: loading 400ms infinite-reverse ease;
 }
 
-[data-module=tour-widget] {
+bandsintown-dates {
 	.hidden {
 		display: none;
   }
@@ -29,6 +29,13 @@ h2.loader {
 		}
 	}
 
+}
+
+.fallback {
+	margin: calc(12px + 2vw) auto;
+	p {
+		margin: 0.1em auto;
+	}
 }
 
 

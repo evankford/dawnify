@@ -1,11 +1,12 @@
 <script defer src="{{ 'slider.js' | asset_url }}"></script>
-{{ 'slider.css' | append: '?enable_css_minification=1' | asset_url | stylesheet_tag }}
-{{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" href="{{ 'component-slider.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>{{ 'component-slider.css' | asset_url | stylesheet_tag }}</noscript>{{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
 {%assign is_slide = false %}
 {% if section.blocks.size > 1 %}
 {% assign is_slide = true %}
 
-<slider-element class="swiper-container {% if section.settings.auto_height != true%} fixed-height {% endif %}"
+<slider-element class="swiper-container {% if section.settings.auto_height != true%} fixed-height {% endif %} color-transparent-light"
   {% if section.settings.autoplay > 0 %} data-autoplay="{{ section.settings.autoplay}}"{% endif %}
   {% if section.settings.navigation == true %} data-navigation="true" {% endif %}
   {% if section.settings.pagination != "disabled" %} data-pagination="{{ section.settings.pagination }}"{% endif %}
@@ -20,15 +21,19 @@
   {% comment %} Resume swiper markup if block size > 1   {% endcomment %}
   {% if section.blocks.size > 1 %}
   </ul>
-  {% if section.settings.pagination != "disabled" %}
-    <div class="swiper-pagination" data-pagination></div>
-  {% endif %}
-  {% if section.settings.navigation == true %}
-    <div class="swiper-navigation">
-      <button class="button-icon" data-prev aria-label="Previous Slide">{% render 'icon-caret' %}</button>
-      <button class="button-icon" data-next aria-label="Next Slide">{% render 'icon-caret' %}</button>
-    </div>
-  {% endif %}
+  {% if section.settings.pagination != "disabled" and section.settings.navigation_style == 'classic' %}
+        <div class="swiper-pagination" data-pagination></div>
+      {% endif %}
+      {% if section.settings.navigation == true %}
+        <div class="swiper-navigation style--{{section.settings.navigation_style | default: 'modern'}}">
+          <button class="button-icon" data-prev aria-label="Previous Slide">{% if section.settings.navigation_style == "classic" %}{% render 'icon-caret' %}{% else %} {% render 'icon-arrow' %} {% endif %}</button>
+          {% if section.settings.pagination != "disabled" and section.settings.navigation_style != 'classic' %}
+          <div class="swiper-pagination" data-pagination></div>
+          {% endif %}
+          <button class="button-icon" data-next aria-label="Next Slide">{% if section.settings.navigation_style == "classic" %}{% render 'icon-caret' %}{% else %} {% render 'icon-arrow' %} {% endif %}</button>
+        </div>
+      {% endif %}
+
 </slider-element>
 {% endif %}
 

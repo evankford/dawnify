@@ -43,7 +43,7 @@ class Slider {
     //     el: this.el.querySelector('[data-pagination]'),
     //     dynamicBullets: true,
     //   }
-    //   if (this.options.pagination == "progress") {
+    //   if (this.options.pagination == "progressbar") {
     //     pagObj.type = "progressbar"
     //   }
     //   toReturn.pagination = pagObj
@@ -132,7 +132,7 @@ if (!customElements.get('slider-element')) {
         dynamicBullets: true,
       }
 
-      if (this.getAttribute('data-pagination') == "progress") {
+      if (this.getAttribute('data-pagination') == "progressbar") {
         params.pagination.type = "progressbar"
       }
     }

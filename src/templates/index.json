@@ -16,7 +16,7 @@
         "16276673415005ec74-0"
       ],
       "settings": {
-        "pagination": "dots",
+        "pagination": "bullets",
         "navigation": true,
         "autoplay_speed": 7,
         "auto_height": false,

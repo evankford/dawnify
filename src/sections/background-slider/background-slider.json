@@ -11,14 +11,14 @@
       "type": "select",
       "id": "pagination",
       "label": "Pagination",
-      "default": "dots",
+      "default": "bullets",
       "options": [
         {
-          "value": "dots",
-          "label": "Dots"
+          "value": "bullets",
+          "label": "bullets"
         },
         {
-          "value": "progress",
+          "value": "progressbar",
           "label": "Progress Bar"
         },
         {

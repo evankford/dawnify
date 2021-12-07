@@ -1,7 +1,8 @@
 
 <script defer src="{{ 'slider.js' | asset_url }}"></script>
-{{ 'slider.css' | append: '?enable_css_minification=1' | asset_url | stylesheet_tag }}
-{{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" href="{{ 'component-slider.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>{{ 'component-slider.css' | asset_url | stylesheet_tag }}</noscript>{{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
 
 <div class="background-slider {% if section.settings.auto_height != true%} fixed-height {% endif %}">
   <div class="background-slider__content banner__content" style="align-items: {{ settings.desktop_text_box_position | default: 'center' }};">

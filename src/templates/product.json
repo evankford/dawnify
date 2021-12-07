@@ -3,6 +3,11 @@
     "main": {
       "type": "main-product",
       "blocks": {
+        "tag": {
+          "type": "tag",
+          "settings": {
+          }
+        },
         "title": {
           "type": "title",
           "settings": {

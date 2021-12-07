@@ -46,18 +46,35 @@
         "type": "select",
         "id": "pagination",
         "label": "Pagination",
-        "default": "dots",
+        "default": "bullets",
         "options": [{
-            "value": "dots",
-            "label": "Dots"
+            "value": "bullets",
+            "label": "bullets"
         }, {
-            "value": "progress",
+            "value": "progressbar",
             "label": "Progress Bar"
         }, {
             "value": "disabled",
             "label": "Disabled"
         }]
-    }, {
+    },
+    {
+      "type" : "select",
+      "id" : "navigation_style",
+      "label" : "Nav Style",
+      "default" : "modern",
+      "options" : [
+        {
+          "value" : "modern",
+          "label" : "Modern"
+        },
+        {
+          "value" : "classic",
+          "label" : "Classic"
+        }
+      ]
+    },
+    {
         "type": "checkbox",
         "id": "navigation",
         "label": "Enable Arrows",
@@ -283,12 +300,7 @@
           "type" : "header",
           "content" : "Icon Links"
         },
-        {
-          "type" : "checkbox",
-          "label" : "Show Icon Link Text",
-          "id" : "show_icon_text",
-          "default"  : false
-        },
+
         {
           "type" : "url",
           "id" : "icon_link_apple_music",

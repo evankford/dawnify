@@ -3,7 +3,21 @@
   <script defer="true" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/ScrollTrigger.min.js"></script>
 {% endif %}
 
+<!-- Any polyfill to enable smoothscroll for the JavaScript APIs -->
+<script src="https://unpkg.com/smoothscroll-polyfill/dist/smoothscroll.min.js"></script>
+
+<!-- This package, to apply the smoothscroll to anchor links -->
+<script src="https://unpkg.com/smoothscroll-anchor-polyfill"></script>
+
+
 <style>
+  html {
+    /* Normal CSS property for browsers with native support */
+    scroll-behavior: smooth;
+
+    /* Defined as the name of a font, so the polyfill can read it */
+    font-family: "scroll-behavior: smooth", sans-serif;
+  }
 {% if settings.fx_underline_menu == true %}
   .list-menu__item, a.header__menu-item.list-menu__item {
     position: relative;

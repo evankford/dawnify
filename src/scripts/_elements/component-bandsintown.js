@@ -32,10 +32,9 @@ class BandsintownDates extends HTMLElement {
       artist: 'Keith Urban',
       limit: 8,
       dateFormat: 'long numbers',
-
       filterString: false,
       showLineup: false,
-      fallback: '.bit-fallback',
+      fallback: '.fallback',
       showYear: false,
       loadMore: true,
     };
@@ -74,7 +73,7 @@ class BandsintownDates extends HTMLElement {
       dateFormat: this.el.getAttribute('data-date-format') ? this.el.getAttribute('data-date-format') : 'long numbers',
       filterString: this.el.getAttribute('data-filter-string') ? this.el.getAttribute('data-filter-string'): false,
       showLineup: this.el.getAttribute('data-show-lineup') == "true" ? true : false,
-      fallback: '.bit-fallback',
+      fallback: '.fallback',
       showYear: this.el.getAttribute('data-show-year') == "true" ? true : false,
       loadMore: this.el.getAttribute('data-load-more') == "true" ? true : false,
     };
@@ -93,6 +92,7 @@ class BandsintownDates extends HTMLElement {
       const response = await fetch(url, { method: 'GET' });
       if (!response.ok) {
         this.el.querySelector('.error').classList.remove('hidden');
+        this.el.querySelector('.loader').classList.add('hidden');
         throw new Error('Failed to load dates. ' + response.message);
       }
       return response.json();
@@ -235,6 +235,7 @@ class BandsintownDates extends HTMLElement {
 
   noShowsToRender() {
     this.el.classList.add('no-shows');
+    this.showFallback();
   }
 
   renderShow(show) {
@@ -254,6 +255,7 @@ class BandsintownDates extends HTMLElement {
     let wrapper = document.createElement('div');
     wrapper.classList.add('bit-wrapper');
     let extras = false;
+
     if (this.shows.length > this.props.limit && this.props.loadMore) {
       extras = document.createElement('div');
 
@@ -333,6 +335,10 @@ class BandsintownDates extends HTMLElement {
     const fallbackEl = this.el.querySelector(this.props.fallback);
     if (fallbackEl) {
       fallbackEl.classList.remove('hidden');
+    }
+    const loaderEl = this.el.querySelector('.loader');
+    if (loaderEl) {
+      loaderEl.classList.add('hidden');
     }
   }
   addClickListeners() {

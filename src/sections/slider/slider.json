@@ -9,12 +9,12 @@
         "type": "select",
         "id": "pagination",
         "label": "Pagination",
-        "default": "dots",
+        "default": "bullets",
         "options": [{
-            "value": "dots",
-            "label": "Dots"
+            "value": "bullets",
+            "label": "bullets"
         }, {
-            "value": "progress",
+            "value": "progressbar",
             "label": "Progress Bar"
         }, {
             "value": "disabled",
@@ -25,7 +25,23 @@
         "id": "navigation",
         "label": "Enable Arrows",
         "default": true
-    }, {
+    },
+    {
+      "type" : "select",
+      "id" : "navigation_style",
+      "label" : "Nav Style",
+      "default" : "modern",
+      "options" : [
+        {
+          "value" : "modern",
+          "label" : "Modern"
+        },
+        {
+          "value" : "classic",
+          "label" : "Classic"
+        }
+      ]
+    },{
         "type": "range",
         "label": "Autoplay Speed",
         "id": "autoplay_speed",

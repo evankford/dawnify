@@ -102,7 +102,12 @@
         "type": "text",
         "id": "title",
         "label": "Title (for customizer UX)"
-    }],
+    },
+{
+    "type" : "text",
+    "id" : "id",
+    "label" : "ID - for anchor links"
+}],
     "blocks": [{
         "type": "label",
         "name": "Label",
