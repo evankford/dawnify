@@ -29,6 +29,12 @@
 
 .article-card {
   background-color: rgba(var(--color-foreground), 0.04);
+
+  &[class*=color-] {
+    background-color: rgba(var(--color-background), 0.95);
+    color: rgb(var(--color-foreground));
+  }
+
   align-self: flex-start;
   flex: 0 1 100%;
   display: flex;

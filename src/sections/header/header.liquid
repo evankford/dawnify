@@ -39,7 +39,7 @@
  --otxt-h: {{ section.settings.color_overlay_hover | default: '#ffffff' }};
 }
 .overlay-active .header-wrapper {
-  --color-foreground: {{ section.settings.color_overlay | default: "rgba(255, 255,255,0.75)" }};
+  --color-foreground: {{ section.settings.color_overlay.red }}, {{ section.settings.color_overlay.green }}, {{ section.settings.color_overlay.blue }};
 }
 </style>
 <site-header{% if section.settings.enable_sticky_header %} data-sticky {% endif %}{% if section.settings.enable_overlay %} data-overlay="true" {% endif %} class="header-wrapper{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %} {% if section.settings.header_shadow == true %} shadow {% endif %}">

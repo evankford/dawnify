@@ -1,0 +1,35 @@
+{
+  "name" : "Music Page",
+  "sections" : {
+    "hero" :  {
+      "type" : "slider"
+    },
+    "tour-dates" : {
+      "type" : "rich-text",
+      "settings" : {
+            "title" : "Tour Dates",
+            "color_scheme": "reverse"
+        },
+      "blocks" :{
+
+            "label" : {
+                "type" : "label",
+                "settings" : {
+                    "heading" : "Upcoming"
+                }
+            },
+           "heading" : {
+                "type" : "heading",
+                "settings" : {
+                    "heading" : "Tour Dates"
+                }
+            },
+           "dates" :{
+                "type" : "bandsintown"
+            }
+          },
+      "block_order" : ["label", "heading", "dates"]
+    }
+  },
+  "order" : ["hero", "tour-dates"]
+}

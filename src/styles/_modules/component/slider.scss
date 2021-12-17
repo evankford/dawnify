@@ -7,6 +7,7 @@
 @import "~swiper/components/pagination/pagination.scss";
 @import "~swiper/components/navigation/navigation.scss";
 @import "~swiper/components/effect-fade/effect-fade.scss";
+@import "~swiper/components/effect-coverflow/effect-coverflow.scss";
 
 ul.swiper-wrapper {
   list-style: none;
@@ -28,6 +29,9 @@ slider-element {
 
   --swiper-theme-color: white;
 }
+.swiper-pagination-bullets.swiper-pagination-bullets-dynamic {
+  white-space:nowrap;
+}
 .swiper-pagination-bullet {
   background: var(--swiper-pagination-color, var(--swiper-theme-color));
 }
@@ -39,9 +43,10 @@ div.swiper-slide, li.swiper-slide {
     height: auto;
   }
 
+
   .banner__content {
     position: absolute;
-    z-index: 3;
+    z-index: 4;
     height: 100%;
     box-sizing: border-box;
     width: 100%;
@@ -137,15 +142,16 @@ html.js .swiper-slide.swiper-slide-active {
       position: relative;
       padding: 0.35em;
       transform: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      // display: flex;
+      // align-items: center;
+      // justify-content: center;
     }
     .swiper-pagination-bullet {
       width: 11px;
       height: 2px;
       border-radius: 0;
-      margin: auto 1px;
+      margin: auto 3px;
+      transition: all 200ms ease;
     }
     .swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-prev-prev,
     .swiper-pagination-bullets-dynamic .swiper-pagination-bullet-active-next-next {
@@ -229,6 +235,13 @@ slider-component {
   }
 }
 
+slider-component .slider.slider--always {
+    padding-bottom: 6rem;
+}
+
+.no-js slider-component .slider.slider--always {
+    padding-bottom: 3rem;
+  }
 @media screen and (max-width: 989px) {
   slider-component .slider {
     padding-bottom: 6rem;
@@ -243,6 +256,20 @@ slider-component {
   scroll-snap-align: start;
   flex-shrink: 0;
 }
+
+.slider.slider--always {
+    position: relative;
+    flex-wrap: inherit;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scroll-padding-left: 1rem;
+    -webkit-overflow-scrolling: touch;
+    .slide__slide {
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+  }
 
 @media screen and (max-width: 749px) {
   .slider.slider--mobile {
@@ -337,7 +364,7 @@ slider-component {
 }
 
 @media screen and (min-width: 990px) {
-  .slider-buttons {
+  .slider-buttons:not(.always-show) {
     display: none;
   }
 }

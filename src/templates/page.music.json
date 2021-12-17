@@ -1,0 +1,15 @@
+{
+  "name" : "Music Page",
+  "sections" : {
+    "hero" :  {
+      "type" : "slider"
+    },
+    "album-slider" : {
+      "type" : "album-slider"
+    },
+    "music-collection" : {
+      "type" : "featured-collection"
+    }
+  },
+  "order" : ["hero", "album-slider", "music-collection"]
+}

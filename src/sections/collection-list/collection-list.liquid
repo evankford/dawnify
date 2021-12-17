@@ -6,30 +6,30 @@
 
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 
-<div class="collection-list-wrapper style--{{ section.settings.style }} page-width{% if section.settings.swipe_on_mobile == true %} page-width-desktop{% endif %}{% if section.settings.title == blank %} no-heading{% endif %}{% if section.settings.show_view_all == false or section.blocks.size > collections.size %} no-mobile-link{% endif %} color-{{ section.settings.color_scheme }}" {% if section.settings.anchor_id != blank %} id="{{section.settings.anchor_id | handleize }}" {% endif %}>
+<div class="collection-list-wrapper style--{{ section.settings.style }} page-width{% if section.settings.swipe_on_mobile == true %} page-width-desktop{% endif %}{% if section.settings.title == blank %} no-heading{% endif %}{% if section.settings.show_view_all == false or section.blocks.size > collections.size %} no-mobile-link{% endif %}" {% if section.settings.anchor_id != blank %} id="{{section.settings.anchor_id | handleize }}" {% endif %}>
   <div class="title-wrapper-with-link{% if section.settings.swipe_on_mobile == true %} title-wrapper--self-padded-tablet-down{% else %} title-wrapper--self-padded-mobile{% endif %}{% if section.settings.title == blank %} title-wrapper-with-link--no-heading{% endif %}">
     <div class="common-header text--{{ section.settings.text_align | default: 'left' }}">
       {% if section.settings.introduction != blank %}
-        <div class="h4 label">{{ section.settings.introduction }}</div>
+        <div data-reveal class="h4 label">{{ section.settings.introduction }}</div>
       {% endif %}
       {% if section.settings.title != blank %}
-      <h2 class="collection-list-title heading">{{ section.settings.title | escape }}</h2>
+      <h2 data-reveal class="collection-list-title heading">{{ section.settings.title | escape }}</h2>
       {% endif %}
       {% if section.settings.subtitle != blank %}
-        <div class="h4 label">{{ section.settings.subtitle }}</div>
+        <div data-reveal class="h4 label">{{ section.settings.subtitle }}</div>
       {% endif %}
     </div>
     {%- if section.settings.show_view_all and section.settings.swipe_on_mobile -%}
-      <a href="{{ routes.collections_url }}" class="link underlined-link ">{{ 'sections.collection_list.view_all' | t }}</a>
+      <a data-reveal href="{{ routes.collections_url }}" class="link underlined-link ">{{ 'sections.collection_list.view_all' | t }}</a>
     {%- endif -%}
   </div>
   <slider-component class="slider-mobile-gutter">
-    <ul class="collection-list grid grid-grid {% if section.settings.center_insufficient == true %} center-insufficient {% endif %} grid-grid--{{ section.settings.grid_size }} {% if section.settings.swipe_on_mobile %} slider slider--tablet grid--peek{% endif %}" data-max="{{ section.blocks.size }}"
+    <ul data-reveal class="collection-list grid grid-grid {% if section.settings.center_insufficient == true %} center-insufficient {% endif %} grid-grid--{{ section.settings.grid_size }} {% if section.settings.swipe_on_mobile %} slider slider--tablet grid--peek{% endif %}" data-max="{{ section.blocks.size }}"
       id="Slider-{{ section.id }}"
       role="list"
     >
       {%- for block in section.blocks -%}
-        <li class="collection-list__item grid__item{% if section.settings.swipe_on_mobile %} slider__slide{% endif %} style--{{ section.settings.style | default: 'standard' }}" {{ block.shopify_attributes }}>
+        <li  class="collection-list__item grid__item{% if section.settings.swipe_on_mobile %} slider__slide{% endif %} style--{{ section.settings.style | default: 'standard' }}" {{ block.shopify_attributes }}>
 
         {%- assign collection = collections[block.settings.collection] -%}
         {% if block.type == "featured_collection" %}

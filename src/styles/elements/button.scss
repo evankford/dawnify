@@ -233,4 +233,10 @@ details[open] > .share-button__fallback {
 .button-wrap {
   margin: 0.8rem auto;
   text-align: inherit;
+  &:first-child {
+    margin-top: 0;
+  }
+  &:last-child {
+    margin-bottom: 0;
+  }
 }

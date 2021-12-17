@@ -75,6 +75,14 @@ class AlbumSlider extends HTMLElement {
       }
     }
     if (this.fullWidth) {
+      params.effect = "coverflow";
+      params.coverflowEffect = {
+        rotate: 50,
+        depth: 70,
+        stretch: 20,
+        slideShadows: false,
+      };
+      params.speed= 500;
       params.slidesPerView = 1;
       params.breakpoints = {};
     } else {
@@ -103,7 +111,7 @@ class AlbumSlider extends HTMLElement {
   init () {
     this.params = this.getParams();
     this.slider = new window.Slider(this, this.params)
-    console.log(this.slider)
+    // console.log(this.slider)
   }
 }
 if (!customElements.get('album-slider')) {

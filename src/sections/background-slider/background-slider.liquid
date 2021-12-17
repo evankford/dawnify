@@ -1,8 +1,12 @@
-
+{%- comment -%}Load styles{%- endcomment -%}
 <script defer src="{{ 'slider.js' | asset_url }}"></script>
 <link rel="stylesheet" href="{{ 'component-slider.css' | asset_url }}" media="print" onload="this.media='all'">
-
 <noscript>{{ 'component-slider.css' | asset_url | stylesheet_tag }}</noscript>{{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" href="{{ 'section-background-slider.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript>{{ 'section-background-slider.css' | asset_url | stylesheet_tag }}</noscript>{{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" href="{{ 'component-slider-styles.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript>{{ 'component-slider-styles.css' | asset_url | stylesheet_tag }}</noscript>{{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
+
 
 <div class="background-slider {% if section.settings.auto_height != true%} fixed-height {% endif %}">
   <div class="background-slider__content banner__content" style="align-items: {{ settings.desktop_text_box_position | default: 'center' }};">
@@ -43,7 +47,7 @@
     {% if section.blocks.size > 1 %}
     {% assign is_slide = true %}
     <slider-element class="swiper-container {% if section.settings.auto_height != true%} fixed-height {% endif %}"
-      {% if section.settings.autoplay > 0 %} data-autoplay="{{ section.settings.autoplay}}"{% endif %}
+      {% if section.settings.autoplay_speed > 0 %} data-autoplay="{{ section.settings.autoplay_speed }}"{% endif %}
       {% if section.settings.navigation == true %} data-navigation="true" {% endif %}
       {% if section.settings.pagination != "disabled" %} data-pagination="{{ section.settings.pagination }}"{% endif %}
       {% if section.settings.auto_height == true %} data-auto-height="true" {% endif %}

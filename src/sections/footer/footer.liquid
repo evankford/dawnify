@@ -30,7 +30,7 @@
             assign footer_grid_class = 'grid--3-col-tablet'
           endif
         -%}
-        <div class="layout--{{ section.settings.layout }} footer__blocks-wrapper {% if section.settings.layout != 'stacked' %} grid grid--1-col grid--2-col grid--4-col-tablet {{ footer_grid_class }} {% endif %}">
+        <div data-reveal class="layout--{{ section.settings.layout }} footer__blocks-wrapper {% if section.settings.layout != 'stacked' %} grid grid--1-col grid--2-col grid--4-col-tablet {{ footer_grid_class }} {% endif %}">
           {%- for block in section.blocks -%}
             <div class="footer-block grid__item{% if block.type == 'link_list' and block.settings.heading != blank %} footer-block--menu small-hide{% endif %} {% unless block.settings.visible_large %} hide--desktop {% endunless %} {% unless block.settings.visible_medium %} hide--medium {% endunless %} {% unless block.settings.visible_small %} hide--small {% endunless %}" {{ block.shopify_attributes }}>
               {%- if block.settings.title != blank and block.type != 'accordion' -%}
@@ -75,7 +75,13 @@
                     {% assign copyright_text_shown = true %}
                   {% endif %}
                 {%- when 'newsletter' -%}
+                {% if block.settings.content != blank %}
+                <div class="rte">
+                  {{ block.settings.content }}
+                </div>
+                {% endif %}
                   <div class="footer-block__newsletter {% if block.settings.enable_full_width == true %}layout--full{% endif %}">
+
                     {% render 'newsletter-form' with id: 'ContactFooter' , class: 'footer__newsletter' %}
                     {%- if block.settings.include_socials -%}
                       {%- render 'socials-ul' -%}
@@ -127,7 +133,7 @@
   <div class="footer__content-bottom layout--{{ section.settings.layout }}">
     <div class="footer__content-bottom-wrapper page-width">
     {% if section.settings.agency_logo != blank or section.settings.credits != blank %}
-        <div class="footer__column footer__attribution">
+        <div data-reveal class="footer__column footer__attribution">
         {%- if section.settings.agency_logo != blank -%}
           {%- if section.settings.agency_link != blank -%}
             <a href="{{ section.settings.agency_link }}" target="_blank" rel="nofollow noopener noreferrer" style="display: inline-block; width: {{ section.settings.agency_logo_width }}px;">
@@ -144,7 +150,7 @@
         {%- endif -%}
       </div>
     {% endif %}
-      <div class="footer__column footer__localization">
+      <div data-reveal class="footer__column footer__localization">
         {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
           <noscript>
             {%- form 'localization', id: 'FooterCountryFormNoScript', class: 'localization-form' -%}
@@ -229,7 +235,7 @@
           </localization-form>
         {%- endif -%}
       </div>
-      <div class="footer__column footer__column--info">
+      <div data-reveal class="footer__column footer__column--info">
         {% unless copyright_text_shown %}
           <div class="footer__copyright">
             {{ copyright_text }}

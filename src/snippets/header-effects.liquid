@@ -1,7 +1,37 @@
 {% if settings.fx_scroll == true %}
-  <script defer="true" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
-  <script defer="true" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <style>
+    html.sr [data-reveal],
+    html.sr  [data-reveal-fade] {
+
+      visibility: hidden;
+    }
+
+    @media (min-width: 750px) {
+      html.sr [data-reveal-desktop] {
+          visibility: hidden;
+      }
+    }
+  </style>
+  <script>
+
+    function generalReveal() {
+      ScrollReveal().reveal('[data-reveal]', { duration: 400, distance: '50px', interval: 50 });
+      ScrollReveal().reveal('[data-reveal-fade]', { duration: 600, distance: '0px', interval: 0 });
+      ScrollReveal().reveal('[data-reveal-desktop]', { mobile: false, duration: 500, distance: '50px', interval: 25 });
+    }
+    window.addEventListener('DOMContentLoaded', generalReveal);
+    document.addEventListener("shopify:section:load", generalReveal);
+
+
+  </script>
+
+  <script>
+
+
+  </script>
 {% endif %}
+
 
 <!-- Any polyfill to enable smoothscroll for the JavaScript APIs -->
 <script src="https://unpkg.com/smoothscroll-polyfill/dist/smoothscroll.min.js"></script>
@@ -80,3 +110,110 @@
 {% endif %}
 
 </style>
+
+  {% unless content_for_header contains "Shopify.designMode" %}
+    {% if settings.enable_loading_effect == true  %}
+    <script async src="https://unpkg.com/@barba/core"></script>
+    <script async src="https://unpkg.com/@barba/prefetch"></script>
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
+    <script defer>
+      function barbaCheck() {
+      if (typeof barba == 'object' ) {
+
+        doBarba();
+
+        return true;
+      } return false;}
+      function doBarba() {
+        if (typeof barbaPrefetch != 'undefined') {
+          barba.use(barbaPrefetch)
+        }
+        barba.init({
+          cacheIgnore: ['/cart'],
+          prefetchIgnore: ['/products/*'],
+          transitions: [{
+            name : "default-transition",
+            leave(data) {
+              document.body.classList.add('loading');
+              return gsap.to(data.current.container, {
+                opacity: 0,
+                scale: 1.05,
+                y: 10,
+                onComplete: function() { data.current.container.style.display = "none";}
+              });
+            },
+            once() {
+              document.body.classList.remove('loading');
+              return;
+            },
+            afterEnter(data) {
+                               window.dispatchEvent(new Event('checkOverlay'));
+
+            return gsap.from(data.next.container, {
+                opacity: 0,
+                scale: 1.04,
+                y: 10,
+               delay: 0.5,
+              }
+            )
+
+            },
+
+            enter(data) {
+                document.body.classList.remove('loading');
+                return true;
+
+
+            },
+            after() {
+              {% if settings.fx_scroll == true %}
+                ScrollReveal().sync();
+              {% endif %}
+
+            }
+          }]
+        })
+      }
+
+      window.addEventListener('DOMContentLoaded' , function() {
+        var barbaInterval =setInterval( function() {
+          if (barbaCheck()){
+            return window.clearInterval(barbaInterval);
+          }}, 200);
+        })
+    </script>
+    <div class="preloader" aria-hidden="true">
+      {% if settings.preloader_image  != blank %}
+      <img src="{{settings.preloader_image | img_url: '320x320' }}" alt="loading site">
+      {% endif %}
+    </div>
+    <style>
+      .preloader {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--gradient-base-accent-2);
+        transform: scale(1.1);
+        transition: transform 400ms ease, opacity 500ms ease;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 10000000000;
+      }
+    .loading .preloader {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .preloader img {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 150px;
+      height: auto;
+      max-width: 40%;
+      transform: translate3d(-50%, -50%, 0);
+      }
+    </style>
+  {% endif %}
+  {% endunless %}

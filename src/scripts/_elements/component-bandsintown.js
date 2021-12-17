@@ -60,6 +60,7 @@ class BandsintownDates extends HTMLElement {
         this.noShowsToRender();
       }
       window.dispatchEvent(new Event('resize'));
+      this.afterRenderShows();
     });
 
     this.addClickListeners();
@@ -87,7 +88,7 @@ class BandsintownDates extends HTMLElement {
       cleanArtist +
       '/events?app_id=' +
       this.props.appId;
-    console.log(url);
+    // console.log(url);
     try {
       const response = await fetch(url, { method: 'GET' });
       if (!response.ok) {
@@ -235,12 +236,14 @@ class BandsintownDates extends HTMLElement {
 
   noShowsToRender() {
     this.el.classList.add('no-shows');
+
     this.showFallback();
   }
 
   renderShow(show) {
     let showEl = document.createElement('div');
     showEl.classList.add('bit-show');
+    showEl.setAttribute('data-reveal', true);
 
     let date = this.renderDate(show);
     let info = this.renderInfo(show);
@@ -343,6 +346,23 @@ class BandsintownDates extends HTMLElement {
   }
   addClickListeners() {
     this.el.addEventListener('click', (evt) => this.clickListener(evt));
+  }
+
+  afterRenderShows() {
+    if (window.ScrollReveal) {
+      window.ScrollReveal().reveal('.bit-show');
+    } else {
+      window.addEventListener('DOMContentReady', function () {
+        if (window.ScrollReveal) {
+          window.ScrollReveal().reveal('.bit-show');
+        }
+      });
+      setTimeout(() => {
+        if (window.ScrollReveal) {
+          window.ScrollReveal().reveal('.bit-show');
+        }
+      }, 1000);
+    }
   }
 }
 

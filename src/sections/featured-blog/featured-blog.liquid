@@ -1,3 +1,5 @@
+{% comment %} Modded {% endcomment %}
+
 <link rel="stylesheet" href="{{ 'component-slider.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-card.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-article-card.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -9,14 +11,30 @@
 
 {{ 'section-featured-blog.css' | asset_url | stylesheet_tag }}
 
-<div class="blog{% if section.settings.soft_background %} background-secondary{% endif %}{% if section.settings.heading == blank %} no-heading{% endif %}">
+{% if section.settings.id == blank %}
+{% assign inner_id = "blog" | append : section.id %}
+{% else %}
+{% assign inner_id = section.settings.id %}
+{% endif %}
+
+{% render 'section-style' with inner: true, id: inner_id, params: section.settings %}
+
+<div id="{{ inner_id }}" class="blog {% if section.settings.soft_background %} background-secondary{% endif %}{% if section.settings.heading == blank %} no-heading{% endif %} color-{{ section.settings.color_scheme }}"">
   <div class="page-width-desktop">
-    <div class="title-wrapper-with-link{% if section.settings.heading == blank %} title-wrapper-with-link--no-heading{% endif %} title-wrapper--self-padded-tablet-down">
-      <h2 class="blog__title">{{ section.settings.heading | escape }}</h2>
+    <div class="title-wrapper-with-link{% if section.settings.heading == blank %} title-wrapper-with-link--no-heading{% endif %} title-wrapper--self-padded-tablet-down layout--{{ section.settings.text_align }} common-header">
+      <div class="header-wrap">
+        {% if section.settings.introduction != blank %}
+          <h4 data-reveal class="{% if section.settings.text_size == 'small' %} h5 {% elsif section.settings.text_size == 'large' %} h3 {% else %}h4 {% endif %} label">{{section.settings.introduction}}</h4>
+        {% endif %}
+        <h2 data-reveal class="blog__title heading {% if section.settings.text_size == 'small' %} h2 {% elsif section.settings.text_size == 'large' %} h0 {% else %}h1 {% endif %}">{{ section.settings.heading | escape }}</h2>
+        {% if section.settings.subtitle != blank %}
+          <h4 data-reveal class="{% if section.settings.text_size == 'small' %} h5 {% elsif section.settings.text_size == 'large' %} h3 {% else %}h4 {% endif %} label">{{section.settings.subtitle}}</h4>
+        {% endif %}
+      </div>
 
       {%- if section.settings.blog != blank and section.settings.show_view_all and section.settings.post_limit < section.settings.blog.articles_count -%}
         <a href="{{ section.settings.blog.url }}"
-          class="link underlined-link large-up-hide"
+          class="link underlined-link "
         >
           {{ 'sections.featured_blog.view_all' | t }}
         </a>
@@ -34,8 +52,8 @@
           role="list"
         >
           {%- for article in section.settings.blog.articles limit: section.settings.post_limit -%}
-            <li class="blog__post grid__item article slider__slide slider__slide--full-width">
-              {% render 'article-card', blog: section.settings.blog, article: article, show_image: section.settings.show_image, show_date: section.settings.show_date, show_author: section.settings.show_author %}
+            <li class="blog__post grid__item article slider__slide slider__slide--full-width ">
+              {% render 'article-card', blog: section.settings.blog, article: article, show_image: section.settings.show_image, show_date: section.settings.show_date, show_author: section.settings.show_author, color_scheme: section.settings.box_color_scheme %}
             </li>
           {%- endfor -%}
         </ul>
@@ -53,13 +71,14 @@
         {%- endif -%}
       </slider-component>
 
-      {%- if section.settings.show_view_all and section.settings.post_limit < section.settings.blog.articles_count -%}
+     {% comment %} Removed in favor of in-line link {%- if section.settings.show_view_all and section.settings.post_limit < section.settings.blog.articles_count -%}
         <div class="blog__view-all center small-hide medium-hide">
           <a href="{{ section.settings.blog.url }}" class="blog__button button">
             {{ 'sections.featured_blog.view_all' | t }}
           </a>
         </div>
       {%- endif -%}
+      {% endcomment %}
     {%- else -%}
       <div class="blog-placeholder">
         <div class="placeholder media media--landscape">

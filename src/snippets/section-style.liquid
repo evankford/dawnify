@@ -1,14 +1,7 @@
 {% comment %} Renders section style. Requires id and section settings object {% endcomment %}
 <style>
   #{% unless inner %}shopify-section-{% endunless %}{{ id }} {
-    {% if params.background_color != blank %}
-    background-color: {{ params.background_color | default: "transparent" }};
-    --color-background: {{ params.background_color.red }}, {{ params.background_color.green }},{{ params.background_color.blue }};
-    {% endif %}
-    {% if params.text_color != blank %}
-    color: {{ params.text_color | default: "inherit" }};
-    --color-foreground: {{ params.text_color.red }}, {{ params.text_color.green }}, {{ params.text_color.blue }};
-    {% endif %}
+
 
     padding-top: {{ params.spacing_top | divided_by: 2.5 | default: 1 }}rem;
     padding-bottom: {{ params.spacing_bottom | divided_by: 2.5 | default: 1 }}rem;
@@ -92,33 +85,47 @@
   }
   {% endif %}
 
-  {% if params.color_scheme != blank and params.color_scheme != 'disabled' and params.background_color == blank and params.text_color == blank %}
+  {% if params.color_scheme != blank and params.color_scheme != 'disabled' %}
   #{% unless inner %}shopify-section-{% endunless %}{{ id }} {
-    background-color: rgb(var(--color-background));
+    background: var(--gradient-background, rgb(var(--color-background)));
     color: rgb(var(--color-foreground));
     {% case params.color_scheme %}
       {% when 'accent-1' %}
     --color-foreground: var(--color-base-solid-button-labels);
-    --color-background: var(--color-base-accent-1);
+    --color-background: var(--gradient-base-accent-1);
+    --gradient-background: var(--gradient-base-accent-1);
       {% when 'accent-2' %}
     --color-foreground: var(--color-base-solid-button-labels);
-    --color-background: var(--color-base-accent-2);
+    --color-background: var(--gradient-base-accent-2);
+    --gradient-background: var(--gradient-base-accent-2);
       {% when 'transparent-light' %}
     --color-foreground: 255, 255, 255;
     --color-background: transparent;
       {% when 'transparent-dark' %}
-    --color-foreground: 0,0,0;
+    --color-foreground: 0, 0 , 0;
     --color-background: transparent;
       {% when 'background-1' %}
     --color-foreground: var(--color-base-text);
     --color-background: var(--color-base-background-1);
+    --gradient-background: var(--gradient-base-background-1);
       {% when 'background-2' %}
     --color-foreground: var(--color-base-text);
     --color-background: var(--color-base-background-2);
+    --gradient-background: var(--gradient-base-background-2);
       {% when 'inverse' %}
     --color-foreground: var(--color-base-background-1);
     --color-background: var(--color-base-text);
+    rgbackground: var(--color-base-text);
     {% endcase %}
+
+     {% if params.background_color != blank and params.background_color != transparent and params.background_color != 'rgba(0,0,0,0)' %}
+    background-color: {{ params.background_color | default: "transparent" }};
+    --color-background: {{ params.background_color.red }}, {{ params.background_color.green }},{{ params.background_color.blue }};
+    {% endif %}
+    {% if params.text_color != blank and params.text_color != transparent %}
+    color: {{ params.text_color | default: "inherit" }};
+    --color-foreground: {{ params.text_color.red }}, {{ params.text_color.green }}, {{ params.text_color.blue }};
+    {% endif %}
   }
 
   {% endif %}

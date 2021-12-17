@@ -65,7 +65,7 @@
     {% endif %}
   </head>
 
-  <body class="template-{{ template.name }} gradient {% if settings.enable_sidebar_menu == true%} has-sidebar{% endif %}">
+  <body data-barba="wrapper" class="template-{{ template.name }} gradient {% if settings.enable_sidebar_menu == true%} has-sidebar{% endif %} {% if settings.enable_loading_effect %}loading {% endif %}">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ "accessibility.skip_to_text" | t }}
     </a>
@@ -74,7 +74,7 @@
     {% if settings.enable_sidebar_menu %}
         {% section 'sidebar' %}
     {% endif %}
-    <main id="MainContent" class="main-content content-for-layout focus-none {% if template.name == 'index' %} has-overlay {% endif %}" role="main" tabindex="-1">
+    <main data-barba="container" data-barba-namespace="{{template.name}}" id="MainContent" class="main-content content-for-layout focus-none {% if template.name == 'index' %} has-overlay {% endif %}" role="main" tabindex="-1">
       {{ content_for_layout }}
     </main>
 
@@ -118,5 +118,6 @@
     {{ settings.footer_code }}
     {% endif %}
     {% render 'browser-update' %}
+
   </body>
 </html>

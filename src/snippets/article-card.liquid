@@ -9,10 +9,10 @@
     - show_author: {String} The setting either show the article author or not. If it's not included it will not show the author by default
 
     Usage:
-    {% render 'article-card' blog: blog, article: article, show_image: section.settings.show_image %}
+    {% render 'article-card' blog: blog, article: article, show_image: section.settings.show_image, color_scheme %}
 {% endcomment %}
 
-<article class="article-card{% if article.image == blank or show_image == false %} article-card--no-image{% endif %}" aria-labelledby="Article-{{ article.id }}">
+<article class="article-card{% if article.image == blank or show_image == false %} article-card--no-image{% endif %} {% if color_scheme != blank %} color-{{color_scheme | default: 'background-2' }} {% endif %}" aria-labelledby="Article-{{ article.id }}">
   <a href="{{ article.url }}" class="article-content motion-reduce">
     {%- if show_image == true and article.image -%}
       <div class="article-card__image-wrapper">

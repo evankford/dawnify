@@ -1,6 +1,6 @@
-import Swiper, { Lazy, Thumbs, A11y, Navigation, Pagination } from 'swiper';
+import Swiper, { Lazy, Thumbs, A11y, Navigation, Pagination, Autoplay, EffectFade, EffectCoverflow } from 'swiper';
+Swiper.use([Lazy, Thumbs, A11y, Navigation, Pagination, Autoplay, EffectFade, EffectCoverflow]);
 
-Swiper.use([Lazy, Thumbs, A11y, Navigation, Pagination]);
 //Returns the element
 class Slider {
   constructor(el, options = {}, thumbEl = false, ) {
@@ -112,14 +112,21 @@ window.Slider = Slider;
 window.dispatchEvent(new Event('slidersReady'));
 window.slidersReady = true;
 
+
 if (!customElements.get('slider-element')) {
   customElements.define('slider-element', class Slider extends HTMLElement {
   constructor() {
-    super();
 
+    super();
   //this == the element
     const params = this.generateParams();
+    this.contentBox = this.querySelector('[data-slider-content]');
+
     this.slider  = new window.Slider(this, params );
+
+    if (this.contentBox != null && this.slider) {
+      this.setupContentBox()
+    }
   }
 
   generateParams() {
@@ -140,9 +147,9 @@ if (!customElements.get('slider-element')) {
     if (this.getAttribute('data-autoplay')) {
 
       params.autoplay = {
-        delay: this.getAttribute('data-autoplay'),
+        delay: parseInt(this.getAttribute('data-autoplay')) * 1000,
         disableOnInteraction: true,
-        pauseOnMouseEnter: true
+        // pauseOnMouseEnter: true
       }
     }
 
@@ -161,8 +168,44 @@ if (!customElements.get('slider-element')) {
       if (this.getAttribute('data-effect') == "fade" || this.getAttribute('data-effect') == 'slide') {
         params.effect = this.getAttribute('data-effect');
       }
+      if (this.getAttribute('data-effect') == "fade") {
+        params.speed = 500;
+        params.fadeEffect = {
+          crossFade: true
+        }
+      }
     }
     return params;
+  }
+
+  //Content box stuff
+
+  setupContentBox() {
+    this.classList.add('has-content-box');
+    const sliderContent = this.querySelector('[data-slider-content]')
+    const slideContents = this.querySelectorAll('[data-slide-content]')
+    const timeoutLength = 200;
+
+    if (sliderContent && slideContents.length) {
+
+      this.slider.swiper.on('slideChange', (evt) => {
+
+        const index = evt.activeIndex;
+
+        sliderContent.classList.add('animating--out')
+
+
+        setTimeout(() => {
+          sliderContent.innerHTML = slideContents[index].innerHTML;
+          // sliderContent.classList.add('animating--in')
+          sliderContent.classList.remove('animating--out')
+          setTimeout(() => {
+            // sliderContent.classList.remove('animating--in')
+          }, timeoutLength);
+        }, timeoutLength);
+
+      })
+    }
   }
 })
 }

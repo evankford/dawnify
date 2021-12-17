@@ -66,10 +66,10 @@ class VideoBackground extends HTMLElement {
       url: this.getAttribute('data-bg-video-url'),
       useCustomFallbackImage: true,
       fitMode: 'fill',
-      // DEBUG: {
-      //   enabled: true,
-      //   verbose: true
-      // }
+      DEBUG: {
+        enabled: false,
+        verbose: true
+      }
     });
     this.classList.add('loaded');
     this.isLoaded = true;

@@ -326,12 +326,12 @@ small.credit {
 
   .footer-block__newsletter .newsletter-form__button.button {
     margin-top: 0;
-    margin-left: 1.4rem;
+    // margin-left: 1.4rem;
   }
 
   .footer-block__newsletter:not(:only-child) .footer__newsletter {
     justify-content: flex-start;
-    margin: 0;
+    // margin: 0;
   }
   .layout--stacked .footer-block__newsletter .footer__newsletter {
     margin: auto;
@@ -687,4 +687,13 @@ footer details[open] summary ~ * {
 
 .footer .disclosure__link--active {
   text-decoration: underline;
+}
+
+.footer__newsletter.newsletter-form {
+    flex-direction: row;
+    margin: 1.4rem auto;
+    width: 100%;
+    max-width: 100%;
+    align-items: center;
+    justify-content: flex-start;
 }

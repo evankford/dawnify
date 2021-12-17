@@ -2,7 +2,7 @@
   General functions for the rest of the site.
   IDEALLY should be unnecessary, as each subfile should load its dependencies
 */
-@use "abstracts";
+@use "abstracts" as *;
 /** Core functions (typography/resets) **/
 @use "core";
 /** Components */

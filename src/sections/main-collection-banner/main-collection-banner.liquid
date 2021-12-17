@@ -19,18 +19,18 @@ div.collection-hero:not(.collection-hero--with-image) {
     {% if section.settings.breadcrumbs != "disabled" %}
     {% render 'breadcrumbs' with style: section.settings.breadcrumbs %}
     {% endif %}
-      <h1 class="collection-hero__title heading">
+      <h1 data-reveal class="collection-hero__title heading">
         <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
         {{- collection.title | escape -}}
       </h1>
 
       {%- if section.settings.show_collection_description -%}
-        <div class="collection-hero__description rte">{{ collection.description }}</div>
+        <div data-reveal class="collection-hero__description rte">{{ collection.description }}</div>
       {%- endif -%}
     </div>
 
     {%- if section.settings.show_collection_image and collection.image -%}
-      <div class="collection-hero__image-container media">
+      <div data-reveal class="collection-hero__image-container media">
         <img srcset="{%- if collection.image.width >= 165 -%}{{ collection.image | img_url: '165x' }} 165w,{%- endif -%}
           {%- if collection.image.width >= 360 -%}{{ collection.image | img_url: '360x' }} 360w,{%- endif -%}
           {%- if collection.image.width >= 535 -%}{{ collection.image | img_url: '535x' }} 535w,{%- endif -%}

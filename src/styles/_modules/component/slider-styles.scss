@@ -1,0 +1,200 @@
+@use "../../abstracts/" as *;
+//Multiple images as content
+
+.swiper-slide--content-image {
+  overflow: hidden;
+}
+.content-image-wrap {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  max-width: $grid-large;
+  height: 100%;
+
+  transform: translate3d(-50% ,-50%, 0);
+  z-index: 2;
+  justify-content: center;
+  align-items: center;
+
+  div[class*=content-image__] {
+    flex:1 1 auto;
+    min-width: 50px;
+
+    //Transition effects
+    transition-delay: 50ms;
+    z-index: 2;
+    &:nth-child(2) {
+      transition-delay: 100ms;
+      z-index: 1;
+    }
+    &:nth-child(3) {
+      transition-delay: 150ms;
+    }
+  }
+
+  &.style--overlapping {
+    width: 95%;
+    max-width: 800px;
+    .content-image__2 {
+      margin: auto -50px;
+
+      @include media-query($medium-up) {
+        width: 80%;
+        margin: auto -100px;
+      }
+    }
+  }
+}
+
+.has-content-box .swiper-slide [data-slide-content] {
+  display: none;
+}
+
+.slider-content-box {
+  width: 100%;
+  z-index: 2;
+  position: relative;
+
+  @include media-query($small) {
+    text-align: center;
+    max-width: 90%;
+    margin: -50px auto 0;
+    border-bottom: 4px solid rgb(var(--color-base-accent-2));
+  }
+
+  @include media-query($medium-up) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 5;
+    transform: translateX(50%) translateY(50%); //easier from the center;
+
+    &[class*=location--bottom] {
+      transform: translateY(0); //easier from the top;
+      top: auto;
+      bottom: 4%;
+      bottom: clamp(3%, calc(20px + 1vw), 5%);
+    }
+    &[class*=location--top] {
+      transform: translateY(0); //easier from the top;
+      top: 4%;
+      top: clamp(3%, calc(20px + 1vw), 5%);
+    }
+
+    &[class*=-left] {
+      transform: translateX(0);
+      left: 4%;
+      left: clamp(2%, calc(10px + 2vw), 7%);
+    }
+    &[class*=-right] {
+      transform: translateX(0);
+      left: auto;
+      right: 4%;
+      right: clamp(2%, calc(12px + 2vw), 7%);
+    }
+    max-width: clamp(200px, 180px + 20vw, 600px);
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.9em;
+  }
+
+  .h2 {
+    font-size: var(--fz-header-smaller);
+  }
+  @include media-query($small) {
+    .h2 {
+      font-size: calc(var(--fz-header-mobile) * 0.8);
+    }
+  }
+  &__inner {
+    padding: 1.2rem;
+    padding: clamp(1rem, calc(0.8rem + 0.6vw), 2rem) clamp(2rem, calc(1.5rem + 1vw), 3rem);
+    @include media-query($small) {
+      padding-top: 2rem;
+      // padding-bottom: 0;
+      margin-top: -2rem;
+    }
+  }
+
+
+}
+
+[data-slider-content] {
+
+   & > * {
+     animation: animIn 200ms ease;
+     animation-fill-mode: both;
+    transition: transform 200ms ease, opacity 200ms ease;
+    @for $i from 1 through 5{
+
+      &:nth-child(#{$i}) {
+        transition-delay: $i * 50ms;
+        animation-delay: $i - 1 * 50ms;
+      }
+    }
+  }
+
+  &.animating--out > * {
+    animation: animOut 200ms ease;
+  }
+
+}
+
+@keyframes animIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+    transform: translateY(clamp(20px, 80%, 300px));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes animOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+    transform: translateY(clamp(20px, 80%, 300px));
+  }
+}
+
+.image-section .slider-content-box  .swiper-navigation.style--modern {
+    left: auto;
+      right: auto;
+      position: relative;
+      bottom: auto;
+      transform: translate3d(0, 0, 0);
+      justify-content: flex-start;
+    padding: 0 5px;
+    background: black;
+    margin: 0;
+    @include media-query($small) {
+      padding: 5px 1.9rem;
+      background: rgb(var(--color-background));
+      justify-content: center;
+    }
+    button {
+      padding: 0.6em;
+    }
+  }
+
+  .slider-content-box__inner.color-inverse {
+    @include media-query($medium-up) {
+      background: rgba(var(--color-base-text), 0.8);
+    }
+}
+  .slider-content-box__inner.color-accent-1 {
+    @include media-query($medium-up) {
+      background: rgba(var(--color-base-accent-1), 0.8);
+    }
+}

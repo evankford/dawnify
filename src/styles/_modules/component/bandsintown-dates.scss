@@ -17,6 +17,7 @@ h2.loader {
 }
 
 bandsintown-dates {
+	display: block;
 	.hidden {
 		display: none;
   }
@@ -102,13 +103,13 @@ h2.loader {
 		background: rgba(white, 0.2);
 	}
 	@include media-query($small) {
-		margin: 20px auto
+		margin: 0.5rem auto
 	}
 
 }
 .bit-date {
 	padding:  var(--bit-elem-padding);
-	flex: 0 1 3em;
+	flex: 0 1 5.5em;
 	text-align: center;
 
 	opacity: 0.6;

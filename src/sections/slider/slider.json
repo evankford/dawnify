@@ -41,7 +41,98 @@
           "label" : "Classic"
         }
       ]
-    },{
+    },
+    {
+      "type" : "select",
+      "id" : "content_style",
+      "label" : "Content Style",
+      "default" : "over-hero",
+      "options" : [
+        {
+          "value" : "over-hero",
+          "label" : "Over Hero"
+        },
+        {
+          "value" : "static",
+          "label" : "In Static Box"
+        }
+      ]
+    },
+    {
+       "type" : "select",
+        "id" : "content_location",
+        "label" : "Static Content Location",
+        "info" : "Only applicable to static style on large screens.",
+        "default" : "bottom-right",
+        "options" : [
+            {
+                "value": "top-right",
+                "label" : "Top Right"
+            },
+            {
+                "value": "top-left",
+                "label" : "Top Left"
+            },
+            {
+                "value": "top-center",
+                "label" : "Top Center"
+            },
+            {
+                "value": "middle-right",
+                "label" : "Middle Right"
+            },
+            {
+                "value": "middle-left",
+                "label" : "Middle Left"
+            },
+            {
+                "value": "middle-center",
+                "label" : "Middle Center"
+            },
+            {
+                "value": "bottom-right",
+                "label" : "Bottom Right"
+            },
+            {
+                "value": "bottom-left",
+                "label" : "Bottom Left"
+            },
+            {
+                "value": "bottom-center",
+                "label" : "Bottom Center"
+            }
+        ]
+     }, {
+            "type": "select",
+            "id": "content_color_scheme",
+            "default" : "inverse",
+            "options": [
+                {
+          "value": "transparent-dark",
+          "label": "Dark Text (no bg)"
+        },
+        {
+          "value": "transparent-light",
+          "label": "Light Text (no bg)"
+        },{
+                "value": "accent-1",
+                "label": "t:sections.image-banner.settings.color_scheme.options__1.label"
+            }, {
+                "value": "accent-2",
+                "label": "t:sections.image-banner.settings.color_scheme.options__2.label"
+            }, {
+                "value": "background-1",
+                "label": "t:sections.image-banner.settings.color_scheme.options__3.label"
+            }, {
+                "value": "background-2",
+                "label": "t:sections.image-banner.settings.color_scheme.options__4.label"
+            }, {
+                "value": "inverse",
+                "label": "t:sections.image-banner.settings.color_scheme.options__5.label"
+            }],
+            "label": "Content Color Scheme"
+        },
+    {
         "type": "range",
         "label": "Autoplay Speed",
         "id": "autoplay_speed",
@@ -88,6 +179,35 @@
       "id" : "anchor_id",
       "type" : "text",
       "label" : "ID (for anchor links)"
+    },
+    {
+            "type": "select",
+            "id": "color_scheme",
+            "default" : "transparent-light",
+            "options": [ {
+          "value": "transparent-dark",
+          "label": "Dark Text (no bg)"
+        },
+        {
+          "value": "transparent-light",
+          "label": "Light Text (no bg)"
+        },{
+                "value": "accent-1",
+                "label": "t:sections.image-banner.settings.color_scheme.options__1.label"
+            }, {
+                "value": "accent-2",
+                "label": "t:sections.image-banner.settings.color_scheme.options__2.label"
+            }, {
+                "value": "background-1",
+                "label": "t:sections.image-banner.settings.color_scheme.options__3.label"
+            }, {
+                "value": "background-2",
+                "label": "t:sections.image-banner.settings.color_scheme.options__4.label"
+            }, {
+                "value": "inverse",
+                "label": "t:sections.image-banner.settings.color_scheme.options__5.label"
+            }],
+            "label": "Background Color Scheme"
     }
 ],
     "blocks": [{
@@ -793,13 +913,236 @@
             "id": "url",
             "label": "url"
         }]
-    }],
+    },
+    {
+        "name" : "Multi-image w/ background",
+        "type" : "content-image",
+        "settings" : [{
+            "type": "header",
+            "content": "Background"
+        }, {
+            "type": "color",
+            "id": "overlay_color",
+            "label": "Overlay Color",
+            "default": "#000000"
+        }, {
+            "type": "range",
+            "id": "overlay_opacity",
+            "label": "Overlay Opacity",
+            "default": 30,
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "unit": "%"
+        }, {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Background Image"
+        },{
+            "type" : "header",
+            "content"  :"Content Images",
+            "info" : "Will fade in. Should almost always be transparent pngs"
+        }, {
+            "type" : "range",
+            "id" : "content_image_opacity",
+            "min" : 0,
+            "max": 100,
+            "step" : 1,
+            "default" : 100,
+            "label" : "Content Image Opacity",
+            "unit" : "%"
+        }, {
+            "type": "image_picker",
+            "id": "content_image_1",
+            "label": "Content Image 1"
+        }, {
+            "type" : "range",
+            "id" : "image_1_basis",
+            "min" : 50,
+            "max": 500,
+            "step" : 10,
+            "default" : 150,
+            "label" : "Image 1 Size",
+            "unit" : "px"
+        }, {
+            "type" : "html",
+            "id" : "image_1_style",
+            "label" : "Image 1 style"
+        },{
+            "type": "image_picker",
+            "id": "content_image_2",
+            "label": "Content Image 2"
+        }, {
+            "type" : "range",
+            "id" : "image_2_basis",
+            "min" : 50,
+            "max": 500,
+            "step" : 10,
+            "default" : 150,
+            "label" : "Image 2 Size",
+            "unit" : "px"
+            }, {
+            "type" : "html",
+            "id" : "image_2_style",
+            "label" : "Image 2 style"
+        }, {
+            "type": "image_picker",
+            "id": "content_image_3",
+            "label": "Content Image 3"
+            }, {
+            "type" : "range",
+            "id" : "image_3_basis",
+            "min" : 50,
+            "max": 500,
+            "step" : 10,
+            "default" : 150,
+            "label" : "Image 3 Size",
+            "unit" : "px"
+        }, {
+            "type" : "html",
+            "id" : "image_3_style",
+            "label" : "Image 3 style"
+        }, {
+            "type": "select",
+            "id": "content_image_spacing",
+            "label": "Content Image Spacing",
+            "default" : "overlapping",
+            "options" : [
+                {
+                    "value" : "overlapping",
+                    "label" : "Overlapping"
+                },
+                {
+                    "value" : "spaced",
+                    "label" : "Spaced"
+                }
+            ]
+        },
+        {
+            "type": "select",
+            "id": "content_image_alignment",
+            "label": "Content Image Alignment",
+            "default" : "center",
+            "options" : [
+                {
+                    "value" : "flex-end",
+                    "label" : "Bottom"
+                },
+                {
+                    "value" : "center",
+                    "label" : "Center"
+                },
+                 {
+                    "value" : "flex-start",
+                    "label" : "Top"
+                }
+            ]
+        },
+
+        {
+            "type": "header",
+            "content": "content"
+        }, {
+            "type": "text",
+            "id": "introduction",
+            "label": "Introduction"
+        }, {
+            "type": "text",
+            "id": "heading",
+            "default": "Image banner",
+            "label": "t:sections.image-banner.blocks.heading.settings.heading.label"
+        }, {
+            "type": "text",
+            "id": "subtitle",
+            "label": "Subtitle"
+        }, {
+            "type": "richtext",
+            "id": "content",
+            "label": "Content"
+        }, {
+            "type": "select",
+            "id": "desktop_text_box_position",
+            "options": [{
+                "value": "flex-start",
+                "label": "t:sections.image-banner.settings.desktop_text_box_position.options__1.label"
+            }, {
+                "value": "center",
+                "label": "t:sections.image-banner.settings.desktop_text_box_position.options__2.label"
+            }, {
+                "value": "flex-end",
+                "label": "t:sections.image-banner.settings.desktop_text_box_position.options__3.label"
+            }],
+            "default": "center",
+            "label": "t:sections.image-banner.settings.desktop_text_box_position.label"
+        }, {
+            "type": "select",
+            "id": "color_scheme",
+            "default" : "transparent-light",
+            "options": [{
+                "value": "transparent-dark",
+                "label": "Dark Text (no bg)"
+            }, {
+                "value": "transparent-light",
+                "label": "Light Text (no bg)"
+            }, {
+                "value": "accent-1",
+                "label": "t:sections.image-banner.settings.color_scheme.options__1.label"
+            }, {
+                "value": "accent-2",
+                "label": "t:sections.image-banner.settings.color_scheme.options__2.label"
+            }, {
+                "value": "background-1",
+                "label": "t:sections.image-banner.settings.color_scheme.options__3.label"
+            }, {
+                "value": "background-2",
+                "label": "t:sections.image-banner.settings.color_scheme.options__4.label"
+            }, {
+                "value": "inverse",
+                "label": "t:sections.image-banner.settings.color_scheme.options__5.label"
+            }],
+            "label": "t:sections.image-banner.settings.color_scheme.label"
+        }, {
+            "type": "header",
+            "content": "buttons"
+        }, {
+            "type": "text",
+            "id": "button_label_1",
+            "default": "Button label",
+            "label": "t:sections.image-banner.blocks.buttons.settings.button_label_1.label",
+            "info": "t:sections.image-banner.blocks.buttons.settings.button_label_1.info"
+        }, {
+            "type": "url",
+            "id": "button_link_1",
+            "label": "t:sections.image-banner.blocks.buttons.settings.button_link_1.label"
+        }, {
+            "type": "checkbox",
+            "id": "button_style_secondary_1",
+            "default": false,
+            "label": "t:sections.image-banner.blocks.buttons.settings.button_style_secondary_1.label"
+        }, {
+            "type": "text",
+            "id": "button_label_2",
+            "default": "Button label",
+            "label": "t:sections.image-banner.blocks.buttons.settings.button_label_2.label",
+            "info": "t:sections.image-banner.blocks.buttons.settings.button_label_2.info"
+        }, {
+            "type": "url",
+            "id": "button_link_2",
+            "label": "t:sections.image-banner.blocks.buttons.settings.button_link_2.label"
+        }, {
+            "type": "checkbox",
+            "id": "button_style_secondary_2",
+            "default": false,
+            "label": "t:sections.image-banner.blocks.buttons.settings.button_style_secondary_2.label"
+        }]
+    }
+    ],
     "presets": [{
         "name": "Slider",
         "blocks": [{
             "type": "image-text"
         }, {
-            "type": "image-text"
+            "type": "video-text"
         }]
     }]
 }

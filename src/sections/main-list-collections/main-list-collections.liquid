@@ -31,7 +31,7 @@
 
   <ul class="grid collection-list grid--1-col grid--3-col-tablet" role="list">
     {%- for collection in collections -%}
-      <li class="collection-list__item grid__item">
+      <li data-reveal class="collection-list__item grid__item">
         <a{% if collection.all_products_count > 0 %} href="{{ collection.url }}"{% endif %}
           class="card animate-arrow{% if collection.featured_image != blank %} card--media{% else %}{% if section.settings.image_ratio != 'adapt' %} card--stretch{% endif %}{% endif %}{% unless section.settings.image_padding %} card--light-border{% endunless %}"
         >

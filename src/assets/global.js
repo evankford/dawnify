@@ -634,6 +634,7 @@ class SliderComponent extends HTMLElement {
   }
 
   initPages() {
+
     const sliderItemsToShow = Array.from(this.sliderItems).filter(
       (element) => element.clientWidth > 0
     );
@@ -665,14 +666,21 @@ class SliderComponent extends HTMLElement {
 
     this.pageCount.textContent = this.currentPage;
     this.pageTotal.textContent = this.totalPages;
+
+    //EKF MODDED
+    // if (window.ScrollReveal) {
+    //   window.ScrollReveal().sync();
+    // }
   }
 
   onButtonClick(event) {
     event.preventDefault();
+
     const slideScrollPosition =
       event.currentTarget.name === 'next'
         ? this.slider.scrollLeft + this.sliderLastItem.clientWidth
         : this.slider.scrollLeft - this.sliderLastItem.clientWidth;
+
     this.slider.scrollTo({
       left: slideScrollPosition,
     });

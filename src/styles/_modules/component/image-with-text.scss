@@ -1,25 +1,19 @@
-.image-with-text {
-  margin-top: 5rem;
-}
+//EKF MODDED - Sticky Image
+@use "../../abstracts/" as *;
 
-.image-with-text:not(.color-scheme-background-1) {
-  margin-bottom: 5rem;
-}
 
-@media screen and (min-width: 750px) {
-  .image-with-text {
-    margin-bottom: calc(5rem + var(--page-width-margin));
-  }
-}
 
 .image-with-text .grid {
   margin-left: 0;
   margin-bottom: 0;
 }
-
-.image-with-text__grid {
+//Start EKF Mod
+// .image-with-text__grid {
+.image-with-text:not(.sticky-image) .image-with-text__grid {
   overflow: hidden;
 }
+//End ekf mod
+
 
 @media screen and (min-width: 750px) {
   .image-with-text__grid--reverse {
@@ -129,3 +123,23 @@
   margin-top: 0;
   margin-bottom: 1rem;
 }
+
+
+//Start EKF Mod
+.image-with-text.sticky-image {
+  @include media-query($medium-up) {
+    .image-with-text__grid {
+      // overflow: auto; //Resolved above
+
+      display: flex;
+      align-items: flex-start;
+      flex-wrap: nowrap;
+    }
+    .grid__item__image {
+      position: sticky;
+      top: 2rem ;
+      bottom: 2rem;
+    }
+  }
+}
+//End EKF Mod

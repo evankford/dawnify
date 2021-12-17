@@ -24,15 +24,23 @@
     {
       "type" : "checkbox",
       "label" : "Enable scroll animation",
-      "id" : "fx_scroll"
+      "id" : "fx_scroll",
+      "default" : true
     },
     {
-      "type" : "range",
-      "min": 0,
-      "max" : 99,
-      "default" : 50,
-      "label" : "FX Scroll Offset Fix",
-      "id" : "fx_scroll_offset_fix"
+      "type" : "header",
+      "content" : "Single Page Loading"
+    },
+    {
+      "type" : "checkbox",
+      "id" : "enable_loading_effect",
+      "label" : "Enable Loading effect",
+      "default" : false
+    },
+    {
+      "type" : "image_picker",
+      "id" : "preloader_image",
+      "label" : "PreLoader Image"
     }
   ]
 }

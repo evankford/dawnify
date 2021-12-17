@@ -45,15 +45,15 @@ class AnnouncementBar extends HTMLElement {
 
   }
   changeBodyOffset() {
-    let offset = document.body.getBoundingClientRect().top;
-
+    // let offset = document.body.getBoundingClientRect().top;
+    let offset = 0;
     //Fixes combined offsets
-    if (this.heightAdded) {
-      offset = offset - this.height
-    }
-    const newOffset = offset + this.newHeight + 'px';
-    document.body.style.marginTop = newOffset;
-    this.heightAdded = true;
+    // if (this.heightAdded) {
+    //   offset = offset - this.height
+    // }
+    // const newOffset = offset + this.newHeight + 'px';
+    document.body.style.marginTop = this.newHeight + 'px';
+    // this.heightAdded = true;
     this.height = this.newHeight;
   }
 

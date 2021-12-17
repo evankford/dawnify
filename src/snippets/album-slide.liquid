@@ -42,7 +42,7 @@ Usage:
           {%- endif -%}
           {% if params.content != blank %}
           <div class="rte" {{ block.shopify_attributes }}>
-            <span>{{ params.text | escape }}</span>
+            <span>{{ params.content  }}</span>
           </div>
           {% endif %}
           {% if params.button_label_1 != blank and params.button_link_1 != blank %}

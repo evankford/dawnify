@@ -23,7 +23,7 @@
         <input type="text"
               class="field__input"
               id="url"
-              value="{{ product.selected_variant.url | default: product.url | prepend: shop.url }}"              placeholder="{{ 'general.share.share_url' | t }}"
+              value="{{ product.selected_variant.url | default: product.url | prepend: shop.url }}" placeholder="{{ 'general.share.share_url' | t }}"
               onclick="this.select();"
               readonly
         >

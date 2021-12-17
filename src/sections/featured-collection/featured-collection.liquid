@@ -1,3 +1,8 @@
+
+{% comment %}
+EKF Modded heavily
+{% endcomment %}
+
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 {{ 'component-product-grid.css' | asset_url | stylesheet_tag }}
@@ -9,20 +14,29 @@
 <noscript>{{ 'component-slider.css' | asset_url | stylesheet_tag }}</noscript>
 <noscript>{{ 'component-badge.css' | asset_url | stylesheet_tag }}</noscript>
 <noscript>{{ 'template-collection.css' | asset_url | stylesheet_tag }}</noscript>
+
+{% assign swipe_active = section.settings.swipe_on_desktop  %}
+{% if section.settings.swipe_on_mobile == true %}
+  {% assign swipe_active = true %}
+{% endif %}
 {% render 'section-style' with id: section.id, params: section.settings %}
-<div class="collection {% unless section.settings.full_width == true %} page-width {% endunless %} {% if section.settings.swipe_on_mobile == true and section.settings.collection.all_products_count > 2 and section.settings.products_to_show > 2 %} page-width-desktop{% endif %} color-{{ section.settings.color_scheme }}" {% if section.settings.anchor_id != blank %} id="{{section.settings.anchor_id | handleize }}" {% endif %}>
+<div class="collection {% unless section.settings.full_width == true %} page-width {% endunless %} {% if swipe_active == true and section.settings.collection.all_products_count > 2 and section.settings.products_to_show > 2 %} page-width-desktop {% endif %}" {% if section.settings.anchor_id != blank %} id="{{section.settings.anchor_id | handleize }}" {% endif %}>
   {% if section.settings.introduction != blank  or section.settings.title != blank %}
-    <div class="{% if section.settings.full_width == true %} page-width {% endif %} {% if section.settings.show_view_all and section.settings.swipe_on_mobile %}title-wrapper-with-link{% endif %}{% if section.settings.title == blank %} title-wrapper-with-link--no-heading{% endif %}{% if section.settings.collection.all_products_count > 2 and section.settings.swipe_on_mobile and section.settings.products_to_show > 2 %} title-wrapper--self-padded-tablet-down{% endif %} layout--{{ section.settings.text_align }} common-header">
-      {% if section.settings.introduction != blank %}
-        <div class="h4 label">{{ section.settings.introduction | escape }}</div>
-      {% endif %}
-     {% if section.settings.title != blank %}  <h2 class="title heading">{{ section.settings.title | escape }}</h2>{% endif %}
-      {%- if section.settings.show_view_all and section.settings.swipe_on_mobile -%}
-        <a href="{{ section.settings.collection.url }}" class="link underlined-link large-up-hide">{{ 'sections.featured_collection.view_all' | t }}</a>
-      {%- endif -%}
-      {% if section.settings.subtitle != blank %}
-        <div class="h4 label">{{ section.settings.subtitle | escape }}</div>
-      {% endif %}
+    <div class="{% if section.settings.full_width == true %} page-width {% endif %} {% if section.settings.show_view_all and swipe_active %}title-wrapper-with-link{% endif %}{% if section.settings.title == blank %} title-wrapper-with-link--no-heading{% endif %}{% if section.settings.collection.all_products_count > 2 and swipe_active and section.settings.products_to_show > 2 %} {% if section.settings.slide_on_desktop == true %} title-wrapper--self-padded {% else %}  title-wrapper--self-padded-tablet-down {% endif %} {% endif %}layout--{{ section.settings.text_align }} common-header">
+      <div class="header-wrap">
+        {% if section.settings.introduction != blank %}
+          <div data-reveal class="h4 label">{{ section.settings.introduction | escape }}</div>
+        {% endif %}
+       {% if section.settings.title != blank %}
+          <h2 data-reveal class="title heading">{{ section.settings.title | escape }}</h2>
+        {% endif %}
+       {% if section.settings.subtitle != blank %}
+        <div data-reveal class="h4 label">{{ section.settings.subtitle | escape }}</div>
+       {% endif %}
+      </div>
+     {%- if section.settings.show_view_all and swipe_active and  section.settings.text_align == 'spaced' -%}
+       <a data-reveal href="{{ section.settings.collection.url }}" class="link  underlined-link {% unless section.settings.swipe_on_desktop %} large-up-hide {% endunless %}">{{ 'sections.featured_collection.view_all' | t }}</a>
+     {%- endif -%}
     </div>
   {% endif %}
 
@@ -39,7 +53,9 @@
     {% assign is_limited = true %}
   {% endif %}
   <slider-component class="slider-mobile-gutter">
-    <ul data-max="{{ max }}" class="{% unless section.settings.full_width == true %} page-width {% endunless %} grid grid-grid {% if section.settings.center_insufficient == true %} center-insufficient {% endif %} grid-grid--{{ section.settings.grid_size }} product-grid {% if section.settings.collection.all_products_count > 2 and section.settings.swipe_on_mobile and section.settings.products_to_show > 2 %} slider slider--tablet grid--peek{% endif %}" role="list">
+    <ul data-max="{{ max }}" class="
+    {%- if section.settings.collection.all_products_count > 2 and swipe_active and section.settings.products_to_show > 2 %} slider grid--peek {% if section.settings.swipe_on_desktop == true %}  slider--always {% endif %} {% if section.settings.swipe_on_mobile == true %} slider--tablet {% endif %}{%- endif -%}
+    {% unless section.settings.full_width == true %} page-width {% endunless %} grid grid-grid {% if section.settings.center_insufficient == true %} center-insufficient {% endif %} grid-grid--{{ section.settings.grid_size }} product-grid " role="list">
       {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
         <li class="grid__item{% if section.settings.collection.all_products_count > 2 and section.settings.swipe_on_mobile and section.settings.products_to_show > 2 %} slider__slide{% endif %} grid__item--product">
           {% render 'product-card',
@@ -58,8 +74,8 @@
         {%- endfor -%}
       {%- endfor -%}
     </ul>
-    {%- if section.settings.collection.all_products_count > 2 and section.settings.swipe_on_mobile and section.settings.products_to_show > 2 -%}
-      <div class="slider-buttons no-js-hidden{% if section.settings.collection.all_products_count < 4 %} medium-hide{% endif %}{% if section.settings.collection.all_products_count < 3 %} small-hide{% endif %}">
+    {%- if section.settings.collection.all_products_count > 2 and swipe_active and section.settings.products_to_show > 2 -%}
+      <div  class="slider-buttons {% if section.settings.swipe_on_desktop %} always-show {% endif %} no-js-hidden{% if section.settings.collection.all_products_count < 4 %} medium-hide{% endif %}{% if section.settings.collection.all_products_count < 3 %} small-hide{% endif %}">
         <div class="slider-counter caption">
           <span class="slider-counter--current">1</span>
           <span aria-hidden="true"> / </span>
@@ -71,9 +87,10 @@
       </div>
     {%- endif -%}
   </slider-component>
-
-  {%- if section.settings.show_view_all and section.settings.collection.all_products_count > section.settings.products_to_show -%}
-    <div class="center{% if section.settings.swipe_on_mobile %} small-hide medium-hide{% endif %}">
+{%- comment -%} Spaced + Swipe = no need for this button {%- endcomment -%}
+  {% unless section.settings.text_align == 'spaced' and section.settings.swipe_on_desktop == true %}
+  {%- if section.settings.show_view_all and section.settings.collection.all_products_count > section.settings.products_to_show  -%}
+    <div  class="center{% if section.settings.swipe_on_mobile %} small-hide medium-hide{% endif %}">
       <a href="{{ section.settings.collection.url }}"
         class="button"
         aria-label="{{ 'sections.featured_collection.view_all_label' | t: collection_name: section.settings.collection.title }}"
@@ -82,4 +99,12 @@
       </a>
     </div>
   {%- endif -%}
+  {% endunless %}
 </div>
+
+
+<style>
+  .collection .common-header.layout--centered {
+    margin: 0 auto calc(1rem + 1vw);
+  }
+</style>

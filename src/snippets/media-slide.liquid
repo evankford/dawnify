@@ -28,45 +28,37 @@ Usage:
         {% render 'media' with type: 'image' , image: settings.image_wide , size: "full" , class: 'media--wide', center_x: settings.image_center_x, type: "image" , center_y: block.setings.image_center_y , is_slide: is_slide %}
       {% endif %}
       {% if settings.image_mobile != blank %}
-        {% render 'media' with type: 'image' , image: settings.image_mobile, size: "full" , class: 'media--mobile', center_x: settings.image_center_x, type: "image" , center_y: block.setings.image_center_y, is_slide: is_slide %}
+        {% render 'media' with type: 'image' , image: settings.image_mobile, size: "full" , class: 'media--mobile', center_x: settings.image_center_x, type: "image" , center_y: settings.image_center_y, is_slide: is_slide %}
       {% endif %}
       {% render 'media' with type: 'image' , image: settings.image, size: "full", center_x: settings.image_center_x, center_y: settings.image_center_y, type: "image"  , is_slide: is_slide %}
     </div>
     {% endif %}
+    {% if type == 'content-image' %}
+
+      <div class="content-image-wrap style--{{settings.content_image_spacing | default: 'overlapping' }}" style="opacity: {{settings.content_image_opacity | divided_by: 100.00 | default: 1 }}; align-items: {{settings.content_image_alignment | default: 'center' }}">
+        {% if settings.content_image_1 != blank %}
+        <div class="content-image__1" style="flex-basis: {{settings.image_1_basis | default: '150' }}px; {% if settings.image_1_style %} {{settings.image_1_style}} {% endif%}">
+          {% render 'media' with type: 'image', image: settings.content_image_1, size: 'large' %}
+        </div>
+        {% endif %}
+        {% if settings.content_image_2 != blank %}
+        <div class="content-image__2" style="flex-basis: {{settings.image_2_basis | default: '150' }}px; {% if settings.image_2_style %} {{settings.image_2_style}} {% endif%}">
+          {% render 'media' with type: 'image', image: settings.content_image_2, size: 'large' %}
+        </div>
+        {% endif %}
+        {% if settings.content_image_3 != blank %}
+        <div class="content-image__3" style="flex-basis: {{settings.image_3_basis | default: '150' }}px; {% if settings.image_3_style %} {{settings.image_3_style}} {% endif%}  ">
+          {% render 'media' with type: 'image', image: settings.content_image_3, size: 'large' %}
+        </div>
+        {% endif %}
+      </div>
+    {% endif %}
   {% unless settings.heading == blank and settings.content_image == blank and settings.button_label_1 == blank and settings.introduction == blank and settings.content == blank %}
     {% if type != 'video' and type != 'image' %}
     <div class="banner__content" style="align-items: {{ settings.desktop_text_box_position }};">
-      <div class="banner__box color-{{ color_scheme }}">
-          {%- if settings.introduction != blank -%}
-          <div class="h4 label">{{ settings.introduction }}</div>
-          {%- endif -%}
-          {% if settings.content_image != blank %}
-            {% render 'media' with class: "content-image", size: 'half', type: "image", image: settings.content_image, max_width: settings.content_image_width %}
-          {% endif %}
-          {% if settings.heading != blank %}
-          <h2 class="banner__heading h0 heading" {{ block.shopify_attributes }}>
-            <span>{{ settings.heading | escape }}</span>
-          </h2>
-          {% endif %}
-          {%- if settings.subtitle != blank -%}
-          <div class="h4 label">{{ settings.subtitle }}</div>
-          {%- endif -%}
-          {% if settings.content != blank %}
-          <div class="banner__text" {{ block.shopify_attributes }}>
-            <span>{{ settings.text | escape }}</span>
-          </div>
-          {% endif %}
-          {% if settings.button_label_1 != blank and settings.button_link_1 != blank %}
-          <div class="banner__buttons{% if settings.button_label_1 != blank and settings.button_link_1 != blank and settings.button_label_2 != blank and settings.button_link_2 != blank %} banner__buttons--multiple{% endif %}" {{ block.shopify_attributes }}>
-            {%- if settings.button_label_1 != blank and settings.button_link_1 != blank -%}
-              <a{% if settings.button_link_1 != blank %} href="{{ settings.button_link_1 }}"{% endif %} class="button{% if settings.button_style_secondary_1 %} button--secondary{% else %} button--primary{% endif %}"{% if settings.button_link_1 == blank %} aria-disabled="true"{% endif %}>{{ settings.button_label_1 | escape }}</a>
-            {%- endif -%}
-            {%- if settings.button_label_2 != blank and settings.button_link_2 != blank -%}
-              <a{% if settings.button_link_2 != blank %} href="{{ settings.button_link_2 }}"{% endif %} class="button{% if settings.button_style_secondary_2 %} button--secondary{% else %} button--primary{% endif %}"{% if settings.button_link_2 == blank %} aria-disabled="true"{% endif %}>{{ settings.button_label_2 | escape }}</a>
-            {%- endif -%}
-          </div>
-          {% endif %}
-        </div>
+      <div class="banner__box color-{{ color_scheme }}"  data-slide-content>
+        {% render 'slide-content' with settings: settings, block: block , is_small: is_static %}
+      </div>
     </div>
     {% endif %}
     {%endunless %}

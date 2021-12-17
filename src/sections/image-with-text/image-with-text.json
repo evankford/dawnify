@@ -1,6 +1,5 @@
 {
   "name": "t:sections.image-with-text.name",
-  "class": "spaced-section spaced-section--full-width",
   "settings": [
     {
       "type": "image_picker",
@@ -27,6 +26,13 @@
       "default": "adapt",
       "label": "t:sections.image-with-text.settings.height.label"
     },
+      {
+      "type" : "checkbox",
+      "id" : "sticky_image",
+      "label" : "Scroll image on large screens?",
+      "default" : false
+    },
+
     {
       "type": "select",
       "id": "color_scheme",
@@ -71,6 +77,86 @@
       "default": "image_first",
       "label": "t:sections.image-with-text.settings.layout.label",
       "info": "t:sections.image-with-text.settings.layout.info"
+      }, {
+        "type": "header",
+        "content": "Section Settings"
+    }, {
+        "id": "spacing_top",
+        "label": "Section Spacing Top",
+        "type": "range",
+        "default": 10,
+        "min": 0,
+        "max": 30,
+        "step": 1
+    }, {
+        "id": "spacing_bottom",
+        "label": "Section Spacing Bottom",
+        "type": "range",
+        "default": 10,
+        "min": 0,
+        "max": 30,
+        "step": 1
+    }, {
+        "id": "background_color",
+        "label": "Background Color",
+        "type": "color"
+    }, {
+        "id": "text_color",
+        "label": "Text Color",
+        "type": "color"
+    }, {
+        "type": "image_picker",
+        "id": "background_image",
+        "label": "Background Image"
+    },
+     {
+      "type" : "range",
+      "label" : "Background Opacity",
+      "id" : "background_opacity",
+      "default" : 100,
+      "step": 1,
+      "min" : 1,
+      "max" : 100
+    },
+
+    {
+        "type": "select",
+        "id": "background_style",
+        "label": "Background Style",
+        "options": [{
+            "group": "Large Image",
+            "value": "cover",
+            "label": "Cover"
+        }, {
+            "group": "Large Image",
+            "value": "contain",
+            "label": "Contain"
+        }, {
+            "group": "Large Image",
+            "value": "fixed",
+            "label": "Fixed"
+        }, {
+            "group": "Image Pattern",
+            "value": "repeat",
+            "label": "Repeat"
+        }, {
+            "group": "Image Pattern",
+            "value": "repeat-x",
+            "label": "Repeat Horizontally"
+        }, {
+            "group": "Image Pattern",
+            "value": "repeat-y",
+            "label": "Repeat Vertically"
+        }]
+    }, {
+        "type": "text",
+        "id": "title",
+        "label": "Title (for customizer UX)"
+    },
+{
+    "type" : "text",
+    "id" : "id",
+    "label" : "ID - for anchor links"
     }
   ],
   "blocks": [
@@ -84,6 +170,21 @@
           "id": "heading",
           "default": "Image with text",
           "label": "t:sections.image-with-text.blocks.heading.settings.heading.label"
+           }, {
+            "type": "select",
+            "id": "heading_size",
+            "options": [{
+                "value": "small",
+                "label": "t:sections.rich-text.blocks.heading.settings.heading_size.options__1.label"
+            }, {
+                "value": "medium",
+                "label": "t:sections.rich-text.blocks.heading.settings.heading_size.options__2.label"
+            }, {
+                "value": "large",
+                "label": "Large"
+            }],
+            "default": "medium",
+            "label": "t:sections.rich-text.blocks.heading.settings.heading_size.label"
         }
       ]
     },
@@ -97,6 +198,33 @@
           "id": "text",
           "default": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
           "label": "t:sections.image-with-text.blocks.text.settings.text.label"
+        }
+      ]
+    },
+    {
+        "type": "label",
+        "name": "Label",
+        "limit" : 2,
+        "settings": [{
+            "type": "text",
+            "id": "heading",
+            "default": "Intro/Subtitle",
+            "label": "t:sections.rich-text.blocks.heading.settings.heading.label"
+          }, {
+            "type": "select",
+            "id": "heading_size",
+            "options": [{
+                "value": "small",
+                "label": "t:sections.rich-text.blocks.heading.settings.heading_size.options__1.label"
+            }, {
+                "value": "medium",
+                "label": "t:sections.rich-text.blocks.heading.settings.heading_size.options__2.label"
+            }, {
+                "value": "large",
+                "label": "Large"
+            }],
+            "default": "medium",
+            "label": "t:sections.rich-text.blocks.heading.settings.heading_size.label"
         }
       ]
     },

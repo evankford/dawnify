@@ -169,6 +169,9 @@
             }, {
                 "value": "medium",
                 "label": "t:sections.rich-text.blocks.heading.settings.heading_size.options__2.label"
+            }, {
+                "value": "large",
+                "label": "Large"
             }],
             "default": "medium",
             "label": "t:sections.rich-text.blocks.heading.settings.heading_size.label"

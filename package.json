@@ -8,6 +8,7 @@
   "private": true,
   "dependencies": {
     "@atmtfy/schema-loader": "^0.0.5",
+    "@barba/core": "^2.9.7",
     "@squarespace/video-background-rendering": "^1.2.3",
     "normalize.css": "^8.0.1",
     "swiper": "^6.8.4"

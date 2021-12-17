@@ -1,0 +1,16 @@
+{
+  "name" : "Store Page",
+  "sections" : {
+    "hero" :  {
+      "type" : "slider"
+    },
+    "featured" :
+    {
+      "type" : "featured-collection"
+    },
+    "collection_list" : {
+      "type" : "collection-list"
+    }
+  },
+  "order" : ["hero", "featured", "collection_list"]
+}

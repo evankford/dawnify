@@ -12,7 +12,7 @@
     max-width: 100%;
   }
 
-  .collection .title:not(.title--no-heading) {
+  .collection .title:not(.title--no-heading):first-child {
     margin-top: -1rem;
   }
 }

@@ -24,6 +24,14 @@
 .rich-text--full-width .rich-text__blocks {
   /* 4rem (1.5rem + 2.5rem) margin on left & right */
     width: calc(100% - 8rem / var(--font-body-scale));
+
+}
+@media (max-width: 500px) {
+  .rich-text--full-width .rich-text__blocks {
+  /* 4rem (1.5rem + 2.5rem) margin on left & right */
+    width: calc(100% - 4rem / var(--font-body-scale));
+
+  }
 }
 
 
