@@ -11,6 +11,8 @@ Accepts:
   image: image object required if type is "image"
   video: video url required if type is "video"
   allow_unmute: allow unmuting of video
+  center_x: Centering along X axis
+  center_y: Center
 {%- endcomment -%}
 
 
@@ -130,6 +132,7 @@ Accepts:
         <img
         {% if is_slide %}
         class="swiper-lazy"
+        {% else %} loading="lazy"
         {% endif %}
         {% if size == "icon" %}
           {{ srcSetString }}="{{ image | img_url: max_width }} 1x, {{ image | img_url: max_width, scale: 2 }} 2x"
@@ -160,6 +163,7 @@ Accepts:
           data-zoom="{{image | img_url: '3000x'}}"
           {% endif %}
         >
+
         {% if zoom and image.width >= 1000 %}<div class="zoom-helper">{% render 'icon-zoom' %}<span data-hover-text="Hover to Zoom" data-touch-text="Touch To Zoom"></span></div> {% endif %}
       {%- else -%}
         {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}

@@ -30,6 +30,11 @@
           "settings": {
           }
         },
+        "pre_order": {
+          "type": "pre_order",
+          "settings": {
+          }
+        },
         "quantity_selector": {
           "type": "quantity_selector",
           "settings": {
@@ -54,11 +59,11 @@
         }
       },
       "block_order": [
-
         "title",
         "subtitle",
         "price",
         "variant_picker",
+        "pre_order",
         "quantity_selector",
         "buy_buttons",
         "description",

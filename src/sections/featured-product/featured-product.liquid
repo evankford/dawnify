@@ -1,3 +1,5 @@
+{%- comment -%}EKF CUSTOMIZED - Typography plus section style{%- endcomment -%}
+
 {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
 {{ 'section-featured-product.css' | asset_url | stylesheet_tag }}
 {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
@@ -16,7 +18,9 @@
   <link id="ModelViewerOverride" rel="stylesheet" href="{{ 'component-model-viewer-ui.css' | asset_url }}" media="print" onload="this.media='all'">
 {%- endif -%}
 
+
 <section class="{% if section.settings.secondary_background %}background-secondary{% else %}spaced-section{% endif %}">
+  {% render 'section-style' with inner: false, id: section.id, params: section.settings %}
   <div class="page-width">
     <div class="featured-product product grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
       <div class="grid__item product__media-wrapper">
@@ -66,11 +70,11 @@
           {%- for block in section.blocks -%}
             {%- case block.type -%}
             {%- when 'text' -%}
-              <p class="product__text{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}" {{ block.shopify_attributes }}>
+              <p class="product__text{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing label{% elsif block.settings.text_style == 'subtitle' %} subtitle label{% endif %}" {{ block.shopify_attributes }}>
                 {{- block.settings.text -}}
               </p>
             {%- when 'title' -%}
-              <h2 class="h1 product__title" {{ block.shopify_attributes }}>
+              <h2 class="h1 product__title heading" {{ block.shopify_attributes }}>
                 {%- if product.title != blank -%}
                   {{ product.title | escape }}
                 {%- else -%}

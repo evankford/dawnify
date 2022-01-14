@@ -129,6 +129,18 @@
                 {{ product.description }}
               </div>
             {%- endif -%}
+          {%- when 'description' -%}
+            {%- if product.tags contains 'pre-order' or product.tags contains 'Pre-order' or product.tags contains 'Pre-Order' or product.tags contains 'PRE-ORDER' or product.tags contains 'PREORDER' -%}
+
+              <div class="product__pre-order checkbox-wrap">
+
+                   <input type="hidden" name="properties[Accepts Pre-Order]" value="No">
+                    <input required id="pre-order" type="checkbox" name="properties[Accepts Pre-Order]" value="Yes">
+                  <label class="form__label" for="pre-order">
+                    {% if block.settings.title != blank %}<span class="label__title">{{block.settings.heading | default : "I understand this item is a pre-order" }}</span>{% endif %}
+                    {% if block.settings.text != blank %}<span class="label__sub"{{ block.settings.text | default: "This is a pre-order product. It will ship when indicated in the product description."}}</label>{% endif %}
+              </div>
+            {%- endif -%}
           {%- when 'collapsible_tab' -%}
             <div class="product__accordion accordion" {{ block.shopify_attributes }}>
               <details id="Details-{{ block.id }}-{{ section.id }}">
@@ -179,7 +191,6 @@
           {%- when 'share' -%}
             {% render 'share-button', block: block %}
           {%- when 'tag' -%}
-
               {% render 'product-tag' with tag: product.metafields.custom.tag %}
           {%- when 'variant_picker' -%}
            {% render 'variant-picker', product: product, block: block, id: section.id, product_form_id: product_form_id %}

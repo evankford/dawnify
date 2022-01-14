@@ -15,7 +15,7 @@
     padding-bottom: 100%; //Defaults to square
   }
 
-  &>img , &>video{
+  &>img , &>video, [data-vbg] {
     @extend %psuedoish;
     object-fit: cover;
     object-position: center center;
@@ -122,4 +122,9 @@
 
 deferred-media {
   display: block;
+}
+
+.content-image {
+  width: 100%;
+  margin: auto;
 }

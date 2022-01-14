@@ -53,7 +53,7 @@ EKF Modded heavily
     {% assign is_limited = true %}
   {% endif %}
   <slider-component class="slider-mobile-gutter">
-    <ul data-max="{{ max }}" class="
+    <ul data-max="{{ max }}" {% if swipe_active == false %} data-reveal {% elsif  section.settings.swipe_on_desktop == false %} data-reveal-desktop {% endif %} class="
     {%- if section.settings.collection.all_products_count > 2 and swipe_active and section.settings.products_to_show > 2 %} slider grid--peek {% if section.settings.swipe_on_desktop == true %}  slider--always {% endif %} {% if section.settings.swipe_on_mobile == true %} slider--tablet {% endif %}{%- endif -%}
     {% unless section.settings.full_width == true %} page-width {% endunless %} grid grid-grid {% if section.settings.center_insufficient == true %} center-insufficient {% endif %} grid-grid--{{ section.settings.grid_size }} product-grid " role="list">
       {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}

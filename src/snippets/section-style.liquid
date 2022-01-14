@@ -59,27 +59,27 @@
 
   {% if params.background_image != blank and  params.background_style == "cover" or params.background_style == "contain" or params.background_style == "fixed" %}
   @media (min-width: 720px) {
-    #shopify-section-{{ id }}::before {
+    #{% unless inner %}shopify-section-{% endunless %}{{ id }}::before {
       background-image: url({{ params.background_image | img_url: "1080x" }});
     }
   }
   @media (min-width: 1080px) {
-    #shopify-section-{{ id }}::before {
+    #{% unless inner %}shopify-section-{% endunless %}{{ id }}::before {
       background-image: url({{ params.background_image | img_url: "1400x" }});
     }
   }
   @media (min-width: 1080px) {
-    #shopify-section-{{ id }}::before {
+    #{% unless inner %}shopify-section-{% endunless %}{{ id }}::before {
       background-image: url({{ params.background_image | img_url: "1750x" }});
     }
   }
   @media (min-width: 1750px) {
-    #shopify-section-{{ id }}::before {
+    #{% unless inner %}shopify-section-{% endunless %}{{ id }}::before {
       background-image: url({{ params.background_image | img_url: "2000x" }});
     }
   }
   @media (min-width: 2000px) {
-    #shopify-section-{{ id }}::before {
+    #{% unless inner %}shopify-section-{% endunless %}{{ id }}::before {
       background-image: url({{ params.background_image | img_url: "2400x" }});
     }
   }
@@ -89,6 +89,7 @@
   #{% unless inner %}shopify-section-{% endunless %}{{ id }} {
     background: var(--gradient-background, rgb(var(--color-background)));
     color: rgb(var(--color-foreground));
+    --color-link: var(--color-foreground);
     {% case params.color_scheme %}
       {% when 'accent-1' %}
     --color-foreground: var(--color-base-solid-button-labels);

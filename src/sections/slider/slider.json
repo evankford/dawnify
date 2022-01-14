@@ -30,7 +30,7 @@
       "type" : "select",
       "id" : "navigation_style",
       "label" : "Nav Style",
-      "default" : "modern",
+      "default" : "classic",
       "options" : [
         {
           "value" : "modern",
@@ -510,7 +510,45 @@
             "id": "button_style_secondary_2",
             "default": false,
             "label": "t:sections.image-banner.blocks.buttons.settings.button_style_secondary_2.label"
-        }]
+        },
+    {
+        "type" : "header",
+        "content" : "Youtube Button",
+        "info" : "Only works for youtube backgrounds"
+    },
+{
+    "type" : "text",
+    "id": "yt_button_text",
+    "label" : "Youtube Button Text",
+    "default" : "Watch Now"
+},
+{
+    "type" : "select",
+    "id": "yt_button_location",
+    "label" : "Youtube Button Location" ,
+    "default" : "disabled",
+    "options" : [
+        {
+            "value" : "first",
+            "label" : "Before Other Buttons"
+        },
+        {
+            "value" : "last",
+            "label" : "After Other Buttons"
+        },
+        {
+            "value" : "disabled",
+            "label" : "Disabled"
+        }
+    ]
+},
+{
+    "type" : "checkbox",
+    "default" : true,
+    "id" : "yt_button_lightbox",
+    "label" : "Open Video in Lightbox?"
+}
+    ]
     }, {
         "type": "image-image",
         "name": "Image w/ Image Content",
@@ -819,7 +857,44 @@
             "id": "button_style_secondary_2",
             "default": false,
             "label": "t:sections.image-banner.blocks.buttons.settings.button_style_secondary_2.label"
-        }]
+        },{
+        "type" : "header",
+        "content" : "Youtube Button",
+        "info" : "Only works for youtube backgrounds"
+    },
+{
+    "type" : "text",
+    "id": "yt_button_text",
+    "label" : "Youtube Button Text",
+    "default" : "Watch Now"
+},
+{
+    "type" : "select",
+    "id": "yt_button_location",
+    "label" : "Youtube Button Location" ,
+    "default" : "disabled",
+    "options" : [
+        {
+            "value" : "first",
+            "label" : "Before Other Buttons"
+        },
+        {
+            "value" : "last",
+            "label" : "After Other Buttons"
+        },
+        {
+            "value" : "disabled",
+            "label" : "Disabled"
+        }
+    ]
+},
+{
+    "type" : "checkbox",
+    "default" : true,
+    "id" : "yt_button_lightbox",
+    "label" : "Open Video in Lightbox?"
+}
+    ]
     }, {
         "type": "image",
         "name": "Just Image",

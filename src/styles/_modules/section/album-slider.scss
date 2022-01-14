@@ -93,7 +93,7 @@ album-slider.swiper-container {
     .album-slide__content {
       flex: 1 1 250px;
       max-width: 450px;
-      padding: clamp(1.2rem, calc(1.2rem + 1.1vw), 2.5rem);
+      padding: clamp(1.5rem, calc(1.2rem + 2.1vw), 4.5rem);
     }
   }
 }

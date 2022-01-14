@@ -1,11 +1,13 @@
 <link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-header-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-cart-notification.css' | asset_url }}" media="print" onload="this.media='all'">
 
 <noscript>{{ 'component-list-menu.css' | asset_url | stylesheet_tag }}</noscript>
 <noscript>{{ 'component-search.css' | asset_url | stylesheet_tag }}</noscript>
 <noscript>{{ 'component-menu-drawer.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-header-drawer.css' | asset_url | stylesheet_tag }}</noscript>
 <noscript>{{ 'component-cart-notification.css' | asset_url | stylesheet_tag }}</noscript>
 
 <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
@@ -26,7 +28,7 @@
 {% assign is_first_button = true %}
 <style>
 .header-wrapper {
-  {% if section.settings.background != blank %}
+  {% if section.settings.background != blank and section.settings.background != 'rgba(0,0,0,0)' %}
  --bg: {{ section.settings.background | default: "var(--color-background)" }};
  --color-background: {{ section.settings.background.red }}, {{ section.settings.background.green }}, {{ section.settings.background.blue }};
  {% endif %}
@@ -38,6 +40,11 @@
  --otxt: {{ section.settings.color_overlay | default: "rgba(255, 255,255,0.75)" }};
  --otxt-h: {{ section.settings.color_overlay_hover | default: '#ffffff' }};
 }
+
+{% if section.settings.background == 'rgba(0,0,0,0)' %}
+  .menu-drawer {background-color: white;}
+{% else %}
+{% endif %}
 .overlay-active .header-wrapper {
   --color-foreground: {{ section.settings.color_overlay.red }}, {{ section.settings.color_overlay.green }}, {{ section.settings.color_overlay.blue }};
 }
@@ -193,14 +200,23 @@
           %}
         {% endcase %}
     </div><!--\.header__item-->
-{% comment %} Close  group if logo, mobile menu, spacer, or last item{% endcomment %}    {% assign index = index | plus: 1 %}
-    {% if index == section.blocks.size or block.type == 'spacer' or block.type == 'logo' or block.type == 'mobile_menu' %}
+  {% comment %} Close  group if logo, mobile menu, spacer, or last item{% endcomment %}
+    {% assign last_item_index = index %}
+    {% assign index = index | plus: 1 %}
+    {% if index == section.blocks.size or block.type == "spacer" or block.type == "logo" or block.type == "mobile_menu" %}
+      </div><!--\.header__group-->
+      {% assign in_group = false %}
+
+    {% comment %} Check if menu + socials (never put them in the same group {% endcomment %}
+    {% elsif section.blocks[index].type == "socials" and section.blocks[last_item_index].type == "menu" %}
+      </div><!--\.header__group-->
+      {% assign in_group = false %}
+    {% elsif section.blocks[index].type == "menu" and section.blocks[last_item_index].type == "socials" %}
       </div><!--\.header__group-->
       {% assign in_group = false %}
     {% endif %}
   {% endfor %}
   </header>
-
 </site-header>
 
 {%- render 'cart-notification', color_scheme: section.settings.color_scheme -%}

@@ -1,5 +1,5 @@
-import Swiper, { Lazy, Thumbs, A11y, Navigation, Pagination, Autoplay, EffectFade, EffectCoverflow } from 'swiper';
-Swiper.use([Lazy, Thumbs, A11y, Navigation, Pagination, Autoplay, EffectFade, EffectCoverflow]);
+import Swiper, { Lazy, Thumbs, A11y, Navigation, Pagination, Autoplay, EffectFade, EffectCoverflow, EffectCreative } from 'swiper';
+Swiper.use([Lazy, Thumbs, A11y, Navigation, Pagination, Autoplay, EffectFade, EffectCoverflow, EffectCreative]);
 
 //Returns the element
 class Slider {
@@ -11,6 +11,12 @@ class Slider {
     this.swiper = this.createSwiper();
     this.swiper.update();
     this.setupWatchers();
+
+    setTimeout(() => {
+
+      window.dispatchEvent(new Event('resize'));
+      this.swiper.update();
+    }, 300);
   }
 
   setupParams() {
@@ -81,6 +87,8 @@ class Slider {
       }
     }
 
+
+
     return toReturn;
   }
 
@@ -88,14 +96,31 @@ class Slider {
   setupWatchers() {
     var self = this;
     if (this.params.lazy) {
+      this.swiper.on('slideChange', self.lazyLoadYoutube)
+
       this.swiper.on('lazyImageLoad', self.lazyLoadVideo);
+      this.swiper.on('lazyImageReady', self.finishLazyLoad);
     }
+
+  }
+
+  finishLazyLoad(swiper,slideEl,imageEl) {
+    slideEl.classList.add('lazyloaded')
   }
 
   lazyLoadVideo(swiper,slideEl,imageEl) {
     if (imageEl.tagName == "video") {
       imageEl.src = imageEl.getAttribute('data-src');
     }
+    slideEl.classList.add('lazyloaded')
+    return true;
+  }
+  lazyLoadYoutube(swiper) {
+    const activeSlide = swiper.slides[swiper.activeIndex];
+    if (activeSlide.querySelector('.background-video') != undefined) {
+      activeSlide.classList.add('lazyloaded');
+    }
+
     return true;
   }
 
@@ -118,15 +143,17 @@ if (!customElements.get('slider-element')) {
   constructor() {
 
     super();
+
   //this == the element
     const params = this.generateParams();
     this.contentBox = this.querySelector('[data-slider-content]');
 
     this.slider  = new window.Slider(this, params );
 
-    if (this.contentBox != null && this.slider) {
+  if (this.contentBox != null && this.slider) {
       this.setupContentBox()
     }
+
   }
 
   generateParams() {
@@ -165,7 +192,7 @@ if (!customElements.get('slider-element')) {
     }
 
     if (this.getAttribute('data-effect')) {
-      if (this.getAttribute('data-effect') == "fade" || this.getAttribute('data-effect') == 'slide') {
+      if (this.getAttribute('data-effect') == "fade" || this.getAttribute('data-effect') == 'slide' ) {
         params.effect = this.getAttribute('data-effect');
       }
       if (this.getAttribute('data-effect') == "fade") {
@@ -174,7 +201,43 @@ if (!customElements.get('slider-element')) {
           crossFade: true
         }
       }
+      if (this.getAttribute('data-effect') == "threed") {
+
+        params.speed = 500;
+        params.effect ='creative';
+        params.loop = true;
+        params.creativeEffect = {
+          next: {
+            translate: ['90%', 0, '-50px'],
+            rotate: [0, -12, 0],
+            scale: 0.8,
+            shadow: true,
+            origin: 'middle center'
+          },
+          prev: {
+            translate: ['-90%', 0, '-50px'],
+            rotate: [0, 12, 0],
+            scale: 0.8,
+            shadow: true,
+            origin: 'middle center'
+          },
+        };
+      }
+      if (this.getAttribute('data-multi-slider') === 'true') {
+        params.slidesPerView = 1;
+        params.breakpoints = false;
+        params.autoplay = false;
+        // params.rewind = true;
+        params.initialSlide = 1;
+        params.centeredSlides = true;
+      }
+    } else {
+      if (this.getAttribute('data-multi-slider') === 'true') {
+        params.slidesPerView = 3;
+      }
     }
+
+
     return params;
   }
 
@@ -193,11 +256,21 @@ if (!customElements.get('slider-element')) {
         const index = evt.activeIndex;
 
         sliderContent.classList.add('animating--out')
-
-
         setTimeout(() => {
           sliderContent.innerHTML = slideContents[index].innerHTML;
+
           // sliderContent.classList.add('animating--in')
+          //Lightbox stuff
+          if (window.GLight) {
+            const newButton = sliderContent.querySelector('[data-glightbox]');
+            const oldButton = slideContents[index].querySelector('[data-glightbox]')
+            if (oldButton && newButton) {
+            newButton.setAttribute('data-glightbox', 'true');
+            oldButton.setAttribute('data-glightbox', 'false');
+          }
+            // window.GLightbox.getAllPlayers();
+            window.GLight.reload();
+          }
           sliderContent.classList.remove('animating--out')
           setTimeout(() => {
             // sliderContent.classList.remove('animating--in')

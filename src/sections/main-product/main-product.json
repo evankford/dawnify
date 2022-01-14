@@ -1,7 +1,7 @@
 {
   "name": "t:sections.main-product.name",
   "tag": "section",
-  "class": "product-section spaced-section",
+  "class": "product-section",
   "blocks": [
     {
       "type": "@app"
@@ -100,6 +100,30 @@
           "label": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.label",
           "info": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.info"
         }
+      ]
+    },
+    {
+      "type" : "pre_order",
+      "limit" : 1,
+      "name" : "Pre-Order Warning",
+      "settings" : [
+        {
+          "type" : "paragraph",
+          "content" : "To enable, use the tag 'Pre-Order' on a product. You may use metafields to populate the acceptance text, they have sensible fallback text."
+        },
+        {
+          "type" : "text",
+          "id" : "heading",
+          "label" : "Heading",
+          "default" : "I understand this item is a pre-order"
+        },
+        {
+          "type" : "text",
+          "id" : "text",
+          "label" : "Text",
+          "default" : "This is a pre-order product. It will ship when indicated in the product description."
+        }
+
       ]
     },
     {

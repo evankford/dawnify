@@ -121,6 +121,26 @@ a.header__menu-item, summary.header__menu-item, .header__icon, .list-social__lin
           margin: 0 0 0 auto;
         }
       }
+      &:first-child {
+        margin-left: 0;
+        margin-right: auto;
+      }
+      @include media-query($medium) {
+        &.hide--medium + .header__group:nth-child(2) {
+          margin-left: 0;
+          margin-right: auto;
+        }
+      }
+      @include media-query($large-up) {
+        &.hide--desktop + .header__group:nth-child(2) {
+          margin-left: 0;
+          margin-right: auto;
+        }
+      }
+      &:last-child {
+        margin-left: auto;
+        margin-right: 0;
+      }
     }
   }
   @include media-query($medium-up) {

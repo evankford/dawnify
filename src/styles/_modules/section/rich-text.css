@@ -41,7 +41,7 @@
     width: calc(100% - 10rem);
   }
 
-  .rich-text:not(.rich-text--full-width),
+  /* .rich-text:not(.rich-text--full-width),
   .rich-text--full-width.color-background-1 {
     margin-top: calc(5rem + var(--page-width-margin));
     margin-bottom: calc(5rem + var(--page-width-margin));
@@ -50,7 +50,7 @@
   .rich-text:not(.color-background-1) {
     padding-top: calc(5rem + var(--page-width-margin));
     padding-bottom: calc(5rem + var(--page-width-margin));
-  }
+  } */
 
   .rich-text__blocks > *:not([class*=size]) {
     max-width: 50rem;

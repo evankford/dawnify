@@ -1,6 +1,7 @@
 import { DEBUG } from '@squarespace/video-background-rendering/src/constants/instance';
 import { VideoBackground as VideoBackgroundRenderer } from '@squarespace/video-background-rendering/src/index.js';
 
+
 class VideoBackground extends HTMLElement {
   constructor() {
     super();

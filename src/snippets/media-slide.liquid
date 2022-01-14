@@ -25,14 +25,14 @@ Usage:
     {%else %}
     <div class="background-image {% unless auto_height == true %} background-element {% endunless %}" style="--oo: {{ overlay_opacity }}; opacity: {{ 100 | minus: overlay_opacity | divided_by: 100.00 }};">
       {% if settings.image_wide != blank %}
-        {% render 'media' with type: 'image' , image: settings.image_wide , size: "full" , class: 'media--wide', center_x: settings.image_center_x, type: "image" , center_y: block.setings.image_center_y , is_slide: is_slide %}
+        {% render 'media' with type: 'image' , image: settings.image_wide , size: "full" , class: 'media--wide', center_x: settings.image_center_x, type: "image" , center_y: block.settings.image_center_y , is_slide: is_slide %}
       {% endif %}
       {% if settings.image_mobile != blank %}
         {% render 'media' with type: 'image' , image: settings.image_mobile, size: "full" , class: 'media--mobile', center_x: settings.image_center_x, type: "image" , center_y: settings.image_center_y, is_slide: is_slide %}
       {% endif %}
       {% render 'media' with type: 'image' , image: settings.image, size: "full", center_x: settings.image_center_x, center_y: settings.image_center_y, type: "image"  , is_slide: is_slide %}
     </div>
-    {% endif %}
+  {% endif %}
     {% if type == 'content-image' %}
 
       <div class="content-image-wrap style--{{settings.content_image_spacing | default: 'overlapping' }}" style="opacity: {{settings.content_image_opacity | divided_by: 100.00 | default: 1 }}; align-items: {{settings.content_image_alignment | default: 'center' }}">
@@ -55,9 +55,9 @@ Usage:
     {% endif %}
   {% unless settings.heading == blank and settings.content_image == blank and settings.button_label_1 == blank and settings.introduction == blank and settings.content == blank %}
     {% if type != 'video' and type != 'image' %}
-    <div class="banner__content" style="align-items: {{ settings.desktop_text_box_position }};">
+    <div class="banner__content" style="align-items: {{ settings.desktop_text_box_position }}; {% if settings.desktop_text_box_position == 'flex-end' %} padding-bottom: clamp(1rem, calc(0.5rem + 1.5vw), 2.5rem); {% endif %}">
       <div class="banner__box color-{{ color_scheme }}"  data-slide-content>
-        {% render 'slide-content' with settings: settings, block: block , is_small: is_static %}
+        {% render 'slide-content' with settings: settings, block: block, type: type, is_small: is_static %}
       </div>
     </div>
     {% endif %}

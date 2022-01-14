@@ -60,6 +60,18 @@
       grid-template-columns: repeat(3, 1fr);
     }
   }
+
+  &.grid---small[data-max="4"],
+  &.grid---medium[data-max="4"] {
+    @include media-query($medium-up) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  &.grid---large[data-max="4"] {
+    @include media-query($large-up) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
   &[data-max="3"],
   &[data-max="6"] {
     max-width: calc(3 * (var(--pg-mw) + var(--pg-g)));

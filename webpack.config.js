@@ -7,6 +7,8 @@ const MergeJsonPlugin = require('merge-json-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const TerserPlugin = require("terser-webpack-plugin");
+
 
 var sass = require('sass');
 
@@ -131,12 +133,16 @@ module.exports = {
       },
     ],
   },
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()]
+  },
 
   plugins: [
     new CleanWebpackPlugin(),
     new RemoveEmptyScriptsPlugin(),
     new MiniCssExtractPlugin({
-      filename: '/assets/[name].css',
+      filename: './assets/[name].css',
     }),
     new CopyPlugin({
       patterns: [

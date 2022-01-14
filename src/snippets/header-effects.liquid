@@ -16,9 +16,13 @@
   <script>
 
     function generalReveal() {
+      if (window.scrollStarted && ScrollReveal()) {
+        ScrollReveal().sync();
+      }
       ScrollReveal().reveal('[data-reveal]', { duration: 400, distance: '50px', interval: 50 });
       ScrollReveal().reveal('[data-reveal-fade]', { duration: 600, distance: '0px', interval: 0 });
       ScrollReveal().reveal('[data-reveal-desktop]', { mobile: false, duration: 500, distance: '50px', interval: 25 });
+      window.scrollStarted = true;
     }
     window.addEventListener('DOMContentLoaded', generalReveal);
     document.addEventListener("shopify:section:load", generalReveal);
@@ -147,13 +151,14 @@
               return;
             },
             afterEnter(data) {
-                               window.dispatchEvent(new Event('checkOverlay'));
-
+              window.dispatchEvent(new Event('checkOverlay'));
+//scroll fix?
+                  window.scrollTo({ top: 0, left: 0, behavior: 'smooth'});
             return gsap.from(data.next.container, {
                 opacity: 0,
                 scale: 1.04,
                 y: 10,
-               delay: 0.5,
+               delay: 0.25,
               }
             )
 
@@ -161,14 +166,12 @@
 
             enter(data) {
                 document.body.classList.remove('loading');
-                return true;
-
-
             },
             after() {
               {% if settings.fx_scroll == true %}
                 ScrollReveal().sync();
               {% endif %}
+              window.dispatchEvent(new Event('resize'));
 
             }
           }]

@@ -1,6 +1,9 @@
 {% comment %}
   TODO: Add collapsible
 {% endcomment %}
+<link rel="stylesheet" href="{{ 'component-sidebar.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>{{ 'component-sidebar.css' | asset_url | stylesheet_tag }}</noscript>
 
 
 {% comment %} Icons {% endcomment %}

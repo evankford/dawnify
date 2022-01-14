@@ -115,17 +115,7 @@
         }
   ],
   "blocks": [
-    {
-      "type" : "password",
-      "name" : "Password Modal",
-      "limit" : 1,
-      "settings" : [
-        {
-          "type"  :"header",
-          "content" : "Only to be used on the password page."
-        }
-      ]
-    },
+
     {
       "type": "heading",
       "name": "t:sections.email-signup-banner.blocks.heading.name",
@@ -136,6 +126,19 @@
           "id": "heading",
           "default": "Opening soon",
           "label": "t:sections.email-signup-banner.blocks.heading.settings.heading.label"
+        }
+      ]
+    },
+    {
+      "type": "label",
+      "name": "Label",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Opening soon",
+          "label": "Label"
         }
       ]
     },
@@ -156,6 +159,50 @@
       "type": "email_form",
       "name": "t:sections.email-signup-banner.blocks.email_form.name",
       "limit": 1
+    },
+     {
+      "type" : "password",
+      "name" : "Password Modal",
+      "limit" : 1,
+      "settings" : [
+        {
+          "type"  :"header",
+          "content" : "Only to be used on the password page."
+        }
+      ]
+    },
+    {
+      "type" : "password-form",
+      "name" : "Password Form",
+      "limit" : 1,
+      "settings" : [
+        {
+          "type"  :"header",
+          "content" : "Shows password form."
+        }
+      ]
+    },
+    {
+      "type" : "image",
+      "name" : "Image",
+      "limit" : 1,
+      "settings" : [
+        {
+          "type" : "image_picker",
+          "id" : "image",
+          "label" : "Image"
+        },
+        {
+            "type": "range",
+            "label": "Content Image Width",
+            "id": "image_width",
+            "default": 240,
+            "step": 10,
+            "min": 100,
+            "max": 600,
+            "unit": "px"
+        }
+      ]
     }
   ],
   "presets": [

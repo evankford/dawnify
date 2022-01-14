@@ -121,10 +121,9 @@
       let main = document.getElementById('MainContent');
       //fix multi mains from barba;
       const multiMains = document.querySelectorAll('main.main-content');
-      console.log(multiMains)
+
       if (multiMains && multiMains.length > 1) {
         main = multiMains[multiMains.length - 1]
-        console.log(multiMains);
       }
       const children = main.querySelectorAll('.shopify-section')
       if (children && children[0].classList.contains('image-section')) {

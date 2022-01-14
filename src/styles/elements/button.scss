@@ -240,3 +240,14 @@ details[open] > .share-button__fallback {
     margin-bottom: 0;
   }
 }
+
+.button.simple {
+  background: transparent;
+  color: rgb(var(--color-foreground));
+
+  padding: 0;
+  text-decoration: none;
+  border: 0;
+  box-shadow: none;
+  font-size:1.6rem;
+}

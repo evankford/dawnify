@@ -1,3 +1,5 @@
+// ekf modded
+
 .price {
   align-items: center;
   display: flex;
@@ -18,7 +20,7 @@
 }
 
 .price .price-item {
-  margin: 0 1rem 0 0;
+  margin: auto 1rem auto 0; //ekf moddedd
 }
 
 .price:not(.price--show-badge) .price-item--last:last-of-type {
@@ -76,7 +78,7 @@
 .price--on-sale .price-item--regular {
   text-decoration: line-through;
   color: rgba(var(--color-foreground), 0.75);
-  font-size: 1.3rem;
+  font-size: 0.8em; //ekf modded
 }
 
 .unit-price {
