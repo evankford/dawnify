@@ -9,32 +9,25 @@
   list-style: none;
 }
 
+
+
 .grid.grid-grid {
-  --pg-w: 200px;
-  --pg-mw: 300px;
   --pg-g: 12px;
    @include media-query($medium-up) {
-    --pg-w: 240px;
     --pg-g: 15px;
   }
   display: grid;
-  grid-template-columns: repeat( auto-fit, minmax(var(--pg-w), 1fr) );
+  // grid-template-columns: repeat(2, 1fr);
   grid-gap: var(--pg-g);
   width: 100%;
   margin:3rem 0 4rem;
 
-  @include media-query($tiny) {
-    margin: 2rem 0 3rem;
-    &:not(.grid-grid--huge) {
-      grid-template-columns: repeat(2, 1fr);
-    }
+  .grid__item {
+    grid-column: span 2;
   }
 
-  @include media-query($widescreen) {
-    grid-template-columns: repeat(4, 1fr);
-    &.grid-grid--huge, &[data-max="3"] {
-      grid-template-columns: repeat(3, 1fr);
-    }
+  @include media-query($tiny) {
+    margin: 2rem 0 3rem;
   }
 
   &.center-insufficient {
@@ -42,39 +35,53 @@
     margin-right: auto;
   }
 
-  &[data-max="1"] {
-    grid-template-columns: 1fr;
-    max-width: calc(1 * (var(--pg-mw) + var(--pg-g)));
 
+  &[data-max="1"] {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: calc(1 * (var(--pg-mw) + var(--pg-g)));
+    .grid__item {
+      grid-column-end: auto !important;
+    }
   }
   &[data-max="2"] {
     max-width: calc(2 * (var(--pg-mw) + var(--pg-g)));
     @include media-query($medium-up) {
-
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .grid__item {
+      grid-column-end: auto !important;
     }
   }
 
   &[data-max="3"] {
      @include media-query($widescreen) {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(6, 1fr);
+    }
+    .grid__item {
+      grid-column-end: auto !important;
     }
   }
 
   &.grid---small[data-max="4"],
   &.grid---medium[data-max="4"] {
     @include media-query($medium-up) {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(8, 1fr);
+      .grid__item {
+      grid-column-end: auto !important;
+    }
     }
   }
   &.grid---large[data-max="4"] {
     @include media-query($large-up) {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(8, 1fr);
     }
   }
   &[data-max="3"],
   &[data-max="6"] {
     max-width: calc(3 * (var(--pg-mw) + var(--pg-g)));
+    .grid__item {
+      grid-column-end: auto !important;
+    }
 
   }
 
@@ -112,35 +119,8 @@
     justify-content: flex-start;
   }
 
-  &.grid-grid--small {
-    --pg-w: 170px;
-    --pg-mw: 320px;
-    --pg-g: 10px;
-     @include media-query($medium-up) {
-      --pg-w: 220px;
-      --pg-g: 12px;
-    }
 
-  }
-  &.grid-grid--large {
-    --pg-w: 260px;
-    --pg-mw: 400px;
-    --pg-g: 15px;
-     @include media-query($medium-up) {
-      --pg-w: 300px;
-      --pg-g: 15px;
-    }
-  }
-  &.grid-grid--huge {
-    --pg-w: 300px;
-    --pg-mw: 520px;
-    --pg-g: 15px;
-     @include media-query($medium-up) {
-      --pg-w: 340px;
-      --pg-g: 15px;
-    }
 
-  }
   .card-wrapper > a , .card {
     padding: 0;
     // margin: auto 0;
@@ -171,7 +151,7 @@
   }
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($small) {
   .grid {
     margin-left: -1rem;
   }
@@ -226,7 +206,7 @@
   width: calc(33.33% - 0.5rem * 2 / 3);
 }
 
-@media screen and (min-width: 750px) {
+@include media-query($medium-up) {
   .grid--3-col .grid__item {
     width: calc(33.33% - 1rem * 2 / 3);
   }
@@ -241,7 +221,7 @@
 //   padding-bottom: 0.5rem;
 // }
 
-@media screen and (min-width: 750px) {
+@include media-query($medium-up) {
   .grid--2-col .grid__item {
     width: calc(50% - 1rem / 2);
   }
@@ -259,7 +239,7 @@
   }
 }
 
-@media screen and (min-width: 990px) {
+@include media-query($large-up) {
   .grid--4-col-desktop .grid__item {
     width: calc(25% - 1rem * 3 / 4);
   }
@@ -298,7 +278,7 @@
   }
 }
 
-@media screen and (max-width: 989px) {
+@include media-query($medium-down) {
   .slider--always.grid--peek,
   .slider--tablet.grid--peek {
     margin: 0;
@@ -330,7 +310,7 @@
 }
 
 
-@media screen and (max-width: 749px) {
+@include media-query($small) {
 
   .grid--peek {
     &.slider--mobile {

@@ -21,16 +21,8 @@
   {%- if section.blocks.size > 0 or section.settings.newsletter_enable or section.settings.show_social -%}
     <div class="footer__content-top page-width">
       {%- if section.blocks.size > 0 -%}
-        {%- liquid
-          if section.blocks.size == 9
-            assign footer_grid_class = 'grid--3-col-tablet'
-          elsif section.blocks.size >= 7
-            assign footer_grid_class = 'grid--4-col-desktop'
-          elsif section.blocks.size >= 5
-            assign footer_grid_class = 'grid--3-col-tablet'
-          endif
-        -%}
-        <div data-reveal class="layout--{{ section.settings.layout }} footer__blocks-wrapper {% if section.settings.layout != 'stacked' %} grid grid--1-col grid--2-col grid--4-col-tablet {{ footer_grid_class }} {% endif %}">
+
+        <div class="layout--{{ section.settings.layout }} footer__blocks-wrapper {% if section.settings.layout != 'stacked' %} grid  {% endif %}">
           {%- for block in section.blocks -%}
             <div class="footer-block grid__item{% if block.type == 'link_list' and block.settings.heading != blank %} footer-block--menu small-hide{% endif %} {% unless block.settings.visible_large %} hide--desktop {% endunless %} {% unless block.settings.visible_medium %} hide--medium {% endunless %} {% unless block.settings.visible_small %} hide--small {% endunless %}" {{ block.shopify_attributes }}>
               {%- if block.settings.title != blank and block.type != 'accordion' -%}
@@ -60,7 +52,7 @@
                 </div>
                 {%- when 'content' -%}
                   {% if block.settings.image %}
-                    {% render "media" with size: "icon", image: block.settings.image, max_width: block.settings.image_width %}
+                    {% if block.settings.image_url != blank %} <a class="nostyle" href="{{block.settings.image_url }}">{% endif %}{% render "media" with size: "icon", image: block.settings.image, max_width: block.settings.image_width %}{% if block.settings.image_url != blank %}</a>{% endif %}
                   {% endif %}
                   {% if block.settings.content != blank %}
                   <div class="rte">
@@ -133,7 +125,7 @@
   <div class="footer__content-bottom layout--{{ section.settings.layout }}">
     <div class="footer__content-bottom-wrapper page-width">
     {% if section.settings.agency_logo != blank or section.settings.credits != blank %}
-        <div data-reveal class="footer__column footer__attribution">
+        <div class="footer__column footer__attribution">
         {%- if section.settings.agency_logo != blank -%}
           {%- if section.settings.agency_link != blank -%}
             <a href="{{ section.settings.agency_link }}" target="_blank" rel="nofollow noopener noreferrer" style="display: inline-block; width: {{ section.settings.agency_logo_width }}px;">
@@ -150,7 +142,7 @@
         {%- endif -%}
       </div>
     {% endif %}
-      <div data-reveal class="footer__column footer__localization">
+      <div class="footer__column footer__localization">
         {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
           <noscript>
             {%- form 'localization', id: 'FooterCountryFormNoScript', class: 'localization-form' -%}
@@ -235,7 +227,7 @@
           </localization-form>
         {%- endif -%}
       </div>
-      <div data-reveal class="footer__column footer__column--info">
+      <div class="footer__column footer__column--info">
         {% unless copyright_text_shown %}
           <div class="footer__copyright">
             {{ copyright_text }}

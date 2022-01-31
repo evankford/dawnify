@@ -5,6 +5,99 @@
   position: relative;
 }
 
+.grid-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+  .grid-grid--small,.grid-grid--medium {
+    grid-template-columns: repeat(4, 1fr);
+    --pg-g: 10px;
+    --pg-mw: 250px;
+    &.center-insufficient {
+      @include centerColumns(2, ".grid__item");
+    }
+    @include media-query($medium-up) {
+      --pg-g: 12px;
+    }
+    @include media-query($medium) {
+      grid-template-columns: repeat(6, 1fr);
+      &.center-insufficient {
+        @include centerColumns(3, ".grid__item");
+      }
+    }
+    @include media-query($large-up) {
+      grid-template-columns: repeat(8, 1fr);
+     &.center-insufficient {
+        @include centerColumns(4, ".grid__item");
+     }
+    }
+
+  }
+
+  .grid-grid--small {
+      @include media-query($widescreen) {
+        grid-template-columns: repeat(10, 1fr);
+        &.center-insufficient {
+          @include centerColumns(5, ".grid__item");
+        }
+      }
+    }
+
+.grid-grid--medium {
+    // grid-template-columns: repeat(4, 1fr);
+    @include media-query($tiny) {
+      grid-template-columns: repeat(2, 1fr);
+      .grid__item:last-child {
+        grid-column-end: -2;
+      }
+    }
+  }
+
+.grid-grid--large {
+  --pg-mw: 340px;
+  --pg-g: 12px;
+  grid-template-columns: repeat(2, 1fr);
+  @include media-query($medium) {
+      --pg-g: 15px;
+      grid-template-columns: repeat(4, 1fr);
+      &.center-insufficient {
+        @include centerColumns(2, ".grid__item");
+      }
+    }
+    @include media-query($large) {
+      --pg-g: 18px;
+      grid-template-columns: repeat(6, 1fr);
+      &.center-insufficient {
+          @include centerColumns(3, ".grid__item");
+      }
+    }
+    @include media-query($widescreen) {
+      --pg-mw: 380px;
+      grid-template-columns: repeat(8, 1fr);
+      &.center-insufficient {
+          @include centerColumns(4, ".grid__item");
+      }
+    }
+  }
+.grid-grid--huge {
+  --pg-mw: 380px;
+  --pg-g: 15px;
+  grid-template-columns: repeat(2, 1fr);
+  @include media-query($medium) {
+    grid-template-columns: repeat(4, 1fr);
+    &.center-insufficient {
+      @include centerColumns(2, ".grid__item");
+    }
+  }
+  @include media-query($large-up) {
+      --pg-g: 20px;
+      --pg-mw: 420px;
+      grid-template-columns: repeat(6, 1fr);
+      &.center-insufficient {
+          @include centerColumns(3, ".grid__item");
+      }
+    }
+  }
 
 
 .product-grid.negative-margin {
@@ -25,3 +118,5 @@
     margin-bottom: calc(-1rem - var(--page-width-margin));
   }
 }
+
+

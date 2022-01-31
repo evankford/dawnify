@@ -6,9 +6,9 @@ body {
 main.main-content {
   position: relative;
   &:not(.has-overlay) {
-    padding-top: var(--header-bottom, 75px);
+    padding-top: var(--header-bottom, 65px);
   }
 }
-.shopify-section {
+.template-index main .shopify-section {
   overflow: hidden;
 }

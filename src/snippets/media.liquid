@@ -169,22 +169,13 @@ Accepts:
         {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
       {%- endif -%}
     {%- when  'video' -%}
-    {% unless is_external %}
-      {% if video %}
-        {% if video_small and video_small != blank %}
-          <video class="{{ classes}} hide--desktop" {% if poster %}poster="{{poster | img_url: '450x'}}" data-poster="{{poster | img_url: '800x'}}" {% endif %} autoplay muted loop playsinline preload="false" loading="lazy" data-src="{{ video_small }}" ></video>
-          <video class="{{ classes}} hide--small" {% if poster %}poster="{{poster | img_url: '450x'}}" data-poster="{{poster | img_url: '1400x'}}" {% endif %} autoplay muted loop playsinline preload="false" loading="lazy" data-src="{{ video }}" ></video>
-        {% else %}
-          <video class="{{ classes}}" {% if poster %}poster="{{poster | img_url: '450x'}}" data-poster="{{poster | img_url: '1400x'}}" {% endif %} autoplay muted loop playsinline preload="false" loading="lazy" data-src="{{ video }}" ></video>
-        {% endif %}
-      {% endif %}
-    {% else %}
+
       {% liquid
         if poster
           assign image = poster
           assign max_width = 2000
         endif %}
-        <video-background class="video-bg" {% if allow_unmute == true %} data-allow-unmute="true" {% endif %} data-bg-video-url="{{ video }}">
+        <video-background class="video-bg" {% if allow_unmute == true %} allow-unmute="true" {% endif %} src="{% if video_small and video_small != blank %}{{ video_small }} 720w, {% endif %}{{ video }}">
           {% if poster %}
           <img
           class="custom-fallback-image{% if is_slide %} swiper-lazy{% endif %}"
@@ -216,9 +207,10 @@ Accepts:
         {% if allow_unmute == true %}
           {% render 'audio-controls' %}
         {% endif %}
-            <script src="{{ 'component-external-video-bg.js' | asset_url }}" defer></script>
-
-
-    {%endunless %}
+        <script src="{{ 'component-external-video-bg-2.js' | asset_url }}" defer></script>
   {%- endcase -%}
+
+    {% if is_slide %}
+      <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+    {% endif %}
 </div>

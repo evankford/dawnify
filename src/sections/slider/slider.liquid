@@ -36,7 +36,7 @@
   data-content-location="{{section.settings.content_location}}">
   <ul class="swiper-wrapper">
     {% else %}
-    <div class="single-slide-wrapper gradient color-{{ section.settings.color_scheme | default: 'inverse' }} {% if section.settings.content_style == 'static' %} has-content-box {% endif %}">
+    <div {% if section.settings.anchor_id != blank %} id="{{section.settings.anchor_id | handleize }}" {% endif %} class="single-slide-wrapper gradient color-{{ section.settings.color_scheme | default: 'inverse' }} {% if section.settings.content_style == 'static' %} has-content-box {% endif %}">
   {% endif %}
   {% for block in section.blocks %}
       {% render 'media-slide' with color_scheme: block.settings.color_scheme, type: block.type, overlay_color: block.settings.overlay_color, overlay_opacity: block.settings.overlay_opacity, settings: block.settings, is_slide: is_slide , auto_height: section.settings.auto_height, is_static: section.settings.content_style == "static" %}
@@ -77,7 +77,7 @@
     height: {{ section.settings.height_standard | default: 460 }}px
   }
 }
-@media (min-width: 1250px) {
+@media (min-width: 1450px) {
   #shopify-section-{{ section.id }} .swiper-slide {
     height: {{ section.settings.height_widescreen | default: 510 }}px
   }

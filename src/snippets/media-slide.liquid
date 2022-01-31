@@ -12,9 +12,9 @@ Usage:
   {% render 'media-slide' with color_scheme: section.settings.color_scheme, overlay_opacity: section.settings.overlay_opacity, overlay_color: section.settings.overlay_color, settings: block.settings, type: block.type, is_slide: is_slide %}
 {% endcomment %}
 
-<{% if is_slide %}li{% else %}div{% endif %} class="swiper-slide swiper-slide--{{ type }} color-{{ color_scheme | default: 'transparent-light' }}" style="background-color: {{ overlay_color | default: '#000000' }}; --oc: {{ overlay_color | default: '#000000' }};">
+<{% if is_slide %}li{% else %}div{% endif %} class="swiper-slide swiper-slide--{{ type }} color-{{ color_scheme | default: 'transparent-light' }}" style="background-color: {{ overlay_color | default: '#000000' }}; --oc: {{ overlay_color | default: '#000000' }}; ">
 {% if type contains 'video' %}
-    <div class="background-video background-element" style="--oo: {{overlay_opacity }}; opacity: {{ 100 | minus: overlay_opacity | divided_by: 100.00 }};">
+    <div class="background-video background-element" style="--oo: {{overlay_opacity }}; opacity: {{ 100 | minus: overlay_opacity | divided_by: 100.00 }}; --vbg-overlay-opacity: {{overlay_opacity | default: 0.4 }}; --vbg-bg: {{overlay_color | default: '#000000' }};">
 
       {% if settings.video_type == 'external' %}
           {% render 'media' with type: 'video', video: settings.youtube_url, poster: settings.image, allow_unmute: settings.allow_unmute %}
@@ -62,7 +62,4 @@ Usage:
     </div>
     {% endif %}
     {%endunless %}
-    {% if is_slide %}
-      <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-    {% endif %}
-    </{% if is_slide %}li{% else %}div{% endif %}>
+</{% if is_slide %}li{% else %}div{% endif %}>

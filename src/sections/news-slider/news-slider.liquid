@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="{{ 'section-album-slider.css' | asset_url }}" media="print" onload="this.media='all'">
-<noscript>{{ 'section-album-slider.css' | asset_url | stylesheet_tag }}</noscript>
+<link rel="stylesheet" href="{{ 'section-news-slider.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript>{{ 'section-news-slider.css' | asset_url | stylesheet_tag }}</noscript>
 
 <script defer src="{{ 'slider.js' | asset_url }}"></script>
 <script defer src="{{ 'component-content-slider.js' | asset_url }}"></script>
@@ -8,7 +8,7 @@
 {{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
 
 {% render 'section-style' with id: section.id, params: section.settings %}
-<div class="page-width album-section-wrap" {% if section.settings.anchor_id != blank %} id="{{section.settings.anchor_id | handleize }}" {% endif %}>
+<div class="page-width news-section-wrap" {% if section.settings.anchor_id != blank %} id="{{section.settings.anchor_id | handleize }}" {% endif %}>
   {% if section.settings.introduction != blank or section.settings.title != blank or section.settings.subtitle != blank%}
   <div class="common-header text--{{ section.settings.text_align | default: "left"}}">
     {% if section.settings.introduction != blank %}
@@ -24,11 +24,11 @@
   {% assign is_slide = false%}
   {% if section.blocks.size > 1 %}
     {% assign is_slide = true %}
-    <content-slider class="swiper-container page-width" data-pagination="{{ section.settings.pagination }}" data-navigation="{{ section.settings.navigation }}" data-autoplay="{{ section.settings.autoplay_speed | default: 0 }}" data-full-width="{{ section.settings.full_width }}">
+    <content-slider class="swiper-container page-width news-slider" data-pagination="{{ section.settings.pagination }}" data-navigation="{{ section.settings.navigation }}" data-autoplay="{{ section.settings.autoplay_speed | default: 0 }}" data-full-width="{{ section.settings.full_width }}">
         <ul class="swiper-wrapper">
   {% endif %}
     {% for block in section.blocks %}
-      {% render 'album-slide' with params: block.settings, full_width: section.settings.full_width, is_slide: is_slide, show_icon_text: section.settings.show_icon_text %}
+      {% render 'news-slide' with type: block.type, params: block.settings, full_width: section.settings.full_width, is_slide: is_slide, color_scheme: section.settings.content_color_scheme %}
       {% endfor %}
     {% if is_slide %}
     </ul>
@@ -44,7 +44,6 @@
           <button class="button-icon" data-next aria-label="Next Slide">{% if section.settings.navigation_style == "classic" %}{% render 'icon-caret' %}{% else %} {% render 'icon-arrow' %} {% endif %}</button>
         </div>
       {% endif %}
-
   </content-slider>
   {% endif %}
 </div>

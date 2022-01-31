@@ -1,10 +1,20 @@
 {% comment %} Renders section style. Requires id and section settings object {% endcomment %}
 <style>
   #{% unless inner %}shopify-section-{% endunless %}{{ id }} {
-
-
     padding-top: {{ params.spacing_top | divided_by: 2.5 | default: 1 }}rem;
     padding-bottom: {{ params.spacing_bottom | divided_by: 2.5 | default: 1 }}rem;
+  }
+  @media (max-width: 720px) {
+    #{% unless inner %}shopify-section-{% endunless %}{{ id }} {
+      padding-top: {{ params.spacing_top | divided_by: 3.25 | default: 1 }}rem;
+      padding-bottom: {{ params.spacing_bottom | divided_by: 3.5 | default: 1 }}rem;
+    }
+  }
+  @media (max-width: 490px) {
+    #{% unless inner %}shopify-section-{% endunless %}{{ id }} {
+      padding-top: {{ params.spacing_top | divided_by: 4 | default: 1 }}rem;
+      padding-bottom: {{ params.spacing_bottom | divided_by: 4 | default: 1 }}rem;
+    }
   }
   {% if params.background_image != blank %}
   #{% unless inner %}shopify-section-{% endunless %}{{ id }} {
@@ -116,7 +126,7 @@
       {% when 'inverse' %}
     --color-foreground: var(--color-base-background-1);
     --color-background: var(--color-base-text);
-    rgbackground: var(--color-base-text);
+    background: rgb(var(--color-base-text));
     {% endcase %}
 
      {% if params.background_color != blank and params.background_color != transparent and params.background_color != 'rgba(0,0,0,0)' %}

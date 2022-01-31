@@ -53,13 +53,23 @@
     transition: opacity 150ms ease;
   }
   .product-grid .card-wrapper:hover .card--product {
-    opacity: 0.125;
+    opacity: 0.55;
   }
   .product-grid .card-wrapper:hover .card-information__wrapper > * {
     opacity: 1;
     transform: translateY(0);
+    text-shadow: 1px 1px 12px rgba(var(--color-background), 0.2));
   }
 
+{% endif %}
+
+{% if settings.expand_page_width == true %}
+  @media (min-width: 1650px) {
+    .page-width {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
 {% endif %}
 
 

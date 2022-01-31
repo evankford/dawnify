@@ -5,7 +5,10 @@
 .page-width {
   max-width: var(--page-width);
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 1.5rem; //Modded
+  @include media-query($small) {
+    padding: 0 1rem;
+  }
 }
 
 .page-width-desktop {

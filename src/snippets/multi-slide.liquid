@@ -20,13 +20,13 @@
 
 <div class="multi-slide__content location--{{block.settings.content_location}} color-{{block.settings.content_color_scheme | default: "inverse"}}">
   {% if block.settings.title != blank %}
-  <h3 class="heading" data-reveal="">{{block.settings.title | escape }}</h3>
+  <h3 class="heading" >{{block.settings.title | escape }}</h3>
   {% endif %}
   {% if block.settings.subtitle != blank %}
-  <h4 class="label" data-reveal="">{{block.settings.subtitle | escape }}</h3>
+  <h4 class="label" >{{block.settings.subtitle | escape }}</h3>
   {% endif %}
   {% if block.settings.url != blank and block.settings.button_text != blank %}
-  <div class="button simple" data-reveal>{{block.settings.button_text| escape}}</div>
+  <div class="button simple" >{{block.settings.button_text| escape}}</div>
   {% endif %}
 </div>
 </{%-if block.settings.url != blank -%}a {%- else -%}div {%- endif -%}>

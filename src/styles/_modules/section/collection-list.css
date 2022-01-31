@@ -32,12 +32,12 @@
     padding-right: 1.5rem;
   }
 }
-
+/*
 @media screen and (max-width: 749px) {
   .collection-list-wrapper:not(.no-heading) .title-wrapper-with-link {
     margin-top: -1rem;
   }
-}
+} */
 
 @media screen and (min-width: 750px) {
   .collection-list-wrapper.no-heading {

@@ -16,7 +16,7 @@ class Slider {
 
       window.dispatchEvent(new Event('resize'));
       this.swiper.update();
-    }, 300);
+    }, 200);
   }
 
   setupParams() {
@@ -24,7 +24,10 @@ class Slider {
       thumbs: false,
       navigation: false,
       pagination: false,
-      lazy: true,
+      lazy: {
+        checkInView: true,
+        loadOnTransitionStart: true,
+      },
       a11y: true,
       preloadImages: false,
       slidesPerView: 1,
@@ -96,10 +99,7 @@ class Slider {
   setupWatchers() {
     var self = this;
     if (this.params.lazy) {
-      this.swiper.on('slideChange', self.lazyLoadYoutube)
 
-      this.swiper.on('lazyImageLoad', self.lazyLoadVideo);
-      this.swiper.on('lazyImageReady', self.finishLazyLoad);
     }
 
   }
@@ -108,21 +108,7 @@ class Slider {
     slideEl.classList.add('lazyloaded')
   }
 
-  lazyLoadVideo(swiper,slideEl,imageEl) {
-    if (imageEl.tagName == "video") {
-      imageEl.src = imageEl.getAttribute('data-src');
-    }
-    slideEl.classList.add('lazyloaded')
-    return true;
-  }
-  lazyLoadYoutube(swiper) {
-    const activeSlide = swiper.slides[swiper.activeIndex];
-    if (activeSlide.querySelector('.background-video') != undefined) {
-      activeSlide.classList.add('lazyloaded');
-    }
 
-    return true;
-  }
 
   watchForVariantChanges() {
 

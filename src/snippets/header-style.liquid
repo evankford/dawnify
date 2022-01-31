@@ -83,5 +83,36 @@
           font-size: 1.6rem;
         }
       }
+
+      /* Some default styles to lower layout shift */
+        .list-menu {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+        }
+
+        .list-menu--inline {
+          display: inline-flex;
+          flex-wrap: wrap;
+          align-items: center;
+        }
+
+        summary.list-menu__item {
+          padding-right: 2.7rem;
+        }
+
+        .list-menu__item {
+          display: flex;
+          align-items: center;
+          line-height: 1.3;
+        }
+
+        .list-menu__item--link {
+          text-decoration: none;
+          padding-bottom: 1rem;
+          padding-top: 1rem;
+          line-height: 1.8;
+        }
+
     {% endstyle %}
     {% render 'header-effects' %}

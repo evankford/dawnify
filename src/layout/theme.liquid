@@ -74,7 +74,7 @@
     {% if settings.enable_sidebar_menu %}
         {% section 'sidebar' %}
     {% endif %}
-    <main data-barba="container" data-barba-namespace="{{template.name}}" id="MainContent" class="main-content content-for-layout focus-none {% if template.name == 'index' %} has-overlay {% endif %}" role="main" tabindex="-1">
+    <main data-barba="container" data-template="template-{{template.name}}" data-barba-namespace="{{template.name}}" id="MainContent" class="main-content content-for-layout focus-none {% if template.name == 'index' %} has-overlay {% endif %}" role="main" tabindex="-1">
       {{ content_for_layout }}
     </main>
 

@@ -12,7 +12,7 @@ const TerserPlugin = require("terser-webpack-plugin");
 
 var sass = require('sass');
 
-const env = process.env.WEBPACK_ENV ? process.env.WEBPACK_ENV : 'development';
+
 function getSections() {
   let sectionBundles = [];
   const allSections = glob.sync(path.resolve('./src/sections/**/*/*.liquid'));
@@ -99,11 +99,13 @@ function getEntries() {
   };
 }
 
-module.exports = {
-  mode: env == 'development' ? 'development' : 'production',
-  stats: env == 'development' ? 'errors-only' : 'detailed',
+module.exports = (env) => {
+  console.log(env);
+  return {
+  mode: !env.production ? 'development' : 'production',
+  stats: !env.production ? 'errors-only' : 'detailed',
   entry: getEntries(),
-  devtool: env == 'development' ? 'inline-source-map' : false,
+  devtool: !env.production ? 'inline-source-map' : false,
   output: {
     filename: 'assets/[name].js',
     chunkFilename: 'assets/[name].js',
@@ -197,4 +199,5 @@ module.exports = {
       bundles: getSections(),
     }),
   ],
+}
 };

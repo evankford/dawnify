@@ -23,6 +23,12 @@
         "label": "Page Width"
       },
       {
+        "id" : "expand_page_width",
+        "type" :"checkbox",
+        "label" : "Expand page width on huge screens?",
+        "default" : true
+      },
+      {
         "id" : "enable_sidebar_menu",
         "type" : "checkbox",
         "label" : "Enable Sidebar Menu",

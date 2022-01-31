@@ -22,7 +22,7 @@
       <div class="h4 label">{{ section.settings.subtitle | escape }}</div>
     {% endif %}
   </div>
-    <ul class="grid product-grid grid-grid grid-grid--{{ section.settings.grid_size }}" data-max="{{ recommendations.products_count }}" role="list">
+    <ul class="grid product-grid grid-grid grid-grid--{{ section.settings.grid_size }} center-insufficient" data-max="{{ recommendations.products_count }}" role="list">
       {% for recommendation in recommendations.products %}
         <li class="grid__item grid__item--product">
           {% render 'product-card',

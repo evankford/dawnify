@@ -12,7 +12,7 @@ Usage:
   {% render 'album-slide' with params: block.settings, full_width: section.params.full_width, is_slide: is_slide %}
 {% endcomment %}
 
-<{% if is_slide %}li{% else %}div{% endif %} class="swiper-slide album-slide {% if full_width or is_slide == false %} layout--full-width {% else %} layout--columns {% endif %}" >
+<{% if is_slide %}li{% else %}div{% endif %} class="swiper-slide album-slide {% if full_width or is_slide == false %} layout--full-width {% else %} layout--columns {% endif %}" {{ block.shopify_attributes }} >
 <div class="album-slide__cover">
       {% if params.image != blank %}
       {% if params.button_link_1 != blank %}
@@ -46,7 +46,7 @@ Usage:
           </div>
           {% endif %}
           {% if params.button_label_1 != blank and params.button_link_1 != blank %}
-          <div class="button-wrap {% if params.button_label_1 != blank and params.button_link_1 != blank and params.button_label_2 != blank and params.button_link_2 != blank %} banner__buttons--multiple{% endif %}" {{ block.shopify_attributes }}>
+          <div class="button-wrap {% if params.button_label_1 != blank and params.button_link_1 != blank and params.button_label_2 != blank and params.button_link_2 != blank %} banner__buttons--multiple{% endif %}" >
             {%- if params.button_label_1 != blank and params.button_link_1 != blank -%}
               <a{% if params.button_link_1 != blank %} href="{{ params.button_link_1 }}"{% endif %} class="button{% if params.button_style_secondary_1 %} button--secondary{% else %} button--primary{% endif %}"{% if params.button_link_1 == blank %} aria-disabled="true"{% endif %}>{{ params.button_label_1 | escape }}</a>
             {%- endif -%}
@@ -127,7 +127,5 @@ Usage:
 
     </div>
     {% endif %}
-    {% if is_slide %}
-      <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-    {% endif %}
+
     </{% if is_slide %}li{% else %}div{% endif %}>

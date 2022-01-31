@@ -139,7 +139,12 @@
       position: sticky;
       top: 2rem ;
       bottom: 2rem;
+
+      .media {
+        max-height: calc(100vh - 4rem)
+      }
     }
+
   }
 }
 //End EKF Mod

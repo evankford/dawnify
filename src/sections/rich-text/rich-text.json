@@ -115,7 +115,7 @@
             "type": "text",
             "id": "heading",
             "default": "Intro/Subtitle",
-            "label": "t:sections.rich-text.blocks.heading.settings.heading.label"
+            "label": "Text"
         }]
     }, {
         "type": "html",
@@ -219,6 +219,11 @@
             "id": "button_style_secondary",
             "default": false,
             "label": "t:sections.rich-text.blocks.button.settings.button_style_secondary.label"
+        }, {
+            "type": "checkbox",
+            "id": "target_blank",
+            "default": false,
+            "label": "Open in new window?"
         }]
     },
     {

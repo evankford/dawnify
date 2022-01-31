@@ -7,6 +7,7 @@
   transition: opacity 150ms linear, transform 100ms linear;
   top: 0;
   .js & {
+    position: fixed;
     opacity: 0;
     animation: slide-down 200ms 50ms $ease 1 forwards;
     width: 100%;

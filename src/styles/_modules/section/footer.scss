@@ -160,7 +160,9 @@
   }
 
   .footer__content-top .grid__item {
-    padding-left: 2.2rem;
+    padding: 0 2.2rem;
+    flex-basis: auto;
+    max-width: 380px;
   }
 }
 
@@ -172,6 +174,8 @@
 .footer__content-bottom:only-child {
   border-top: 0;
 }
+
+
 
 .footer__content-bottom-wrapper {
   display: flex;
@@ -320,8 +324,14 @@ small.credit {
 }
 
 @include media-query($medium-up) {
+
   .footer-block__newsletter:not(:only-child) {
     text-align: left;
+  }
+  .layout--stacked .footer-block__newsletter {
+    text-align: center;
+    margin: 1rem auto 2rem;
+    max-width: 500px;
   }
 
   .footer-block__newsletter .newsletter-form__button.button {

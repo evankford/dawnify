@@ -41,12 +41,15 @@ class BandsintownDates extends HTMLElement {
   constructor() {
     super();
     this.el = this;
+    this.loaded = false;
 
     this.props = this.getArgs();
     //Fix for limit = 0
     if (this.props.limit == 0) {
       this.props.limit = 1000
     }
+
+    console.log("Tour Dates Loaded")
 
 
     this.shows = [];
@@ -205,6 +208,8 @@ class BandsintownDates extends HTMLElement {
       button.classList.add('button');
       button.classList.add('arrow-after');
       button.classList.add('small');
+      button.target = '_blank';
+      button.rel = 'nofollower noreferrer noopener';
       if (offer.status == 'sold out') {
         button.innerHTML = 'Sold Out';
         button.classList.add('sold-out');
@@ -243,7 +248,7 @@ class BandsintownDates extends HTMLElement {
   renderShow(show) {
     let showEl = document.createElement('div');
     showEl.classList.add('bit-show');
-    showEl.setAttribute('data-reveal', true);
+    // showEl.setAttribute('data-reveal', true);
 
     let date = this.renderDate(show);
     let info = this.renderInfo(show);
@@ -255,8 +260,8 @@ class BandsintownDates extends HTMLElement {
 
   renderAllShows() {
     //CreateWrapper
-    let wrapper = document.createElement('div');
-    wrapper.classList.add('bit-wrapper');
+    this.wrapper = document.createElement('div');
+    this.wrapper.classList.add('bit-wrapper');
     let extras = false;
 
     if (this.shows.length > this.props.limit && this.props.loadMore) {
@@ -273,7 +278,7 @@ class BandsintownDates extends HTMLElement {
       //Counter
       counter++;
       if (counter <= this.props.limit) {
-        wrapper.append(showItem);
+        this.wrapper.append(showItem);
       } else if (extras && this.props.loadMore) {
         extras.append(showItem);
       } else {
@@ -290,11 +295,11 @@ class BandsintownDates extends HTMLElement {
       this.expandButton.classList.remove('hidden');
     }
     if (extras) {
-      this.el.prepend(wrapper, extras);
+      this.el.prepend(this.wrapper, extras);
       this.extraWrapper = this.el.querySelector('.bit-extra');
     } else if (this.expandButton) {
       this.expandButton.remove();
-      this.el.prepend(wrapper);
+      this.el.prepend(this.wrapper);
     }
     this.el.querySelector('.loader').classList.add('hidden');
   }
@@ -310,15 +315,33 @@ class BandsintownDates extends HTMLElement {
           this.expandButton.getAttribute('data-more-text');
         this.expandButton.setAttribute('data-expand-bit', '');
         this.extraWrapper.style.maxHeight = 0 + 'px';
+        const timer = setTimeout(() => {
+
+          this.wrapper.scrollIntoView({ behavior: 'smooth'})
+                window.dispatchEvent(new Event('resize'));
+
+        }, 200);
+        window.addEventListener('scroll', function () {
+          window.clearTimeout(timer);
+        });
       } else {
         this.expandButton.setAttribute('data-expand-bit', 'expanded');
         let extraShows = this.extraWrapper.querySelectorAll('.bit-show');
         let heightTarget =
-          extraShows[0].getBoundingClientRect().height *
-          (extraShows.length * 1.75);
+        extraShows[0].getBoundingClientRect().height *
+        (extraShows.length * 1.75);
         this.extraWrapper.style.maxHeight = heightTarget + 50 + 'px';
         this.expandButton.innerHTML =
-          this.expandButton.getAttribute('data-less-text');
+        this.expandButton.getAttribute('data-less-text');
+        const timer = setTimeout(() => {
+
+          this.extraWrapper.scrollIntoView({ behavior: 'smooth'})
+                window.dispatchEvent(new Event('resize'));
+
+        }, 200);
+        window.addEventListener('scroll', function() {
+          window.clearTimeout(timer);
+        });
       }
       window.dispatchEvent(new Event('resize'));
     }
@@ -349,20 +372,8 @@ class BandsintownDates extends HTMLElement {
   }
 
   afterRenderShows() {
-    if (window.ScrollReveal) {
-      window.ScrollReveal().reveal('.bit-show');
-    } else {
-      window.addEventListener('DOMContentReady', function () {
-        if (window.ScrollReveal) {
-          window.ScrollReveal().reveal('.bit-show');
-        }
-      });
-      setTimeout(() => {
-        if (window.ScrollReveal) {
-          window.ScrollReveal().reveal('.bit-show');
-        }
-      }, 1000);
-    }
+    this.loaded = true;
+    window.dispatchEvent(new Event('RevealCheck'));
   }
 }
 

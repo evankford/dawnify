@@ -98,13 +98,20 @@
     &[class*=-left] {
       transform: translateX(0);
       left: 4%;
-      left: clamp(2%, calc(10px + 2vw), 7%);
+      left: clamp(4%, calc(10px + 4vw), 7%);
+
+      @include media-query($widescreen) {
+        left: calc((100vw - var(--page-width)) / 2);
+      }
     }
     &[class*=-right] {
       transform: translateX(0);
       left: auto;
       right: 4%;
-      right: clamp(2%, calc(12px + 2vw), 7%);
+      right: clamp(4%, calc(10px + 4vw), 7%);
+       @include media-query($widescreen) {
+        right: calc((100vw - var(--page-width)) / 2);
+      }
     }
     max-width: clamp(200px, 180px + 20vw, 600px);
   }
@@ -254,6 +261,9 @@
     margin: calc(20px + 2%) auto 0;
     left: 0;
     transform: translate3d(0,0,0);
+  }
+  .swiper-lazy-preloader {
+    display: none;
   }
 }
 

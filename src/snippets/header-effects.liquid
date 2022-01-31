@@ -14,18 +14,36 @@
     }
   </style>
   <script>
-
     function generalReveal() {
-      if (window.scrollStarted && ScrollReveal()) {
-        ScrollReveal().sync();
+      if (window.scrollStarted == true) {
+        return ScrollReveal().sync();
       }
-      ScrollReveal().reveal('[data-reveal]', { duration: 400, distance: '50px', interval: 50 });
-      ScrollReveal().reveal('[data-reveal-fade]', { duration: 600, distance: '0px', interval: 0 });
-      ScrollReveal().reveal('[data-reveal-desktop]', { mobile: false, duration: 500, distance: '50px', interval: 25 });
       window.scrollStarted = true;
+      ScrollReveal().reveal('[data-reveal]', { duration: 400, distance: '40px', interval: 30, cleanup: true });
+      ScrollReveal().reveal('[data-reveal-fade]', { duration: 600, distance: '0px', interval: 0, cleanup: true });
+      ScrollReveal().reveal('[data-reveal-desktop]', { mobile: false, duration: 500, distance: '50px', interval: 25, cleanup: true });
+
     }
-    window.addEventListener('DOMContentLoaded', generalReveal);
-    document.addEventListener("shopify:section:load", generalReveal);
+    window.addEventListener('DOMContentLoaded', function() {
+      generalReveal();
+    });
+
+    window.addEventListener('RevealReset', function() {
+      window.scrollStarted = false;
+      ScrollReveal().clean('[data-reveal]');
+      ScrollReveal().clean('[data-reveal-fade]');
+      ScrollReveal().clean('[data-reveal-desktop]');
+      ScrollReveal().destroy();
+      console.log("Destroying scrollReveal")
+      generalReveal()
+    });
+    window.addEventListener('RevealSync', function() {
+      generalReveal()
+    });
+    document.addEventListener("shopify:section:load", function() {
+      generalReveal();
+    });
+
 
 
   </script>
@@ -120,7 +138,7 @@
     <script async src="https://unpkg.com/@barba/core"></script>
     <script async src="https://unpkg.com/@barba/prefetch"></script>
     <script async src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
-    <script defer>
+    <script>
       function barbaCheck() {
       if (typeof barba == 'object' ) {
 
@@ -134,7 +152,6 @@
         }
         barba.init({
           cacheIgnore: ['/cart'],
-          prefetchIgnore: ['/products/*'],
           transitions: [{
             name : "default-transition",
             leave(data) {
@@ -145,45 +162,110 @@
                 y: 10,
                 onComplete: function() { data.current.container.style.display = "none";}
               });
+
             },
             once() {
               document.body.classList.remove('loading');
+               const url = new URL(window.location.href);
+              const hash = url.hash;
+
+              if (!hash || hash == '') {
+                window.scrollTo({ top: 0, left: 0, behavior: 'smooth'});
+              } else {
+                const target = document.getElementById(hash.replace('#', ''));
+                console.log(target);
+                if (target) {
+                  target.scrollIntoView({block: 'start', behavior:'smooth'})
+                }
+              }
+            },
+            beforeEnter(data) {
+              if (data.next.container) {
+                const nextTemplate = data.next.container.getAttribute('data-template');
+                const templateClass = new RegExp(/\btemplate-.+?\b/, 'g');
+                if (document.body.className.match(templateClass) && nextTemplate) {
+                  document.body.className = nextTemplate + ' ' + document.body.className.replace(templateClass, '');
+                }
+              }
+
+               window.scrollTo({ top: 0, left: 0, behavior: 'smooth'});
+
+              const nextEl = data.next.container;
+              if (nextEl) {
+                console.log("AutoGenerating scripts and links");
+
+                const nextScripts = nextEl.querySelectorAll('script')
+
+                nextScripts.forEach(nextScript=> {
+                  const src = nextScript.src;
+                  if (document.head.querySelector('script[src="' + src + '"]') == undefined) {
+
+                    //Have to create a new script element in order for the browser to execute the code
+                    const newScript = document.createElement('script');
+                    newScript.src = src;
+                    newScript.async = true; //Best for loading practices, even though it's already loaded the DOM
+                    document.head.append(newScript);
+
+                    nextScript.remove(); //Cleaning up;
+                    console.log("Appending script to head: " + src);
+
+                  } else {
+                    console.log("Script already exists")
+                  }
+                })
+
+
+                console.log(nextEl.querySelectorAll('link'));
+              }
+
               return;
             },
             afterEnter(data) {
               window.dispatchEvent(new Event('checkOverlay'));
-//scroll fix?
-                  window.scrollTo({ top: 0, left: 0, behavior: 'smooth'});
-            return gsap.from(data.next.container, {
-                opacity: 0,
-                scale: 1.04,
-                y: 10,
-               delay: 0.25,
-              }
-            )
 
+              window.dispatchEvent(new Event('resize'));
+              return gsap.from(data.next.container, {
+                  opacity: 0,
+                  scale: 1.04,
+                  y: 10,
+
+                }
+              )
             },
 
             enter(data) {
-                document.body.classList.remove('loading');
+              const url = new URL(window.location.href);
+              const hash = url.hash;
+              if (hash && hash !== '' ) {
+
+                const target = document.getElementById(hash.replace('#', ''));
+                if (target) {
+                  target.scrollIntoView({block: 'start', behavior:'smooth'})
+                }
+              }
+              document.body.classList.remove('loading');
+              return;
             },
-            after() {
-              {% if settings.fx_scroll == true %}
-                ScrollReveal().sync();
-              {% endif %}
+            after(data) {
+
+              window.dispatchEvent(new Event('RevealReset'));
               window.dispatchEvent(new Event('resize'));
 
+              return;
             }
           }]
         })
       }
-
-      window.addEventListener('DOMContentLoaded' , function() {
+      function barbaLoader() {
         var barbaInterval =setInterval( function() {
           if (barbaCheck()){
             return window.clearInterval(barbaInterval);
           }}, 200);
-        })
+          window.removeEventListener('DOMContentLoaded', barbaLoader)
+
+      }
+
+      window.addEventListener('DOMContentLoaded' , barbaLoader)
     </script>
     <div class="preloader" aria-hidden="true">
       {% if settings.preloader_image  != blank %}

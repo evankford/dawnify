@@ -129,7 +129,7 @@
                 {{ product.description }}
               </div>
             {%- endif -%}
-          {%- when 'description' -%}
+          {%- when 'pre_order' -%}
             {%- if product.tags contains 'pre-order' or product.tags contains 'Pre-order' or product.tags contains 'Pre-Order' or product.tags contains 'PRE-ORDER' or product.tags contains 'PREORDER' -%}
 
               <div class="product__pre-order checkbox-wrap">
@@ -137,7 +137,7 @@
                    <input type="hidden" name="properties[Accepts Pre-Order]" value="No">
                     <input required id="pre-order" type="checkbox" name="properties[Accepts Pre-Order]" value="Yes">
                   <label class="form__label" for="pre-order">
-                    {% if block.settings.title != blank %}<span class="label__title">{{block.settings.heading | default : "I understand this item is a pre-order" }}</span>{% endif %}
+                    {% if block.settings.heading != blank %}<span class="label__title h5">{{block.settings.heading | default : "I understand this item is a pre-order" }}</span>{% endif %}
                     {% if block.settings.text != blank %}<span class="label__sub"{{ block.settings.text | default: "This is a pre-order product. It will ship when indicated in the product description."}}</label>{% endif %}
               </div>
             {%- endif -%}

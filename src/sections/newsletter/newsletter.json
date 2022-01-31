@@ -1,54 +1,113 @@
 {
   "name": "t:sections.newsletter.name",
   "tag": "section",
-  "class": "spaced-section spaced-section--full-width",
-  "settings": [
-    {
-      "type": "select",
-      "id": "color_scheme",
-      "options": [
-        {
-          "value": "transparent-dark",
-          "label": "Dark Text (no bg)"
-        },
-        {
-          "value": "transparent-light",
-          "label": "Light Text (no bg)"
-        },
-        {
-          "value": "accent-1",
-          "label": "t:sections.image-banner.settings.color_scheme.options__1.label"
-        },
-        {
-          "value": "accent-2",
-          "label": "t:sections.image-banner.settings.color_scheme.options__2.label"
-        },
-        {
-          "value": "background-1",
-          "label": "t:sections.image-banner.settings.color_scheme.options__3.label"
-        },
-        {
-          "value": "background-2",
-          "label": "t:sections.image-banner.settings.color_scheme.options__4.label"
-        },
-        {
-          "value": "inverse",
-          "label": "t:sections.image-banner.settings.color_scheme.options__5.label"
-        }
-      ],
-      "default": "background-1",
-      "label": "t:sections.image-banner.settings.color_scheme.label"
+  "settings": [{
+        "type": "select",
+        "id": "color_scheme",
+        "options": [{
+            "value": "accent-1",
+            "label": "t:sections.rich-text.settings.color_scheme.options__1.label"
+        }, {
+            "value": "accent-2",
+            "label": "t:sections.rich-text.settings.color_scheme.options__2.label"
+        }, {
+            "value": "background-1",
+            "label": "t:sections.rich-text.settings.color_scheme.options__3.label"
+        }, {
+            "value": "background-2",
+            "label": "t:sections.rich-text.settings.color_scheme.options__4.label"
+        }, {
+            "value": "inverse",
+            "label": "t:sections.rich-text.settings.color_scheme.options__5.label"
+        }],
+        "default": "background-1",
+        "label": "t:sections.rich-text.settings.color_scheme.label"
+    }, {
+        "type": "checkbox",
+        "id": "full_width",
+        "default": true,
+        "label": "t:sections.rich-text.settings.full_width.label"
+    }, {
+        "type": "header",
+        "content": "Section Settings"
+    }, {
+        "id": "spacing_top",
+        "label": "Section Spacing Top",
+        "type": "range",
+        "default": 10,
+        "min": 0,
+        "max": 30,
+        "step": 1
+    }, {
+        "id": "spacing_bottom",
+        "label": "Section Spacing Bottom",
+        "type": "range",
+        "default": 10,
+        "min": 0,
+        "max": 30,
+        "step": 1
+    }, {
+        "id": "background_color",
+        "label": "Background Color",
+        "type": "color"
+    }, {
+        "id": "text_color",
+        "label": "Text Color",
+        "type": "color"
+    }, {
+        "type": "image_picker",
+        "id": "background_image",
+        "label": "Background Image"
     },
-    {
-      "type": "checkbox",
-      "id": "full_width",
-      "default": true,
-      "label": "t:sections.newsletter.settings.full_width.label"
+     {
+      "type" : "range",
+      "label" : "Background Opacity",
+      "id" : "background_opacity",
+      "default" : 100,
+      "step": 1,
+      "min" : 1,
+      "max" : 100
     },
+
     {
-      "type": "paragraph",
-      "content": "t:sections.newsletter.settings.paragraph.content"
-    }
+        "type": "select",
+        "id": "background_style",
+        "label": "Background Style",
+        "options": [{
+            "group": "Large Image",
+            "value": "cover",
+            "label": "Cover"
+        }, {
+            "group": "Large Image",
+            "value": "contain",
+            "label": "Contain"
+        }, {
+            "group": "Large Image",
+            "value": "fixed",
+            "label": "Fixed"
+        }, {
+            "group": "Image Pattern",
+            "value": "repeat",
+            "label": "Repeat"
+        }, {
+            "group": "Image Pattern",
+            "value": "repeat-x",
+            "label": "Repeat Horizontally"
+        }, {
+            "group": "Image Pattern",
+            "value": "repeat-y",
+            "label": "Repeat Vertically"
+        }]
+    }, {
+        "type": "text",
+        "id": "title",
+        "label": "Title (for customizer UX)"
+    },
+{
+    "type" : "text",
+    "id" : "id",
+    "label" : "ID - for anchor links"
+}
   ],
   "blocks": [
     {
@@ -67,7 +126,7 @@
     {
       "type": "paragraph",
       "name": "t:sections.newsletter.blocks.paragraph.name",
-      "limit": 1,
+      "limit": 2,
       "settings": [
         {
           "type": "richtext",

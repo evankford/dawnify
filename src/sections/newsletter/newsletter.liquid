@@ -1,7 +1,10 @@
+{%- comment -%}EKF Modded{%- endcomment -%}
+
 {{ 'component-newsletter.css' | asset_url | stylesheet_tag }}
 {{ 'newsletter-section.css' | asset_url | stylesheet_tag }}
+{% render 'section-style' with  id: section.id, params: section.settings %}
 
-<div class="newsletter center{% if section.settings.full_width == false %} newsletter--narrow page-width{% endif %}">
+<div class="newsletter center page-width" {% if section.settings.id %} id="{{section.settings.id}}" {% endif %}>
   <div class="newsletter__wrapper color-{{ section.settings.color_scheme }}">
     {%- for block in section.blocks -%}
       {%- case block.type -%}

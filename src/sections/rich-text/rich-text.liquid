@@ -30,7 +30,7 @@
         {%- when 'socials' -%}
           {% render 'socials-ul' with attrs: block.shopify_attributes %}
         {%- when 'button' -%}
-          <a{% if block.settings.button_link == blank %}  role="link" aria-disabled="true"{% else %} href="{{ block.settings.button_link }}"{% endif %} data-reveal class="button{% if block.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}" {{ block.shopify_attributes }}>
+          <a {% if block.settings.target_blank == true %} target="_blank" rel="nofollower noopener noreferrer" {% endif %}{% if block.settings.button_link == blank %}  role="link" aria-disabled="true"{% else %} href="{{ block.settings.button_link }}"{% endif %} data-reveal class="button{% if block.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}" {{ block.shopify_attributes }}>
             {{ block.settings.button_label | escape }}
           </a>
         {%- when 'bandsintown' -%}

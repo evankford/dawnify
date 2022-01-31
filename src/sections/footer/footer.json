@@ -101,6 +101,12 @@
           "label": "Image"
         },
         {
+          "type": "url",
+          "id": "image_url",
+          "label": "Image URL",
+          "info" : "leave blank for no link"
+        },
+        {
           "type": "richtext",
           "id": "content",
           "label": "Content"
@@ -190,7 +196,7 @@
           "type": "text",
           "id": "title",
           "label": "Title",
-          "default" : "Sign Up For The Newsletter"
+          "default" : "Join the Email List"
         },
         {
           "type": "richtext",

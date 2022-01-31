@@ -1,3 +1,5 @@
+//EKF Customized - Adding reveal support
+
 class FacetFiltersForm extends HTMLElement {
   constructor() {
     super();
@@ -61,6 +63,10 @@ class FacetFiltersForm extends HTMLElement {
     });
 
     if (updateURLHash) FacetFiltersForm.updateURLHash(searchParams);
+
+    //Adding reveal support
+
+
   }
 
   static renderSectionFromFetch(url, event) {
@@ -75,6 +81,9 @@ class FacetFiltersForm extends HTMLElement {
         FacetFiltersForm.renderFilters(html, event);
         FacetFiltersForm.renderProductGridContainer(html);
         FacetFiltersForm.renderProductCount(html);
+        setTimeout(() => {
+          window.dispatchEvent(new Event('RevealSync'));
+        }, 100);
       });
   }
 
@@ -89,6 +98,7 @@ class FacetFiltersForm extends HTMLElement {
     document.getElementById('ProductGridContainer').innerHTML = new DOMParser()
       .parseFromString(html, 'text/html')
       .getElementById('ProductGridContainer').innerHTML;
+
   }
 
   static renderProductCount(html) {
@@ -222,6 +232,7 @@ class FacetFiltersForm extends HTMLElement {
 FacetFiltersForm.filterData = [];
 FacetFiltersForm.searchParamsInitial = window.location.search.slice(1);
 FacetFiltersForm.searchParamsPrev = window.location.search.slice(1);
+
 customElements.define('facet-filters-form', FacetFiltersForm);
 FacetFiltersForm.setListeners();
 
@@ -262,7 +273,6 @@ class PriceRange extends HTMLElement {
 }
 
 customElements.define('price-range', PriceRange);
-
 class FacetRemove extends HTMLElement {
   constructor() {
     super();
