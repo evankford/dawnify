@@ -35,6 +35,7 @@ class ContentSlider extends HTMLElement {
       spaceBetween: 12,
       autoplay: false,
       effect: "slide",
+      autoHeight: true,
       watchVisibility: true,
       lazy: true,
       preloadImages: false,
