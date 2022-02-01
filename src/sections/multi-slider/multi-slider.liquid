@@ -6,6 +6,8 @@
 <noscript>{{ 'component-slider-styles.css' | asset_url | stylesheet_tag }}</noscript>{{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
 
 {% render 'section-style' with id: section.id, params: section.settings %}
+{% if section.settings.anchor_id != blank %}<div id={{section.settings.anchor_id}}>
+{% endif %}
 
 {% capture nav %}
 {% if section.settings.pagination != "disabled" and section.settings.navigation_style == 'classic' and section.blocks.size > 1 %}
@@ -45,7 +47,6 @@
   {% if section.settings.pagination != "disabled" %} data-pagination="{{ section.settings.pagination }}"{% endif %}
   {% if section.settings.effect %} data-effect="{{ section.settings.effect }}"{% endif %}
   {% if section.settings.auto_height == true %} data-auto-height="true" {% endif %}
-  {% if section.settings.anchor_id != blank %} id="{{section.settings.anchor_id | handleize }}" {% endif %}
   data-multi-slider="true"
   >
   <div class="swiper-wrapper">
@@ -67,5 +68,9 @@
 {% if section.blocks.size > 1 %}
 </slider-element>
 {% else %}
+</div>
+{% endif %}
+
+{% if section.settings.anchor_id != blank %}
 </div>
 {% endif %}

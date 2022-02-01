@@ -1,3 +1,5 @@
+//Modified - Close menu drawer on anchor click
+
 function getFocusableElements(container) {
   return Array.from(
     container.querySelectorAll(
@@ -381,6 +383,7 @@ class MenuDrawer extends HTMLElement {
   }
 
   onSummaryClick(event) {
+    console.log("Summary Clicked");
     const summaryElement = event.currentTarget;
     const detailsElement = summaryElement.parentNode;
     const isOpen = detailsElement.hasAttribute('open');
@@ -523,6 +526,22 @@ class HeaderDrawer extends MenuDrawer {
     summaryElement.setAttribute('aria-expanded', true);
     trapFocus(this.mainDetailsToggle, summaryElement);
     document.body.classList.add(`overflow-hidden-${this.dataset.breakpoint}`);
+  }
+  onMenuLinkClick(evt) {
+    if (evt.target.href.includes('#')) {
+      this.closeMenuDrawer(evt);
+    }
+  }
+  bindEvents() {
+    this.querySelectorAll('summary').forEach((summary) =>
+      summary.addEventListener('click', this.onSummaryClick.bind(this))
+    );
+    this.querySelectorAll('button').forEach((button) =>
+      button.addEventListener('click', this.onCloseButtonClick.bind(this))
+    );
+    this.querySelectorAll('a').forEach((button) =>
+      button.addEventListener('click', this.onMenuLinkClick.bind(this))
+    );
   }
 }
 

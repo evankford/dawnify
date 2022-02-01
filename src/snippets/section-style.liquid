@@ -1,4 +1,15 @@
 {% comment %} Renders section style. Requires id and section settings object {% endcomment %}
+{% liquid
+unless inner == true and id != blank
+  if params.id != blank
+    assign id = params.id
+    assign inner = true
+  else if params.anchor_id != blank
+    assign id = params.anchor_id
+    assign inner = true
+  endif
+endunless
+%}
 <style>
   #{% unless inner %}shopify-section-{% endunless %}{{ id }} {
     padding-top: {{ params.spacing_top | divided_by: 2.5 | default: 1 }}rem;

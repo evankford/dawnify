@@ -1,4 +1,4 @@
-class BandsintownDates extends HTMLElement {
+class TourDates extends HTMLElement {
   static monthsLong = [
     'January',
     'February',
@@ -41,6 +41,7 @@ class BandsintownDates extends HTMLElement {
   constructor() {
     super();
     this.el = this;
+    this.provider = this.el.getAttribute('data-provider');
     this.loaded = false;
 
     this.props = this.getArgs();
@@ -48,15 +49,33 @@ class BandsintownDates extends HTMLElement {
     if (this.props.limit == 0) {
       this.props.limit = 1000
     }
-
-    console.log("Tour Dates Loaded")
-
-
     this.shows = [];
-    this.expandButton = this.el.querySelector('[data-expand-bit]');
-    this.expandButton = this.el.querySelector('[data-expand-bit]');
+    this.expandButton = this.el.querySelector('[data-expand-button]');
+    this.startLoad();
+  }
+
+  startLoad() {
+    if (document.readyState === "complete") {
+      this.init();
+      return;
+    }
+     const self = this;
+     window.addEventListener('load', this.init.bind(this));
+
+     //Maximum time before starting to load
+     window.addEventListener('DOMContentLoaded', function () {
+       setTimeout(() => {
+         self.init();
+       }, 3000);
+     });
+  }
+
+  init() {
+    if (this.loaded) {
+      return;
+    }
     this.getShowData().then((response) => {
-      this.shows = response;
+      this.shows = this.transformData(response);
       if (this.shows.length > 0) {
         this.renderAllShows();
       } else {
@@ -67,6 +86,7 @@ class BandsintownDates extends HTMLElement {
     });
 
     this.addClickListeners();
+    this.loaded = true;
   }
 
   getArgs() {
@@ -86,18 +106,23 @@ class BandsintownDates extends HTMLElement {
 
   async getShowData() {
     let cleanArtist = this.props.artist.replace(' ', '');
-    let url =
-      'https://rest.bandsintown.com/artists/' +
-      cleanArtist +
-      '/events?app_id=' +
-      this.props.appId;
+
+    let url =`https://rest.bandsintown.com/artists/${cleanArtist}/events?app_id=${this.props.appId}`
     // console.log(url);
+    if (this.provider == 'seated') {
+      url = `https://cdn.seated.com/api/tour/${this.props.artist}?include=tour-events`
+    }
     try {
       const response = await fetch(url, { method: 'GET' });
       if (!response.ok) {
         this.el.querySelector('.error').classList.remove('hidden');
         this.el.querySelector('.loader').classList.add('hidden');
-        throw new Error('Failed to load dates. ' + response.message);
+        this.showErrror();
+        console.log(
+          'There has been a problem with your fetch operation: ',
+          response.message
+        );
+        return false;
       }
       return response.json();
     } catch (error) {
@@ -107,6 +132,90 @@ class BandsintownDates extends HTMLElement {
         error.message
       );
     }
+  }
+
+  createSeatedOffers(show) {
+    let offersArray = [];
+    if(show.attributes['link-text1'] && show.attributes['link-url1']) {
+      offersArray.push({type: show.attributes['link-text1'], status: show.attributes['link-text1'].toLowercase(), url: show.attributes['link-url1']})
+      if(show.attributes['link-text2'] && show.attributes['link-url2']) {
+        offersArray.push({type: show.attributes['link-text2'], status: show.attributes['link-text2'].toLowercase(), url: show.attributes['link-url2']})
+      }
+    } else {
+      offersArray.push({type : show.attributes['on-sale-date-name'] ? show.attributes['on-sale-date-name'] : "Tickets", status: "available", url: `https://link.seated.com/${show.id}` })
+    }
+    if (show.attributes['promoted-on-sale-date-name'] && show.attributes['promoted-on-sale-date-url']) {
+      offersArray.push({type : show.attributes['promoted-on-sale-date-name'] ? show.attributes['promoted-on-sale-date-name'] : "Tickets", status: show.attributes['promoted-on-sale-date-name'].toLowercase() , url: show.attributes['promoted-on-sale-date-url']  })
+    }
+    return offersArray;
+  }
+
+  processSeatedData(data) {
+    let seatedShowsArray = []
+    try {
+      const ids = data.data.relationships['tour-events'].data.map(datum=> {
+        return datum.id;
+      })
+
+      let showData = [];
+      ids.forEach(id=> {
+        //find show
+        const foundShow = data.included.find(el=> {
+          return el.id == id
+        })
+        if (foundShow) {
+          showData.push(foundShow)
+        }
+      })
+
+      //sort by date
+      const sortedShowData = showData.sort((a, b)=> {
+        return new Date(b['starts-at']) > new Date(a['starts-at']);
+      })
+
+      sortedShowData.forEach(show=> {
+        let toPush = {
+          datetime : show.attributes['starts-at'],
+          venueName : show.attributes['venue-name'],
+          venueLocation : show.attributes['formatted-address'],
+          offers : this.createSeatedOffers(show)
+        };
+
+        if (typeof show.details == 'string' && show.details.length) {
+          toPush.lineup = show.details
+        }
+        seatedShowsArray.push(toPush);
+      })
+      console.log(seatedShowsArray);
+      return seatedShowsArray;
+
+    } catch(e) {
+      console.error(e.message);
+      return false;
+    }
+  }
+
+  transformData(data) {
+    let toReturn = [];
+    if (this.provider == 'seated') {
+      toReturn = this.processSeatedData(data);
+    } else {
+        data.forEach(datum=> {
+        const { datetime, lineup, offers, url, venue } = datum;
+        let toAdd = {
+          datetime, lineup, offers, url
+        }
+        //Handle region
+        toAdd.venueName = venue.name;
+        let region = venue.region;
+        if (venue.country != 'United States') {
+          region = venue.country;
+        }
+        toAdd.venueLocation = venue.city + ', ' + region;
+        toReturn.push(toAdd);
+        })
+      }
+    return toReturn;
   }
 
   showError() {
@@ -122,7 +231,7 @@ class BandsintownDates extends HTMLElement {
 
     ///Element
     let dateEl = document.createElement('span');
-    dateEl.classList.add('bit-date');
+    dateEl.classList.add('td-date');
     dateEl.classList.add('label');
     dateEl.classList.add('h4');
     let string = '';
@@ -171,26 +280,20 @@ class BandsintownDates extends HTMLElement {
   renderInfo(show) {
     //Create elements
     let infoEl = document.createElement('span');
-    infoEl.classList.add('bit-info');
+    infoEl.classList.add('td-info');
 
     //Get Data
-    let region = show.venue.region;
-    if (show.venue.country != 'United States') {
-      region = show.venue.country;
-    }
-    let venue = show.venue.name;
+
 
     //Conditional formating
     var string =
-      '<span class="bit-city h4 heading">' +
-      show.venue.city +
-      ', ' +
-      region +
-      '</span><span class="bit-venue label">' +
-      venue +
+      '<span class="td-city h4 heading">' +
+     show.venueName +
+      '</span><span class="td-venue label">' +
+      show.venueLocation
       '</span>';
     if (this.showLineup) {
-      string += '<span class="bit-lineup">' + show.lineup + '</span>';
+      string += '<span class="td-lineup">' + show.lineup + '</span>';
     }
 
     infoEl.innerHTML = string;
@@ -199,7 +302,7 @@ class BandsintownDates extends HTMLElement {
 
   renderLinks(show) {
     let linksEl = document.createElement('span');
-    linksEl.classList.add('bit-links');
+    linksEl.classList.add('td-links');
 
     const offers = show.offers;
     offers.forEach((offer) => {
@@ -213,7 +316,7 @@ class BandsintownDates extends HTMLElement {
       if (offer.status == 'sold out') {
         button.innerHTML = 'Sold Out';
         button.classList.add('sold-out');
-      } else if (offer.status != 'available') {
+      } else if (offer.status != 'available' && offer.status != 'tickets') {
         button.innerHTML = 'Info';
       } else {
         button.innerHTML = offer.type;
@@ -247,7 +350,7 @@ class BandsintownDates extends HTMLElement {
 
   renderShow(show) {
     let showEl = document.createElement('div');
-    showEl.classList.add('bit-show');
+    showEl.classList.add('td-show');
     // showEl.setAttribute('data-reveal', true);
 
     let date = this.renderDate(show);
@@ -261,14 +364,14 @@ class BandsintownDates extends HTMLElement {
   renderAllShows() {
     //CreateWrapper
     this.wrapper = document.createElement('div');
-    this.wrapper.classList.add('bit-wrapper');
+    this.wrapper.classList.add('td-wrapper');
     let extras = false;
 
     if (this.shows.length > this.props.limit && this.props.loadMore) {
       extras = document.createElement('div');
 
-      extras.classList.add('bit-extra');
-      extras.classList.add('bit-wrapper');
+      extras.classList.add('td-extra');
+      extras.classList.add('td-wrapper');
     }
 
     //Loop through shows
@@ -296,7 +399,7 @@ class BandsintownDates extends HTMLElement {
     }
     if (extras) {
       this.el.prepend(this.wrapper, extras);
-      this.extraWrapper = this.el.querySelector('.bit-extra');
+      this.extraWrapper = this.el.querySelector('.td-extra');
     } else if (this.expandButton) {
       this.expandButton.remove();
       this.el.prepend(this.wrapper);
@@ -326,7 +429,7 @@ class BandsintownDates extends HTMLElement {
         });
       } else {
         this.expandButton.setAttribute('data-expand-bit', 'expanded');
-        let extraShows = this.extraWrapper.querySelectorAll('.bit-show');
+        let extraShows = this.extraWrapper.querySelectorAll('.td-show');
         let heightTarget =
         extraShows[0].getBoundingClientRect().height *
         (extraShows.length * 1.75);
@@ -377,6 +480,6 @@ class BandsintownDates extends HTMLElement {
   }
 }
 
-if (!customElements.get('bandsintown-dates')) {
-  customElements.define('bandsintown-dates', BandsintownDates);
+if (!customElements.get('tour-dates')) {
+  customElements.define('tour-dates', TourDates);
 }

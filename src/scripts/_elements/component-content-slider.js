@@ -113,7 +113,6 @@ class ContentSlider extends HTMLElement {
     this.params = this.getParams();
     this.slider = new window.Slider(this, this.params)
     window.dispatchEvent(new Event('resize'));
-    console.log(this.slider);
     // console.log(this.slider)
   }
 }

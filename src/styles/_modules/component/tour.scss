@@ -2,7 +2,7 @@
 
 @keyframes loading {
   from {
-    opacity: 0.6;
+    opacity: 0.4;
     transform: translateY(5px)
   }
   to {
@@ -16,7 +16,7 @@ h2.loader {
   animation: loading 400ms infinite-reverse ease;
 }
 
-bandsintown-dates {
+tour-dates {
 	display: block;
 	.hidden {
 		display: none;
@@ -29,11 +29,11 @@ bandsintown-dates {
 			display: none;
 		}
 	}
-
 }
 
 .fallback {
 	margin: calc(12px + 2vw) auto;
+	display: block;
 	p {
 		margin: 0.1em auto;
 	}
@@ -75,22 +75,22 @@ h2.loader {
 }
 
 
- .bit-wrapper {
+ .td-wrapper {
     padding: 0;
     width: 100%;
     max-width: 800px;
 		margin: auto;
 		overflow: hidden;
-    &.bit-extra {
+    &.td-extra {
       max-height: 0;
       overflow: hidden;
       transition: max-height 500ms $ease;
     }
   }
 
-.bit-show {
-	--bit-show-padding: 10px;
-	--bit-elem-padding: 10px;
+.td-show {
+	--td-show-padding: 6px;
+	--td-elem-padding: 8px;
 	text-align: left;
 	display: flex;
 	flex-wrap: wrap;
@@ -98,21 +98,25 @@ h2.loader {
 	justify-content: stretch;
 
 	margin:  auto;
-	padding: var(--bit-show-padding);
+	padding: var(--td-show-padding);
 	&:nth-child(even) {
 		background: rgba(white, 0.2);
 	}
 	@include media-query($small) {
-		margin: 0.5rem auto
+		margin: 0.5rem auto;
+		--td-show-padding: 6px;
+	}
+
+	@include media-query($widescreen) {
+		--td-elem-padding: 10px;
 	}
 
 }
-.bit-date {
-	padding:  var(--bit-elem-padding);
+.td-date {
+	padding:  var(--td-elem-padding);
 	flex: 0 1 5.5em;
 	text-align: center;
 
-	opacity: 0.6;
 	letter-spacing: 0;
 	display: flex;
 	align-items: center;
@@ -125,8 +129,8 @@ h2.loader {
 	}
 }
 
-.bit-links {
-	padding:  2px;
+.td-links {
+	padding:  var(--td-elem-padding);
 	flex: 1 0 135px;
 
 
@@ -157,42 +161,31 @@ h2.loader {
 		flex: 1 1 100%
 	}
 }
-.bit-info {
+.td-info {
 	flex: 20 1 190px;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: center;
-	padding:  var(--bit-elem-padding);
+	padding:  var(--td-elem-padding);
 	margin-right: -1px;
 	@include media-query($tiny) {
 		padding: 9px 9px;
 		align-items: center;
 		justify-content: center;
 		text-align: center;
-		.bit-city, .bit-venue {
+		.td-city, .td-venue {
 			display: inline-block;
 			text-align: center;
+
 		}
 	}
-	.bit-city {
-		// @extend .h4;
-    // @include font-extra;
-		// font-size: calc(22px + 0.3vw);
+	.td-city, .td-venue {
+		margin: 0.15em 0;
 		display: inline-block;
-		// text-transform: uppercase;
-		// line-height: 1.2;
-		// margin-bottom: 0.15em;
-
 	}
-	.bit-venue {
-		// @extend .h4;
-		display: inline-block;
-		// text-transform: none;
-		// line-height: 1.2;
-		// font-weight: 300;
-		// letter-spacing: -0.01em;
-		// -webkit-font-smoothing: initial;
+	.td-venue {
+		opacity: 0.7
 	}
 }
 

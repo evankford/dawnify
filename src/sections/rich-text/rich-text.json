@@ -227,17 +227,34 @@
         }]
     },
     {
-      "type" : "bandsintown",
-      "name" : "Bandsintown",
+      "type" : "tour",
+      "name" : "Tour Dates",
       "settings" : [
           {
               "type" : "header",
-              "content" : "BIT Widget Settings"
+              "content" : "Widget Settings"
+          },
+          {
+              "type" : "select",
+              "id" : "provider",
+              "label" : "Tour Dates Provider",
+              "default" : "bandsintown",
+              "options" : [
+                  {
+                      "value" : "bandsintown",
+                      "label" : "Bandsintown"
+                  },
+                  {
+                      "value" : "seated",
+                      "label" : "Seated"
+                  }
+              ]
           },
           {
               "type" : "text",
               "id" : "artist",
-              "label" : "Artist"
+              "label" : "Artist ID/Name",
+              "info" : "For bandsintown, the name or id_${number} should work. For seated, you should have a 30 or so character id with a number of hyphens. "
           },{
               "type" : "range",
               "id" : "limit",
@@ -323,7 +340,7 @@
               "id" : "app_id",
               "label" : "App ID",
               "default" : "5234ca141a91a3721bdc34b061d329a2",
-              "info" : "You may get rate-limited and need to reach out to bandsintown for a new APP id for this site."
+              "info" : "Only for bandsintown. You may get rate-limited and need to reach out to bandsintown for a new APP id for this site."
           }
       ]
   }],
@@ -357,7 +374,7 @@
                 }
             },
             {
-                "type" : "bandsintown"
+                "type" : "tour"
             }
         ]
     },

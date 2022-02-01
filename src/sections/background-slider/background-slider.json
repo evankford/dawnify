@@ -69,17 +69,24 @@
       "label": "Auto Height?",
       "id": "auto_height",
       "default": false
-    },
-    {
-      "type": "range",
-      "label": "Height (Mobile)",
-      "id": "height_mobile",
-      "default": 350,
-      "step": 10,
-      "min": 160,
-      "max": 700
-    },
-    {
+    }, {
+        "type": "range",
+        "label": "Height (Mobile)",
+        "id": "height_mobile",
+        "default": 300,
+        "step": 10,
+        "min": 160,
+        "max": 650
+    }, {
+        "type": "range",
+        "label": "Height (Tablet)",
+        "id": "height_tablet",
+        "default": 390,
+        "step": 10,
+        "min": 160,
+        "max": 700
+    }, {
+
       "type": "range",
       "label": "Height (Desktop)",
       "id": "height_standard",
