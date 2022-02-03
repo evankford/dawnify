@@ -8,9 +8,9 @@
 {{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
 
 {% render 'section-style' with id: section.id, params: section.settings %}
-<div class="page-width news-section-wrap" {% if section.settings.anchor_id != blank %} id="{{section.settings.anchor_id | handleize }}" {% endif %}>
+<div class="news-section-wrap" {% if section.settings.anchor_id != blank %} id="{{section.settings.anchor_id | handleize }}" {% endif %}>
   {% if section.settings.introduction != blank or section.settings.title != blank or section.settings.subtitle != blank%}
-  <div class="common-header text--{{ section.settings.text_align | default: "left"}}">
+  <div class="common-header page-width  text--{{ section.settings.text_align | default: "left"}}">
     {% if section.settings.introduction != blank %}
       <div class="h4 label">{{ section.settings.introduction | escape }}</div>
     {% endif %}

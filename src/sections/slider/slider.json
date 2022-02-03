@@ -410,6 +410,11 @@
             "label": "Allow unmuting?",
             "info": "Shows an unmute icon over bottom left of video"
         }, {
+            "type": "checkbox",
+            "id": "start_unmuted",
+            "label": "Start unmuted?",
+            "info": "NOT RECOMMENDED. May cause your video to not autoplay on mobile."
+        }, {
             "type": "color",
             "id": "overlay_color",
             "label": "Overlay Color",
@@ -758,6 +763,11 @@
             "label": "Allow unmuting?",
             "info": "Shows an unmute icon over bottom left of video"
         }, {
+            "type": "checkbox",
+            "id": "start_unmuted",
+            "label": "Start unmuted?",
+            "info": "NOT RECOMMENDED. May cause your video to not autoplay on mobile."
+        }, {
              "type": "color",
             "id": "overlay_color",
             "label": "Overlay Color",
@@ -991,6 +1001,11 @@
             "id": "allow_unmute",
             "label": "Allow unmuting?",
             "info": "Shows an unmute icon over bottom left of video"
+        }, {
+            "type": "checkbox",
+            "id": "start_unmuted",
+            "label": "Start unmuted?",
+            "info": "NOT RECOMMENDED. May cause your video to not autoplay on mobile."
         }, {
             "type": "url",
             "id": "url",

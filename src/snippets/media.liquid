@@ -175,7 +175,7 @@ Accepts:
           assign image = poster
           assign max_width = 2000
         endif %}
-        <video-background class="video-bg" {% if allow_unmute == true %} allow-unmute="true" {% endif %} src="{% if video_small and video_small != blank %}{{ video_small }} 720w, {% endif %}{{ video }}">
+        <video-background class="video-bg" {% if allow_unmute == true %} can-unmute {% endif %} {% if start_unmuted == true %} muted="false" {% endif %}{% if allow_pause == true %} can-pause {% endif %} src="{% if video_small and video_small != blank %}{{ video_small }} 720w, {% endif %}{{ video }}">
           {% if poster %}
           <img
           class="custom-fallback-image{% if is_slide %} swiper-lazy{% endif %}"

@@ -1,34 +1,33 @@
 {% comment %} Renders section style. Requires id and section settings object {% endcomment %}
 {% liquid
-unless inner == true and id != blank
-  if params.id != blank
-    assign id = params.id
-    assign inner = true
-  else if params.anchor_id != blank
-    assign id = params.anchor_id
-    assign inner = true
-  endif
-endunless
+if params.anchor_id != blank and id == blank
+  assign final_id = params.anchor_id
+  assign inner = true
+else
+  assign final_id = id
+endif
 %}
+
+
 <style>
-  #{% unless inner %}shopify-section-{% endunless %}{{ id }} {
+  #{% unless inner %}shopify-section-{% endunless %}{{ final_id }} {
     padding-top: {{ params.spacing_top | divided_by: 2.5 | default: 1 }}rem;
     padding-bottom: {{ params.spacing_bottom | divided_by: 2.5 | default: 1 }}rem;
   }
   @media (max-width: 720px) {
-    #{% unless inner %}shopify-section-{% endunless %}{{ id }} {
+    #{% unless inner %}shopify-section-{% endunless %}{{ final_id }} {
       padding-top: {{ params.spacing_top | divided_by: 3.25 | default: 1 }}rem;
       padding-bottom: {{ params.spacing_bottom | divided_by: 3.5 | default: 1 }}rem;
     }
   }
   @media (max-width: 490px) {
-    #{% unless inner %}shopify-section-{% endunless %}{{ id }} {
+    #{% unless inner %}shopify-section-{% endunless %}{{ final_id }} {
       padding-top: {{ params.spacing_top | divided_by: 4 | default: 1 }}rem;
       padding-bottom: {{ params.spacing_bottom | divided_by: 4 | default: 1 }}rem;
     }
   }
   {% if params.background_image != blank %}
-  #{% unless inner %}shopify-section-{% endunless %}{{ id }} {
+  #{% unless inner %}shopify-section-{% endunless %}{{ final_id }} {
     position:relative;
     z-index: 1;
     {% if params.background_style == "fixed" %}
@@ -41,7 +40,7 @@ endunless
     {% endif %}
 
   }
-  #{% unless inner %}shopify-section-{% endunless %}{{ id }}::before {
+  #{% unless inner %}shopify-section-{% endunless %}{{ final_id }}::before {
     position: absolute;
     height: 100%;
     content: "";
@@ -80,34 +79,34 @@ endunless
 
   {% if params.background_image != blank and  params.background_style == "cover" or params.background_style == "contain" or params.background_style == "fixed" %}
   @media (min-width: 720px) {
-    #{% unless inner %}shopify-section-{% endunless %}{{ id }}::before {
+    #{% unless inner %}shopify-section-{% endunless %}{{ final_id }}::before {
       background-image: url({{ params.background_image | img_url: "1080x" }});
     }
   }
   @media (min-width: 1080px) {
-    #{% unless inner %}shopify-section-{% endunless %}{{ id }}::before {
+    #{% unless inner %}shopify-section-{% endunless %}{{ final_id }}::before {
       background-image: url({{ params.background_image | img_url: "1400x" }});
     }
   }
   @media (min-width: 1080px) {
-    #{% unless inner %}shopify-section-{% endunless %}{{ id }}::before {
+    #{% unless inner %}shopify-section-{% endunless %}{{ final_id }}::before {
       background-image: url({{ params.background_image | img_url: "1750x" }});
     }
   }
   @media (min-width: 1750px) {
-    #{% unless inner %}shopify-section-{% endunless %}{{ id }}::before {
+    #{% unless inner %}shopify-section-{% endunless %}{{ final_id }}::before {
       background-image: url({{ params.background_image | img_url: "2000x" }});
     }
   }
   @media (min-width: 2000px) {
-    #{% unless inner %}shopify-section-{% endunless %}{{ id }}::before {
+    #{% unless inner %}shopify-section-{% endunless %}{{ final_id }}::before {
       background-image: url({{ params.background_image | img_url: "2400x" }});
     }
   }
   {% endif %}
 
   {% if params.color_scheme != blank and params.color_scheme != 'disabled' %}
-  #{% unless inner %}shopify-section-{% endunless %}{{ id }} {
+  #{% unless inner %}shopify-section-{% endunless %}{{ final_id }} {
     background: var(--gradient-background, rgb(var(--color-background)));
     color: rgb(var(--color-foreground));
     --color-link: var(--color-foreground);

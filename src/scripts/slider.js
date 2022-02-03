@@ -15,6 +15,7 @@ class Slider {
     setTimeout(() => {
 
       window.dispatchEvent(new Event('resize'));
+      // window.dispatchEvent(new Event('RevealSync'));
       this.swiper.update();
     }, 200);
   }
@@ -219,7 +220,7 @@ if (!customElements.get('slider-element')) {
       }
     } else {
       if (this.getAttribute('data-multi-slider') === 'true') {
-        params.slidesPerView = 3;
+        params.slidesPerView = Math.max(this.el.querySelectorAll('.swiper-slide').length, 3);
       }
     }
 

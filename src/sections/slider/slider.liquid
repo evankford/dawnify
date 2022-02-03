@@ -77,14 +77,14 @@
     height: {{ section.settings.height_tablet | default: 460 }}px
   }
 }
-@media (min-width: 900px) {
+@media (min-width: 1000px) {
   #shopify-section-{{ section.id }} .swiper-slide {
     height: {{ section.settings.height_standard | default: 460 }}px
   }
 }
-@media (min-width: 1450px) {
+@media (min-width: 1650px) {
   #shopify-section-{{ section.id }} .swiper-slide {
-    height: {{ section.settings.height_widescreen | default: 510 }}px
+    height: clamp( 50vh, {{ section.settings.height_widescreen | default: 510 }}px, 85vh);
   }
 }
 </style>

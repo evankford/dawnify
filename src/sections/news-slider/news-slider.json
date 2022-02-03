@@ -57,6 +57,21 @@
             "value": "disabled",
             "label": "Disabled"
         }]
+    }, {
+        "type": "select",
+        "id": "effect",
+        "label": "Slider Effect",
+        "default": "slide",
+        "options": [{
+            "value": "slide",
+            "label": "Slide"
+        }, {
+            "value": "fade",
+            "label": "Fade"
+        }, {
+            "value": "threed",
+            "label": "Coverflow"
+        }]
     },
     {
       "type" : "select",

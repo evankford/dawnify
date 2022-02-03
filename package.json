@@ -8,11 +8,12 @@
   "private": true,
   "dependencies": {
     "@atmtfy/schema-loader": "^0.0.5",
-    "@atmtfy/video-background": "^0.3.3",
+    "@atmtfy/video-background": "^0.4.4",
     "@barba/core": "^2.9.7",
+    "date-fns": "^2.28.0",
     "glightbox": "^3.1.0",
     "normalize.css": "^8.0.1",
-    "swiper": "^7.4.1"
+    "swiper": "^8.0.2"
   },
   "scripts": {
     "start": "pnpm  build && cd dist && rm .shopifyignore && touch .shopifyignore && cd ../ && run-p watch serve",
@@ -43,7 +44,7 @@
     "clean-webpack-plugin": "^4.0.0",
     "concurrently": "^6.5.1",
     "copy-webpack-plugin": "^9.1.0",
-    "css-loader": "^6.5.1",
+    "css-loader": "^6.6.0",
     "fibers": "^5.0.1",
     "file-loader": "^6.2.0",
     "glob": "^7.2.0",
@@ -51,9 +52,9 @@
     "merge-jsons-webpack-plugin": "^2.0.1",
     "mini-css-extract-plugin": "~2.4.7",
     "npm-run-all": "^4.1.5",
-    "sass": "^1.49.0",
+    "sass": "^1.49.7",
     "sass-loader": "^12.4.0",
-    "terser-webpack-plugin": "^5.3.0",
+    "terser-webpack-plugin": "^5.3.1",
     "webpack": "^5.68.0",
     "webpack-cli": "^4.9.2",
     "webpack-concat-files-plugin": "^0.5.2",

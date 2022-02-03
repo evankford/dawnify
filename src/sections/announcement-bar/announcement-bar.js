@@ -53,6 +53,7 @@ class AnnouncementBar extends HTMLElement {
     // }
     // const newOffset = offset + this.newHeight + 'px';
     document.body.style.marginTop = this.newHeight + 'px';
+    document.body.style.setProperty('body-top', this.newHeight + 'px');
     // this.heightAdded = true;
     this.height = this.newHeight;
   }

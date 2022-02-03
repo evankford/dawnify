@@ -1,3 +1,6 @@
+import parseISO from "date-fns/parseISO";
+import isBefore from "date-fns/isBefore";
+
 class TourDates extends HTMLElement {
   static monthsLong = [
     'January',
@@ -169,13 +172,11 @@ class TourDates extends HTMLElement {
       })
 
       //sort by date
-      const sortedShowData = showData.sort((a, b)=> {
-        return new Date(b['starts-at']) > new Date(a['starts-at']);
-      })
 
-      sortedShowData.forEach(show=> {
+
+      showData.forEach(show=> {
         let toPush = {
-          datetime : show.attributes['starts-at'],
+          datetime : parseISO(show.attributes['starts-at']),
           venueName : show.attributes['venue-name'],
           venueLocation : show.attributes['formatted-address'],
           offers : this.createSeatedOffers(show)
@@ -186,7 +187,9 @@ class TourDates extends HTMLElement {
         }
         seatedShowsArray.push(toPush);
       })
-      console.log(seatedShowsArray);
+      seatedShowsArray.sort((a, b)=> {
+        return isBefore(b['datetime'], a['datetime']) ? 1 : -1;
+      })
       return seatedShowsArray;
 
     } catch(e) {

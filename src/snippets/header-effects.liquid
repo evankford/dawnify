@@ -19,13 +19,16 @@
         return ScrollReveal().sync();
       }
       window.scrollStarted = true;
-      ScrollReveal().reveal('[data-reveal]', { duration: 400, distance: '40px', interval: 30, cleanup: true });
-      ScrollReveal().reveal('[data-reveal-fade]', { duration: 600, distance: '0px', interval: 0, cleanup: true });
-      ScrollReveal().reveal('[data-reveal-desktop]', { mobile: false, duration: 500, distance: '50px', interval: 25, cleanup: true });
+      ScrollReveal().reveal('[data-reveal]', { duration: 400, distance: '30px', interval: 50 });
+      ScrollReveal().reveal('[data-reveal-fade]', { duration: 600, distance: '0px', interval: 0 });
+      ScrollReveal().reveal('[data-reveal-desktop]', { mobile: false, duration: 500, distance: '30px', interval: 25 });
 
     }
     window.addEventListener('DOMContentLoaded', function() {
       generalReveal();
+    });
+    window.addEventListener('load', function() {
+      ScrollReveal().delegate();
     });
 
     window.addEventListener('RevealReset', function() {
@@ -40,6 +43,7 @@
     window.addEventListener('RevealSync', function() {
       generalReveal()
     });
+
     document.addEventListener("shopify:section:load", function() {
       generalReveal();
     });

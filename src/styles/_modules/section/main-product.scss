@@ -486,9 +486,12 @@ a.product__text {
   }
 }
 
-@media screen and (min-width: 750px) and (max-width: 989px) {
-  .product__media-list .product__media-item:first-child {
+@include media-query($medium) {
+  .grid .product__media-list li.product__media-item:first-child {
     padding-left: 0;
+  }
+  .grid .product__media-list li.product__media-item:last-child {
+    padding-right: 0;
   }
 
   .product__media-list .product__media-item {

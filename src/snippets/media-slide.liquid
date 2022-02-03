@@ -17,9 +17,9 @@ Usage:
     <div class="background-video background-element" style="--oo: {{overlay_opacity }}; opacity: {{ 100 | minus: overlay_opacity | divided_by: 100.00 }}; --vbg-overlay-opacity: {{overlay_opacity | default: 0.4 }}; --vbg-bg: {{overlay_color | default: '#000000' }};">
 
       {% if settings.video_type == 'external' %}
-          {% render 'media' with type: 'video', video: settings.youtube_url, poster: settings.image, allow_unmute: settings.allow_unmute %}
+          {% render 'media' with type: 'video', video: settings.youtube_url, poster: settings.image, allow_unmute: settings.allow_unmute , start_unmuted: settings.start_unmuted %}
       {% else %}
-        {% render 'media' with type: 'video', ratio: "16-9", class: 'media--mobile', video: settings.video, video_small: settings.video_small, poster: settings.image, is_slide: is_slide %}
+        {% render 'media' with type: 'video', ratio: "16-9", class: 'media--mobile', video: settings.video, allow_unmute: settings.allow_unmute, start_unmuted: settings.start_unmuted , video_small: settings.video_small, poster: settings.image, is_slide: is_slide %}
       {% endif %}
     </div>
     {%else %}

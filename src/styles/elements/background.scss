@@ -24,14 +24,11 @@
 
 .background-element .media video-background {
    @extend %psuedoish;
-   height: 130%;
-   top: -15%;
+
 
   z-index: 0;
-pointer-events:  none;
-  @include media-query($medium-up) {
-    height: 120%;
-    top: -10%;
+  iframe, video {
+    pointer-events:  none;
   }
   // background: var(--oc, #000000);
   //  &::before {
@@ -40,20 +37,7 @@ pointer-events:  none;
   //   opacity: var(--oo, 0);
   //   background-color: var(--oc, #000000);
   // }
-  .custom-fallback-image {
-    opacity: 1;
-    object-fit: cover;
 
-  }
-  iframe {
-    min-width: 100%;
-    min-height: 100%;
-
-
-  }
-  &.loaded .custom-fallback-image {
-    // opacity: 0;
-  }
 }
 
 .background-element .media  .custom-fallback-image {

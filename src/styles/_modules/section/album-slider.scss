@@ -2,8 +2,9 @@
 
 .album-slider {
   overflow: hidden;
+  display: block;
 }
-album-slider.swiper-container {
+content-slider.swiper-container {
   width: 100%;
   &>ul.swiper-wrapper {
     margin: 1.75rem auto;
@@ -42,6 +43,10 @@ album-slider.swiper-container {
   flex-wrap: wrap;
   width: 100%;
 
+  &.swiper-slide {
+    height: auto;
+  }
+
   &__cover, &__content {
     max-width: 600px;
     margin: 0 auto 1.5rem;
@@ -58,10 +63,11 @@ album-slider.swiper-container {
     width: auto;
     flex-direction: column;
     flex: 1 1 300px;
-    max-width: 440px;
+    max-width: 500px;
+    height: auto !important;
 
     @include media-query($widescreen) {
-      max-width: 520px;
+      max-width: 600px;
     }
     .album-slide__cover, .album-slide__content {
       width: 100%;
@@ -96,6 +102,9 @@ album-slider.swiper-container {
       padding: clamp(1.5rem, calc(1.2rem + 2.1vw), 4.5rem);
     }
   }
+}
+li.swiper-slide.album-slide.layout--full-width.swiper-slide-prev, li.swiper-slide.album-slide.layout--full-width.swiper-slide-next {
+    opacity: 0.4;
 }
 
 .album-slide .swiper-lazy-preloader {

@@ -21,7 +21,7 @@ class ContentSlider extends HTMLElement {
 
     this.autoplay = this.getAttribute('data-autoplay');
 
-    this.fullWidth = this.getAttribute('data-full-width') == 'true';
+    this.fullWidth = this.getAttribute('data-full-width') === 'true';
     if (typeof window.Slider == 'function' && window.slidersReady == true) {
       this.init();
     } else {
@@ -35,11 +35,12 @@ class ContentSlider extends HTMLElement {
       spaceBetween: 12,
       autoplay: false,
       effect: "slide",
-      autoHeight: true,
-      watchVisibility: true,
+
+      centeredSlides: true,
+      // watchVisibility: true,
       lazy: true,
-      preloadImages: false,
-      centerInsufficientSlides: true,
+      preloadImages: true,
+
       breakpoints: {
         420: {
           // slidesPerView: 2,
@@ -76,34 +77,48 @@ class ContentSlider extends HTMLElement {
       }
     }
     if (this.fullWidth) {
-      params.effect = "coverflow";
+      params.effect = 'coverflow';
+      params.autoHeight = true,
       params.coverflowEffect = {
         rotate: 50,
         depth: 70,
         stretch: 20,
         slideShadows: false,
       };
-      params.speed= 500;
+      params.speed = 500;
       params.slidesPerView = 1;
       params.breakpoints = {};
     } else {
       params.breakpoints = {};
       params.slidesPerView = 1;
       if(this.slidesCount >=2) {
-        params.breakpoints[350] = {
+        params.breakpoints["350"] = {
           slidesPerView:2,
         }
       }
       if (this.slidesCount >=3) {
-         params.breakpoints[800] = {
+         params.breakpoints["800"] = {
           slidesPerView:3,
           spaceBetween:12
         }
+      } else {
+        params.breakpoints["800"] = {
+          spaceBetween: 16,
+          centerInsufficientSlides: true,
+        };
       }
       if (this.slidesCount >= 4) {
-        params.breakpoints[1100] = {
+        params.breakpoints["1100"] = {
           slidesPerView: 4,
-          spaceBetween: 15
+          spaceBetween: 15,
+          centerInsufficientSlides: true,
+          centeredSlides: true
+        };
+      } else {
+        params.breakpoints["1100"] = {
+          spaceBetween: 24,
+          centerInsufficientSlides: true,
+          centeredSlides: true
         }
       }
     }
