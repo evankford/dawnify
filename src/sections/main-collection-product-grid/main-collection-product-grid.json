@@ -20,7 +20,7 @@
       "type" : "select",
       "id" : "grid_size",
       "label" : "Product Size",
-      "default" : "medium",
+      "default" : "large",
       "options" : [
         {
           "value" : "small",
@@ -43,7 +43,8 @@
      {
       "id": "center_insufficient",
       "label" : "Center insufficient boxes?",
-      "type" : "checkbox"
+      "type" : "checkbox",
+      "default" : true
     },
     {
       "type": "header",

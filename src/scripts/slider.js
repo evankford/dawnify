@@ -82,10 +82,10 @@ class Slider {
           slidesPerView: 2,
           spaceBetween: 12,
         },
-        700: {
+        900: {
           slidesPerView: 3,
         },
-        1000: {
+        1300: {
           slidesPerView: 4,
         },
       }

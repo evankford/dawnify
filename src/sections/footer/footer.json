@@ -204,6 +204,11 @@
           "label": "Content",
           "default" : "<p>Get updates on sales, news + more!</p>"
         },
+          {
+          "type": "richtext",
+          "id": "content_below",
+          "label": "Content Below (smaller)"
+        },
          {
           "type": "checkbox",
           "id": "include_socials",
@@ -377,7 +382,7 @@
     {
       "type": "checkbox",
       "id": "enable_country_selector",
-      "default": true,
+      "default": false,
       "label": "t:sections.footer.settings.enable_country_selector.label"
     },
     {
@@ -388,7 +393,7 @@
     {
       "type": "checkbox",
       "id": "enable_language_selector",
-      "default": true,
+      "default": false,
       "label": "t:sections.footer.settings.enable_language_selector.label"
     },
     {
@@ -398,7 +403,7 @@
     {
       "type": "checkbox",
       "id": "payment_enable",
-      "default": true,
+      "default": false,
       "label": "t:sections.footer.settings.payment_enable.label"
     }
   ],

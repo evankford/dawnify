@@ -121,7 +121,14 @@ div.heading,
 span.heading,
 h4.heading,.h4.heading,h5.heading,.h5.heading
 {
-  font-size: {{ settings.heading_font_size_smallest | default : 28 }}px;
+  font-size: {{ settings.heading_font_size_smallest | default : 25 }}px;
+}
+
+div.heading,
+span.heading,
+h5.heading,.h5.heading,h5.heading,.h5.heading
+{
+  font-size: {{ settings.heading_font_size_smallest | times : 0.8 |  default : 19 }}px;
 }
 
 .label

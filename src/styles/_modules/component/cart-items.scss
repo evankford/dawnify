@@ -64,10 +64,11 @@
   height: 100%;
 }
 
-.cart-item__name {
+.cart-item__name, .cart-item__name.heading {
   color: rgb(var(--color-foreground));
   text-decoration: none;
   display: block;
+  margin-bottom: 0;
 }
 
 .cart-item__name:hover {

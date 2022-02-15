@@ -36,7 +36,7 @@ class ContentSlider extends HTMLElement {
       autoplay: false,
       effect: "slide",
 
-      centeredSlides: true,
+      // centeredSlides: true,
       // watchVisibility: true,
       lazy: true,
       preloadImages: true,
@@ -92,33 +92,32 @@ class ContentSlider extends HTMLElement {
       params.breakpoints = {};
       params.slidesPerView = 1;
       if(this.slidesCount >=2) {
-        params.breakpoints["350"] = {
+        params.breakpoints["450"] = {
           slidesPerView:2,
         }
       }
       if (this.slidesCount >=3) {
-         params.breakpoints["800"] = {
+         params.breakpoints["1100"] = {
           slidesPerView:3,
-          spaceBetween:12
+          spaceBetween:20
         }
       } else {
-        params.breakpoints["800"] = {
+        params.breakpoints["1100"] = {
           spaceBetween: 16,
           centerInsufficientSlides: true,
         };
       }
       if (this.slidesCount >= 4) {
-        params.breakpoints["1100"] = {
+        console.log("There are a ton of slides")
+        params.breakpoints["1800"] = {
           slidesPerView: 4,
-          spaceBetween: 15,
+          spaceBetween: 23,
           centerInsufficientSlides: true,
-          centeredSlides: true
         };
       } else {
-        params.breakpoints["1100"] = {
+        params.breakpoints["1800"] = {
           spaceBetween: 24,
           centerInsufficientSlides: true,
-          centeredSlides: true
         }
       }
     }
@@ -127,6 +126,7 @@ class ContentSlider extends HTMLElement {
   init () {
     this.params = this.getParams();
     this.slider = new window.Slider(this, this.params)
+    console.log(this.slider.swiper);
     window.dispatchEvent(new Event('resize'));
     // console.log(this.slider)
   }

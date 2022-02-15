@@ -1,4 +1,26 @@
+{% assign socials_order = 'instagram,tiktok,facebook,twitter,youtube,vimeo,spotify,apple,pandora,amazon,snapchat,tumblr,pinterest' %}
+{% if settings.socials_order != blank %}
+{% assign socials_order = settings.socials_order %}
+{% endif %}
+
+{% assign socials_split = socials_order | split: ',' %}
+
 <ul class="list list-social list-unstyled" role="list" {{ attrs }}>
+
+  {% for social in socials_split %}
+    {% assign social_slug = social | trim | downcase %}
+    {%- capture settings_slug %}social_{{social_slug}}_link{%- endcapture -%}
+    {%- capture translation_slug %}general.social.links.{{social_slug}}{%- endcapture -%}
+    {%- capture icon_slug %}icon-{{social_slug}}{%- endcapture -%}
+    {% if settings[settings_slug] != blank %}
+     <li data-reveal class="list-social__item">
+      <a target="_blank" rel="nofollow noreferrer noopener" href="{{ settings[settings_slug]}}" class="link list-social__link" >
+        {%- render icon_slug -%}
+        <span class="visually-hidden">{{ translation_slug | t }}</span>
+      </a>
+    </li>
+  {% endif %}
+  {% enfor %}
   {%- if settings.social_twitter_link != blank -%}
     <li data-reveal class="list-social__item">
       <a target="_blank" rel="nofollow noreferrer noopener" href="{{ settings.social_twitter_link }}" class="link list-social__link" >

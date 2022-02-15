@@ -78,6 +78,71 @@
       "type": "text",
       "id": "social_amazon_link",
       "label": "Amazon"
+    },
+    {
+      "type" : "header",
+      "content" : "Fixed social box"
+    },
+    {
+      "type" : "select",
+      "id" : "fixed_socials_position",
+      "label" : "Fixed socials position",
+      "info" : "Only shown on larger screens",
+      "default" : "disabled",
+      "options" : [
+        {
+          "value" : "disabled",
+          "label" : "Disabled"
+        },
+        {
+          "value" : "left",
+          "label" : "Left"
+        },
+        {
+          "value" : "right",
+          "label" : "Right"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "fixed_socials_color_scheme",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "accent-1",
+          "label": "t:sections.footer.settings.color_scheme.options__1.label"
+        },
+        {
+          "value": "accent-2",
+          "label": "t:sections.footer.settings.color_scheme.options__2.label"
+        },
+        {
+          "value": "background-1",
+          "label": "t:sections.footer.settings.color_scheme.options__3.label"
+        },
+        {
+          "value": "background-2",
+          "label": "t:sections.footer.settings.color_scheme.options__4.label"
+        },
+        {
+          "value": "inverse",
+          "label": "t:sections.footer.settings.color_scheme.options__5.label"
+        }
+      ],
+      "default": "accent-2",
+      "info" : "Determines the cart notification color scheme",
+      "label": "t:sections.footer.settings.color_scheme.label"
+    },
+    {
+      "type": "html",
+      "id" : "socials_order",
+      "label" : "Socials Order",
+      "info" :  "Use with caution. All values are lowercase and one word (i.e. 'apple')",
+      "default": "instagram,tiktok,facebook,twitter,youtube,vimeo,spotify,apple,pandora,amazon,snapchat,tumblr,pinterest"
     }
   ]
 }

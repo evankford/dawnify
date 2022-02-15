@@ -16,14 +16,14 @@ endif
   }
   @media (max-width: 720px) {
     #{% unless inner %}shopify-section-{% endunless %}{{ final_id }} {
-      padding-top: {{ params.spacing_top | divided_by: 3.25 | default: 1 }}rem;
-      padding-bottom: {{ params.spacing_bottom | divided_by: 3.5 | default: 1 }}rem;
+      padding-top: {{ params.spacing_top | divided_by: 3 | default: 1 }}rem;
+      padding-bottom: {{ params.spacing_bottom | divided_by: 3 | default: 1 }}rem;
     }
   }
   @media (max-width: 490px) {
     #{% unless inner %}shopify-section-{% endunless %}{{ final_id }} {
-      padding-top: {{ params.spacing_top | divided_by: 4 | default: 1 }}rem;
-      padding-bottom: {{ params.spacing_bottom | divided_by: 4 | default: 1 }}rem;
+      padding-top: {{ params.spacing_top | divided_by: 3.5 | default: 1 }}rem;
+      padding-bottom: {{ params.spacing_bottom | divided_by: 3.5 | default: 1 }}rem;
     }
   }
   {% if params.background_image != blank %}

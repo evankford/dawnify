@@ -28,6 +28,7 @@
       "type" : "select",
       "id" : "text_align",
       "label" :"Header Text Align",
+      "default" : "center",
       "options" : [
         {
           "value" : "left",
@@ -83,11 +84,12 @@
       "type" : "select",
       "id" : "header_layout",
       "label" : "Header Layout",
-      "default" : "left",
+
+      "default" : "center",
       "options" : [
         {
-          "value"  :"left",
-          "label" : "left"
+          "value"  :"spaced",
+          "label" : "Left/Spaced"
         },
         {
           "value" : "center",

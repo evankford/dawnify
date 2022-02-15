@@ -13,14 +13,16 @@
         >
       {% endif %}
       <div>
-        <h3 class="cart-notification-product__name h4">{{ item.product.title | escape }}</h3>
+        <h3 class="cart-notification-product__name h5 heading">{{ item.product.title | escape }}</h3>
           <dl>
             {%- unless item.product.has_only_default_variant -%}
               {%- for option in item.options_with_values -%}
+              {% unless option.name == 'title' or option.name == 'Title' %}
                 <div class="product-option">
-                  <dt>{{ option.name }}: </dt>
+                  <dt class="h6 label">{{ option.name }}: </dt>
                   <dd>{{ option.value }}</dd>
                 </div>
+              {% endunless %}
               {%- endfor -%}
             {%- endunless -%}
             {%- for property in item.properties -%}

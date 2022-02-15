@@ -1,0 +1,21 @@
+{% if settings.fixed_socials_position != disabled %}
+<aside class="fixed-socials position--{{settings.fixed_socials_position}} color--{{settings.fixed_socials_color_scheme}}">
+  {% render 'socials-ul' %}
+</aside>
+<style>
+  .fixed-socials {
+    padding: 2px;
+  }
+  .fixed-socials ul {
+    display: block
+  }
+  .fixed-socials a,
+  .fixed-socials li {
+    padding: 3px;
+  }
+
+  .fixed-socials a {
+    font-size: 1.6rem;
+  }
+</style>
+{% endif %}

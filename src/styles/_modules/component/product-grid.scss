@@ -18,6 +18,7 @@
     }
     @include media-query($medium-up) {
       --pg-g: 12px;
+       --pg-mw: 320px;
     }
     @include media-query($medium) {
       grid-template-columns: repeat(6, 1fr);
@@ -26,6 +27,7 @@
       }
     }
     @include media-query($large-up) {
+        --pg-mw: 350px;
       grid-template-columns: repeat(8, 1fr);
      &.center-insufficient {
         @include centerColumns(4, ".grid__item");
@@ -43,36 +45,30 @@
       }
     }
 
-.grid-grid--medium {
-    // grid-template-columns: repeat(4, 1fr);
-    @include media-query($tiny) {
-      grid-template-columns: repeat(2, 1fr);
-      .grid__item:last-child {
-        grid-column-end: -2;
-      }
-    }
-  }
 
 .grid-grid--large {
   --pg-mw: 340px;
   --pg-g: 12px;
+  grid-template-columns: repeat(4, 1fr);
+  @include media-query($tiny) {
   grid-template-columns: repeat(2, 1fr);
+  }
   @include media-query($medium) {
       --pg-g: 15px;
-      grid-template-columns: repeat(4, 1fr);
       &.center-insufficient {
         @include centerColumns(2, ".grid__item");
       }
     }
     @include media-query($large) {
       --pg-g: 18px;
+      --pg-mw: 430px;
       grid-template-columns: repeat(6, 1fr);
       &.center-insufficient {
           @include centerColumns(3, ".grid__item");
       }
     }
     @include media-query($widescreen) {
-      --pg-mw: 380px;
+      --pg-mw: 520px;
       grid-template-columns: repeat(8, 1fr);
       &.center-insufficient {
           @include centerColumns(4, ".grid__item");
@@ -80,7 +76,7 @@
     }
   }
 .grid-grid--huge {
-  --pg-mw: 380px;
+  --pg-mw: 400px;
   --pg-g: 15px;
   grid-template-columns: repeat(2, 1fr);
   @include media-query($medium) {
@@ -90,14 +86,18 @@
     }
   }
   @include media-query($large-up) {
-      --pg-g: 20px;
-      --pg-mw: 420px;
-      grid-template-columns: repeat(6, 1fr);
-      &.center-insufficient {
-          @include centerColumns(3, ".grid__item");
-      }
+    --pg-g: 20px;
+    --pg-mw: 600px;
+    grid-template-columns: repeat(6, 1fr);
+    &.center-insufficient {
+        @include centerColumns(3, ".grid__item");
     }
   }
+  @include media-query($widescreen) {
+    --pg-g: 24px;
+    --pg-mw: 700px;
+  }
+}
 
 
 .product-grid.negative-margin {

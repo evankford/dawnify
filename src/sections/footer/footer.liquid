@@ -24,7 +24,7 @@
 
         <div class="layout--{{ section.settings.layout }} footer__blocks-wrapper {% if section.settings.layout != 'stacked' %} grid  {% endif %}">
           {%- for block in section.blocks -%}
-            <div class="footer-block grid__item{% if block.type == 'link_list' and block.settings.heading != blank %} footer-block--menu small-hide{% endif %} {% unless block.settings.visible_large %} hide--desktop {% endunless %} {% unless block.settings.visible_medium %} hide--medium {% endunless %} {% unless block.settings.visible_small %} hide--small {% endunless %}" {{ block.shopify_attributes }}>
+            <div class="footer-block footer-block__{{block.type}} grid__item{% if block.type == 'link_list' and block.settings.heading != blank %} footer-block--menu small-hide{% endif %} {% unless block.settings.visible_large %} hide--desktop {% endunless %} {% unless block.settings.visible_medium %} hide--medium {% endunless %} {% unless block.settings.visible_small %} hide--small {% endunless %} {% if block.settings.enable_full_width == true %}layout--full{% endif %}" {{ block.shopify_attributes }}>
               {%- if block.settings.title != blank and block.type != 'accordion' -%}
                 <h3 class="footer-block__heading heading h4">{{- block.settings.title | escape -}}</h3>
               {%- endif -%}
@@ -72,13 +72,17 @@
                   {{ block.settings.content }}
                 </div>
                 {% endif %}
-                  <div class="footer-block__newsletter {% if block.settings.enable_full_width == true %}layout--full{% endif %}">
 
                     {% render 'newsletter-form' with id: 'ContactFooter' , class: 'footer__newsletter' %}
                     {%- if block.settings.include_socials -%}
                       {%- render 'socials-ul' -%}
                     {%- endif -%}
-                  </div>
+
+                     {% if block.settings.content_below != blank %}
+                <small class="rte">
+                  {{ block.settings.content_below }}
+                </small>
+                {% endif %}
                 {%- when 'text' -%}
                   <div class="footer-block__details-content rte">
                     {{ block.settings.subtext }}

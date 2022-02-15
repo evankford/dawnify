@@ -62,18 +62,28 @@ content-slider.swiper-container {
   &.layout--columns {
     width: auto;
     flex-direction: column;
+
+    .swiper-initialized &  {
+      flex: none;
+    }
     flex: 1 1 300px;
     max-width: 500px;
+    justify-content: flex-start;
     height: auto !important;
 
     @include media-query($widescreen) {
-      max-width: 600px;
+      width: 450px;
+      max-width: 650px;
+      // padding: 12px;
     }
     .album-slide__cover, .album-slide__content {
       width: 100%;
     }
     .album-slide__content {
       margin: 1.5rem auto 0;
+       h3.heading:first-child {
+        margin-top: 0;
+      }
     }
   }
 
@@ -100,6 +110,7 @@ content-slider.swiper-container {
       flex: 1 1 250px;
       max-width: 450px;
       padding: clamp(1.5rem, calc(1.2rem + 2.1vw), 4.5rem);
+
     }
   }
 }

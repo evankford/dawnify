@@ -15,12 +15,15 @@
               {%- if block.settings.picker_type == 'button' -%}
                 <variant-radios class="no-js-hidden" data-section="{{ id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
                   {%- for option in product.options_with_values -%}
-
+                  {% assign name_downcased = option.name | downcase %}
+                      {% if product.options_with_values.size == 1 and name_downcased == 'title' %}
+                      {% continue %}
+                      {% endif %}
                       <fieldset class="js product-form__input">
                         <legend class="form__label label">{{ option.name }}</legend>
                           {% liquid
                             assign is_color = false
-                            if option.name contains "color" or option.name contains "Color" or option.name contains "olour"
+                            if name_downcased contains "color" or  name_downcased contains "olour"
                               assign is_color = true
                             endif
                           %}
