@@ -120,7 +120,7 @@
       "content" : "Section Settings"
     },
     {
-      "id" :"spacing_top",
+      "id" :"padding_top",
       "label" : "Section Spacing Top",
       "type" : "range",
       "default" : 5,
@@ -129,7 +129,7 @@
       "step" : 1
     },
     {
-      "id" :"spacing_bottom",
+      "id" :"padding_bottom",
       "label" : "Section Spacing Bottom",
       "type" : "range",
       "default" : 5,
@@ -198,6 +198,26 @@
       "min" : 1,
       "max" : 100
     },
+      {
+      "type" : "range",
+      "label" : "Background Position X",
+      "id" : "background_position_x",
+      "default" : 50,
+      "step": 1,
+      "min" : 1,
+      "max" : 100,
+      "unit" : "%"
+    },
+     {
+      "type" : "range",
+      "label" : "Background Position Y",
+      "id" : "background_position_y",
+      "default" : 50,
+      "step": 1,
+      "min" : 1,
+      "max" : 100,
+      "unit" : "%"
+    },
     {
       "type" : "select",
       "id" : "background_style",
@@ -217,6 +237,11 @@
           "group" : "Large Image",
           "value" : "fixed",
           "label" : "Fixed"
+        },
+        {
+          "group" : "Large Image",
+          "value" : "parallax",
+          "label" : "Parallax"
         },
         {
           "group" : "Image Pattern",

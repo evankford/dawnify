@@ -71,8 +71,8 @@
           {% assign sub_block = section.blocks[i] %}
           {% assign next_index = i | plus: 1 %}
           {% assign next_block = section.blocks[next_index] %}
+          <!-- Type: {{block.type }} - VBSmall: {{ sub_block.settings.visible_small }} -->
           {% if sub_block.settings.visible_small == true %}
-            {% comment %} Type: {{block.type }} - VBSmall: {{ sub_block.settings.visible_small }} {% endcomment %}
             {% assign vb_small = '' %}
           {% endif %}
           {% if sub_block.settings.visible_medium == true %}
@@ -85,6 +85,9 @@
             {% break %}
           {% endif %}
           {% if sub_block.type == 'spacer' or sub_block.type == 'logo' or sub_block.type == 'mobile_menu' %}
+            {% break %}
+          {% endif %}
+          {% if block.type == 'menu' %}
             {% break %}
           {% endif %}
         {% endfor %}
@@ -120,7 +123,7 @@
               --mw: {{ block.settings.logo_width }}px;
               max-width: 100%; /* needed for the psuedoelement */
               width: {{ block.settings.logo_width | default: 150 }}px;
-              margin: {{ block.settings.logo_spacing_top | minus: 40 | default: 0 }}% auto {{ block.settings.logo_spacing_bottom | minus: 40 | default: 0 }}%;
+              margin: {{ block.settings.logo_padding_top | minus: 40 | default: 0 }}% auto {{ block.settings.logo_padding_bottom | minus: 40 | default: 0 }}%;
             }
 
             @media (max-width: 1000px) {
@@ -239,12 +242,12 @@
       {{ settings.social_youtube_link | json }},
       {{ settings.social_vimeo_link | json }}
     ],
-    "url": {{ shop.url | append: page.url | json }}
+    "url": {{ request.origin | append: page.url | json }}
   }
 </script>
 
 {%- if request.page_type == 'index' -%}
-  {% assign potential_action_target = shop.url | append: routes.search_url | append: "?q={search_term_string}" %}
+  {% assign potential_action_target = request.origin | append: routes.search_url | append: "?q={search_term_string}" %}
   <script type="application/ld+json">
     {
       "@context": "http://schema.org",
@@ -255,7 +258,7 @@
         "target": {{ potential_action_target | json }},
         "query-input": "required name=search_term_string"
       },
-      "url": {{ shop.url | append: page.url | json }}
+      "url": {{ request.origin | append: page.url | json }}
     }
   </script>
 {%- endif -%}

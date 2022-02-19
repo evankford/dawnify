@@ -21,9 +21,11 @@
   }
   &.shopify-section-header-hidden {
     animation:none;transform: translateY(-100%);
+    &.menu-open {
+      transform: translateY(0)
+    }
   }
 }
-
 
 
 @keyframes slide-down {
@@ -37,7 +39,9 @@
   }
 }
 
-
+.shopify-section-header-hidden.menu-open {
+  transform: translateY(0);
+}
 
 
 #shopify-section-header.animate {

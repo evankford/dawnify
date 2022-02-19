@@ -1,12 +1,10 @@
-if (!customElements.get('product-modal')) {
-    customElements.define('product-modal', class ProductModal extends ModalDialog {
+class ProductModal extends ModalDialog {
   constructor() {
     super();
   }
 
   hide() {
     super.hide();
-    window.pauseAllMedia();
   }
 
   show(opener) {
@@ -25,15 +23,24 @@ if (!customElements.get('product-modal')) {
     const activeMedia = this.querySelector(
       `[data-media-id="${this.openedBy.getAttribute('data-media-id')}"]`
     );
+    const activeMediaTemplate = activeMedia.querySelector('template');
+    const activeMediaContent = activeMediaTemplate
+      ? activeMediaTemplate.content
+      : null;
     activeMedia.classList.add('active');
     activeMedia.scrollIntoView();
 
+    const container = this.querySelector('[role="document"]');
+    container.scrollLeft = (activeMedia.width - container.clientWidth) / 2;
+
     if (
       activeMedia.nodeName == 'DEFERRED-MEDIA' &&
-      activeMedia
-        .querySelector('template')
-        ?.content?.querySelector('.js-youtube')
+      activeMediaContent &&
+      activeMediaContent.querySelector('.js-youtube')
     )
       activeMedia.loadContent();
   }
-})};
+}
+
+if (!customElements.get('product-modal'))
+  customElements.define('product-modal', ProductModal);

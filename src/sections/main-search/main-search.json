@@ -1,7 +1,7 @@
 {
   "name": "t:sections.main-search.name",
   "tag": "section",
-  "class": "spaced-section",
+  "class": "section",
   "settings": [
     {
       "type": "header",
@@ -125,7 +125,7 @@
       "content": "Section Settings"
     },
     {
-      "id": "spacing_top",
+      "id": "padding_top",
       "label": "Section Spacing Top",
       "type": "range",
       "default": 5,
@@ -134,7 +134,7 @@
       "step": 1
     },
     {
-      "id": "spacing_bottom",
+      "id": "padding_bottom",
       "label": "Section Spacing Bottom",
       "type": "range",
       "default": 5,

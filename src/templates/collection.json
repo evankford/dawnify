@@ -6,8 +6,8 @@
         "show_collection_description": false,
         "show_collection_image": false,
         "breadcrumbs": "disabled",
-        "spacing_top": 20,
-        "spacing_bottom": 5
+        "padding_top": 32,
+        "padding_bottom": 24
       }
     },
     "product-grid": {
@@ -22,8 +22,8 @@
         "show_vendor": false,
         "enable_filtering": true,
         "enable_sorting": true,
-        "spacing_top": 5,
-        "spacing_bottom": 5
+        "padding_top": 20,
+        "padding_bottom": 20
       }
     }
   },

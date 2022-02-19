@@ -6,6 +6,9 @@
   position: relative;
   overflow: hidden;
   max-width: var(--mw, unset);//Only works if set
+  .placeholder-svg {
+     @extend %psuedoish;
+  }
 
   &::before {
     //Psuedo can't inherit variables
@@ -24,6 +27,16 @@
 
   &.product-card__media {
     &>img {
+      object-fit: contain;
+    }
+  }
+
+  &.product__media {
+    &::before {
+      display: none;
+    }
+
+    img {
       object-fit: contain;
     }
   }

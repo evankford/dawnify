@@ -101,7 +101,7 @@
                 --mw: {{ block.settings.logo_width }}px;
                 max-width: 100%; /* needed for the psuedoelement */
                 width: {{ block.settings.logo_width | default: 150 }}px;
-                margin: {{ block.settings.logo_spacing_top | minus: 40 | default: 0 }}% auto {{ block.settings.logo_spacing_bottom | minus: 40 | default: 0 }}%;
+                margin: {{ block.settings.logo_padding_top | minus: 40 | default: 0 }}% auto {{ block.settings.logo_padding_bottom | minus: 40 | default: 0 }}%;
               }
 
               @media (max-width: 790px) {

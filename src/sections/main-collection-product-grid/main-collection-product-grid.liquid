@@ -2,7 +2,7 @@
 {{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
-{{ 'component-product-grid.css' | asset_url | stylesheet_tag }}
+{{ 'component-grid-grid.css' | asset_url | stylesheet_tag }}
 
 <link rel="preload" href="{{ 'component-badge.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <link rel="preload" href="{{ 'component-rte.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -12,13 +12,13 @@
 
 <style>
 #shopify-section-{{ section.id }} {
-  margin-top: {{ section.settings.spacing_top | minus: 5 | divided_by: 3.0 | default: 1 }}rem;
-  margin-bottom: {{ section.settings.spacing_bottom | minus: 5 | divided_by: 3.0 | default: 1 }}rem;
+  margin-top: {{ section.settings.padding_top | minus: 5 | divided_by: 3.0 | default: 1 }}rem;
+  margin-bottom: {{ section.settings.padding_bottom | minus: 5 | divided_by: 3.0 | default: 1 }}rem;
 }
 @media (max-width: 749px) {
   #shopify-section-{{ section.id }} {
-  margin-top: {{ section.settings.spacing_top | minus: 5 | divided_by: 6.0 | default: 1 }}rem;
-  margin-bottom: {{ section.settings.spacing_bottom | minus: 5 | divided_by: 6.0 | default: 1 }}rem;
+  margin-top: {{ section.settings.padding_top | minus: 5 | divided_by: 6.0 | default: 1 }}rem;
+  margin-bottom: {{ section.settings.padding_bottom | minus: 5 | divided_by: 6.0 | default: 1 }}rem;
 }
 }
 </style>
@@ -60,12 +60,12 @@
         <ul id="product-grid" data-id="{{ section.id }}" class="{% unless section.settings.full_width == true %} page-width {% endunless %} grid grid-grid product-grid grid-grid--{{ section.settings.grid_size }} {% if section.settings.center_insufficient == true %} center-insufficient {% endif %}" data-max="{{ collection.products_count }}">
           {%- for product in collection.products -%}
             <li data-reveal class="grid__item">
-              {% render 'product-card',
-                product_card_product: product,
-                media_size: section.settings.image_ratio,
+              {% render 'card-product',
+                card_product: product,
+                media_aspect_ratio: section.settings.image_ratio,
                 show_secondary_image: section.settings.show_secondary_image,
-                add_image_padding: section.settings.add_image_padding,
-                show_vendor: section.settings.show_vendor
+                show_vendor: section.settings.show_vendor,
+                show_rating: section.settings.show_rating
               %}
             </li>
           {%- endfor -%}

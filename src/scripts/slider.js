@@ -125,8 +125,8 @@ window.dispatchEvent(new Event('slidersReady'));
 window.slidersReady = true;
 
 
-if (!customElements.get('slider-element')) {
-  customElements.define('slider-element', class Slider extends HTMLElement {
+if (!customElements.get('swiper-element')) {
+  customElements.define('swiper-element', class Slider extends HTMLElement {
   constructor() {
 
     super();

@@ -2,7 +2,12 @@
   display: block;
 }
 
-.product-recommendations__heading.heading {
+.product-recommendations:not(.product-recommendations--loaded) {
+  padding: 0;
   margin: 0;
-  margin-bottom: 2rem;
+}
+
+.product-recommendations__heading {
+  margin: 0;
+  margin-bottom: 3rem;
 }

@@ -1,20 +1,44 @@
 {
-    "name": "Icons",
-    "settings": [
-      {
-        "type" : "select",
-        "id" : "header_icon_style",
-        "label" : "Header Icon Style",
-        "default" : "thin",
-        "options" : [
-          {
-            "value" : "thin",
-            "label" : "Thin"
-          },{
-           "value" : "bolder",
-           "label" : "Bolder"
-          }
-        ]
-      }
-    ]
-  }
+  "name": "Icons",
+  "settings": [
+    {
+      "type" : "select",
+      "id" : "header_icon_style",
+      "label" : "Header Icon Style",
+      "default" : "thin",
+      "options" : [
+        {
+          "value" : "thin",
+          "label" : "Thin"
+        },{
+          "value" : "bolder",
+          "label" : "Bolder"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "accent_icons",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "t:settings_schema.styles.settings.accent_icons.options__1.label"
+        },
+        {
+          "value": "accent-2",
+          "label": "t:settings_schema.styles.settings.accent_icons.options__2.label"
+        },
+        {
+          "value": "outline-button",
+          "label": "t:settings_schema.styles.settings.accent_icons.options__3.label"
+        },
+        {
+          "value": "text",
+          "label": "t:settings_schema.styles.settings.accent_icons.options__4.label"
+        }
+      ],
+      "default": "text",
+      "label": "t:settings_schema.styles.settings.accent_icons.label"
+    }
+  ]
+}

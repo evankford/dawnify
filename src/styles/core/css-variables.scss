@@ -15,6 +15,7 @@ TODO: Not sure we want these?
   --gradient-background: var(--gradient-base-background-2);
 }
 
+
 .color-inverse {
   --color-foreground: var(--color-base-background-1);
   --color-background: var(--color-base-text);
@@ -78,14 +79,19 @@ TODO: Not sure we want these?
 .button--secondary {
   --color-button: var(--color-base-outline-button-labels);
   --color-button-text: var(--color-base-outline-button-labels);
-  --alpha-button-background: 0;
+  --color-button: var(--color-background);
+  --alpha-button-background: 1;
 }
 
 .color-background-2 .button--secondary,
-.color-inverse .button--secondary,
 .color-accent-1 .button--secondary,
 .color-accent-2 .button--secondary {
-  --color-button: var(--color-foreground);
+  --color-button: var(--color-background);
+  --color-button-text: var(--color-foreground);
+}
+
+.color-inverse .button--secondary {
+  --color-button: var(--color-background);
   --color-button-text: var(--color-foreground);
 }
 
@@ -134,6 +140,19 @@ TODO: Not sure we want these?
 .color-accent-2 {
   --color-card-hover: var(--color-base-solid-button-labels);
 }
+.color-transparent-light {
+  --color-foreground: 255, 255, 255;
+  --color-background: transparent;
+}
+.color-transparent-dark {
+  --color-foreground: 0,0,0;
+  --color-background: transparent;
+}
+
+.color-card {
+  --color-foreground: var(--color-card-text);
+  --color-background: var(--color-card-background);;
+}
 
 :root,
 .color-icon-text {
@@ -151,16 +170,52 @@ TODO: Not sure we want these?
 .color-icon-outline-button {
   --color-icon: rgb(var(--color-base-outline-button-labels));
 }
+:root,
+.color-icon-text {
+  --color-icon: rgb(var(--color-base-text));
+}
 
-.color-transparent-light {
-  --color-foreground: 255, 255, 255;
-  --color-background: transparent;
+.color-icon-accent-1 {
+  --color-icon: rgb(var(--color-base-accent-1));
 }
-.color-transparent-dark {
-  --color-foreground: 0,0,0;
-  --color-background: transparent;
+
+.color-icon-accent-2 {
+  --color-icon: rgb(var(--color-base-accent-2));
 }
-.color-card {
-  --color-foreground: var(--color-card-text);
-  --color-background: var(--color-card-background);;
+
+.color-icon-outline-button {
+  --color-icon: rgb(var(--color-base-outline-button-labels));
+}
+
+.contains-card,
+.card {
+  --border-radius: var(--card-corner-radius);
+  --border-width: var(--card-border-width);
+  --border-opacity: var(--card-border-opacity);
+  --shadow-horizontal-offset: var(--card-shadow-horizontal-offset);
+  --shadow-vertical-offset: var(--card-shadow-vertical-offset);
+  --shadow-blur-radius: var(--card-shadow-blur-radius);
+  --shadow-opacity: var(--card-shadow-opacity);
+}
+
+.contains-content-container,
+.content-container {
+  --border-radius: var(--text-boxes-radius);
+  --border-width: var(--text-boxes-border-width);
+  --border-opacity: var(--text-boxes-border-opacity);
+  --shadow-horizontal-offset: var(--text-boxes-shadow-horizontal-offset);
+  --shadow-vertical-offset: var(--text-boxes-shadow-vertical-offset);
+  --shadow-blur-radius: var(--text-boxes-shadow-blur-radius);
+  --shadow-opacity: var(--text-boxes-shadow-opacity);
+}
+
+.product__media-gallery .slider,
+.product__media-item {
+  --border-radius: var(--media-radius);
+  --border-width: var(--media-border-width);
+  --border-opacity: var(--media-border-opacity);
+  --shadow-horizontal-offset: var(--media-shadow-horizontal-offset);
+  --shadow-vertical-offset: var(--media-shadow-vertical-offset);
+  --shadow-blur-radius: var(--media-shadow-blur-radius);
+  --shadow-opacity: var(--media-shadow-opacity);
 }

@@ -186,7 +186,7 @@ h5.label , .h5.label, .label, .form__label, label{
   font-size: {{ settings.label_font_size_smaller | times: 0.8 | default: '13.5' }}px;
 }
 
-a.button, .button, .button-label, button.button,a.customer-button, button.shopify-challenge-button, [type=submit] {
+a.button, .button, .button-label, button.button,a.customer-button, button.shopify-challenge-button, .button[type=submit] {
   {% case settings.button_font_family %}
     {% when 'body' %}
       font-family: var(--font-body-family);
@@ -210,10 +210,6 @@ a.button, .button, .button-label, button.button,a.customer-button, button.shopif
   letter-spacing: {{ settings.button_letter_spacing | default: 10 | divided_by: 20.0 | minus: 0.5 }}em;
   font-style: {{ settings.button_text_style | default : "Standard" }};
   font-size: {{ settings.button_font_size | default: '17' }}px;
-
-  {% if settings.button_border_radius > 0 %}
-    border-radius: {{ settings.button_border_radius | divided_by: 10.0 | default: 0 }}em;
-  {% endif %}
 }
 
 
@@ -275,7 +271,7 @@ a.header__menu-item, summary.header--menu-item, summary.header__menu-item > span
    font-size: {{ settings.menu_text_size_drawer | default : 18 }}px;
  }
 
-h4.product-card-title {
+h3.card__heading {
   {% case settings.pg_font_family %}
     {% when 'body' %}
       font-family: var(--font-body-family);
@@ -370,7 +366,7 @@ div.price {
 
 /* Product Styles - Mobile */
 @media (max-width: 720px) {
-  h4.product-card-title {
+  h3.card__heading {
     font-size: {{ settings.pg_font_size_mobile | default: '17' }}px;
   }
   h1.product__title {

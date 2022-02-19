@@ -1,5 +1,4 @@
 @use "../../abstracts/" as *;
-
 .header__icon--menu {
   position: initial;
 }
@@ -39,14 +38,17 @@ menu-drawer > details[open] > summary::before {
   top: 100%;
   width: calc(100vw - 4rem);
   padding: 0;
-  border: 0.1rem solid rgba(var(--color-foreground), 0.2);
-  border-left: 0;
+  border-width: 0 var(--drawer-border-width) 0 0;
   background-color: rgb(var(--color-background));
   overflow-x: hidden;
-
-  @include media-query($medium) {
-    max-width: calc(250px + 10vw);
-  }
+  border-style: solid;
+  border-color: rgba(var(--color-foreground), var(--drawer-border-opacity));
+  filter: drop-shadow(
+    var(--drawer-shadow-horizontal-offset)
+    var(--drawer-shadow-vertical-offset)
+    var(--drawer-shadow-blur-radius)
+    rgba(var(--color-shadow), var(--drawer-shadow-opacity))
+  );
 }
 
 .js .menu-drawer {
@@ -246,4 +248,3 @@ details[open].menu-opening > .menu-drawer__submenu {
 .menu-drawer .list-social__link {
   padding: 1.3rem 1.25rem;
 }
-

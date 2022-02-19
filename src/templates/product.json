@@ -13,7 +13,7 @@
           "settings": {
           }
         },
-        "subtitle": {
+        "caption": {
           "type": "text",
           "settings": {
             "text": "{{ product.metafields.descriptors.subtitle.value }}",
@@ -82,8 +82,8 @@
       "settings": {
         "introduction": "Shop By",
         "heading": "Collection",
-        "spacing_top": 10,
-        "spacing_bottom": 10,
+        "padding_top": 24,
+        "padding_bottom": 24,
         "color_scheme": "background-2",
         "box_color_scheme": "accent-1"
       },

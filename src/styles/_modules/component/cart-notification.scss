@@ -1,5 +1,3 @@
-
-//Ekf modded
 .cart-notification-wrapper {
   position: relative;
 }
@@ -9,10 +7,12 @@
 }
 
 .cart-notification {
+  border-bottom-right-radius: var(--popup-corner-radius);
+  border-bottom-left-radius: var(--popup-corner-radius);
   background-color: rgb(var(--color-background));
-  border-color: rgba(var(--color-foreground), 0.2);
+  border-color: rgba(var(--color-foreground), var(--popup-border-opacity));
   border-style: solid;
-  border-width: 0 0 0.1rem;
+  border-width: 0 0 var(--popup-border-width);
   padding: 2.5rem 3.5rem;
   position: absolute;
   right: 0;
@@ -20,11 +20,21 @@
   visibility: hidden;
   width: 100%;
   z-index: -1;
+  filter: drop-shadow(
+    var(--popup-shadow-horizontal-offset)
+    var(--popup-shadow-vertical-offset)
+    var(--popup-shadow-blur-radius)
+    rgba(var(--color-shadow), var(--popup-shadow-opacity))
+  );
 }
 
 @media screen and (min-width: 750px) {
+  .header-wrapper:not(.header-wrapper--border-bottom) + cart-notification .cart-notification {
+    border-top-width: var(--popup-border-width);
+  }
+
   .cart-notification {
-    border-width: 0 0.1rem 0.1rem;
+    border-width: 0 var(--popup-border-width) var(--popup-border-width);
     max-width: 36.8rem;
     right: 4rem;
   }
@@ -52,13 +62,13 @@
   flex-grow: 1;
   margin-bottom: 0;
   margin-top: 0;
-  .icon-checkmark {
-    color: rgb(var(--color-foreground));
-     margin-right: calc(var(--font-heading-scale) * 1rem);
-    width: calc(var(--font-heading-scale) * 1.3rem);
-  }
 }
 
+.cart-notification__heading .icon-checkmark {
+  color: rgb(var(--color-foreground));
+  margin-right: 1rem;
+  width: 1.3rem;
+}
 
 .cart-notification__close {
   margin-top: -2rem;
@@ -72,12 +82,9 @@
 .cart-notification__links > * {
   margin-top: 1rem;
 }
-.cart-notification dd {
-  margin: auto auto auto 0.4rem;
-}
 
 .cart-notification-product {
-  align-items: center;
+  align-items: flex-start;
   display: flex;
   padding-bottom: 3rem;
   padding-top: 2rem;
@@ -89,19 +96,16 @@
 }
 
 .cart-notification-product__image {
-  border: 0.1rem solid rgba(var(--color-foreground), 0.03);
+  display: inline-flex;
   margin-right: 1.5rem;
-    margin-top: 0.5rem;
+  margin-top: 0.5rem;
 }
 
-.cart-notification-product__name, .cart-notification-product__name.heading {
+.cart-notification-product__image:after {
+  content: none;
+}
+
+.cart-notification-product__name {
   margin-bottom: 0.5rem;
   margin-top: 0;
-}
-.product-option {
-  display: flex;
-  align-items: center;
-  dt {
-    flex: 0 0 auto;
-  }
 }

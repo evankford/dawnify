@@ -29,6 +29,8 @@ announcement-bar {
 
   [data-close] {
     position: absolute;
+    appearance: none;
+    background: transparent; border: 0px solid transparent;
     top: 0;
     right: 0;
     height: 100%;

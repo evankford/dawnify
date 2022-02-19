@@ -43,5 +43,5 @@
 .background-element .media  .custom-fallback-image {
   transition: opacity 200ms ease;
   @extend %psuedoish;
-  opacity: 0;
+  // opacity: 0;
 }

@@ -2,7 +2,7 @@
 {
   "name": "t:sections.product-recommendations.name",
   "tag": "section",
-  "class": "recommendations-section",
+  "class": "recommendations-section section",
   "settings": [
     {
       "type": "paragraph",
@@ -74,12 +74,7 @@
       "default": true,
       "label": "t:sections.product-recommendations.settings.show_secondary_image.label"
     },
-    {
-      "type": "checkbox",
-      "id": "add_image_padding",
-      "default": false,
-      "label": "t:sections.product-recommendations.settings.add_image_padding.label"
-    },
+
     {
       "type" : "select",
       "id" : "header_layout",
@@ -108,7 +103,7 @@
       "content" : "Section Settings"
     },
     {
-      "id" :"spacing_top",
+      "id" :"padding_top",
       "label" : "Section Spacing Top",
       "type" : "range",
       "default" : 5,
@@ -117,7 +112,7 @@
       "step" : 1
     },
     {
-      "id" :"spacing_bottom",
+      "id" :"padding_bottom",
       "label" : "Section Spacing Bottom",
       "type" : "range",
       "default" : 5,

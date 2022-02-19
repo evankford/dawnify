@@ -1,5 +1,4 @@
-
-  class ProductRecommendations extends HTMLElement {
+ class ProductRecommendations extends HTMLElement {
     constructor() {
       super();
 
@@ -13,8 +12,13 @@
             const html = document.createElement('div');
             html.innerHTML = text;
             const recommendations = html.querySelector('product-recommendations');
+
             if (recommendations && recommendations.innerHTML.trim().length) {
               this.innerHTML = recommendations.innerHTML;
+            }
+
+            if (html.querySelector('.grid__item')) {
+              this.classList.add('product-recommendations--loaded');
             }
           })
           .catch(e => {
@@ -25,5 +29,4 @@
       new IntersectionObserver(handleIntersection.bind(this), {rootMargin: '0px 0px 200px 0px'}).observe(this);
     }
   }
-
-  customElements.define('product-recommendations', ProductRecommendations);
+    customElements.define('product-recommendations', ProductRecommendations);

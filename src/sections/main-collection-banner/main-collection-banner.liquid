@@ -1,14 +1,14 @@
 {{ 'component-collection-hero.css' | asset_url | stylesheet_tag }}
 <style>
 div.collection-hero:not(.collection-hero--with-image) {
-  margin-top: {{ section.settings.spacing_top | minus: 5 | divided_by: 3.0 | default: 1 }}rem;
-  margin-bottom: {{ section.settings.spacing_bottom | minus: 5 | divided_by: 3.0 | default: 1 }}rem;
+  margin-top: {{ section.settings.padding_top | minus: 5 | divided_by: 3.0 | default: 1 }}rem;
+  margin-bottom: {{ section.settings.padding_bottom | minus: 5 | divided_by: 3.0 | default: 1 }}rem;
 }
 @media (max-width: 749px) {
 
   div.collection-hero:not(.collection-hero--with-image) {
-    margin-top: {{ section.settings.spacing_top | minus: 5 | divided_by: 6.0 | default: 1 }}rem;
-    margin-bottom: {{ section.settings.spacing_bottom | minus: 5 | divided_by: 6.0 | default: 1 }}rem;
+    margin-top: {{ section.settings.padding_top | minus: 5 | divided_by: 6.0 | default: 1 }}rem;
+    margin-bottom: {{ section.settings.padding_bottom | minus: 5 | divided_by: 6.0 | default: 1 }}rem;
   }
 }
 </style>

@@ -15,17 +15,15 @@
 
 {{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
 <script defer src="{{ 'slider.js' | asset_url }}"></script>
-<link rel="stylesheet" href="{{ 'component-slider.css' | asset_url }}" media="print" onload="this.media='all'">
-
-<noscript>{{ 'component-slider.css' | asset_url | stylesheet_tag }}</noscript>
-<link rel="stylesheet" href="{{ 'component-slider-styles.css' | asset_url }}" media="print" onload="this.media='all'">
-
-<noscript>{{ 'component-slider-styles.css' | asset_url | stylesheet_tag }}</noscript>{{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" href="{{ 'component-swiper.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript>{{ 'component-swiper.css' | asset_url | stylesheet_tag }}</noscript>
+<link rel="stylesheet" href="{{ 'component-swiper-styles.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript>{{ 'component-swiper-styles.css' | asset_url | stylesheet_tag }}</noscript>{{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
 {%assign is_slide = false %}
 {% if section.blocks.size > 1 %}
 {% assign is_slide = true %}
 
-<slider-element class="swiper-container {% if section.settings.auto_height != true%} fixed-height {% endif %} gradient color-{{ section.settings.color_scheme | default: 'transparent-light'}} {% if section.settings.content_style == 'static' %} has-content-box {% endif %}"
+<swiper-element class="swiper-container {% if section.settings.auto_height != true%} fixed-height {% endif %} gradient color-{{ section.settings.color_scheme | default: 'transparent-light'}} {% if section.settings.content_style == 'static' %} has-content-box {% endif %}"
   {% if section.settings.autoplay_speed > 0 %} data-autoplay="{{ section.settings.autoplay_speed }}"{% endif %}
   {% if section.settings.navigation == true %} data-navigation="true" {% endif %}
   {% if section.settings.pagination != "disabled" %} data-pagination="{{ section.settings.pagination }}"{% endif %}
@@ -62,7 +60,7 @@
   {% endif %}
 
 {% if section.blocks.size > 1 %}
-</slider-element>
+</swiper-element>
 {% else %}
 </div>
 {% endif %}

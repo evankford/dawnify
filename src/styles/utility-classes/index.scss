@@ -34,3 +34,9 @@ details > * {
 .break {
   word-break: break-word;
 }
+
+
+.isolate {
+  position: relative;
+  z-index: 0;
+}

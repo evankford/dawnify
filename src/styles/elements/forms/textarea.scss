@@ -5,14 +5,10 @@
   font-family: var(--font-body-family);
   font-style: var(--font-body-style);
   font-weight: var(--font-body-weight);
-  padding: 1.2rem;
   min-height: 10rem;
   resize: none;
 }
 
-.text-area--resize-vertical {
-  resize: vertical;
-}
 input[type='checkbox'] {
   display: inline-block;
   width: auto;

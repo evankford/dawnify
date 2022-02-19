@@ -4,21 +4,37 @@
 <noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
 <noscript>{{ 'section-main-page.css' | asset_url | stylesheet_tag }}</noscript>
 
-<div class="page-width page-width--narrow">
-  <h2 class="page-title heading">
-    {%- if section.settings.page.title != blank -%}
-      {{ section.settings.page.title | escape }}
-    {%- else -%}
-      Page title
-    {%- endif -%}
-  </h2>
-  <div class="rte">
-    {%- if section.settings.page.content != blank -%}
-      {{ section.settings.page.content }}
-    {%- else -%}
-      <div class='page-placeholder-wrapper placeholder'>
-        {{ 'page' | placeholder_svg_tag: 'page-placeholder' }}
-      </div>
-    {%- endif -%}
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width page-width--narrow section-{{ section.id }}-padding">
+    <h2 class="page-title">
+      {%- if section.settings.page.title != blank -%}
+        {{ section.settings.page.title | escape }}
+      {%- else -%}
+        Page title
+      {%- endif -%}
+    </h2>
+    <div class="rte">
+      {%- if section.settings.page.content != blank -%}
+        {{ section.settings.page.content }}
+      {%- else -%}
+        <div class='page-placeholder-wrapper placeholder'>
+          {{ 'page' | placeholder_svg_tag: 'page-placeholder' }}
+        </div>
+      {%- endif -%}
+    </div>
   </div>
 </div>

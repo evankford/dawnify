@@ -13,6 +13,7 @@ Accepts:
   allow_unmute: allow unmuting of video
   center_x: Centering along X axis
   center_y: Center
+  lazy_load: boolean
 {%- endcomment -%}
 
 
@@ -49,6 +50,8 @@ Accepts:
       assign type = "image"
     endif
   endunless
+
+
 
   assign sizes = '100vw'
   assign loading_size = '300x'
@@ -112,6 +115,14 @@ Accepts:
     assign loading_size = "300x"
   endif
 
+  unless image or type != 'image'
+    assign image = media
+  endunless
+
+  unless video or type != 'video'
+    assign video = media
+  endunless
+
   assign is_external = false
   if media contains "https://youtu" or media contains "https://vim" or media contains 'https://www.youtube' or media  contains 'youtube.com' or media contains 'vimeo.com'
     assign is_external = true
@@ -130,10 +141,12 @@ Accepts:
       {%- if image -%}
         {% comment %} Requires an image input, that's it! {% endcomment %}
         <img
+        {% unless lazy_load == false %}
         {% if is_slide %}
         class="swiper-lazy"
         {% else %} loading="lazy"
         {% endif %}
+        {% endunless %}
         {% if size == "icon" %}
           {{ srcSetString }}="{{ image | img_url: max_width }} 1x, {{ image | img_url: max_width, scale: 2 }} 2x"
         {% else %}
@@ -195,7 +208,7 @@ Accepts:
             src="{{ image | img_url: loading_size }}"
             sizes="{{ sizes }}"
             alt="{{ alt | default: image.alt | escape }}"
-            {% unless is_slide %} loading="lazy" {% endunless %}
+            {% unless is_slide or lazy_load == false %} loading="lazy" {% endunless %}
             width="{{ image.width }}"
             height="{{ image.height }}"
             {% if center_x or center_y %}

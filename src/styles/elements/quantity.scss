@@ -1,11 +1,34 @@
 
 /* component-quantity */
 .quantity {
-  border: 0.1rem solid rgba(var(--color-foreground), 0.55);
+  color: rgba(var(--color-foreground));
   position: relative;
-    width: calc(14rem / var(--font-body-scale));
-  margin: 0.7em 0;
+  width: calc(14rem / var(--font-body-scale) + var(--inputs-border-width) * 2);
   display: flex;
+  border-radius: var(--inputs-radius);
+  min-height: calc((var(--inputs-border-width) * 2) + 4.5rem);
+}
+
+.quantity:after {
+  pointer-events: none;
+  content: '';
+  position: absolute;
+  inset: var(--inputs-border-width);
+  border: 0.1rem solid transparent;
+  border-radius: var(--inputs-radius);
+  box-shadow: 0 0 0 var(--inputs-border-width) rgba(var(--color-foreground), var(--inputs-border-opacity));
+  transition: box-shadow var(--duration-short) ease;
+  z-index: 1;
+}
+
+.quantity:before {
+  pointer-events: none;
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--inputs-radius-outset);
+  box-shadow: var(--inputs-shadow-horizontal-offset) var(--inputs-shadow-vertical-offset) var(--inputs-shadow-blur-radius) rgba(var(--color-base-text), var(--inputs-shadow-opacity));
+  z-index: -1;
 }
 
 .quantity__input {
@@ -17,7 +40,6 @@
   background-color: transparent;
   border: 0;
   padding: 0 0.5rem;
-  height: 4.5rem;
   width: 100%;
   flex-grow: 1;
   -webkit-appearance: none;
@@ -25,7 +47,7 @@
 }
 
 .quantity__button {
-    width: calc(4.5rem / var(--font-body-scale));
+  width: calc(4.5rem / var(--font-body-scale));
   flex-shrink: 0;
   font-size: 1.8rem;
   border: 0;
@@ -35,11 +57,38 @@
   align-items: center;
   justify-content: center;
   color: rgb(var(--color-foreground));
+  padding: 0;
+}
+
+.quantity__button:first-child {
+  margin-left: calc(var(--inputs-border-width));
+}
+
+.quantity__button:last-child {
+  margin-right: calc(var(--inputs-border-width));
 }
 
 .quantity__button svg {
   width: 1rem;
   pointer-events: none;
+}
+
+.quantity__button:focus-visible,
+.quantity__input:focus-visible {
+  background-color: rgb(var(--color-background));
+  z-index: 2;
+}
+
+.quantity__button:focus,
+.quantity__input:focus {
+  background-color: rgb(var(--color-background));
+  z-index: 2;
+}
+
+.quantity__button:not(:focus-visible):not(.focused),
+.quantity__input:not(:focus-visible):not(.focused) {
+  box-shadow: inherit;
+  background-color: inherit;
 }
 
 .quantity__input:-webkit-autofill,

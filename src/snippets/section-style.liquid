@@ -9,34 +9,30 @@ endif
 %}
 
 
+{%- comment -%}transitional padding stuff{%- endcomment -%}
+{% capture padding_top %}{% unless params.padding_top != blank %}{% if params.spacing_top and params.spacing_top != blank %}{{params.spacing_top | divided_by: 12 }}{%- endif -%}{% else %}{{params.padding_top }}{% endunless %}{%endcapture %}
+{% capture padding_bottom %}{% unless params.padding_bottom != blank %}{% if params.spacing_bottom and params.spacing_bottom != blank %}{{params.spacing_bottom | divided_by: 12 }}{%- endif -%}{% else %}{{params.padding_bottom }}{% endunless %}{%endcapture %}
+
 <style>
   #{% unless inner %}shopify-section-{% endunless %}{{ final_id }} {
-    padding-top: {{ params.spacing_top | divided_by: 2.5 | default: 1 }}rem;
-    padding-bottom: {{ params.spacing_bottom | divided_by: 2.5 | default: 1 }}rem;
+    padding-top: {{ padding_top |  divided_by: 0.75  }}px;
+    padding-bottom: {{padding_bottom  |  divided_by: 0.75 }}px;
   }
-  @media (max-width: 720px) {
+ @media screen and (min-width: 750px) {
     #{% unless inner %}shopify-section-{% endunless %}{{ final_id }} {
-      padding-top: {{ params.spacing_top | divided_by: 3 | default: 1 }}rem;
-      padding-bottom: {{ params.spacing_bottom | divided_by: 3 | default: 1 }}rem;
-    }
-  }
-  @media (max-width: 490px) {
-    #{% unless inner %}shopify-section-{% endunless %}{{ final_id }} {
-      padding-top: {{ params.spacing_top | divided_by: 3.5 | default: 1 }}rem;
-      padding-bottom: {{ params.spacing_bottom | divided_by: 3.5 | default: 1 }}rem;
+      padding-top: {{ padding_top  }}px;
+      padding-bottom: {{padding_bottom  }}px;
     }
   }
   {% if params.background_image != blank %}
   #{% unless inner %}shopify-section-{% endunless %}{{ final_id }} {
     position:relative;
-    z-index: 1;
-    {% if params.background_style == "fixed" %}
+    z-index: 3;
+    {% if params.background_style == "fixed"  or params.background_style == "parallax" %}
       clip-path: polygon(0 0, 100% 0, 100% 100.1%, 0 100.1%);
       -webkit-backface-visibility: hidden;
       -moz-backface-visibility: hidden;
       backface-visibility: hidden;
-    {% else %}
-    overflow: hidden;
     {% endif %}
 
   }
@@ -47,21 +43,23 @@ endif
     display: block;
     width: 100%;
     top: 0;
+    background-position: {{params.background_position_x|default: 50}}% {{params.background_position_y|default: 50}}%;
     {% if params.background_opacity != 100 %}
     opacity: {{ params.background_opacity | times: 0.01 | default: 1 }};
     {% endif %}
     left: 0;
-    z-index: -1;
-    background-position: 50% 50%;
-    {% if params.background_style == "cover" or params.background_style == "contain" %}
+    z-index: 0;
+    {% if params.background_style == "cover" or params.background_style == "contain"  %}
     background-image: url({{ params.background_image | img_url: "800x" }});
     background-size: {{ params.background_style }};
     background-repeat: no-repeat;
-    {% elsif params.background_style == "fixed" %}
-    position: fixed;
-    height: 100vh;
-    background-size: cover;
-    background-repeat: no-repeat;
+    {% elsif params.background_style == 'parallax'  or params.background_style == 'fixed' %}
+    background-image: url({{ params.background_image | img_url: "800x" }});
+     position: absolute;
+     left: 0;
+     width: 100%;
+     background-repeat: no-repeat;
+     background-size: cover;
     {% else %}
     background-image: url({{ params.background_image | img_url: "master" }});
     {% if params.background_style == "repeat-x" %}
@@ -74,31 +72,41 @@ endif
 
     background-repeat: {{ params.background_style }};
     {% endif %}
+    {% if params.background_style == 'parallax' %}
+      --offset: clamp(-10%, calc(-20% * (0.5 - var(--scroll))), 10%);
+      position: fixed;
+      top: -10%;
+      left: 0;
+      height: 120%;
+      width: 100%;
+      transition: transform 10ms ease;
+      transform: translateY(var(--offset));
+    {% endif %}
   }
   {% endif %}
 
-  {% if params.background_image != blank and  params.background_style == "cover" or params.background_style == "contain" or params.background_style == "fixed" %}
-  @media (min-width: 720px) {
+  {% if params.background_image != blank and params.background_style == "cover" or params.background_style == "contain" or params.background_style == "fixed" or params.background_style == "parallax"%}
+  @media (min-width: 720px), (min-height: 500px) {
     #{% unless inner %}shopify-section-{% endunless %}{{ final_id }}::before {
       background-image: url({{ params.background_image | img_url: "1080x" }});
     }
   }
-  @media (min-width: 1080px) {
+  @media (min-width: 1080px), (min-height: 580px) {
     #{% unless inner %}shopify-section-{% endunless %}{{ final_id }}::before {
       background-image: url({{ params.background_image | img_url: "1400x" }});
     }
   }
-  @media (min-width: 1080px) {
+  @media (min-width: 1080px), (min-height: 650px) {
     #{% unless inner %}shopify-section-{% endunless %}{{ final_id }}::before {
       background-image: url({{ params.background_image | img_url: "1750x" }});
     }
   }
-  @media (min-width: 1750px) {
+  @media (min-width: 1750px,  min-height: 740px) {
     #{% unless inner %}shopify-section-{% endunless %}{{ final_id }}::before {
       background-image: url({{ params.background_image | img_url: "2000x" }});
     }
   }
-  @media (min-width: 2000px) {
+  @media (min-width: 2000px), (min-height: 840px) {
     #{% unless inner %}shopify-section-{% endunless %}{{ final_id }}::before {
       background-image: url({{ params.background_image | img_url: "2400x" }});
     }

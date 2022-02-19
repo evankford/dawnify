@@ -222,7 +222,7 @@
         },
         {
           "type": "range",
-          "id": "logo_spacing_top",
+          "id": "logo_padding_top",
           "min": 0,
           "max": 80,
           "step": 1,
@@ -232,7 +232,7 @@
         },
         {
           "type": "range",
-          "id": "logo_spacing_bottom",
+          "id": "logo_padding_bottom",
           "min": 0,
           "max": 80,
           "step": 1,

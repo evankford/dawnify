@@ -44,7 +44,7 @@
   margin-left: 1rem;
 }
 
-.link[role="link"]:not([href]) {
+a:not([href]) {
   cursor: not-allowed;
 }
 

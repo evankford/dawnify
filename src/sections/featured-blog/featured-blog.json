@@ -1,7 +1,7 @@
 {
   "name": "t:sections.featured-blog.name",
   "tag": "section",
-  "class": "standard-section",
+  "class": "section",
   "settings": [
     {
       "type" : "header",
@@ -160,7 +160,7 @@
         "type": "header",
         "content": "Section Settings"
     }, {
-        "id": "spacing_top",
+        "id": "padding_top",
         "label": "Section Spacing Top",
         "type": "range",
         "default": 10,
@@ -168,7 +168,7 @@
         "max": 30,
         "step": 1
     }, {
-        "id": "spacing_bottom",
+        "id": "padding_bottom",
         "label": "Section Spacing Bottom",
         "type": "range",
         "default": 10,
@@ -227,10 +227,6 @@
             "value": "repeat-y",
             "label": "Repeat Vertically"
         }]
-    }, {
-        "type": "text",
-        "id": "title",
-        "label": "Title (for customizer UX)"
     },
 {
     "type" : "text",

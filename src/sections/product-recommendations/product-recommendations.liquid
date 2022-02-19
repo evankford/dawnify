@@ -1,13 +1,13 @@
 <link rel="stylesheet" href="{{ 'component-badge.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-card.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'component-product-grid.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-grid-grid.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'section-product-recommendations.css' | asset_url }}" media="print" onload="this.media='all'">
 
 <noscript>{{ 'component-badge.css' | asset_url | stylesheet_tag }}</noscript>
 <noscript>{{ 'component-card.css' | asset_url | stylesheet_tag }}</noscript>
 <noscript>{{ 'component-price.css' | asset_url | stylesheet_tag }}</noscript>
-<noscript>{{ 'component-product-grid.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-grid-grid.css' | asset_url | stylesheet_tag }}</noscript>
 <noscript>{{ 'section-product-recommendations.css' | asset_url | stylesheet_tag }}</noscript>
 {% render 'section-style' with id: section.id, params: section.settings %}
 
@@ -25,9 +25,9 @@
     <ul class="grid product-grid grid-grid grid-grid--{{ section.settings.grid_size }} center-insufficient" data-max="{{ recommendations.products_count }}" role="list">
       {% for recommendation in recommendations.products %}
         <li class="grid__item grid__item--product">
-          {% render 'product-card',
-            product_card_product: recommendation,
-            media_size: section.settings.image_ratio,
+          {% render 'card-product',
+            card_product: recommendation,
+            media_aspect_ratio: section.settings.image_ratio,
             show_secondary_image: section.settings.show_secondary_image,
             add_image_padding: section.settings.add_image_padding,
             show_vendor: section.settings.show_vendor

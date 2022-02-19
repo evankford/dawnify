@@ -1,13 +1,28 @@
 {%- comment -%}Modified: Added label/heading class to DT{%- endcomment -%}
 {{ 'component-cart.css' | asset_url | stylesheet_tag }}
+{{ 'component-cart-items.css' | asset_url | stylesheet_tag }}
 {{ 'component-totals.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
-{{ 'component-cart-items.css' | asset_url | stylesheet_tag }}
+{{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: calc({{ section.settings.padding_top }}px * 0.75);
+    padding-bottom: calc({{ section.settings.padding_bottom }}px  * 0.75);
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
 
 <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 
-<cart-items class="page-width{% if cart == empty %} is-empty{% endif %}">
+<cart-items class="page-width{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}">
   <div class="title-wrapper-with-link">
     <h1 class="title title--primary heading">{{ 'sections.cart.title' | t }}</h1>
     <a href="{{ routes.all_products_collection_url }}" class="underlined-link">{{ 'general.continue_shopping' | t }}</a>
@@ -19,8 +34,8 @@
       {{ 'general.continue_shopping' | t }}
     </a>
 
-    {%- if shop.customer_accounts_enabled -%}
-      <h2 class="cart__login-title">{{ 'sections.cart.login.title' | t }}</h2>
+    {%- if shop.customer_accounts_enabled and customer == nil -%}
+    <h2 class="cart__login-title">{{ 'sections.cart.login.title' | t }}</h2>
       <p class="cart__login-paragraph">
         {{ 'sections.cart.login.paragraph_html' | t: link: routes.account_login_url }}
       </p>
@@ -48,13 +63,15 @@
                     {% if item.image %}
                       {% comment %} Leave empty space due to a:empty CSS display: none rule {% endcomment %}
                       <a href="{{ item.url }}" class="cart-item__link" aria-hidden="true" tabindex="-1"> </a>
-                      <img class="cart-item__image"
-                        src="{{ item.image | img_url: '300x' }}"
-                        alt="{{ item.image.alt | escape }}"
-                        loading="lazy"
-                        width="150"
-                        height="{{ 150 | divided_by: item.image.aspect_ratio | ceil }}"
-                      >
+                      <div class="cart-item__image-container global-media-settings">
+                          <img src="{{ item.image | img_url: '300x' }}"
+                            class="cart-item__image"
+                            alt="{{ item.image.alt | escape }}"
+                            loading="lazy"
+                            width="150"
+                            height="{{ 150 | divided_by: item.image.aspect_ratio | ceil }}"
+                          >
+                        </div>
                     {% endif %}
                   </td>
 
@@ -280,13 +297,13 @@
 
 <style>
 #shopify-section-{{ section.id }} {
-  margin-top: {{ section.settings.spacing_top | minus: 5 | divided_by: 3.0 | default: 1 }}rem;
-  margin-bottom: {{ section.settings.spacing_bottom | minus: 5 | divided_by: 3.0 | default: 1 }}rem;
+  margin-top: {{ section.settings.padding_top | minus: 5 | divided_by: 3.0 | default: 1 }}rem;
+  margin-bottom: {{ section.settings.padding_bottom | minus: 5 | divided_by: 3.0 | default: 1 }}rem;
 }
 @media (max-width: 749px) {
   #shopify-section-{{ section.id }} {
-  margin-top: {{ section.settings.spacing_top | minus: 5 | divided_by: 6.0 | default: 1 }}rem;
-  margin-bottom: {{ section.settings.spacing_bottom | minus: 5 | divided_by: 6.0 | default: 1 }}rem;
+  margin-top: {{ section.settings.padding_top | minus: 5 | divided_by: 6.0 | default: 1 }}rem;
+  margin-bottom: {{ section.settings.padding_bottom | minus: 5 | divided_by: 6.0 | default: 1 }}rem;
 }
 }
 </style>

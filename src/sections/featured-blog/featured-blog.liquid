@@ -1,4 +1,6 @@
-{% comment %} Modded {% endcomment %}
+{% comment %} Modded:
+
+- section-style {% endcomment %}
 
 <link rel="stylesheet" href="{{ 'component-slider.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-card.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -20,65 +22,51 @@
 {% render 'section-style' with inner: true, id: inner_id, params: section.settings %}
 
 <div id="{{ inner_id }}" class="blog {% if section.settings.soft_background %} background-secondary{% endif %}{% if section.settings.heading == blank %} no-heading{% endif %} color-{{ section.settings.color_scheme }}"">
-  <div class="page-width-desktop">
-    <div class="title-wrapper-with-link{% if section.settings.heading == blank %} title-wrapper-with-link--no-heading{% endif %} title-wrapper--self-padded-tablet-down layout--{{ section.settings.text_align }} common-header">
-      <div class="header-wrap">
-        {% if section.settings.introduction != blank %}
-          <h4 data-reveal class="{% if section.settings.text_size == 'small' %} h5 {% elsif section.settings.text_size == 'large' %} h3 {% else %}h4 {% endif %} label">{{section.settings.introduction}}</h4>
-        {% endif %}
-        <h2 data-reveal class="blog__title heading {% if section.settings.text_size == 'small' %} h2 {% elsif section.settings.text_size == 'large' %} h0 {% else %}h1 {% endif %}">{{ section.settings.heading | escape }}</h2>
-        {% if section.settings.subtitle != blank %}
-          <h4 data-reveal class="{% if section.settings.text_size == 'small' %} h5 {% elsif section.settings.text_size == 'large' %} h3 {% else %}h4 {% endif %} label">{{section.settings.subtitle}}</h4>
-        {% endif %}
-      </div>
+ <div class="page-width-desktop isolate{% if posts_displayed < 3 %} page-width-tablet{% endif %} section-{{ section.id }}-padding">
+    <div class="title-wrapper-with-link{% if section.settings.heading == blank %} title-wrapper-with-link--no-heading{% endif %} {% if posts_displayed > 2 %}title-wrapper--self-padded-tablet-down{% else %}title-wrapper--self-padded-mobile{% endif %} title-wrapper--no-top-margin">
+      <h2 class="blog__title">{{ section.settings.heading | escape }}</h2>
 
       {%- if section.settings.blog != blank and section.settings.show_view_all and section.settings.post_limit < section.settings.blog.articles_count -%}
         <a href="{{ section.settings.blog.url }}"
-          class="link underlined-link "
+          class="link underlined-link large-up-hide"
         >
           {{ 'sections.featured_blog.view_all' | t }}
         </a>
       {%- endif -%}
     </div>
-    {%- liquid
-      if section.settings.post_limit <= section.settings.blog.articles_count
-        assign posts_exceed_limit = true
-      endif
-    -%}
     {%- if section.settings.blog != blank and section.settings.blog.articles_count > 0 -%}
       <slider-component class="slider-mobile-gutter">
         <ul id="Slider-{{ section.id }}"
-          class="blog__posts articles-wrapper grid grid--peek grid--2-col-tablet grid--3-col-desktop slider slider--tablet{% if posts_exceed_limit %} blog__posts--{{ section.settings.post_limit }}-items{% else %} blog__posts--{{ section.settings.blog.articles_count }}-items{% endif %}"
+          class="blog__posts articles-wrapper contains-card{% if settings.card_style == 'standard' %} contains-card--standard{% endif %} grid grid--peek grid--2-col-tablet{% if section.settings.columns_desktop == 1 %} grid--full-width{% else %} grid--{{ section.settings.columns_desktop }}-col-desktop{% endif %} slider {% if posts_displayed > 2 %}slider--tablet{% else %}slider--mobile{% endif %}"
           role="list"
         >
           {%- for article in section.settings.blog.articles limit: section.settings.post_limit -%}
-            <li class="blog__post grid__item article slider__slide slider__slide--full-width ">
-              {% render 'article-card', blog: section.settings.blog, article: article, show_image: section.settings.show_image, show_date: section.settings.show_date, show_author: section.settings.show_author, color_scheme: section.settings.box_color_scheme %}
+            <li id="Slide-{{ section.id }}-{{ forloop.index }}" class="blog__post grid__item article slider__slide slider__slide--full-width">
+              {% render 'article-card', blog: section.settings.blog, article: article, media_aspect_ratio: 1.66, show_image: section.settings.show_image, show_date: section.settings.show_date, show_author: section.settings.show_author, show_excerpt: true %}
             </li>
           {%- endfor -%}
         </ul>
         {%- if posts_exceed_limit -%}
           <div class="slider-buttons no-js-hidden{% if section.settings.post_limit < 3 %} medium-hide{% endif %}{% if section.settings.post_limit < 2 %} small-hide{% endif %}">
+            <button type="button" class="slider-button slider-button--prev" name="previous" aria-label="{{ 'general.slider.previous_slide' | t }}">{% render 'icon-caret' %}</button>
             <div class="slider-counter caption">
               <span class="slider-counter--current">1</span>
               <span aria-hidden="true"> / </span>
-              <span class="visually-hidden">{{ 'accessibility.of' | t }}</span>
+              <span class="visually-hidden">{{ 'general.slider.of' | t }}</span>
               <span class="slider-counter--total">{{ section.settings.post_limit }}</span>
             </div>
-            <button type="button" class="slider-button slider-button--prev" name="previous" aria-label="{{ 'accessibility.previous_slide' | t }}">{% render 'icon-caret' %}</button>
-            <button type="button" class="slider-button slider-button--next" name="next" aria-label="{{ 'accessibility.next_slide' | t }}">{% render 'icon-caret' %}</button>
+            <button type="button" class="slider-button slider-button--next" name="next" aria-label="{{ 'general.slider.next_slide' | t }}">{% render 'icon-caret' %}</button>
           </div>
         {%- endif -%}
       </slider-component>
 
-     {% comment %} Removed in favor of in-line link {%- if section.settings.show_view_all and section.settings.post_limit < section.settings.blog.articles_count -%}
+      {%- if section.settings.show_view_all and section.settings.post_limit < section.settings.blog.articles_count -%}
         <div class="blog__view-all center small-hide medium-hide">
           <a href="{{ section.settings.blog.url }}" class="blog__button button">
             {{ 'sections.featured_blog.view_all' | t }}
           </a>
         </div>
       {%- endif -%}
-      {% endcomment %}
     {%- else -%}
       <div class="blog-placeholder">
         <div class="placeholder media media--landscape">

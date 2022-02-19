@@ -6,7 +6,7 @@ class LocalizationForm extends HTMLElement {
         'input[name="locale_code"], input[name="country_code"]'
       ),
       button: this.querySelector('button'),
-      panel: this.querySelector('ul'),
+      panel: this.querySelector('.disclosure__list-wrapper'),
     };
     this.elements.button.addEventListener(
       'click',
@@ -37,8 +37,9 @@ class LocalizationForm extends HTMLElement {
 
   onItemClick(event) {
     event.preventDefault();
+    const form = this.querySelector('form');
     this.elements.input.value = event.currentTarget.dataset.value;
-    this.querySelector('form')?.submit();
+    if (form) form.submit();
   }
 
   openSelector() {

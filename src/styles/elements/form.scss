@@ -1,0 +1,126 @@
+
+/* component-form */
+
+.button.newsletter-form__button {
+  height: 4.5rem;
+}
+
+.field__input,
+.select__select,
+.customer .field input,
+
+.customer select {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
+  color: rgb(var(--color-foreground));
+  font-size: 1.6rem;
+  width: 100%;
+  box-shadow: 0 0 0 0.1rem rgba(var(--color-foreground), 0.55);
+  height: 4.5rem;
+  box-sizing: border-box;
+  transition: box-shadow var(--duration-short) ease;
+}
+
+.select__select {
+  font-family: var(--font-body-family);
+  font-style: var(--font-body-style);
+  font-weight: var(--font-body-weight);
+  font-size: 1.2rem;
+  color: rgba(var(--color-foreground), 0.75);
+}
+
+.field__input:hover,
+.select__select:hover,
+.customer .field input:hover,
+.customer select:hover,
+.localization-form__select:hover {
+  box-shadow: 0 0 0 0.2rem rgba(var(--color-foreground), 0.55);
+}
+
+.field__input:focus-visible,
+.select__select:focus-visible,
+.field input:focus-visible {
+  box-shadow: 0 0 0 0.1rem rgba(var(--color-foreground), 0.55),
+    0 0 0 0.3rem rgb(var(--color-background)),
+    0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
+}
+
+.field__input:focus,
+.select__select:focus,
+.field input:focus {
+  box-shadow: 0 0 0 0.1rem rgba(var(--color-foreground), 0.55),
+    0 0 0 0.3rem rgb(var(--color-background)),
+    0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
+}
+
+.text-area,
+.select {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+}
+
+
+/* Form global */
+
+.form__label {
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
+.form__message {
+  align-items: center;
+  display: flex;
+  font-size: 1.4rem;
+  line-height: 1;
+  margin-top: 1rem;
+}
+
+.form__message--large {
+  font-size: 1.6rem;
+}
+
+.customer .field .form__message {
+  font-size: 1.4rem;
+  text-align: left;
+}
+
+.form__message .icon,
+.customer .form__message svg {
+  flex-shrink: 0;
+  height: 1.3rem;
+  margin-right: 0.5rem;
+  width: 1.3rem;
+}
+
+.form__message--large .icon,
+.customer .form__message svg {
+  height: 1.5rem;
+  width: 1.5rem;
+  margin-right: 1rem;
+}
+
+.customer .field .form__message svg {
+  align-self: start;
+}
+
+.form-status {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.form-status-list {
+  padding: 0;
+  margin: 2rem 0 4rem;
+}
+
+.form-status-list li {
+  list-style-position: inside;
+}
+
+.form-status-list .link::first-letter {
+  text-transform: capitalize;
+}
