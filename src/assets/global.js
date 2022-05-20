@@ -644,7 +644,6 @@ class SliderComponent extends HTMLElement {
     this.nextButton = this.querySelector('button[name="next"]');
 
     if (!this.slider || !this.nextButton) return;
-
     this.initPages();
     const resizeObserver = new ResizeObserver((entries) => this.initPages());
     resizeObserver.observe(this.slider);
@@ -927,6 +926,7 @@ class VariantSelects extends HTMLElement {
     this.toggleAddButton(true, '', false);
     this.updatePickupAvailability();
     this.removeErrorMessage();
+    console.log('Variant changing');
 
     if (!this.currentVariant) {
       this.toggleAddButton(true, '', true);
@@ -1056,11 +1056,13 @@ class VariantSelects extends HTMLElement {
       `product-form-${this.dataset.section}`
     );
     if (!productForm) return;
-    const addButton = productForm.querySelector('[name="add"]');
-    const addButtonText = productForm.querySelector('[name="add"] > span');
+    const addButton = productForm.querySelector('[name="add"]:not([data-single-clone]');
+    const addButtonText = productForm.querySelector(
+      '[name="add"]:not([data-single-clone] > span'
+    );
 
+    console.log(text);
     if (!addButton) return;
-
     if (disable) {
       addButton.setAttribute('disabled', 'disabled');
       if (text) addButtonText.textContent = text;
@@ -1073,11 +1075,16 @@ class VariantSelects extends HTMLElement {
   }
 
   setUnavailable() {
+
     const button = document.getElementById(
       `product-form-${this.dataset.section}`
     );
-    const addButton = button.querySelector('[name="add"]');
-    const addButtonText = button.querySelector('[name="add"] > span');
+    const addButton = button.querySelector(
+      '[name="add"]:not([data-single-clone]'
+    );
+    const addButtonText = button.querySelector(
+      '[name="add"]:not([data-single-clone] > span'
+    );
     const price = document.getElementById(`price-${this.dataset.section}`);
     if (!addButton) return;
     addButtonText.textContent = window.variantStrings.unavailable;
@@ -1140,9 +1147,19 @@ function setVars() {
   }
 
   function setScrollMod() {
-    const canTravel = document.body.clientHeight - window.innerHeight;
+    var body = document.body,
+      html = document.documentElement;
+
+    var height = Math.max(
+      body.scrollHeight,
+      body.offsetHeight,
+      html.clientHeight,
+      html.scrollHeight,
+      html.offsetHeight
+    );
+
+    const canTravel = height - window.innerHeight;
     const final = 1 + (window.scrollY - canTravel) / canTravel
-    console.log(`Final is ${final}, dbc: ${document.body.clientHeight}`)
     document.body.style.setProperty('--scroll', final)
   }
 

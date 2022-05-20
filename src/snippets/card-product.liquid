@@ -38,10 +38,8 @@
       {% if card_product.featured_media == nil and settings.card_style == 'card' %} ratio{% endif %}"
       style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
     >
-    <div class="card__inner {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }}{% endif %}{% if card_product.featured_media or settings.card_style == 'standard' %} ratio{% endif %}" style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;">
-       {% if settings.tag_location == "top"  or settings.tag_location == "bottom" %}
-          {% render 'product-tag' with tag: card_product.metafields.custom.tag %}
-        {% endif %}
+    <div class="card__inner {% if card_product.featured_media or settings.card_style == 'standard' %} ratio{% endif %}" style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;">
+
         {%- if card_product.featured_media -%}
           <div class="card__media">
            <div class="media media--transparent media--hover-effect">
@@ -83,11 +81,15 @@
             </div>
             </div>
         {%- endif -%}
+        {% if settings.visible_tag_location == "image" and card_product.metafields.dawnify.tag %}
+          <div class="card__media__badge {{settings.badge_position}}">
+            {% render 'product-tag' with tag: card_product.metafields.dawnify.tag %}
+          </div>
+        {% endif %}
+
          <div class="card__content">
           <div class="card__information">
-              {% if settings.tag_location == "above" %}
-                {% render 'product-tag' with tag: card_product.metafields.custom.tag %}
-              {% endif %}
+
             <h3 class="card__heading">
               <a href="{{ card_product.url }}" class="full-unstyled-link">
                 {{ card_product.title | escape }}
@@ -101,6 +103,11 @@
               <span class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}">{{ 'products.product.on_sale' | t }}</span>
             {%- endif -%}
           </div>
+           {% if settings.visible_tag_location == "content" and card_product.metafields.dawnify.tag %}
+           <div class="card__badge {{ settings.badge_position }}  {% if settings.visible_tags_centered %} centered {% endif %}">
+             {% render 'product-tag' with tag: card_product.metafields.dawnify.tag %}
+           </div>
+        {% endif %}
         </div>
       </div>
       <div class="card__content">
@@ -146,6 +153,11 @@
             {% endif %}
           </div>
         </div>
+        {% if settings.visible_tag_location == "content" and card_product.metafields.dawnify.tag %}
+           <div class="card__badge {{ settings.badge_position }}  {% if settings.visible_tags_centered %} centered {% endif %}">
+             {% render 'product-tag' with tag: card_product.metafields.dawnify.tag %}
+           </div>
+        {% endif %}
         <div class="card__badge {{ settings.badge_position }}">
           {%- if card_product.available == false -%}
             <span class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }}">{{ 'products.product.sold_out' | t }}</span>
@@ -166,7 +178,7 @@
       {% if card_product.featured_media == nil and settings.card_style == 'card' %} ratio{% endif %}"
       style="--ratio-percent: 100%;"
     >
-      <div class="card__inner {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }}{% endif %}{% if settings.card_style == 'standard' %} ratio{% endif %}" style="--ratio-percent: 100%;">
+      <div class="card__inner {% if settings.card_style == 'standard' %} ratio{% endif %}" style="--ratio-percent: 100%;">
         <div class="card__content">
           <div class="card__information">
             <h3 class="card__heading">

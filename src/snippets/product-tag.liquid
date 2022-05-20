@@ -1,1 +1,5 @@
-{% if tag and tag != "" %}<dl class="tags tag--{{ settings.tag_style }} location--{{ settings.tag_location }} "><dt class="label {% if settings.tag_size == 'small' %} h6 {% else %} h5 {% endif %} {% if settings.tag_style != 'standard' %}color-{{settings.tag_color_scheme}}"{% endif %}>{{ tag }}</dt></dl>{% endif %}
+{% if tag and tag != "" %}
+   <span class="badge default-badge color-{{settings.default_badge_color_scheme}}">
+     {{ tag | escape }}
+   </span>
+{% endif %}

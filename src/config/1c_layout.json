@@ -61,6 +61,43 @@
         "type" : "checkbox",
         "label" : "Enable Sidebar Menu",
         "info" : "Enables an extra place for menus/buttons as a site-wide sidebar."
+      },
+      {
+        "type" : "header",
+        "content" : "Advanced"
+      },
+      {
+        "type" : "range",
+        "label" : "Header Height (desktop)",
+        "min" : 30,
+        "step" : 1,
+        "unit" : "px",
+        "max" : 120,
+        "default" : 65,
+        "info" : "Helps with layout shift when set to the final height of the header",
+        "id" : "header_height"
+      },
+      {
+        "type" : "range",
+        "label" : "Header Height (mobile)",
+        "min" : 30,
+        "step" : 1,
+        "unit" : "px",
+        "max" : 120,
+        "default" : 55,
+        "info" : "Helps with layout shift when set to the final height of the header",
+        "id" : "header_height_mobile"
+      },
+      {
+        "type" : "range",
+        "label" : "Header Height (tablet)",
+        "min" : 30,
+        "step" : 1,
+        "unit" : "px",
+        "max" : 120,
+        "default" : 65,
+        "info" : "Helps with layout shift when set to the final height of the header",
+        "id" : "header_height_tablet"
       }
   ]
 }

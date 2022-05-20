@@ -1,11 +1,7 @@
 {
   "name" : "Product Grid Styles",
   "settings" : [
-     {
-      "label" : "Center Product Titles",
-      "type" : "checkbox",
-      "id" : "pg_centered"
-    },
+
     {
       "type" : "header",
       "content" : "Grid Appearance"
@@ -16,16 +12,42 @@
       "label" : "Only show details on hover?"
     },
     {
-      "type" : "checkbox",
-      "label" : "Use Card Style",
-      "id" : "pg_card"
+      "type" : "select",
+      "id" : "pg_color",
+      "label" : "Hover content color scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "t:sections.all.colors.accent_1.label"
+        },
+        {
+          "value": "accent-2",
+          "label": "t:sections.all.colors.accent_2.label"
+        },
+        {
+          "value": "background-1",
+          "label": "t:sections.all.colors.background_1.label"
+        },
+        {
+          "value": "background-2",
+          "label": "t:sections.all.colors.background_2.label"
+        },
+        {
+          "value": "inverse",
+          "label": "t:sections.all.colors.inverse.label"
+        },
+        {
+          "value": "transparent-light",
+          "label": "transparent (light text)"
+        },
+        {
+          "value": "transparent-dark",
+          "label": "Transparent (dark text)"
+        }
+      ],
+      "default": "inverse"
     },
-    {
-      "type" : "checkbox",
-      "label" : "Use Image Border",
-      "id" : "pg_border",
-      "default" : true
-    },
+
      {
         "type" : "header",
         "content" : "Grid Typography",

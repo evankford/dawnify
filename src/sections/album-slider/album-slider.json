@@ -20,6 +20,67 @@
       "label": "Subtitle"
     },
     {
+      "type" : "text",
+      "id" : "button_label_1",
+      "label" : "Button Label"
+    },
+    {
+      "type" : "url",
+      "id" : "button_link_1",
+      "label" : "Button URL"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_style_secondary_1",
+      "default": false,
+      "label": "t:sections.image-banner.blocks.buttons.settings.button_style_secondary_1.label"
+    },
+    {
+      "type" : "text",
+      "id" : "button_label_2",
+      "label" : "Button 2 Label"
+    },
+    {
+      "type" : "url",
+      "id" : "button_link_2",
+      "label" : "Button 2 URL"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_style_secondary_2",
+      "default": false,
+      "label": "t:sections.image-banner.blocks.buttons.settings.button_style_secondary_1.label"
+    },
+    {
+      "type": "select",
+      "id": "button_color_scheme",
+      "default" : "transparent-light",
+      "options": [ {
+          "value": "transparent-dark",
+          "label": "Dark Text (no bg)"
+        }, {
+          "value": "transparent-light",
+          "label": "Light Text (no bg)"
+        },{
+          "value": "accent-1",
+          "label": "t:sections.image-banner.settings.color_scheme.options__1.label"
+        }, {
+          "value": "accent-2",
+          "label": "t:sections.image-banner.settings.color_scheme.options__2.label"
+        }, {
+          "value": "background-1",
+          "label": "t:sections.image-banner.settings.color_scheme.options__3.label"
+        }, {
+          "value": "background-2",
+          "label": "t:sections.image-banner.settings.color_scheme.options__4.label"
+        }, {
+          "value": "inverse",
+          "label": "t:sections.image-banner.settings.color_scheme.options__5.label"
+        }
+      ],
+      "label": "Background Color Scheme"
+    },
+    {
       "type" : "select",
       "id" : "text_align",
       "label" : "Text Align",
@@ -42,7 +103,14 @@
     {
         "type": "header",
         "content": "Slider Settings"
-    }, {
+    },
+     {
+       "id" : "disable_slider",
+       "label" : "Disable Slider",
+       "type" : "checkbox"
+     },
+
+    {
         "type": "select",
         "id": "pagination",
         "label": "Pagination",
@@ -115,22 +183,24 @@
       "content" : "Section Settings"
     },
     {
-      "id" :"padding_top",
-      "label" : "Section Spacing Top",
-      "type" : "range",
-      "default" : 5,
-      "min" : 0,
-      "max": 30,
-      "step" : 1
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
     },
     {
-      "id" :"padding_bottom",
-      "label" : "Section Spacing Bottom",
-      "type" : "range",
-      "default" : 5,
-      "min" : 0,
-      "max": 30,
-      "step" : 1
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
     }, {
             "type": "select",
             "id": "color_scheme",

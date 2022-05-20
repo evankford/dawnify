@@ -182,6 +182,50 @@
         "max": 900
     },
     {
+      "type" : "header",
+      "content" : "Content",
+      "info": "Rarely should be used!"
+    },
+     {
+      "type": "text",
+      "id": "introduction",
+      "label": "Introduction"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.featured-collection.settings.title.label"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type" : "select",
+      "id" : "text_align",
+      "label" : "Text Align",
+      "default" : "left",
+      "options" : [
+        {
+          "value" : "left",
+          "label" : "Left"
+        },
+        {
+          "value" : "centered",
+          "label" : "Centered"
+        },
+        {
+          "value" : "right",
+          "label" : "Right"
+        }
+      ]
+    },
+    {
+        "type" : "header",
+        "content" : "Section Settingx"
+    },
+    {
       "id" : "anchor_id",
       "type" : "text",
       "label" : "ID (for anchor links)"
@@ -288,6 +332,36 @@
             "label": "Content"
         }, {
             "type": "select",
+            "id": "content_alignment",
+            "options": [{
+                "value": "flex-start",
+                "label": "Left"
+            }, {
+                "value": "center",
+                "label": "Center"
+            }, {
+                "value": "flex-end",
+                "label": "Right"
+            }],
+            "default": "center",
+            "label": "Content Alignment"
+        }, {
+            "type": "select",
+            "id": "text_alignment",
+            "options": [{
+                "value": "left",
+                "label": "Left"
+            }, {
+                "value": "center",
+                "label": "Center"
+            }, {
+                "value": "right",
+                "label": "Right"
+            }],
+            "default": "center",
+            "label": "Content Alignment"
+        },{
+            "type": "select",
             "id": "desktop_text_box_position",
             "options": [{
                 "value": "flex-start",
@@ -361,6 +435,39 @@
             "id": "button_style_secondary_2",
             "default": false,
             "label": "t:sections.image-banner.blocks.buttons.settings.button_style_secondary_2.label"
+        },
+        {
+          "type" : "header",
+          "content" : "Icon Links"
+        },
+        {
+          "type" : "url",
+          "id" : "icon_link_apple_music",
+          "label" : "Apple Music URL"
+        }, {
+          "type" : "url",
+          "id" : "icon_link_spotify",
+          "label" : "Spotify URL"
+        }, {
+          "type" : "url",
+          "id" : "icon_link_youtube",
+          "label" : "Youtube URL"
+        }, {
+          "type" : "url",
+          "id" : "icon_link_deezer",
+          "label" : "Deezer URL"
+        }, {
+          "type" : "url",
+          "id" : "icon_link_soundcloud",
+          "label" : "Soundcloud URL"
+        }, {
+          "type" : "url",
+          "id" : "icon_link_pandora",
+          "label" : "Pandora URL"
+        }, {
+          "type" : "url",
+          "id" : "icon_link_amazon",
+          "label" : "Amazon URL"
         }]
     }, {
         "type": "video-text",
@@ -446,7 +553,41 @@
             "type": "richtext",
             "id": "content",
             "label": "Content"
-        }, {
+        },{
+            "type": "select",
+            "id": "text_alignment",
+            "options": [{
+                "value": "left",
+                "label": "Left"
+            }, {
+                "value": "center",
+                "label": "Center"
+            }, {
+                "value": "right",
+                "label": "Right"
+            }],
+            "default": "center",
+            "label": "Content Alignment"
+        },
+
+        {
+            "type": "select",
+            "id": "content_alignment",
+            "options": [{
+                "value": "flex-start",
+                "label": "Left"
+            }, {
+                "value": "center",
+                "label": "Center"
+            }, {
+                "value": "flex-end",
+                "label": "Right"
+            }],
+            "default": "center",
+            "label": "Content Alignment"
+        },
+
+        {
             "type": "select",
             "id": "desktop_text_box_position",
             "options": [{
@@ -522,43 +663,77 @@
             "default": false,
             "label": "t:sections.image-banner.blocks.buttons.settings.button_style_secondary_2.label"
         },
-    {
-        "type" : "header",
-        "content" : "Youtube Button",
-        "info" : "Only works for youtube backgrounds"
-    },
-{
-    "type" : "text",
-    "id": "yt_button_text",
-    "label" : "Youtube Button Text",
-    "default" : "Watch Now"
-},
-{
-    "type" : "select",
-    "id": "yt_button_location",
-    "label" : "Youtube Button Location" ,
-    "default" : "disabled",
-    "options" : [
         {
-            "value" : "first",
-            "label" : "Before Other Buttons"
+            "type" : "header",
+            "content" : "Youtube Button",
+            "info" : "Only works for youtube backgrounds"
         },
         {
-            "value" : "last",
-            "label" : "After Other Buttons"
+            "type" : "text",
+            "id": "yt_button_text",
+            "label" : "Youtube Button Text",
+            "default" : "Watch Now"
         },
         {
-            "value" : "disabled",
-            "label" : "Disabled"
+            "type" : "select",
+            "id": "yt_button_location",
+            "label" : "Youtube Button Location" ,
+            "default" : "disabled",
+            "options" : [
+                {
+                    "value" : "first",
+                    "label" : "Before Other Buttons"
+                },
+                {
+                    "value" : "last",
+                    "label" : "After Other Buttons"
+                },
+                {
+                    "value" : "disabled",
+                    "label" : "Disabled"
+                }
+            ]
+        },
+        {
+            "type" : "checkbox",
+            "default" : true,
+            "id" : "yt_button_lightbox",
+            "label" : "Open Video in Lightbox?"
+        },
+        {
+          "type" : "header",
+          "content" : "Icon Links"
+        },
+
+        {
+          "type" : "url",
+          "id" : "icon_link_apple_music",
+          "label" : "Apple Music URL"
+        }, {
+          "type" : "url",
+          "id" : "icon_link_spotify",
+          "label" : "Spotify URL"
+        }, {
+          "type" : "url",
+          "id" : "icon_link_youtube",
+          "label" : "Youtube URL"
+        }, {
+          "type" : "url",
+          "id" : "icon_link_deezer",
+          "label" : "Deezer URL"
+        }, {
+          "type" : "url",
+          "id" : "icon_link_soundcloud",
+          "label" : "Soundcloud URL"
+        }, {
+          "type" : "url",
+          "id" : "icon_link_pandora",
+          "label" : "Pandora URL"
+        }, {
+          "type" : "url",
+          "id" : "icon_link_amazon",
+          "label" : "Amazon URL"
         }
-    ]
-},
-{
-    "type" : "checkbox",
-    "default" : true,
-    "id" : "yt_button_lightbox",
-    "label" : "Open Video in Lightbox?"
-}
     ]
     }, {
         "type": "image-image",
@@ -630,6 +805,24 @@
             "min": 100,
             "max": 800,
             "unit": "px"
+        },{
+            "type": "range",
+            "label": "Content Image Max",
+            "id": "content_image_width_max",
+            "default": 50,
+            "step": 1,
+            "min": 30,
+            "max": 100,
+            "unit": "%"
+        }, {
+            "type": "range",
+            "label": "Content Image Min",
+            "id": "content_image_width_min",
+            "default": 50,
+            "step": 1,
+            "min": 10,
+            "max": 60,
+            "unit": "%"
         }, {
             "type": "text",
             "id": "subtitle",
@@ -638,6 +831,21 @@
             "type": "richtext",
             "id": "content",
             "label": "Content"
+        },{
+            "type": "select",
+            "id": "content_alignment",
+            "options": [{
+                "value": "flex-start",
+                "label": "Left"
+            }, {
+                "value": "center",
+                "label": "Center"
+            }, {
+                "value": "flex-end",
+                "label": "Right"
+            }],
+            "default": "center",
+            "label": "Content Alignment"
         }, {
             "type": "select",
             "id": "desktop_text_box_position",
@@ -713,7 +921,42 @@
             "id": "button_style_secondary_2",
             "default": false,
             "label": "t:sections.image-banner.blocks.buttons.settings.button_style_secondary_2.label"
-        }]
+        },
+        {
+          "type" : "header",
+          "content" : "Icon Links"
+        },
+
+        {
+          "type" : "url",
+          "id" : "icon_link_apple_music",
+          "label" : "Apple Music URL"
+        }, {
+          "type" : "url",
+          "id" : "icon_link_spotify",
+          "label" : "Spotify URL"
+        }, {
+          "type" : "url",
+          "id" : "icon_link_youtube",
+          "label" : "Youtube URL"
+        }, {
+          "type" : "url",
+          "id" : "icon_link_deezer",
+          "label" : "Deezer URL"
+        }, {
+          "type" : "url",
+          "id" : "icon_link_soundcloud",
+          "label" : "Soundcloud URL"
+        }, {
+          "type" : "url",
+          "id" : "icon_link_pandora",
+          "label" : "Pandora URL"
+        }, {
+          "type" : "url",
+          "id" : "icon_link_amazon",
+          "label" : "Amazon URL"
+        }
+    ]
     }, {
         "type": "video-image",
         "name": "Video w/ Image Content",
@@ -790,6 +1033,34 @@
             "type": "image_picker",
             "id": "content_image",
             "label": "Content Image"
+        },
+        {
+            "type": "range",
+            "label": "Content Image Width",
+            "id": "content_image_width",
+            "default": 240,
+            "step": 10,
+            "min": 100,
+            "max": 800,
+            "unit": "px"
+        },{
+            "type": "range",
+            "label": "Content Image Max",
+            "id": "content_image_width_max",
+            "default": 50,
+            "step": 1,
+            "min": 30,
+            "max": 100,
+            "unit": "%"
+        }, {
+            "type": "range",
+            "label": "Content Image Min",
+            "id": "content_image_width_min",
+            "default": 50,
+            "step": 1,
+            "min": 10,
+            "max": 60,
+            "unit": "%"
         }, {
             "type": "text",
             "id": "subtitle",
@@ -799,6 +1070,36 @@
             "id": "content",
             "label": "Content"
         }, {
+            "type": "select",
+            "id": "content_alignment",
+            "options": [{
+                "value": "flex-start",
+                "label": "Left"
+            }, {
+                "value": "center",
+                "label": "Center"
+            }, {
+                "value": "flex-end",
+                "label": "Right"
+            }],
+            "default": "center",
+            "label": "Content Alignment"
+        }, {
+            "type": "select",
+            "id": "text_alignment",
+            "options": [{
+                "value": "left",
+                "label": "Left"
+            }, {
+                "value": "center",
+                "label": "Center"
+            }, {
+                "value": "right",
+                "label": "Right"
+            }],
+            "default": "center",
+            "label": "Content Alignment"
+        },{
             "type": "select",
             "id": "desktop_text_box_position",
             "options": [{
@@ -874,42 +1175,75 @@
             "default": false,
             "label": "t:sections.image-banner.blocks.buttons.settings.button_style_secondary_2.label"
         },{
-        "type" : "header",
-        "content" : "Youtube Button",
-        "info" : "Only works for youtube backgrounds"
-    },
-{
-    "type" : "text",
-    "id": "yt_button_text",
-    "label" : "Youtube Button Text",
-    "default" : "Watch Now"
-},
-{
-    "type" : "select",
-    "id": "yt_button_location",
-    "label" : "Youtube Button Location" ,
-    "default" : "disabled",
-    "options" : [
-        {
-            "value" : "first",
-            "label" : "Before Other Buttons"
+            "type" : "header",
+            "content" : "Youtube Button",
+            "info" : "Only works for youtube backgrounds"
         },
         {
-            "value" : "last",
-            "label" : "After Other Buttons"
+            "type" : "text",
+            "id": "yt_button_text",
+            "label" : "Youtube Button Text",
+            "default" : "Watch Now"
         },
         {
-            "value" : "disabled",
-            "label" : "Disabled"
+            "type" : "select",
+            "id": "yt_button_location",
+            "label" : "Youtube Button Location" ,
+            "default" : "disabled",
+            "options" : [
+                {
+                    "value" : "first",
+                    "label" : "Before Other Buttons"
+                },
+                {
+                    "value" : "last",
+                    "label" : "After Other Buttons"
+                },
+                {
+                    "value" : "disabled",
+                    "label" : "Disabled"
+                }
+            ]
+        },
+        {
+            "type" : "checkbox",
+            "default" : true,
+            "id" : "yt_button_lightbox",
+            "label" : "Open Video in Lightbox?"
+        },
+        {
+          "type" : "header",
+          "content" : "Icon Links"
+        },
+        {
+          "type" : "url",
+          "id" : "icon_link_apple_music",
+          "label" : "Apple Music URL"
+        }, {
+          "type" : "url",
+          "id" : "icon_link_spotify",
+          "label" : "Spotify URL"
+        }, {
+          "type" : "url",
+          "id" : "icon_link_youtube",
+          "label" : "Youtube URL"
+        }, {
+          "type" : "url",
+          "id" : "icon_link_deezer",
+          "label" : "Deezer URL"
+        }, {
+          "type" : "url",
+          "id" : "icon_link_soundcloud",
+          "label" : "Soundcloud URL"
+        }, {
+          "type" : "url",
+          "id" : "icon_link_pandora",
+          "label" : "Pandora URL"
+        }, {
+          "type" : "url",
+          "id" : "icon_link_amazon",
+          "label" : "Amazon URL"
         }
-    ]
-},
-{
-    "type" : "checkbox",
-    "default" : true,
-    "id" : "yt_button_lightbox",
-    "label" : "Open Video in Lightbox?"
-}
     ]
     }, {
         "type": "image",
@@ -962,6 +1296,11 @@
             "type": "url",
             "id": "url",
             "label": "url"
+        },
+        {
+            "type": "checkbox",
+            "id": "target",
+            "label": "Open in new window?"
         }]
     }, {
         "type": "video",
@@ -1008,6 +1347,10 @@
             "type": "url",
             "id": "url",
             "label": "url"
+        }, {
+            "type": "checkbox",
+            "id": "target",
+            "label": "Open in new window?"
         }]
     },
     {
@@ -1233,11 +1576,18 @@
         }]
     }
     ],
-    "presets": [{
+    "presets": [
+    {
         "name": "Slider",
         "blocks": [{
             "type": "image-text"
         }, {
+            "type": "video-text"
+        }]
+    },
+    {
+        "name" : "Background Video",
+        "blocks": [{
             "type": "video-text"
         }]
     }]

@@ -1,0 +1,290 @@
+{
+  "name" : "Custom Events",
+  "class" : "custom-events",
+  "settings" : [
+    {
+      "type" : "checkbox",
+      "id" : "hide_after_date",
+      "label" : "Hide After Date?",
+      "info" : "Will attempt to hide dates that have passed."
+    },
+    {
+      "type" : "text",
+      "id" : "dates_format",
+      "label" : "Dates Format?",
+      "info" : "Enables hiding old dates.",
+      "default": "dd.MM.yyyy"
+    },
+    {
+      "type" : "text",
+      "id" : "fallback_heading",
+      "label" : "Fallback Heading",
+      "default" : "No Dates Found"
+    },
+    {
+      "type" : "richtext",
+      "id" : "fallback_content",
+      "label" : "Fallback Heading",
+      "default" : "<p>More dates are coming soon. Check back here or follow for more options</p>"
+    },
+    {
+      "type" : "checkbox",
+      "id" : "fallback_socials",
+      "label" : "Fallback Socials?",
+      "default" : true
+    }
+  ],
+  "blocks" : [
+    {
+      "name" : "Event",
+      "type" : "Event",
+      "settings" : [
+        {
+          "type" : "header",
+          "content" : "Details"
+        },
+        {
+          "type" : "text",
+          "id" : "date",
+          "label" : "Date",
+          "info" : "Must match date format from section settings"
+        },
+        {
+          "type" : "text",
+          "id" : "date_text",
+          "label" : "Date Text",
+          "info" : "Overwrites the display value of the date above"
+        },
+        {
+          "type" : "text",
+          "id" : "title",
+          "label" : "Location"
+        },
+        {
+          "type" : "text",
+          "id" : "venue",
+          "label" : "Venue"
+        },
+        {
+          "type" : "richtext",
+          "id" : "details",
+          "label" : "Details"
+        },
+        {
+          "type" : "header",
+          "content" : "Links"
+        },
+        {
+          "type" : "text",
+          "id" : "button_1_text",
+          "label" : "Button 1 Text",
+          "default" : "Tickets"
+        },
+        {
+          "type" : "url",
+          "id" : "button_1_url",
+          "label" : "Button 1 URL",
+          "info" : "Leave blank to mark as sold out/disabled"
+        },
+        {
+          "type" : "checkbox",
+          "id" : "button_1_target",
+          "label" : "Open in new window?",
+          "default" : true
+        },
+        {
+          "type" : "select",
+          "id" : "button_1_style",
+          "label" : "Button 1 Style",
+          "default" : "solid",
+          "options"  :[
+            {
+              "value": "solid",
+              "label" : "Solid"
+            },
+            {
+              "value": "outline",
+              "label" : "Outline"
+            },
+            {
+              "value": "simple",
+              "label" : "Simple"
+            }
+          ]
+        },
+        {
+          "type" : "select",
+          "id" : "button_1_color",
+          "label" : "Button 1 Color",
+          "default" : "inverse",
+          "options"  :[
+            {
+              "value": "inverse",
+              "label" : "Inverse"
+            },
+            {
+              "value": "background-1",
+              "label" : "Background 1"
+            },
+            {
+              "value": "background-2",
+              "label" : "Background 2"
+            },
+            {
+              "value": "accent-1",
+              "label" : "Accent 1"
+            },
+            {
+              "value": "accent-2",
+              "label" : "Accent 2"
+            },
+            {
+              "value": "transparent-light",
+              "label" : "Transparent Light"
+            },
+            {
+              "value": "transparent-dark",
+              "label" : "Transparent Dark"
+            }
+          ]
+        },
+        {
+          "type" : "text",
+          "id" : "button_2_text",
+          "label" : "Button 2 Text",
+          "default" : "Be A VIP"
+        },
+        {
+          "type" : "url",
+          "id" : "button_2_url",
+          "label" : "Button 2 URL",
+          "info" : "Leave blank to mark as sold out/disabled"
+        },
+        {
+          "type" : "checkbox",
+          "id" : "button_2_target",
+          "label" : "Open in new window?",
+          "default" : true
+        },
+        {
+          "type" : "select",
+          "id" : "button_2_style",
+          "label" : "Button 2 Style",
+          "default" : "solid",
+          "options"  :[
+            {
+              "value": "solid",
+              "label" : "Solid"
+            },
+            {
+              "value": "outline",
+              "label" : "Outline"
+            },
+            {
+              "value": "simple",
+              "label" : "Simple"
+            }
+          ]
+        },
+        {
+          "type" : "select",
+          "id" : "button_2_color",
+          "label" : "Button 2 Color",
+          "default" : "inverse",
+          "options"  :[
+            {
+              "value": "inverse",
+              "label" : "Inverse"
+            },
+            {
+              "value": "accent-1",
+              "label" : "Accent 1"
+            },
+            {
+              "value": "accent-2",
+              "label" : "Accent 2"
+            },
+            {
+              "value": "transparent-light",
+              "label" : "Transparent Light"
+            },
+            {
+              "value": "transparent-dark",
+              "label" : "Transparent Dark"
+            }
+          ]
+        },
+        {
+          "type" : "text",
+          "id" : "button_3_text",
+          "label" : "Button 3 Text"
+        },
+        {
+          "type" : "url",
+          "id" : "button_3_url",
+          "label" : "Button 3 URL",
+          "info" : "Leave blank to mark as sold out/disabled"
+        },
+        {
+          "type" : "checkbox",
+          "id" : "button_3_target",
+          "label" : "Open in new window?",
+          "default" : true
+        },
+        {
+          "type" : "select",
+          "id" : "button_3_style",
+          "label" : "Button 3 Style",
+          "default" : "solid",
+          "options"  :[
+            {
+              "value": "solid",
+              "label" : "Solid"
+            },
+            {
+              "value": "outline",
+              "label" : "Outline"
+            },
+            {
+              "value": "simple",
+              "label" : "Simple"
+            }
+          ]
+        },
+        {
+          "type" : "select",
+          "id" : "button_3_color",
+          "label" : "Button 3 Color",
+          "default" : "inverse",
+          "options"  :[
+            {
+              "value": "inverse",
+              "label" : "Inverse"
+            },
+            {
+              "value": "accent-1",
+              "label" : "Accent 1"
+            },
+            {
+              "value": "accent-2",
+              "label" : "Accent 2"
+            },
+            {
+              "value": "transparent-light",
+              "label" : "Transparent Light"
+            },
+            {
+              "value": "transparent-dark",
+              "label" : "Transparent Dark"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets" : [
+  {
+      "name" : "Custom Events"
+   }
+  ]
+}

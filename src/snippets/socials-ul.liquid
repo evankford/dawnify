@@ -12,7 +12,7 @@
     {%- capture settings_slug %}social_{{social_slug}}_link{%- endcapture -%}
     {%- capture translation_slug %}general.social.links.{{social_slug}}{%- endcapture -%}
     {% if settings[settings_slug] != blank %}
-     <li data-reveal class="list-social__item">
+     <li {%unless disable_animation %} data-reveal {% endunless %} class="list-social__item">
       <a target="_blank" rel="nofollow noreferrer noopener" href="{{ settings[settings_slug]}}" class="link list-social__link" >
         {%- render 'social-icon' with icon: social_slug -%}
         <span class="visually-hidden">{{ translation_slug | t }}</span>

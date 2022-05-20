@@ -28,6 +28,7 @@ announcement-bar {
   }
 
   [data-close] {
+    color: currentColor;
     position: absolute;
     appearance: none;
     background: transparent; border: 0px solid transparent;
@@ -97,4 +98,13 @@ announcement-bar {
 .announcement-bar__message p {
     margin: 0;
     display: inline;
+  }
+
+  body{
+    margin-top: var(--announcement-bottom, 0px);
+  }
+
+  shopify-editor-preview-inspector {
+    position: relative;
+    margin-top:  calc(0px - var(--announcement-bottom, 0px));
   }

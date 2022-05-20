@@ -1,7 +1,7 @@
 {
   "name": "t:sections.image-banner.name",
   "tag": "section",
-  "class": "section",
+  "class": "section image-section",
   "settings": [
     {
       "type": "image_picker",

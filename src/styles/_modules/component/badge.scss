@@ -12,3 +12,11 @@
   color: rgb(var(--color-foreground));
   word-break: break-word;
 }
+
+
+.tag.badge {
+  background: rgb(var(--tag-background));
+  color: rgb(var(--tag-foreground ));
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}

@@ -10,6 +10,7 @@
      @extend %psuedoish;
   }
 
+
   &::before {
     //Psuedo can't inherit variables
     @extend %psuedo;
@@ -23,6 +24,11 @@
     object-fit: cover;
     object-position: center center;
     transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 1;
+  }
+  &>img.blur {
+    filter: blur(20px);
+    transform: scale(1.1);
   }
 
   &.product-card__media {
@@ -120,12 +126,10 @@
 }
 
 
-
-
-
-.media.media--hover-effect > img + img {
+.media.media--hover-effect > img:not(.blur) + img {
   opacity: 0;
 }
+
 
 @media screen and (min-width: 990px) {
   .media--cropped {

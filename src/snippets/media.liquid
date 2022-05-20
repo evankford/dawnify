@@ -139,6 +139,10 @@ Accepts:
     {%- when 'image' -%}
 
       {%- if image -%}
+      {% capture imgchecker %}{{image|img_url:'240x'}}{%endcapture %}
+      {% if imgchecker contains 'jpg' %}
+      <img class="blur" aria-hidden="true" style="filter:blur(25px); z-index: 0;" src="{{ image | img_url: '80x' }}">
+      {% endif %}
         {% comment %} Requires an image input, that's it! {% endcomment %}
         <img
         {% unless lazy_load == false %}
@@ -223,7 +227,7 @@ Accepts:
         <script src="{{ 'component-external-video-bg-2.js' | asset_url }}" defer></script>
   {%- endcase -%}
 
-    {% if is_slide %}
-      <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-    {% endif %}
+{% if is_slide %}
+  <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+{% endif %}
 </div>

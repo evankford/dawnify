@@ -109,3 +109,22 @@
   margin-bottom: 0.5rem;
   margin-top: 0;
 }
+
+//EKF Custom
+.product-option {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0.4rem 0;
+  dd {
+    flex: 1 0 auto;
+    margin: auto;
+    line-height: 1.25;
+  }
+  dt {
+    margin-right: 12px;
+    flex: 0 0 auto;
+    line-height: 1;
+  }
+
+}

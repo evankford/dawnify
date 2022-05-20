@@ -15,9 +15,11 @@
 <noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
 <noscript>{{ 'disclosure.css' | asset_url | stylesheet_tag }}</noscript>
 
+{% include 'section-style' with id: section.id, inner = false, params: section.settings %}
+
 {%- capture copyright_text -%}<small class="copyright__content">&copy; {{ 'now' | date: "%Y" }} {{ section.settings.copyright_text | strip_html }}</small>{%- endcapture -%}
 
-<footer class="footer color-{{ section.settings.color_scheme }} gradient-standard">
+<footer class="footer">
   {%- if section.blocks.size > 0 or section.settings.newsletter_enable or section.settings.show_social -%}
     <div class="footer__content-top page-width">
       {%- if section.blocks.size > 0 -%}
@@ -30,7 +32,7 @@
               {%- endif -%}
               {%- case block.type -%}
                 {%- when 'accordion' %}
-                    <div class="accordion" {{ block.shopify_attributes }}>
+                    <div class="accordion" >
                       <details>
                         <summary><h2 class="h4 heading accordion__title">{{ block.settings.title | escape }}</h2>{% render 'icon-caret' %}</summary>
                         {%- if block.settings.menu != blank -%}
@@ -52,7 +54,7 @@
                 </div>
                 {%- when 'content' -%}
                   {% if block.settings.image %}
-                    {% if block.settings.image_url != blank %} <a class="nostyle" href="{{block.settings.image_url }}">{% endif %}{% render "media" with size: "icon", image: block.settings.image, max_width: block.settings.image_width %}{% if block.settings.image_url != blank %}</a>{% endif %}
+                    {% if block.settings.image_url != blank %} <a class="nostyle" href="{{block.settings.image_url }}">{% endif %}{% render "media" with size: "medium", image: block.settings.image, max_width: block.settings.image_width %}{% if block.settings.image_url != blank %}</a>{% endif %}
                   {% endif %}
                   {% if block.settings.content != blank %}
                   <div class="rte">
@@ -67,22 +69,26 @@
                     {% assign copyright_text_shown = true %}
                   {% endif %}
                 {%- when 'newsletter' -%}
-                {% if block.settings.content != blank %}
-                <div class="rte">
-                  {{ block.settings.content }}
-                </div>
-                {% endif %}
-
+                    {% if block.settings.content != blank %}
+                    <div class="rte">
+                      {{ block.settings.content }}
+                    </div>
+                    {% endif %}
+                    {% if block.settings.phone_content != blank %}
+                    <div class="rte large">
+                      {{ block.settings.phone_content }}
+                    </div>
+                    {% endif %}
                     {% render 'newsletter-form' with id: 'ContactFooter' , class: 'footer__newsletter newsletter-form' %}
                     {%- if block.settings.include_socials -%}
                       {%- render 'socials-ul' -%}
                     {%- endif -%}
 
                      {% if block.settings.content_below != blank %}
-                <small class="rte">
-                  {{ block.settings.content_below }}
-                </small>
-                {% endif %}
+                      <small class="rte">
+                        {{ block.settings.content_below }}
+                      </small>
+                    {% endif %}
                 {%- when 'text' -%}
                   <div class="footer-block__details-content rte">
                     {{ block.settings.subtext }}

@@ -52,6 +52,12 @@
         --popup-shadow-vertical-offset: {{ settings.popup_shadow_vertical_offset }}px;
         --popup-shadow-blur-radius: {{ settings.popup_shadow_blur }}px;
 
+        --drawer-background-color: {{ settings.color_drawer_foreground.red }}, {{ settings.color_drawer_foreground.green }}, {{ settings.color_drawer_foreground.blue }};
+        --drawer-foreground-color: {{ settings.color_drawer_background.red }},  {{ settings.color_drawer_background.green }}, {{ settings.color_drawer_background.blue }};
+        {% if settings.color_drawer_accent != blank and settings.color_drawer_accent_inverse != blank %}
+        --drawer-accent-color: {{ settings.color_drawer_accent.red }},{{ settings.color_drawer_accent.green }},{{ settings.color_drawer_accent.blue }};
+        --drawer-accent-inverse-color: {{ settings.color_drawer_accent_inverse.red }},{{ settings.color_drawer_accent_inverse.green }},{{ settings.color_drawer_accent_inverse.blue }};
+        {% endif %}
         --drawer-border-width: {{ settings.drawer_border_thickness }}px;
         --drawer-border-opacity: {{ settings.drawer_border_opacity | divided_by: 100.0 }};
         --drawer-shadow-opacity: {{ settings.drawer_shadow_opacity | divided_by: 100.0 }};
@@ -123,7 +129,6 @@
         min-height: 100%;
         margin: 0;
         font-size: 1.5rem;
-        letter-spacing: 0.06rem;
         line-height: calc(1 + 0.8 / var(--font-body-scale));
         font-family: var(--font-body-family);
         font-style: var(--font-body-style);

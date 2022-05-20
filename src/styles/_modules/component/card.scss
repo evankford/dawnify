@@ -71,6 +71,22 @@
   width: calc(100% - 2 * var(--card-image-padding));
 }
 
+.card__media__badge {
+
+  position:absolute;
+  bottom: 1rem;
+  left: 1rem;
+  z-index: 5;
+
+  &.top {
+    top: 1rem
+  }
+
+  &.right {
+    right: 1rem;
+  }
+}
+
 .card--standard .card__media {
   margin: var(--card-image-padding);
 }
@@ -105,7 +121,12 @@
     padding-bottom: 1.7rem;
     padding-top: 1.7rem;
   }
+
 }
+.card--card .card__information {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
 
 .card__badge {
   align-self: flex-end;
@@ -120,6 +141,9 @@
 
 .card__badge.right {
   justify-self: flex-end;
+}
+.card__badge.centered {
+  justify-self: center;
 }
 
 .card__media .media img {
@@ -187,8 +211,7 @@
   outline: 0;
 }
 
-@media screen and (min-width: 990px) {
-  .card .media.media--hover-effect > img:only-child,
+ .card .media.media--hover-effect > img:only-child,
   .card-wrapper .media.media--hover-effect > img:only-child {
     transition: transform var(--duration-long) ease;
   }
@@ -206,9 +229,13 @@
 
   .card-wrapper:hover .media.media--hover-effect > img + img {
     opacity: 1;
-    transition: transform var(--duration-long) ease;
+    transition: transform var(--duration-short) ease;
     transform: scale(1.03);
   }
+
+
+@media screen and (min-width: 990px) {
+
 
   .underline-links-hover:hover a {
     text-decoration: underline;
@@ -235,7 +262,7 @@
 
 .card--card.card--media .card__inner .card__information,
 .card--card.card--text .card__inner,
-.card--card.card--media > .card__content .card__badge {
+.card--card.card--media > .card__inner .card__badge {
   display: none;
 }
 
@@ -294,4 +321,39 @@
 
 .card-article-info {
   margin-top: 1rem;
+}
+.card.style--overlay {
+  .card__inner, .card-wrapper {
+    height: 100%;
+  }
+}
+
+.card.style--overlay.card--media {
+  overflow: hidden;
+
+  .card__inner .card__information {
+    display: block;
+    text-align: center;
+  }
+
+  .card__content {
+    z-index: 2;
+    transition: transform 400ms ease, opacity 400ms ease;
+  }
+
+  .card__media {
+    opacity: 0.3;
+    transition: transform 400ms ease, opacity 400ms ease;
+  }
+
+  &:hover {
+    .card__content {
+      transform: translateY(-4px)
+    }
+
+    .card__media {
+      transform: scale(1.06);
+      opacity: 0.5;
+    }
+  }
 }

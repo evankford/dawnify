@@ -15,9 +15,6 @@ class AnnouncementBar extends HTMLElement {
         window.addEventListener('resize', this.handleResize.bind(this));
       })
     }
-
-
-
   }
 
   duringThemeEditor()  {
@@ -45,17 +42,9 @@ class AnnouncementBar extends HTMLElement {
 
   }
   changeBodyOffset() {
-    // let offset = document.body.getBoundingClientRect().top;
-    let offset = 0;
-    //Fixes combined offsets
-    // if (this.heightAdded) {
-    //   offset = offset - this.height
-    // }
-    // const newOffset = offset + this.newHeight + 'px';
-    document.body.style.marginTop = this.newHeight + 'px';
-    document.body.style.setProperty('body-top', this.newHeight + 'px');
-    // this.heightAdded = true;
+    document.body.style.setProperty('--announcement-bottom', this.newHeight + 'px');
     this.height = this.newHeight;
+
   }
 
   close() {

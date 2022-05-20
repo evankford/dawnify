@@ -145,7 +145,7 @@
         bottom: this.header.offsetTop + this.header.offsetHeight,
       },
 
-      document.body.style.setProperty('--header-bottom', this.header.offsetHeight + this.header.offsetTop + 'px');
+      document.body.style.setProperty('--header-bottom', this.header.offsetHeight + this.header.offsetTop - 2 + 'px');
     }
 
     checkOverlaySize() {

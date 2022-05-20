@@ -11,15 +11,53 @@ div.collection-hero:not(.collection-hero--with-image) {
     margin-bottom: {{ section.settings.padding_bottom | minus: 5 | divided_by: 6.0 | default: 1 }}rem;
   }
 }
+{% if section.settings.collection_image_overlay and collection.image and section.settings.show_collection_image%}
+.collection-hero.collection-hero--with-image.image--overlay {
+position: relative;
+min-height: clamp(40vh, calc(200px + 20vw), 70vh);
+padding: 30px;
+margin-bottom: 20px;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-wrap: wrap;
+}
+.collection-hero.image--overlay .collection-hero__text-wrapper {
+  z-index: 2;
+  margin: auto;
+  width: 100%;
+  max-width: 900px;
+  flex-basis: 100%;
+  text-align: center;
+
+}
+
+.image--overlay .collection-hero__image-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  margin: 0;
+  max-width: 100%;
+  opacity: {{ section.settings.image_opacity | times : 0.01 | default: 0.5  }}
+}
+
+.collection-banner {
+  padding-bottom: 5px;
+}
+
+
+{% endif %}
 </style>
-</style>
-<div class="collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %}">
-  <div class="collection-hero__inner page-width">
+<div class="collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image {% if section.settings.collection_image_overlay %} image--overlay color-{{section.settings.color_scheme_overlay | default: 'inverse'}}{% endif %}{% endif %}">
+  <div class="collection-hero__inner {% unless section.settings.collection_image_overlay and collection.image and section.settings.collection_image_overlay %} page-width{% endunless %}">
     <div class="collection-hero__text-wrapper">
     {% if section.settings.breadcrumbs != "disabled" %}
     {% render 'breadcrumbs' with style: section.settings.breadcrumbs %}
     {% endif %}
-      <h1 data-reveal class="collection-hero__title heading">
+      <h1 data-reveal class="collection-hero__title heading h0">
         <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
         {{- collection.title | escape -}}
       </h1>
@@ -36,9 +74,11 @@ div.collection-hero:not(.collection-hero--with-image) {
           {%- if collection.image.width >= 535 -%}{{ collection.image | img_url: '535x' }} 535w,{%- endif -%}
           {%- if collection.image.width >= 720 -%}{{ collection.image | img_url: '720x' }} 720w,{%- endif -%}
           {%- if collection.image.width >= 940 -%}{{ collection.image | img_url: '940x' }} 940w,{%- endif -%}
-          {%- if collection.image.width >= 1070 -%}{{ collection.image | img_url: '1070x' }} 1070w{%- endif -%}"
+          {%- if collection.image.width >= 1070 -%}{{ collection.image | img_url: '1070x' }} 1070w,{%- endif -%}
+          {%- if collection.image.width >= 1400 -%}{{ collection.image | img_url: '1400x' }} 1400w,{%- endif -%}
+          {%- if collection.image.width >= 2000 -%}{{ collection.image | img_url: '2000x' }}{%- endif -%}"
           src="{{ collection.image | img_url: '533x' }}"
-          sizes="(min-width: 1100px) 535px, (min-width: 750px) calc(50vw - 130px), calc(50vw - 55px)"
+          sizes="{% unless section.settings.collection_image_overlay %}(min-width: 1100px) 535px, (min-width: 750px) calc(50vw - 130px), calc(50vw - 55px){% else %} 100vw{% endunless %}"
           alt="{{ collection.title | escape }}"
           loading="lazy"
           width="{{ collection.image.width }}"

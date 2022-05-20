@@ -1,0 +1,102 @@
+
+<link rel="preload" href="{{ 'section-custom-events.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>{{ 'section-custom-events.css' | asset_url | stylesheet_tag }}</noscript>
+
+{% if section.settings.hide_after_date == true %}
+<script src="{{ 'section-custom-events.js' | asset_url }}" defer></script>
+{%endif %}
+<ul class="events-wrap" {% if section.settings.hide_after_date == true %} data-dates-wrap data-dates-format="{{section.settings.dates_format | default: "dd.MM.yyyy"}}"{% endif %}>
+  {% for block in section.blocks %}
+  <li class="custom-event" data-custom-event data-date="{{block.settings.date}}">
+    <div class="custom-event__content">
+      {% if block.settings.date != blank %}<div class="custom-event__date label h4">{{ block.settings.date_text | default : block.settings.date | escape }}</div>{% endif %}
+      <div class="custom-event__heading">
+        {% if block.settings.title != blank %}<div class="custom-event__location h4 heading">{{ block.settings.title | escape }}</div>{%endif %}
+        {% if block.settings.venue != blank %}<div class="custom-event__venue label h5">{{block.settings.venue | escape }}</div>{% endif %}
+        {% if block.settings.details != blank %}<div class="custom-event__details">{{block.settings.details}}</div>{%endif %}
+      </div>
+    </div>
+    {% if block.settings.button_1_text != blank or  block.settings.button_2_text != blank or  block.settings.button_3_text != blank %}
+    <div class="custom-event__buttons">
+      {% if  block.settings.button_1_text != blank %}
+        {% assign button_text = block.settings.button_1_text %}
+        {% assign is_product = false %}
+        {% assign linked_product = false %}
+        {% assign is_disabled = false %}
+
+
+        {% if block.settings.button_1_url != blank and block.settings.button_1_url contains '/products/' %}
+ {% assign split_url = block.settings.button_1_url | split: '/products/' %}
+
+                {% assign product_slug = split_url[1] %}
+
+            {% assign linked_product = all_products[product_slug] %}
+        {% endif %}
+
+        {% if linked_product != false and linked_product.title and linked_product.available != true %}
+        {% assign is_disabled = true %}
+        {% assign button_text = 'Sold Out' %}
+        {% elsif block.settings.button_1_url == blank %}
+          {% assign is_disabled = true %}
+        {% endif %}
+
+        <a {% unless is_disabled %} href="{{block.settings.button_1_url}}" {% if block.settings.button_1_target %} target="_blank" rel="nofollow noopener noreferrer" {% endif %}{% else %} disabled aria-disabled="true"{% endunless %} class="button {% if block.settings.button_1_style == 'outline'%} button--secondary {% elsif block.settings.button_1_style == 'simple' %} button--simple {% endif %} color-{{block.settings.button_1_color}}">
+          {{button_text | escape}}
+        </a>
+      {% endif %}
+      {% if  block.settings.button_2_text != blank %}
+       {% assign button_text = block.settings.button_2_text %}
+        {% assign is_product = false %}
+        {% assign linked_product = false %}
+        {% assign is_disabled = false %}
+
+        {% if block.settings.button_2_url != blank and linked_product.title and block.settings.button_2_url contains '/products/' %}
+            {% assign split_url = block.settings.button_2_url | split: '/products/' %}
+            {% assign product_slug = split_url[1] %}
+            {% assign linked_product = all_products[product_slug] %}
+        {% endif %}
+
+        {% if linked_product != false and linked_product.available != true %}
+        {% assign is_disabled = true %}
+        {% assign button_text = 'Sold Out' %}
+        {% elsif block.settings.button_2_url == blank %}
+          {% assign is_disabled = true %}
+        {% endif %}
+        <a {% unless is_disabled %} href="{{block.settings.button_2_url}}" {% if block.settings.button_2_target %} target="_blank" rel="nofollow noopener noreferrer" {% endif %}{% else %} disabled aria-disabled="true"{% endunless %} class="button {% if block.settings.button_2_style == 'outline'%} button--secondary {% elsif block.settings.button_2_style == 'simple' %} button--simple {% endif %} color-{{block.settings.button_2_color}}">
+          {{ button_text  | escape}}
+        </a>
+      {% endif %}
+      {% if block.settings.button_3_text != blank %}
+        {% assign button_text = block.settings.button_3_text %}
+        {% assign is_product = false %}
+        {% assign linked_product = false %}
+        {% assign is_disabled = false %}
+
+        {% if block.settings.button_3_url != blank and block.settings.button_3_url contains '/products/' %}
+            {% assign split_url = block.settings.button_3_url | split: '/products/' %}
+            {% assign product_slug = split_url[1] %}
+            {% assign linked_product = all_products[product_slug] %}
+        {% endif %}
+
+        {% if linked_product != false and linked_product.title and linked_product.available != true %}
+        {% assign is_disabled = true %}
+        {% assign button_text = 'Sold Out' %}
+        {% elsif block.settings.button_3_url == blank %}
+          {% assign is_disabled = true %}
+        {% endif %}
+        <a {% unless is_disabled %} href="{{block.settings.button_3_url}}" {% if block.settings.button_3_target %} target="_blank" rel="nofollow noopener noreferrer" {% endif %}{% else %} disabled aria-disabled="true"{% endunless %} class="button {% if block.settings.button_3_style == 'outline'%} button--secondary {% elsif block.settings.button_3_style == 'simple' %} button--simple {% endif %} color-{{block.settings.button_3_color}}">
+          {{ button_text | escape}}
+        </a>
+      {% endif %}
+    </div>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>
+{% if section.settings.fallback_heading != blank%}
+<div class="fallback hidden" data-fallback>
+  <h2 class="heading">{{section.settings.fallback_heading}}</h2>
+  {% if section.settings.fallback_content != blank %}{{section.settings.fallback_content}}{% endif %}
+  {% if section.settings.fallback_socials  %}{% render 'socials-ul' %}{% endif %}
+</div>
+{% endif %}

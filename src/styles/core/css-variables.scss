@@ -142,10 +142,12 @@ TODO: Not sure we want these?
 }
 .color-transparent-light {
   --color-foreground: 255, 255, 255;
+  --color-link: var(--color-foreground);
   --color-background: transparent;
 }
 .color-transparent-dark {
   --color-foreground: 0,0,0;
+  --color-link: var(--color-foreground);
   --color-background: transparent;
 }
 

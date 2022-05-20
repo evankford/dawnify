@@ -44,6 +44,8 @@ tour-dates {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
+	position: relative;
+
 }
 
 .tour-header {
@@ -77,8 +79,9 @@ h2.loader {
 
  .td-wrapper {
     padding: 0;
+		position: relative;
+		z-index: 1;
     width: 100%;
-    max-width: 800px;
 		margin: auto;
 		overflow: hidden;
     &.td-extra {

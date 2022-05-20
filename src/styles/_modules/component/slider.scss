@@ -61,6 +61,7 @@ slider-component {
   }
 }
 
+
 @media screen and (max-width: 989px) {
   .slider.slider--tablet {
     position: relative;
@@ -96,6 +97,8 @@ slider-component {
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   margin-bottom: 1rem;
+
+
 }
 
 @media (prefers-reduced-motion) {
@@ -107,6 +110,12 @@ slider-component {
 .slider.slider--everywhere .slider__slide {
   margin-bottom: 0;
   scroll-snap-align: center;
+}
+
+@media screen and (min-width: 990px) {
+  .slider:not(.slider--everywhere) + .slider-buttons {
+    display: none;
+  }
 }
 
 /* Scrollbar */

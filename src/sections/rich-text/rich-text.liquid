@@ -18,7 +18,10 @@
     {%- for block in section.blocks -%}
       {%- case block.type -%}
         {%- when 'heading' -%}
-          <h2 data-reveal class="heading {% if block.settings.heading_size == 'small' %}h2{% elsif block.settings.heading_size == 'large'%} h0 {% else %} h1{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.heading | escape }}</h2>
+        {% if block.settings.url %}
+        <a class="nostyle" href="{{ block.settings.url}}">{% endif %}
+          <h2 data-reveal class="heading {% if block.settings.heading_size == 'small' %}h3{% elsif block.settings.heading_size == 'large'%} h0 {% else %} h1{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.heading | escape }}</h2>
+        {% if block.settings.url %}</a>{%endif %}
         {%- when 'label' -%}
           <div {{ block.shopify_attributes}} data-reveal class="label {% if block.settings.heading_size == 'small' %}h5{% elsif block.settings.heading_size == 'medium' %}h4 {% else %}h3{% endif %}" >{{ block.settings.heading | escape }}</div>
         {%- when 'html' -%}

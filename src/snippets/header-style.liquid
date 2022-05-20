@@ -8,6 +8,8 @@
     {% if settings.type_font_code != blank %}{{ settings.type_font_code }}{% endif %}
     {% style %}
       {{ settings.type_body_font | font_face: font_display: 'swap' }}
+      {{ settings.type_header_font | font_face: font_display: 'swap' }}
+      {{ settings.type_extra_font | font_face: font_display: 'swap' }}
       {{ body_font_bold | font_face: font_display: 'swap' }}
       {{ body_font_italic | font_face: font_display: 'swap' }}
       {{ body_font_bold_italic | font_face: font_display: 'swap' }}
@@ -28,17 +30,128 @@
 
         --base-letter-spacing: {{ settings.base_letter_spacing | plus: 80 | divided_by: 100.00 | minus: 1.00 | default: 0.00 }}em;
 
+          {% case settings.tag_color_scheme %}
+            {% when 'accent-1' %}
+          --tag-foreground: var(--color-base-solid-button-labels);
+          --tag-background: var(--color-base-accent-1);
+
+            {% when 'accent-2' %}
+          --tag-foreground: var(--color-base-solid-button-labels);
+          --tag-background: var(--color-base-accent-2);
+
+            {% when 'transparent-light' %}
+          --tag-foreground: 255, 255, 255;
+          --tag-background: transparent;
+
+            {% when 'transparent-dark' %}
+          --tag-foreground: 0, 0 , 0;
+          --tag-background: transparent;
+
+            {% when 'background-1' %}
+          --tag-foreground: var(--color-base-text);
+          --tag-background: var(--color-base-background-1);
+
+            {% when 'background-2' %}
+          --tag-foreground: var(--color-base-text);
+          --tag-background: var(--color-base-background-2);
+
+            {% when 'inverse' %}
+          --tag-foreground: var(--color-base-background-1);
+          --tag-background: var(--color-base-text);
+
+          {% endcase %}
 
       }
-
-
 
       body {
         letter-spacing: var(--base-letter-spacing);
       }
 
 
+    {% if settings.social_icon_style != 'simple' %}
+    a.list-social__link .icon {
+      margin: 0.1rem auto 0;
+    }
+      a.list-social__link {
+        padding: 0.8rem;
+        width: 3.5rem;
+        height: 3.5rem;
+        margin: 0.3rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+         {% if settings.social_icon_style != 'round' %}
+         border-radius: 3em;
+         {% endif %}
+        transition: all 300ms ease;
+        {% case settings.socials_color_scheme %}
+
+          {% when 'accent-1' %}
+          color: rgb(var(--color-base-solid-button-labels));
+          background: rgb(var(--color-base-accent-1));
+
+            {% when 'accent-2' %}
+          color: rgb(var(--color-base-solid-button-labels));
+          background: rgb(var(--color-base-accent-2));
+
+            {% when 'transparent-light' %}
+          color: rgb(255, 255, 255);
+          background: rgb(transparent);
+
+            {% when 'transparent-dark' %}
+          color: rgb(0, 0 , 0);
+          background: rgb(transparent);
+
+            {% when 'background-1' %}
+          color: rgb(var(--color-base-text));
+          background: rgb(var(--color-base-background-1));
+
+            {% when 'background-2' %}
+          color: rgb(var(--color-base-text));
+          background: rgb(var(--color-base-background-2));
+
+            {% when 'inverse' %}
+          color: rgb(var(--color-base-background-1));
+          background: rgb(var(--color-base-text));
+
+          {% endcase %}
+      }
+      a.list-social__link:hover {
+          {% case settings.socials_hover_scheme %}
+
+          {% when 'accent-1' %}
+          color: rgb(var(--color-base-solid-button-labels));
+          background: rgb(var(--color-base-accent-1));
+
+            {% when 'accent-2' %}
+          color: rgb(var(--color-base-solid-button-labels));
+          background: rgb(var(--color-base-accent-2));
+
+            {% when 'transparent-light' %}
+          color: rgb(255, 255, 255);
+          background: rgb(transparent);
+
+            {% when 'transparent-dark' %}
+          color: rgb(0, 0 , 0);
+          background: rgb(transparent);
+
+            {% when 'background-1' %}
+          color: rgb(var(--color-base-text));
+          background: rgb(var(--color-base-background-1));
+
+            {% when 'background-2' %}
+          color: rgb(var(--color-base-text));
+          background: rgb(var(--color-base-background-2));
+
+            {% when 'inverse' %}
+          color: rgb(var(--color-base-background-1));
+          background: rgb(var(--color-base-text));
+
+          {% endcase %}
+      }
+    {% endif %}
 
     {% endstyle %}
 
     {% render 'header-effects' %}
+    {% render 'header-styles-layoutfix' %}

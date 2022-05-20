@@ -1,9 +1,13 @@
 {
   "name": "t:sections.collection-list.name",
   "tag": "section",
-  "class": "section section-collection-list",
+  "class": "section section-collection-list dawnify",
   "max_blocks": 15,
   "settings": [
+    {
+      "type" : "header",
+      "content" : "Heading"
+    },
       {
       "type": "text",
       "id": "introduction",
@@ -12,7 +16,7 @@
     {
       "type": "text",
       "id": "title",
-      "default": "Featured collection",
+      "default": "Collection",
       "label": "t:sections.featured-collection.settings.title.label"
     },
     {
@@ -24,11 +28,11 @@
       "type" : "select",
       "id" : "text_align",
       "label" : "Text Align",
-      "default" : "spaced",
+      "default" : "centered",
       "options" : [
         {
           "value" : "spaced",
-          "label" : "Spaced"
+          "label" : "Left"
         },
         {
           "value" : "centered",
@@ -36,6 +40,72 @@
         }
       ]
     },
+    {
+      "type" : "header",
+      "content" : "Card Settings"
+    },
+     {
+      "type" : "select",
+      "id" : "style",
+      "label" : "Style",
+      "default" : "overlay",
+      "options" : [
+        {
+          "value" : "standard",
+          "label" : "Standard"
+        },
+        {
+          "value" : "overlay",
+          "label" : "Overlay"
+        }
+      ]
+    },
+    {
+      "type" : "range",
+      "default" : 35,
+      "step" : 1,
+      "min" : 0,
+      "max" : 100,
+      "id" : "overlay_opacity",
+      "label" : "Image Opacity"
+     },
+     {
+      "type": "select",
+      "id": "color_scheme_content",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "t:sections.all.colors.accent_1.label"
+        },
+        {
+          "value": "accent-2",
+          "label": "t:sections.all.colors.accent_2.label"
+        },
+        {
+          "value": "background-1",
+          "label": "t:sections.all.colors.background_1.label"
+        },
+        {
+          "value": "background-2",
+          "label": "t:sections.all.colors.background_2.label"
+        },
+        {
+          "value": "inverse",
+          "label": "t:sections.all.colors.inverse.label"
+        },
+        {
+          "value": "transparent-light",
+          "label": "transparent (light text)"
+        },
+        {
+          "value": "transparent-dark",
+          "label": "Transparent (dark text)"
+        }
+      ],
+      "default": "inverse",
+      "label": "Content Color Scheme"
+    },
+
     {
       "type": "select",
       "id": "image_ratio",
@@ -56,15 +126,6 @@
       "default": "square",
       "label": "t:sections.collection-list.settings.image_ratio.label",
       "info": "t:sections.collection-list.settings.image_ratio.info"
-    },
-    {
-      "type": "range",
-      "id": "columns_desktop",
-      "min": 1,
-      "max": 5,
-      "step": 1,
-      "default": 3,
-      "label": "t:sections.collection-list.settings.columns_desktop.label"
     },
     {
       "type": "select",
@@ -95,6 +156,38 @@
       "label": "t:sections.all.colors.label",
       "info": "t:sections.all.colors.has_cards_info"
     },
+
+     {
+      "type" : "select",
+      "id" : "grid_size",
+      "label" : "Product Size",
+      "default" : "large",
+      "options" : [
+        {
+          "value" : "small",
+          "label": "Small"
+        },
+        {
+          "value" : "medium",
+          "label": "Medium"
+        },
+        {
+          "value" : "large",
+          "label": "Large"
+        },
+        {
+          "value" : "huge",
+          "label": "Huge"
+        }
+      ]
+    },
+    {
+      "id": "center_insufficient",
+      "label" : "Center insufficient products?",
+      "type" : "checkbox",
+      "default" : true
+    },
+
     {
       "type": "checkbox",
       "id": "swipe_on_mobile",
@@ -224,6 +317,27 @@
           "type": "collection",
           "id": "collection",
           "label": "t:sections.collection-list.blocks.featured_collection.settings.collection.label"
+        },
+        {
+          "type" : "image_picker",
+          "id" : "image",
+          "label" : "Image"
+        }
+      ]
+    },
+    {
+      "type": "link",
+      "name": "Link",
+      "settings": [
+        {
+          "type": "url",
+          "id": "url",
+          "label": "URL"
+        },
+        {
+          "type" : "image_picker",
+          "id" : "image",
+          "label" : "Image"
         }
       ]
     }

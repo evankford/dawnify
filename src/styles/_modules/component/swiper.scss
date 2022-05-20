@@ -11,10 +11,20 @@
 @import "~swiper/css/effect-coverflow";
 @import "~swiper/css/effect-creative";
 
+.swiper.page-width {
+  padding: 0 2rem;
+  @include media-query($large) {
+    padding: 0 3.5rem;
+  }
+  @include media-query($widescreen) {
+    padding: 0 5rem;
+  }
+}
+
 ul.swiper-wrapper {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0 0 -1px;
   // overflow: hidden;
   --swiper-theme-color: var(--color-foreground);
   &.swiper-initialized:not(.swiper-autoheight) .swiper-slide {
@@ -52,7 +62,12 @@ ul.swiper-wrapper {
       box-sizing: border-box;
       width: 100%;
       top: 0;
+      text-align: inherit;
       // padding:0;
+    }
+
+    .banner__box , .banner__buttons {
+      justify-content:inherit;
     }
     .background-element {
       z-index: 2;
@@ -116,7 +131,7 @@ html.js .swiper-slide.swiper-slide-active {
     left: auto;
     width: auto;
     --swiper-theme-color: rgb(var(--color-foreground));
-    --swiper-size: 15px;
+    --swiper-size: 25px;
     max-width:100%;
     margin: calc(12px + 0.5vw) auto;
     transform: 0;
@@ -135,6 +150,7 @@ html.js .swiper-slide.swiper-slide-active {
       left:unset;
       border: none;
       top:unset;
+      width: 34px;
     }
     button[data-prev] {
       svg {
@@ -232,4 +248,8 @@ button[data-next] {
   }
 
 
+}
+
+li.swiper-slide {
+  margin-bottom: -1px;
 }

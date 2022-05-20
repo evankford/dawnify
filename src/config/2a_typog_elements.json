@@ -36,7 +36,7 @@
         "label": "Font Size",
         "min": 12,
         "default": 50,
-        "max": 90,
+        "max": 100,
         "step": 1
       },
       {

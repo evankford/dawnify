@@ -9,7 +9,7 @@
 
 {% render 'section-style' with id: section.id, params: section.settings %}
 
-<div id="{{ inner_id }}" class="image-with-text image-with-text--{{ section.settings.content_layout }} {% if section.settings.sticky_image == true %} sticky-image {% endif %} page-width ">
+<div id="{{ inner_id }}" class="image-with-text {% if section.settings.sticky_image == true %} sticky-image {% endif %} page-width ">
   <div class="image-with-text__grid grid grid--gapless grid--1-col grid--{% if section.settings.desktop_image_width == 'medium' %}2-col-tablet{% else %}3-col-tablet{% endif %}{% if section.settings.layout == 'text_first' %} image-with-text__grid--reverse{% endif %}{% if section.settings.content_layout == 'no-overlap' %} gradient color-{{ section.settings.color_scheme }}{% endif %}">
     <div class="image-with-text__media-item image-with-text__media-item--{{ section.settings.desktop_image_width }} image-with-text__media-item--{{ section.settings.desktop_content_position }} grid__item grid__item__image" data-reveal >
     {%- capture media_classes -%}image-with-text__media image-with-text__media--{{ section.settings.height }} {% if section.settings.image == blank %}image-with-text__media--placeholder placeholder{% endif %}{%- endcapture -%}

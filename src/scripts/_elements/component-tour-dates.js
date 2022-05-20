@@ -45,6 +45,7 @@ class TourDates extends HTMLElement {
     super();
     this.el = this;
     this.provider = this.el.getAttribute('data-provider');
+
     this.loaded = false;
 
     this.props = this.getArgs();
@@ -236,7 +237,7 @@ class TourDates extends HTMLElement {
     let dateEl = document.createElement('span');
     dateEl.classList.add('td-date');
     dateEl.classList.add('label');
-    dateEl.classList.add('h4');
+    dateEl.classList.add('h5');
     let string = '';
 
     //Contitional markup
@@ -291,14 +292,13 @@ class TourDates extends HTMLElement {
     //Conditional formating
     var string =
       '<span class="td-city h4 heading">' +
-     show.venueName +
+     show.venueLocation +
       '</span><span class="td-venue label">' +
-      show.venueLocation
+      show.venueName
       '</span>';
     if (this.showLineup) {
       string += '<span class="td-lineup">' + show.lineup + '</span>';
     }
-
     infoEl.innerHTML = string;
     return infoEl;
   }
@@ -379,6 +379,30 @@ class TourDates extends HTMLElement {
 
     //Loop through shows
     let counter = 0;
+    try {
+
+      if (this.props.filterString) {
+        console.log('Filtering shows by ' + this.props.filterString);
+        this.shows = this.shows.filter(show=> {
+          return (
+            (typeof show.venueName == 'string' &&
+              show.venueName ===
+                this.props.filterString) ||
+            (typeof show.venueLocation == 'string' &&
+              show.venueLocation ===
+                this.props.filterString) ||
+            (typeof show.venueName == 'string' &&
+              show.venueName.indexOf(this.props.filterString) >= 0) ||
+            (typeof show.venueLocation == 'string' &&
+              show.venueLocation.indexOf(this.props.filterString) >= 0)
+          );
+        })
+      }
+    } catch(e) {
+      console.log('Filtering failed: ');
+      console.log(e);
+    }
+
     this.shows.forEach((show) => {
       const showItem = this.renderShow(show);
       //Counter
@@ -403,8 +427,10 @@ class TourDates extends HTMLElement {
     if (extras) {
       this.el.prepend(this.wrapper, extras);
       this.extraWrapper = this.el.querySelector('.td-extra');
-    } else if (this.expandButton) {
-      this.expandButton.remove();
+    } else {
+      if (this.expandButton) {
+        this.expandButton.remove();
+      }
       this.el.prepend(this.wrapper);
     }
     this.el.querySelector('.loader').classList.add('hidden');

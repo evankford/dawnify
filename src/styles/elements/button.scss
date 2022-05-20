@@ -346,3 +346,12 @@ details[open] > .share-button__fallback {
 .share-button__message:not(:empty):not(.hidden) ~ * {
   display: none;
 }
+
+.button-wrap  {
+  &:not(:first-child) {
+    margin-top: 0.75em;
+  }
+  &:not(:last-child) {
+    margin-bottom: 0.75em;
+  }
+}

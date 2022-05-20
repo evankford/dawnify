@@ -47,24 +47,24 @@ class Slider {
       }
     }
 
-    // if (this.options.pagination) {
-    //   let pagObj = {
-    //     type: 'bullets',
-    //     el: this.el.querySelector('[data-pagination]'),
-    //     dynamicBullets: true,
-    //   }
-    //   if (this.options.pagination == "progressbar") {
-    //     pagObj.type = "progressbar"
-    //   }
-    //   toReturn.pagination = pagObj
-    // }
+    if (this.options.pagination) {
+      let pagObj = {
+        type: 'bullets',
+        el: this.el.querySelector('[data-pagination]'),
+        dynamicBullets: true,
+      }
+      if (this.options.pagination == "progressbar") {
+        pagObj.type = "progressbar"
+      }
+      toReturn.pagination = pagObj
+    }
 
-    // if (this.options.navigation) {
-    //   toReturn.navigation = {
-    //     prevEl: this.el.querySelector('[data-prev]'),
-    //     nextEl: this.el.querySelector('[data-next]'),
-    //   }
-    // }
+    if (this.options.navigation) {
+      toReturn.navigation = {
+        prevEl: this.el.querySelector('[data-prev]'),
+        nextEl: this.el.querySelector('[data-next]'),
+      }
+    }
 
     if (this.options.height) {
       toReturn.breakPoints = {
@@ -209,6 +209,7 @@ if (!customElements.get('swiper-element')) {
             origin: 'middle center'
           },
         };
+
       }
       if (this.getAttribute('data-multi-slider') === 'true') {
         params.slidesPerView = 1;

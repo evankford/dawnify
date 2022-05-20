@@ -1,4 +1,4 @@
-
+// ekf modded
   .list-menu {
     list-style: none;
     padding: 0;
@@ -26,6 +26,7 @@
     padding-bottom: 1rem;
     padding-top: 1rem;
     line-height: 1.8;
+    overflow: hidden; // ekf modded
   }
 
   @media screen and (min-width: 750px) {

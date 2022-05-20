@@ -10,7 +10,7 @@
   src: {% if settings.type_asset_woff2 != blank %}url("{{ settings.type_asset_woff2 }}") format("woff2"),{% endif %} url("{{ settings.type_asset_woff }}") format("woff");
   font-weight: {{ settings.type_asset_weight | default: 400 }};
   font-display: swap;
-  font-style: normal;
+  font-style: {{ settings.type_asset_style }};
 }
 {% endif %}
 {% if settings.type_asset2_name != blank and settings.type_asset2_woff != blank %}
@@ -19,7 +19,7 @@
   src: {% if settings.type_asset2_woff2 != blank %}url("{{ settings.type_asset2_woff2 }}") format("woff2"),{% endif %} url("{{ settings.type_asset2_woff }}") format("woff");
   font-weight: {{ settings.type_asset2_weight | default: 400 }};
   font-display: swap;
-  font-style: normal;
+  font-style: {{ settings.type_asset2_style }};
 }
 {% endif %}
 {% if settings.type_asset3_name != blank and settings.type_asset3_woff != blank %}
@@ -28,7 +28,7 @@
   src: {% if settings.type_asset3_woff2 != blank %}url("{{ settings.type_asset3_woff2 }}") format("woff2"),{% endif %} url("{{ settings.type_asset3_woff }}") format("woff");
   font-weight: {{ settings.type_asset3_weight | default: 400 }};
   font-display: swap;
-  font-style: normal;
+  font-style: {{ settings.type_asset3_style }};
 }
 {% endif %}
 
@@ -147,7 +147,7 @@ h6.label,
 .h6.label,
 span.label,
 div.label,
-.form__label {
+.form__label, .field__label {
 {% case settings.label_font_family %}
   {% when 'body' %}
     font-family: var(--font-body-family);
@@ -163,9 +163,6 @@ div.label,
     font-weight: 400;
   {% endcase %}
 
-  line-height: {{ settings.label_line_height | divided_by: 10.0 }};
-  margin-top: {{ settings.label_margin_top | minus: 5 | divided_by: 10.0 }}em;
-  margin-bottom: {{ settings.label_margin_bottom | minus: 5 | divided_by: 10.0 }}em;
   text-transform: {{ settings.label_capitalization | default: "none" }};
   font-weight: {{ settings.label_font_weight | default: "700" }};
   letter-spacing: {{ settings.label_letter_spacing | divided_by: 40.0 | minus: 0.25 | default: 0 }}em;
@@ -173,12 +170,32 @@ div.label,
   font-size: {{ settings.label_font_size | default: '17' }}px;
 }
 
+.label h1.label,
+h2.label,
+h3.label,
+h4.label,
+h5.label,
+h6.label,
+.h0.label,
+.h1.label,
+.h2.label,
+.h3.label,
+.h4.label,
+.h5.label,
+.h6.label,
+span.label,
+div.label {
+  line-height: {{ settings.label_line_height | divided_by: 10.0 }};
+  margin-top: {{ settings.label_margin_top | minus: 5 | divided_by: 10.0 }}em;
+  margin-bottom: {{ settings.label_margin_bottom | minus: 5 | divided_by: 10.0 }}em;
+}
+
 h4.label,
 .h4.label {
   font-size: {{ settings.label_font_size | default: '17' }}px;
 }
 
-h5.label , .h5.label, .label, .form__label, label{
+h5.label , .h5.label, .label, .form__label, .field__label, label{
   font-size: {{ settings.label_font_size_smaller | default: '15.5' }}px;
 }
 
@@ -186,7 +203,7 @@ h5.label , .h5.label, .label, .form__label, label{
   font-size: {{ settings.label_font_size_smaller | times: 0.8 | default: '13.5' }}px;
 }
 
-a.button, .button, .button-label, button.button,a.customer-button, button.shopify-challenge-button, .button[type=submit] {
+a.button, input.shopify-challenge__button, .btn, .button, .button-label, button.button,a.customer-button, button.shopify-challenge-button, .button[type=submit] {
   {% case settings.button_font_family %}
     {% when 'body' %}
       font-family: var(--font-body-family);
@@ -446,20 +463,27 @@ summary .menu-drawer__menu-item {
   .h6.label,
   span.label,
   div.label,
-  .form__label {
+  .form__label, .field__label {
     font-size: {{ settings.label_font_size_mobile | default: '16' }}px;
   }
    h4.label,
   .h4.label {
     font-size: {{ settings.label_font_size_mobile | default: '16' }}px;
   }
-   h5.label  .h5.label, .label, .form__label, label{
+   h5.label  .h5.label, .label, .form__label, .field__label, label{
     font-size: {{ settings.label_font_size_mobile | times: 0.9 | default: '14' }}px;
   }
-   a.button, .button-label, button.button,a.customer-button, button.shopify-challenge-button, [type=submit] {
+  a.button,
+  input.shopify-challenge__button,
+  .btn,
+  .button,
+  .button-label,
+  button.button,
+  a.customer-button,
+  button.shopify-challenge-button,
+  .button[type=submit] {
     font-size: {{ settings.button_font_size_mobile | default: '16' }}px;
   }
-
   a.button.small, button.button.small {
     font-size: {{ settings.button_font_size_mobile | times: 0.8 | default: '14' }}px;
   }

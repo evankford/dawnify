@@ -33,4 +33,39 @@
         .swiper-slide {
         position: relative;
       }
+      /* Preloading styles */
+main.main-content {
+  position: relative;
+}
+
+{% if settings.header_height != blank %}
+:root {
+  --header-bottom: {{settings.header_height}}px;
+}
+{% endif %}
+ {% if settings.header_height_tablet != blank %}
+@media (max-width: 1000px) and (min-width: 601px) {
+  :root {
+    --header-bottom: {{settings.header_height_tablet}}px;
+  }
+}
+{% endif %}
+{% if settings.header_height_mobile != blank %}
+@media (max-width:600px)  {
+  :root {
+    --header-bottom: {{settings.header_height_mobile}}px;
+  }
+}
+{% endif %}
+main.main-content:not(.has-overlay) {
+  padding-top: var(--header-bottom, 65px);
+}
+.media {
+  position: relative;
+
+}
+  shopify-editor-interface {
+    position: absolute !important;
+    top:  calc(0px - var(--announcement-bottom, 0px)) !important;
+  }
 {% endstyle %}

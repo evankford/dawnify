@@ -3,12 +3,6 @@ body {
   transition: margin 300ms ease;
 }
 
-main.main-content {
-  position: relative;
-  &:not(.has-overlay) {
-    padding-top: var(--header-bottom, 65px);
-  }
-}
 .template-index main .shopify-section {
-  overflow: hidden;
+  // overflow: hidden;
 }

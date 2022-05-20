@@ -3,23 +3,19 @@
 //Begin ekf grid
 
 .grid.grid-grid {
-  --pg-g: 12px;
-   @include media-query($medium-up) {
-    --pg-g: 15px;
-  }
+
   display: grid;
   // grid-template-columns: repeat(2, 1fr);
-  grid-gap: var(--pg-g);
+
   width: 100%;
-  margin:3rem 0 4rem;
+  margin: 3rem auto 4rem;
+  margin: 2rem auto 3rem;
 
   .grid__item {
     grid-column: span 2;
   }
 
-  @include media-query($tiny) {
-    margin: 2rem 0 3rem;
-  }
+
 
   &.center-insufficient {
     margin-left: auto;
@@ -29,13 +25,13 @@
 
   &[data-max="1"] {
     grid-template-columns: repeat(2, 1fr);
-    max-width: calc(1 * (var(--pg-mw) + var(--pg-g)));
+    max-width: calc(1 * (var(--pg-mw) + var(--grid-desktop-horizontal-spacing)));
     .grid__item {
       grid-column-end: auto !important;
     }
   }
   &[data-max="2"] {
-    max-width: calc(2 * (var(--pg-mw) + var(--pg-g)));
+    max-width: calc(2 * (var(--pg-mw) + var(--grid-desktop-horizontal-spacing)));
     @include media-query($medium-up) {
       grid-template-columns: repeat(4, 1fr);
     }
@@ -69,7 +65,7 @@
   }
   &[data-max="3"],
   &[data-max="6"] {
-    max-width: calc(3 * (var(--pg-mw) + var(--pg-g)));
+    max-width: calc(3 * (var(--pg-mw) + var(--grid-desktop-horizontal-spacing)));
     .grid__item {
       grid-column-end: auto !important;
     }
@@ -80,13 +76,13 @@
   &[data-max="4"],
   &[data-max="7"],
   &[data-max="8"] {
-    max-width: calc(4 * (var(--pg-mw) + var(--pg-g)));
+    max-width: calc(4 * (var(--pg-mw) + var(--grid-desktop-horizontal-spacing)));
 
   }
 
   &[data-max="4"] {
     &.grid-grid--huge {
-      max-width: calc(2 * (var(--pg-mw) + var(--pg-g)));
+      max-width: calc(2 * (var(--pg-mw) + var(--grid-desktop-horizontal-spacing)));
     }
   }
 

@@ -6,6 +6,28 @@
         "content": "t:settings_schema.global.settings.header__border.content"
       },
       {
+        "type": "color",
+        "id": "color_drawer_foreground",
+        "default": "#FFFFFF",
+        "label": "Drawer foreground color"
+      },
+        {
+        "type": "color",
+        "id": "color_drawer_background",
+        "default": "#000000",
+        "label": "Drawer background color"
+      },
+      {
+        "type": "color",
+        "id": "color_drawer_accent",
+        "label": "Drawer accent color"
+      },
+      {
+        "type": "color",
+        "id": "color_drawer_accent_inverse",
+        "label": "Drawer accent inverse color"
+      },
+      {
         "type": "range",
         "id": "drawer_border_thickness",
         "min": 0,

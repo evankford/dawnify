@@ -4,8 +4,8 @@
 {% endcomment %}
 
 {% assign yt_button = false %}
-{%- if settings.yt_button_location != 'disabled' and type contains 'video' and settings.yt_button_text != blank -%}
-{%- if settings.yt_button_lightbox == true -%}
+{%- if props.yt_button_location != 'disabled' and type contains 'video' and props.yt_button_text != blank -%}
+{%- if props.yt_button_lightbox == true -%}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" media="print" onload="this.media='all'">
 
 <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" /></noscript>
@@ -29,40 +29,44 @@
 </script>
 {%- endif -%}
 {%- capture yt_button_markup -%}
-<a href="https://youtube.com/watch?v={{settings.youtube_url.id}}" class="button {% if is_small %} small {% endif %} button--primary" {% if settings.yt_button_lightbox %}data-glightbox="true" data-type="video"
-  data-effect="fade"{% endif %} target="_blank" rel="nofollow noopener noreferrer">{{settings.yt_button_text | default: "Watch Now" }}</a>
+<a href="https://youtube.com/watch?v={{props.youtube_url.id}}" class="button {% if is_small %} small {% endif %} button--primary" {% if props.yt_button_lightbox %}data-glightbox="true" data-type="video"
+  data-effect="fade"{% endif %} target="_blank" rel="nofollow noopener noreferrer">{{props.yt_button_text | default: "Watch Now" }}</a>
 {%- endcapture -%}
 {% assign yt_button = true %}
 {%- endif -%}
 
-{%- if settings.introduction != blank -%}
-<div class="{% if is_small %} h5 {% else %} h4 {% endif %} label">{{ settings.introduction }}</div>
+{%- if props.introduction != blank -%}
+<div class="{% if is_small %} h5 {% else %} h4 {% endif %} label">{{ props.introduction }}</div>
 {%- endif -%}
-{% if settings.content_image != blank %}
-  {% render 'media' with class: "content-image", size: 'half', type: "image", image: settings.content_image, max_width: settings.content_image_width %}
+{% if props.content_image != blank %}
+<div class="content-image" style="width: clamp({{props.content_image_width_min | default: 40 }}%, {{props.content_image_width | default: 250 }}px, {{props.content_image_width_max | default: 70 }}%);">
+
+</div>
+  {% render 'media' with class: "content-image", size: 'half', type: "image", image: props.content_image, max_width: props.content_image_width %}
 {% endif %}
-{% if settings.heading != blank %}
+{% if props.heading != blank %}
 <h2 class="banner__heading {% if is_small %} h2 {% else %} h0 {% endif %} heading" {{ block.shopify_attributes }}>
-  <span>{{ settings.heading | escape }}</span>
+  <span>{{ props.heading | escape }}</span>
 </h2>
 {% endif %}
-{%- if settings.subtitle != blank -%}
-<div class="{% if is_small %} h5 {% else %} h4 {% endif %} label">{{ settings.subtitle }}</div>
+{%- if props.subtitle != blank -%}
+<div class="{% if is_small %} h4 {% else %} h5 {% endif %} label">{{ props.subtitle }}</div>
 {%- endif -%}
-{% if settings.content != blank %}
+{% if props.content != blank %}
 <div class="banner__text" {{ block.shopify_attributes }}>
-  <span>{{ settings.content }}</span>
+  <span>{{ props.content }}</span>
 </div>
 {% endif %}
-{% if settings.button_label_1 != blank and settings.button_link_1 != blank or yt_button %}
-<div class="banner__buttons button-wrap{% if settings.button_label_1 != blank and settings.button_link_1 != blank and settings.button_label_2 != blank and settings.button_link_2 != blank %} banner__buttons--multiple{% endif %}" {{ block.shopify_attributes }}>
-  {%- if settings.yt_button_location == 'first' and yt_button -%}{{ yt_button_markup }}{%-endif -%}
-  {%- if settings.button_label_1 != blank and settings.button_link_1 != blank -%}
-  <a{% if settings.button_link_1 != blank %} href="{{ settings.button_link_1 }}"{% endif %} class="button{% if settings.button_style_secondary_1 %} button--secondary{% else %} button--primary{% endif %} {% if is_small %} small {% endif %}"{% if settings.button_link_1 == blank %} aria-disabled="true"{% endif %}>{{ settings.button_label_1 | escape }}</a>
+{% if props.button_label_1 != blank and props.button_link_1 != blank or yt_button %}
+<div class="banner__buttons button-wrap{% if props.button_label_1 != blank and props.button_link_1 != blank and props.button_label_2 != blank and props.button_link_2 != blank %} banner__buttons--multiple{% endif %}" {{ block.shopify_attributes }}>
+  {%- if props.yt_button_location == 'first' and yt_button -%}{{ yt_button_markup }}{%-endif -%}
+  {%- if props.button_label_1 != blank and props.button_link_1 != blank -%}
+  <a{% if props.button_link_1 != blank %} href="{{ props.button_link_1 }}" {% if props.button_link_1 contains "http" %} target="_blank" rel="nofollow noopener noreferrer" {% endif %} {% endif %} class="button{% if props.button_style_secondary_1 %} button--secondary{% else %} button--primary{% endif %} {% if is_small %} small {% endif %}"{% if props.button_link_1 == blank %} aria-disabled="true"{% endif %}>{{ props.button_label_1 | escape }}</a>
   {%- endif -%}
-  {%- if settings.button_label_2 != blank and settings.button_link_2 != blank -%}
-  <a{% if settings.button_link_2 != blank %} href="{{ settings.button_link_2 }}"{% endif %} class="button{% if settings.button_style_secondary_2 %} button--secondary{% else %} button--primary{% endif %} {% if is_small %} small {% endif %}"{% if settings.button_link_2 == blank %} aria-disabled="true"{% endif %}>{{ settings.button_label_2 | escape }}</a>
+  {%- if props.button_label_2 != blank and props.button_link_2 != blank -%}
+  <a{% if props.button_link_2 != blank %} href="{{ props.button_link_2 }}" {% if props.button_link_2 contains "http" %} target="_blank" rel="nofollow noopener noreferrer" {% endif %} {% endif %} class="button{% if props.button_style_secondary_2 %} button--secondary{% else %} button--primary{% endif %} {% if is_small %} small {% endif %}"{% if props.button_link_2 == blank %} aria-disabled="true"{% endif %}>{{ props.button_label_2 | escape }}</a>
   {%- endif -%}
-  {%- if settings.yt_button_location == 'last' and yt_button -%}{{yt_button}}{%-endif -%}
+  {%- if props.yt_button_location == 'last' and yt_button -%}{{yt_button}}{%-endif -%}
 </div>
 {% endif %}
+{% render 'icon-links' with params: props %}

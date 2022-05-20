@@ -204,13 +204,33 @@
           "label": "Content",
           "default" : "<p>Get updates on sales, news + more!</p>"
         },
+        {
+          "type": "richtext",
+          "id": "phone_content",
+          "label": "Phone number"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+         {
+          "type": "range",
+          "id": "image_width",
+          "min": 50,
+          "max": 400,
+          "step": 5,
+          "unit": "px",
+          "label": "Image width",
+          "default": 100
+        },
           {
           "type": "richtext",
           "id": "content_below",
           "label": "Content Below (smaller)"
         },
          {
-          "type": "checkbox",
+        "type": "checkbox",
           "id": "include_socials",
           "label": "Include Socials?"
         },
@@ -282,34 +302,7 @@
     }
   ],
   "settings": [
-    {
-      "type": "select",
-      "id": "color_scheme",
-      "options": [
-        {
-          "value": "accent-1",
-          "label": "t:sections.footer.settings.color_scheme.options__1.label"
-        },
-        {
-          "value": "accent-2",
-          "label": "t:sections.footer.settings.color_scheme.options__2.label"
-        },
-        {
-          "value": "background-1",
-          "label": "t:sections.footer.settings.color_scheme.options__3.label"
-        },
-        {
-          "value": "background-2",
-          "label": "t:sections.footer.settings.color_scheme.options__4.label"
-        },
-        {
-          "value": "inverse",
-          "label": "t:sections.footer.settings.color_scheme.options__5.label"
-        }
-      ],
-      "default": "background-1",
-      "label": "t:sections.footer.settings.color_scheme.label"
-    },
+
     {
       "type": "header",
       "content": "layout"
@@ -373,6 +366,144 @@
       "type" : "richtext",
       "id" : "credits",
       "label" : "Credits Content"
+    },
+    {
+      "type" : "header",
+      "content" : "Section Settings"
+    },
+     {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    },
+     {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "t:sections.footer.settings.color_scheme.options__1.label"
+        },
+        {
+          "value": "accent-2",
+          "label": "t:sections.footer.settings.color_scheme.options__2.label"
+        },
+        {
+          "value": "background-1",
+          "label": "t:sections.footer.settings.color_scheme.options__3.label"
+        },
+        {
+          "value": "background-2",
+          "label": "t:sections.footer.settings.color_scheme.options__4.label"
+        },
+        {
+          "value": "inverse",
+          "label": "t:sections.footer.settings.color_scheme.options__5.label"
+        }
+      ],
+      "default": "background-1",
+      "label": "t:sections.footer.settings.color_scheme.label"
+    },
+    {
+      "id" : "background_color",
+      "label" : "Background Color",
+      "type" : "color"
+    },
+    {
+      "id" : "text_color",
+      "label" : "Text Color",
+      "type" : "color"
+    },
+    {
+      "type" :"image_picker",
+      "id" : "background_image",
+      "label" : "Background Image"
+    },
+     {
+      "type" : "range",
+      "label" : "Background Opacity",
+      "id" : "background_opacity",
+      "default" : 100,
+      "step": 1,
+      "min" : 1,
+      "max" : 100
+    },
+      {
+      "type" : "range",
+      "label" : "Background Position X",
+      "id" : "background_position_x",
+      "default" : 50,
+      "step": 1,
+      "min" : 1,
+      "max" : 100,
+      "unit" : "%"
+    },
+     {
+      "type" : "range",
+      "label" : "Background Position Y",
+      "id" : "background_position_y",
+      "default" : 50,
+      "step": 1,
+      "min" : 1,
+      "max" : 100,
+      "unit" : "%"
+    },
+    {
+      "type" : "select",
+      "id" : "background_style",
+      "label" : "Background Style",
+      "options" : [
+        {
+          "group" : "Large Image",
+          "value" : "cover",
+          "label": "Cover"
+        },
+        {
+          "group" : "Large Image",
+          "value" : "contain",
+          "label" : "Contain"
+        },
+        {
+          "group" : "Large Image",
+          "value" : "fixed",
+          "label" : "Fixed"
+        },
+        {
+          "group" : "Large Image",
+          "value" : "parallax",
+          "label" : "Parallax"
+        },
+        {
+          "group" : "Image Pattern",
+          "value" : "repeat",
+          "label" : "Repeat"
+        },
+        {
+          "group" : "Image Pattern",
+          "value" : "repeat-x",
+          "label" : "Repeat Horizontally"
+        },
+        {
+          "group" : "Image Pattern",
+          "value" : "repeat-y",
+          "label" : "Repeat Vertically"
+        }
+      ]
     },
     {
       "type": "header",

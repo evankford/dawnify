@@ -1,0 +1,33 @@
+{% if settings.theme_popup_enabled  %}
+<link rel="stylesheet" href="{{ 'component-theme-popup.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript>{{ 'component-theme-popup.css' | asset_url | stylesheet_tag }}</noscript>
+<script defer src="{{ 'component-auto-modal.js' | asset_url }}"></script>
+{% assign debug = false %}
+{% liquid
+  assign debug = false
+  if settings.theme_popup_debug == 'always'
+    assign debug = true
+  elsif content_for_header contains "previewBarInjector.init();" and settings.theme_popup_debug contains 'preview'
+    assign debug = true
+  elsif content_for_header contains "Shopify.designMode" and settings.theme_popup_debug contains 'customizer'
+    assign debug = true
+  endif
+%}
+<auto-modal role="dialog" class="theme-popup"  id="AutoModal-{{ settings.theme_popup_id | default: 'themePopup' }}" data-delay="{{settings.theme_popup_delay | default: 3 }}" data-debug="{%- if debug -%}true{%- else -%}false{%- endif -%}" data-show="{{settings.theme_popup_show | default: 8 }}">
+  <div  class="modal-content color-background-1 theme-popup__content type--{{settings.theme_popup_type}} image-layout--{{settings.theme_popup_layout}}">
+    {% if settings.theme_popup_type contains 'image' and settings.theme_popup_image != blank%}
+      {% render media with type: 'image', media: settings.theme_popup_image,  class:"theme-popup__media" %}
+    {% endif %}
+    {% if settings.theme_popup_type contains 'liquid' and settings.theme_popup_liquid != blank%}
+    <div class="theme-popup__liquid">
+      {{ settings.theme_popup_liquid.liquid }}
+    </div>
+    {% endif %}
+  </div>
+  <button id="ModalClose-{{ settings.theme_popup_id | default: 'themePopup' }}" type="button" class="auto-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
+
+
+
+</auto-modal>
+
+{% endif %}

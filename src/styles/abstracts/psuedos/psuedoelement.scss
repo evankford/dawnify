@@ -12,3 +12,7 @@
   @extend %psuedoish;
   content:'';
 }
+
+@mixin psuedo {
+  @extend %psuedo;
+}

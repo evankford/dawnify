@@ -127,6 +127,14 @@
       "type": "select",
       "id": "color_scheme",
       "options": [
+         {
+          "value" : "transparent-dark",
+          "label" : "Dark Text (no bg)"
+        },
+        {
+          "value" : "transparent-light",
+          "label" : "Light Text (no bg)"
+        },
         {
           "value": "accent-1",
           "label": "t:sections.email-signup-banner.settings.color_scheme.options__1.label"
@@ -194,6 +202,19 @@
           "id": "heading",
           "default": "Opening soon",
           "label": "t:sections.email-signup-banner.blocks.heading.settings.heading.label"
+        }
+      ]
+    },
+    {
+      "type" : "password",
+      "name" : "password",
+      "limit" : 1,
+      "settings": [
+        {
+          "type" : "text",
+          "id" : "heading",
+          "label" : "Heading",
+          "default" : "Enter using password:"
         }
       ]
     },

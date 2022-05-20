@@ -87,10 +87,13 @@ function getEntries() {
       file.lastIndexOf('/') + 1,
       file.lastIndexOf('.')
     );
-    componentEntries[`${name}`] = [file];
+    if (componentEntries[`${name}`]) {
+      componentEntries[`${name}`].push(file);
+    } else {
+      componentEntries[`${name}`] = [file];
+    }
   });
 
-  // console.log(componentEntries);
   return {
     ...componentEntries,
     theme: ['./src/scripts/theme.js', './src/styles/theme.scss'],
@@ -100,7 +103,6 @@ function getEntries() {
 }
 
 module.exports = (env) => {
-  console.log(env);
   return {
   mode: !env.production ? 'development' : 'production',
   stats: !env.production ? 'errors-only' : 'detailed',
@@ -175,6 +177,10 @@ module.exports = (env) => {
         {
           from: path.resolve('./src/.shopifyignore'),
           to: path.resolve(outputDirectory),
+        },
+        {
+          from: path.resolve('./src/config/settings_data.json'),
+          to: path.resolve(outputDirectory, 'config'),
         },
       ],
     }),

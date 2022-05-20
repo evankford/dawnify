@@ -11,7 +11,33 @@ if (!customElements.get('product-form')) {
         this.cartNotification = document.querySelector('cart-notification');
       }
 
+      checkForRequiredInputs(formData) {
+
+        this.errors = [];
+        const parent = this.form.closest('.product');
+        const els = parent.querySelectorAll('input[required]');
+        let weGood = true;
+        els.forEach(el=> {
+          const property = el.getAttribute('name');
+          const hasEntry = formData.has(property);
+          if (hasEntry) {
+            if (formData.get(property) !== 'Yes') {
+              errors.push(this.cleanProperty(property));
+
+            }
+          } else if (property) {
+            this.errors.push(this.cleanProperty(property));
+
+          }
+        });
+      }
+
+      cleanProperty(str) {
+        return str.replace('properties[', '').replace(']', '');
+      }
+
       onSubmitHandler(evt) {
+        this.errors = [];
         evt.preventDefault();
         const submitButton = this.querySelector('[type="submit"]');
         if (submitButton.classList.contains('loading')) return;
@@ -30,6 +56,28 @@ if (!customElements.get('product-form')) {
         delete config.headers['Content-Type'];
 
         const formData = new FormData(this.form);
+        this.checkForRequiredInputs(formData);
+          // console.log(passedCheck)
+
+        if (this.errors.length) {
+          console.log(this.errors);
+          let msg = '<ul>';
+          this.errors.forEach(error=> {
+            msg += `<li>Please check the <b>${error}</b> checkbox to add to your cart.</li>`
+          });
+          msg +='</ul>'
+          this.handleErrorMessage(msg);
+           submitButton.classList.remove('loading');
+           submitButton.removeAttribute('aria-disabled');
+           this.querySelector('.loading-overlay__spinner').classList.add(
+             'hidden'
+           );
+          return;
+        } else {
+          this.handleErrorMessage()
+        }
+
+
         formData.append(
           'sections',
           this.cartNotification
@@ -74,7 +122,7 @@ if (!customElements.get('product-form')) {
         this.errorMessageWrapper.toggleAttribute('hidden', !errorMessage);
 
         if (errorMessage) {
-          this.errorMessage.textContent = errorMessage;
+          this.errorMessage.innerHTML = errorMessage;
         }
       }
     }

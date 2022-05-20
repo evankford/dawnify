@@ -12,7 +12,7 @@ Usage:
   {% render 'album-slide' with params: block.settings, full_width: section.params.full_width, is_slide: is_slide %}
 {% endcomment %}
 
-<{% if is_slide %}li{% else %}div{% endif %} class="swiper-slide album-slide {% if full_width or is_slide == false %} layout--full-width {% else %} layout--columns {% endif %}" {{ block.shopify_attributes }} >
+<li class="{% if is_slide %} swiper-slide {% endif %} album-slide {% if full_width %} layout--full-width {% else %} layout--columns {% endif %}" {{ block.shopify_attributes }} >
 <div class="album-slide__cover">
       {% if params.image != blank %}
       {% if params.button_link_1 != blank %}
@@ -33,7 +33,7 @@ Usage:
           <div class="h5 label">{{ params.introduction }}</div>
           {%- endif -%}
           {% if params.title != blank %}
-          <h3 class=" heading" {{ block.shopify_attributes }}>
+          <h2 class=" heading {% unless full_width %} h3 {% endunless %}" {{ block.shopify_attributes }}>
             <span>{{ params.title | escape }}</span>
           </h2>
           {% endif %}
@@ -55,77 +55,9 @@ Usage:
             {%- endif -%}
           </div>
           {% endif %}
-          {% if params.icon_link_spotify != blank or params.icon_link_apple_music != blank or params.icon_link_youtube != blank or params.icon_link_amazon != blank%}
-          <ul class="button-wrap icon-link__wrap list-unstyled text--inherit">
-
-            {% if params.icon_link_spotify != blank %}
-            <li>
-              <a class="icon-link" href="{{ params.icon_link_spotify }}" rel="nofollower noopener noreferrer" target="_blank">
-                {%- render 'icon-spotify' -%}
-                {% if show_icon_text == true %}<span class="icon-link__label">Spotify</span>{% endif %}
-                <span class="visually-hidden">Listen on Spotify</span>
-
-              </a>
-            </li>
-            {% endif %}
-            {% if params.icon_link_apple_music != blank %}
-            <li>
-              <a class="icon-link" href="{{ params.icon_link_apple_music }}" rel="nofollower noopener noreferrer" target="_blank">
-                {%- render 'icon-apple' -%}
-                {% if show_icon_text == true %}<span class="icon-link__label">Apple Music</span>{% endif %}
-                <span class="visually-hidden">Listen on Apple Music</span>
-              </a>
-            </li>
-            {% endif %}
-            {% if params.icon_link_youtube != blank %}
-            <li>
-              <a class="icon-link" href="{{ params.icon_link_youtube }}" rel="nofollower noopener noreferrer" target="_blank">
-                {%- render 'icon-youtube' -%}
-                {% if show_icon_text == true %}<span class="icon-link__label">Youtube</span>{% endif %}
-                <span class="visually-hidden">Listen on Youtube Music</span>
-              </a>
-            </li>
-            {% endif %}
-            {% if params.icon_link_amazon != blank %}
-            <li>
-              <a class="icon-link" href="{{ params.icon_link_amazon }}" rel="nofollower noopener noreferrer" target="_blank">
-                {%- render 'icon-amazon' -%}
-                {% if show_icon_text == true %}<span class="icon-link__label">Amazon</span>{% endif %}
-                <span class="visually-hidden">Listen on Amazon Music</span>
-              </a>
-            </li>
-            {% endif %}
-            {% if params.icon_link_soundcloud != blank %}
-            <li>
-              <a class="icon-link" href="{{ params.icon_link_soundcloud }}" rel="nofollower noopener noreferrer" target="_blank">
-                {%- render 'icon-soundcloud' -%}
-                {% if show_icon_text == true %}<span class="icon-link__label">Soundcloud</span>{% endif %}
-                <span class="visually-hidden">Listen on soundcloud</span>
-              </a>
-            </li>
-            {% endif %}
-            {% if params.icon_link_deezer != blank %}
-            <li>
-              <a class="icon-link" href="{{ params.icon_link_deezer }}" rel="nofollower noopener noreferrer" target="_blank">
-                {%- render 'icon-deezer' -%}
-                {% if show_icon_text == true %}<span class="icon-link__label">Deezer</span>{% endif %}
-                <span class="visually-hidden">Listen on Deezer</span>
-              </a>
-            </li>
-            {% endif %}
-            {% if params.icon_link_pandora != blank %}
-            <li>
-              <a class="icon-link" href="{{ params.icon_link_pandora }}" rel="nofollower noopener noreferrer" target="_blank">
-                {%- render 'icon-pandora' -%}
-                {% if show_icon_text == true %}<span class="icon-link__label">Pandora</span>{% endif %}
-                <span class="visually-hidden">Listen on Pandora</span>
-              </a>
-            </li>
-            {% endif %}
-          </ul>
-          {% endif %}
+          {% render 'icon-links' with params: params %}
 
     </div>
     {% endif %}
 
-    </{% if is_slide %}li{% else %}div{% endif %}>
+  </li>

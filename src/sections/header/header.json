@@ -121,9 +121,14 @@
           "label" : "Spaced"
         },
         {
-          "group" : "desktop",
+          "group" : "standard",
           "value" : "logo-first",
           "label" : "Logo First"
+        },
+        {
+          "group" : "standard",
+          "value" : "logo-stacked",
+          "label" : "Logo Stacked"
         },
         {
           "group" : "Sidebar",
@@ -141,7 +146,7 @@
   "blocks" : [
     {
       "type" : "link",
-      "name" : "link",
+      "name" : "Link",
       "settings" : [
         {
           "type" :"text",
@@ -159,6 +164,12 @@
           "type" : "checkbox",
           "id" : "button_style",
           "label" : "Button Style",
+          "default" : true
+        },
+        {
+          "type" : "checkbox",
+          "id" : "button_target",
+          "label" : "Open in new window?",
           "default" : true
         },
         {
@@ -294,37 +305,9 @@
           "info" : "Logo to show over transparent header"
         },
         {
-          "type" : "select",
-          "id" : "include_socials",
-          "label" : "Socials Included",
-          "default" : "disabled",
-          "options" : [
-            {
-              "value": "disabled",
-              "group" : "None",
-              "label" : "Disabled"
-            },
-            {
-              "value": "above",
-              "group" : "Vertical",
-              "label" : "Above"
-            },
-            {
-              "value": "below",
-              "group" : "Vertical",
-              "label" : "Below"
-            },
-            {
-              "value": "before",
-              "group" : "Horizontal",
-              "label" : "Before"
-            },
-            {
-              "value": "after",
-              "group" : "Horizontal",
-              "label" : "After"
-            }
-          ]
+          "type" : "url",
+          "label" : "Custom URL",
+          "id" : "url"
         },
         {
           "type" : "header",
@@ -378,9 +361,10 @@
         }
       ]
     },
+
     {
       "type" : "button",
-      "name" : "Button",
+      "name" : "Icon Button",
       "settings" : [
          {
           "type": "select",

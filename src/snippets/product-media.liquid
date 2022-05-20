@@ -15,6 +15,8 @@
 {% endcomment %}
 
 {%- if media.media_type == 'image' -%}
+  <img class="blur" width="1100"
+    height="{{ 1100 | divided_by: media.preview_image.aspect_ratio | ceil }}" src="{{media.preview_image | img_url : "120px"}}"/>
   <img
     srcset="{%- if media.preview_image.width >= 550 -%}{{ media.preview_image | img_url: '550x' }} 550w,{%- endif -%}
             {%- if media.preview_image.width >= 1100 -%}{{ media.preview_image | img_url: '1100x' }} 1100w,{%- endif -%}

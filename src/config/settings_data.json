@@ -19,6 +19,31 @@
         },
         "header": {
           "type": "header",
+           "blocks": {
+
+            "mobile_menu" : {
+               "type": "mobile_menu"
+             },
+             "logo" :{
+               "type": "logo"
+             },
+             "main_menu" : {
+               "type": "menu"
+             },
+             "search" :{
+               "type": "button",
+               "settings" : {
+                 "type" : "search"
+               }
+             },
+             "cart" :{
+               "type": "button",
+               "settings" : {
+                 "type" : "cart"
+               }
+             }
+           },
+          "block_order" : ["mobile_menu", "logo", "main_menu", "search", "cart"],
           "settings": {
             "logo_width": 90
           }
@@ -28,24 +53,10 @@
           "blocks": {
             "footer-0": {
               "type": "link_list"
-            },
-            "footer-1": {
-              "type": "link_list",
-              "settings": {
-                "heading": "Info"
-              }
-            },
-            "footer-2": {
-              "type": "text",
-              "settings": {
-                "heading": "Our mission"
-              }
             }
           },
           "block_order": [
-            "footer-0",
-            "footer-1",
-            "footer-2"
+            "footer-0"
           ],
           "settings": {
             "show_social": true,

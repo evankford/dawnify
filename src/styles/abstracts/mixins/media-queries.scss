@@ -1,4 +1,5 @@
 @use "../variables/breakpoints" as *;
+@forward "../variables/breakpoints";
 
 @mixin media-query($media-query) {
   $breakpoint-found: false;

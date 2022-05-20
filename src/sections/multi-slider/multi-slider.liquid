@@ -1,7 +1,7 @@
 <script defer src="{{ 'slider.js' | asset_url }}"></script>
-<link rel="stylesheet" href="{{ 'component-slider.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-swiper.css' | asset_url }}" media="print" onload="this.media='all'">
 
-<noscript>{{ 'component-slider.css' | asset_url | stylesheet_tag }}</noscript>{{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
+<noscript>{{ 'component-swiper.css' | asset_url | stylesheet_tag }}</noscript>{{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
 <link rel="stylesheet" href="{{ 'component-swiper-styles.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript>{{ 'component-swiper-styles.css' | asset_url | stylesheet_tag }}</noscript>{{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
 
@@ -11,17 +11,17 @@
 
 {% capture nav %}
 {% if section.settings.pagination != "disabled" and section.settings.navigation_style == 'classic' and section.blocks.size > 1 %}
-        <div class="swiper-pagination" data-pagination></div>
-      {% endif %}
-      {% if section.settings.navigation == true %}
-        <div class="swiper-navigation style--{{section.settings.navigation_style | default: 'modern'}}">
-          <button class="button-icon" data-prev aria-label="Previous Slide">{% if section.settings.navigation_style == "classic" %}{% render 'icon-caret' %}{% else %} {% render 'icon-arrow' %} {% endif %}</button>
-          {% if section.settings.pagination != "disabled" and section.settings.navigation_style != 'classic' %}
-          <div class="swiper-pagination" data-pagination></div>
-          {% endif %}
-          <button class="button-icon" data-next aria-label="Next Slide">{% if section.settings.navigation_style == "classic" %}{% render 'icon-caret' %}{% else %} {% render 'icon-arrow' %} {% endif %}</button>
-        </div>
-      {% endif %}
+  <div class="swiper-pagination" data-pagination></div>
+{% endif %}
+{% if section.settings.navigation == true %}
+  <div class="swiper-navigation style--{{section.settings.navigation_style | default: 'modern'}}">
+    <button class="button-icon" data-prev aria-label="Previous Slide">{% if section.settings.navigation_style == "classic" %}{% render 'icon-caret' %}{% else %} {% render 'icon-arrow' %} {% endif %}</button>
+    {% if section.settings.pagination != "disabled" and section.settings.navigation_style != 'classic' %}
+    <div class="swiper-pagination" data-pagination></div>
+    {% endif %}
+    <button class="button-icon" data-next aria-label="Next Slide">{% if section.settings.navigation_style == "classic" %}{% render 'icon-caret' %}{% else %} {% render 'icon-arrow' %} {% endif %}</button>
+  </div>
+{% endif %}
 {% endcapture %}
 <div class="layout--{{ section.settings.text_align }} common-header multi-slider__header">
   <div class="header-wrap  page-width">
@@ -41,7 +41,7 @@
 {% if section.blocks.size > 1 %}
 {% assign is_slide = true %}
 
-<swiper-element class="swiper-container multi-slider {% unless section.settings.full_width %} page-width {% endunless %}"
+<swiper-element class="swiper-container swiper multi-slider {% unless section.settings.full_width %} page-width {% endunless %}"
   {% if section.settings.autoplay_speed > 0 %} data-autoplay="{{ section.settings.autoplay_speed }}"{% endif %}
   {% if section.settings.navigation == true %} data-navigation="true" {% endif %}
   {% if section.settings.pagination != "disabled" %} data-pagination="{{ section.settings.pagination }}"{% endif %}
@@ -62,7 +62,7 @@
 </div>
 {% endif %}
 {% unless section.blocks.size <= 1 %}
-  {{ nav}}
+  {{ nav}}<!-- rendering nav -->
   {% endunless %}
 
 {% if section.blocks.size > 1 %}
@@ -72,5 +72,5 @@
 {% endif %}
 
 {% if section.settings.anchor_id != blank %}
-</div>
+</div><!-- end {{section.settings.anchor_id}} -->
 {% endif %}

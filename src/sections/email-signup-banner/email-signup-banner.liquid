@@ -5,27 +5,16 @@
 {{ 'component-rte.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
-  #Banner-{{ section.id }}::after {
-    opacity: {{ section.settings.image_overlay_opacity | divided_by: 100.0 }};
+  .modal__toggle  {
+    display: flex;
+
   }
-
-  {%- if section.settings.image_height == 'adapt-image' and section.settings.image != blank -%}
-    @media screen and (max-width: 749px) {
-      #Banner-{{ section.id }}:not(.banner--mobile-bottom) .banner__content::before {
-        padding-bottom: {{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100 }}%;
-        content: '';
-        display: block;
-      }
-    }
-
-    #Banner-{{ section.id }}::before,
-    #Banner-{{ section.id }} .banner__media::before {
-      padding-bottom: {{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100 }}%;
-      content: '';
-      display: block;
-    }
-  {%- endif -%}
+  .modal__toggle > div {
+    margin: 12px auto 0;
+  }
 {%- endstyle -%}
+
+{% render 'section-style' with id: section.id, params: section.settings %}
 
 <div id="Banner-{{ section.id }}" class="email-signup-banner banner banner--content-align-{{ section.settings.desktop_content_alignment }} banner--content-align-mobile-{{ section.settings.mobile_content_alignment }} banner--{{ section.settings.image_height }}{% if section.settings.image_height == 'adapt-image' and section.settings.image != blank %} banner--adapt{% endif %}{% if section.settings.show_text_below %} banner--mobile-bottom{%- endif -%}{% if section.settings.show_text_box == false %} banner--desktop-transparent{% endif %}">
   {%- if section.settings.show_background_image -%}
@@ -59,9 +48,11 @@
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when 'heading' -%}
-            <h2 class="email-signup-banner__heading h1" {{ block.shopify_attributes }}>{{ block.settings.heading | escape }}</h2>
+            <h2 class="email-signup-banner__heading h1 heading" {{ block.shopify_attributes }}>{{ block.settings.heading | escape }}</h2>
           {%- when 'paragraph' -%}
             <div class="newsletter__subheading rte {{ block.settings.text_style }}" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+          {%- when 'password' -%}
+              {% render 'password-modal' %}
           {%- when 'email_form' -%}
             <div {{ block.shopify_attributes }}>
               {% form 'customer', class: 'newsletter-form' %}

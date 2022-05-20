@@ -48,6 +48,12 @@
 .overlay-active .header-wrapper {
   --color-foreground: {{ section.settings.color_overlay.red }}, {{ section.settings.color_overlay.green }}, {{ section.settings.color_overlay.blue }};
 }
+{% if section.settings.enable_shadow %}
+.animate .header-wrapper::before {
+    box-shadow: 4px 4px 18px rgb(0 0 0 / 10%);
+
+}
+{% endif %}
 </style>
 <site-header{% if section.settings.enable_sticky_header %} data-sticky {% endif %}{% if section.settings.enable_overlay %} data-overlay="true" {% endif %} class="header-wrapper{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %} {% if section.settings.header_shadow == true %} shadow {% endif %}">
   <header class="header first--{{ first_type }} layout--{{ section.settings.layout }} page-width{% if section.settings.menu != blank %} header--has-menu{% endif %}">
@@ -87,9 +93,7 @@
           {% if sub_block.type == 'spacer' or sub_block.type == 'logo' or sub_block.type == 'mobile_menu' %}
             {% break %}
           {% endif %}
-          {% if block.type == 'menu' %}
-            {% break %}
-          {% endif %}
+
         {% endfor %}
         <div class="header__group {% if block.type == 'logo' %}header__group--logo{% endif %} {% if block.type == 'mobile_menu' %}header__group--mobile_menu{% endif %} {{ vb_small }} {{ vb_medium }} {{ vb_desktop }}">
         {% assign in_group = true %}
@@ -99,7 +103,7 @@
         {% case block.type %}
         {% when "link" %}
           {%- if block.settings.button_label != blank -%}
-            <a{% if block.settings.button_link != blank %} href="{{ block.settings.button_link }}"{% endif %} class="{% if block.settings.button_style %} button {% else %} link--text link {% endif %} {% if block.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}"{% if block.settings.button_link == blank %} aria-disabled="true"{% endif %}>
+            <a{% if block.settings.button_link != blank %} href="{{ block.settings.button_link }}"{% endif %} class="{% if block.settings.button_style %} button {% else %} link--text header__menu-item header-link {% endif %} {% if block.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}"{% if block.settings.button_link == blank %} aria-disabled="true"{% endif %} {% if block.settings.button_target %} target="_blank" rel="nofollower noopener noreferrer" {% endif %}>
               {{ block.settings.button_label | escape }}
             </a>
           {%- endif -%}
@@ -107,12 +111,6 @@
           <h4 class="heading" >{{ block.settings.title | escape }}</h4>
         {% when "logo" %}
           {% liquid
-            if block.settings.socials_layout == "before" or block.settings.social_layout == "above"
-              render 'socials-ul'
-            endif
-            if block.settings.include_socials == 'before' or block.settings.include_socials == "above"
-                  render 'socials-ul'
-              endif
             if request.page_type == 'index'
               echo '<h1 class="header__heading">'
             endif
@@ -140,7 +138,7 @@
               }
             }
           </style>
-          <a href="{{ routes.root_url }}" class="header-logo media media--adapt header__heading-link link link--text focus-inset {% if block.settings.socials_layout == 'before' or block.settings.socials_layout == 'after' %} flex-center {% endif %}">
+          <a href="{{ block.settings.url | default: routes.root_url }}" class="header-logo media media--adapt header__heading-link link link--text focus-inset {% if block.settings.socials_layout == 'before' or block.settings.socials_layout == 'after' %} flex-center {% endif %}">
             {%- if block.settings.image != blank -%}
               {% assign json_logo = block.settings.image | img_url: block.settings.image.width | prepend: "https:" | json %}
               {%- assign image_size = block.settings.logo_width | append: 'x' -%}
@@ -169,12 +167,6 @@
             {% liquid
               if request.page_type == 'index'
                 echo '</h1>'
-              endif
-              if block.settings.socials_layout == 'below' or block.settings.socials_layout == 'after'
-                render 'socials-ul'
-              endif
-              if block.settings.include_socials == 'below' or block.settings.include_socials == "after"
-                  render 'socials-ul'
               endif
             %}
         {% when "socials" %}
@@ -206,15 +198,28 @@
   {% comment %} Close  group if logo, mobile menu, spacer, or last item{% endcomment %}
     {% assign last_item_index = index %}
     {% assign index = index | plus: 1 %}
-    {% if index == section.blocks.size or block.type == "spacer" or block.type == "logo" or block.type == "mobile_menu" %}
+    {% assign next_block = section.blocks[index] %}
+     {% if index == section.blocks.size or block.type == 'spacer' %}
+       </div><!--\.header__group-->
+          {% assign in_group = false %}
+     {% elsif block.type == 'logo' %}
+        {% if section.settings.layout == 'logo-stacked' and next_block.type == "menu" %}
+          <!-- should be a stacked menu -->
+        {% else %}
+          </div><!--\.header__group-->
+          {% assign in_group = false %}
+        {% endif %}
+    {% elsif block.type == 'menu' and section.settings.layout == 'logo-stacked' %}
       </div><!--\.header__group-->
+        {% assign in_group = false %}
+    {% elsif index == section.blocks.size or next_block.type == "spacer" or block.type == "mobile_menu" %}
+     </div><!--\.header__group-->
       {% assign in_group = false %}
-
     {% comment %} Check if menu + socials (never put them in the same group {% endcomment %}
-    {% elsif section.blocks[index].type == "socials" and section.blocks[last_item_index].type == "menu" %}
+    {% elsif next_block.type == "socials" and block.type == "menu" %}
       </div><!--\.header__group-->
       {% assign in_group = false %}
-    {% elsif section.blocks[index].type == "menu" and section.blocks[last_item_index].type == "socials" %}
+    {% elsif next_block.type == "menu" and block.type == "socials" %}
       </div><!--\.header__group-->
       {% assign in_group = false %}
     {% endif %}

@@ -22,22 +22,39 @@
 {%assign is_slide = false %}
 {% if section.blocks.size > 1 %}
 {% assign is_slide = true %}
+<div {% if section.settings.anchor_id != blank %} id="{{section.settings.anchor_id | handleize }}" {% endif %}>
+  {% if section.settings.introduction != blank or section.settings.title != blank or section.settings.subtitle != blank %}
+    <div class="common-header position--absolute text--{{ section.settings.text_align | default: "left"}} {% if section.settings.color_scheme contains "transparent" %} color-{{ section.settings.color_scheme | default: 'transparent-light'}} {% else %} color-transparent-light {% endif %} ">
+      {% if section.settings.introduction != blank %}
+        <div class="h4 label">{{ section.settings.introduction | escape }}</div>
+      {% endif %}
+      {% if section.settings.title != blank %}  <h2 class="title heading">{{ section.settings.title | escape }}</h2>{% endif %}
+      {% if section.settings.subtitle != blank %}
+        <div class="h4 label">{{ section.settings.subtitle | escape }}</div>
+      {% endif %}
+    </div>
+  {% endif %}
 
-<swiper-element class="swiper-container {% if section.settings.auto_height != true%} fixed-height {% endif %} gradient color-{{ section.settings.color_scheme | default: 'transparent-light'}} {% if section.settings.content_style == 'static' %} has-content-box {% endif %}"
+<swiper-element class="swiper swiper-container {% if section.settings.auto_height != true%} fixed-height {% endif %} gradient {% if section.settings.content_style == 'static' %} has-content-box {% endif %}  color-{{ section.settings.color_scheme | default: 'transparent-light'}}"
   {% if section.settings.autoplay_speed > 0 %} data-autoplay="{{ section.settings.autoplay_speed }}"{% endif %}
   {% if section.settings.navigation == true %} data-navigation="true" {% endif %}
   {% if section.settings.pagination != "disabled" %} data-pagination="{{ section.settings.pagination }}"{% endif %}
   {% if section.settings.effect %} data-effect="{{ section.settings.effect }}"{% endif %}
   {% if section.settings.auto_height == true %} data-auto-height="true" {% endif %}
-  {% if section.settings.anchor_id != blank %} id="{{section.settings.anchor_id | handleize }}" {% endif %}
+
   data-content-style="{{section.settings.content_style}}"
   data-content-location="{{section.settings.content_location}}">
   <ul class="swiper-wrapper">
     {% else %}
     <div {% if section.settings.anchor_id != blank %} id="{{section.settings.anchor_id | handleize }}" {% endif %} class="single-slide-wrapper gradient color-{{ section.settings.color_scheme | default: 'inverse' }} {% if section.settings.content_style == 'static' %} has-content-box {% endif %}">
   {% endif %}
+   {% assign is_static = false %}
+   {% if section.settings.content_style == "static" %}
+   {%assign is_static = true %}
+  {%endif%}
   {% for block in section.blocks %}
-      {% render 'media-slide' with color_scheme: block.settings.color_scheme, type: block.type, overlay_color: block.settings.overlay_color, overlay_opacity: block.settings.overlay_opacity, settings: block.settings, is_slide: is_slide , auto_height: section.settings.auto_height, is_static: section.settings.content_style == "static" %}
+  {% capture block_class %}{{section.id}}-slide{{forloop.index0}}{% endcapture %}
+      {% render 'media-slide' with color_scheme: block.settings.color_scheme, type: block.type, overlay_color: block.settings.overlay_color, overlay_opacity: block.settings.overlay_opacity, props: block.settings, is_slide: is_slide , auto_height: section.settings.auto_height, is_static: is_static, class:block_class , has%}
   {% endfor %}
 
   {% comment %} Resume swiper markup if block size > 1   {% endcomment %}
@@ -48,7 +65,7 @@
   {% assign first_block = section.blocks[0] %}
     <div class="slider-content-box location--{{section.settings.content_location | default: 'bottom-right'}} {% if first_block.type == 'video' or first_block.type == 'image' %} disabled {% endif %}">
       <div data-slider-content class="slider-content-box__inner color-{{section.settings.content_color_scheme | default: 'inverse' }}">
-          {% render 'slide-content' with settings: first_block.settings, block: first_block, is_small: true %}
+          {% render 'slide-content' with props: first_block.settings, block: first_block, is_small: true %}
       </div>
       {% if section.settings.navigation_style == 'modern' and section.blocks.size > 1 %} {{ nav }} {% endif %}
     </div>
@@ -87,3 +104,4 @@
 }
 </style>
 {% endif %}
+</div>

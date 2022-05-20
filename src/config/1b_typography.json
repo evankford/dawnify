@@ -123,6 +123,21 @@
     },
     {
       "type": "select",
+      "id": "type_asset_style",
+      "label": "Asset 1 Font Style",
+      "options" : [
+        {
+          "value" : "normal",
+          "label" : "Normal"
+        },
+        {
+          "value" : "italic",
+          "label" : "Italic"
+        }
+      ]
+    },
+    {
+      "type": "select",
       "id": "type_asset_weight",
       "label": "Asset 1 Font Weight",
       "default": "400",
@@ -190,6 +205,21 @@
       "label" : "Asset URL (woff2)",
       "type" : "url",
       "info" : "URL for custom font from files"
+    },
+     {
+      "type": "select",
+      "id": "type_asset2_style",
+      "label": "Asset 2 Font Style",
+      "options" : [
+        {
+          "value" : "normal",
+          "label" : "Normal"
+        },
+        {
+          "value" : "italic",
+          "label" : "Italic"
+        }
+      ]
     },
     {
       "type": "select",
@@ -260,6 +290,21 @@
       "label" : "Asset URL (woff2)",
       "type" : "url",
       "info" : "URL for custom font from files"
+    },
+     {
+      "type": "select",
+      "id": "type_asset3_style",
+      "label": "Asset 3 Font Style",
+      "options" : [
+        {
+          "value" : "normal",
+          "label" : "Normal"
+        },
+        {
+          "value" : "italic",
+          "label" : "Italic"
+        }
+      ]
     },
     {
       "type": "select",

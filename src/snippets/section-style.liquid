@@ -10,8 +10,8 @@ endif
 
 
 {%- comment -%}transitional padding stuff{%- endcomment -%}
-{% capture padding_top %}{% unless params.padding_top != blank %}{% if params.spacing_top and params.spacing_top != blank %}{{params.spacing_top | divided_by: 12 }}{%- endif -%}{% else %}{{params.padding_top }}{% endunless %}{%endcapture %}
-{% capture padding_bottom %}{% unless params.padding_bottom != blank %}{% if params.spacing_bottom and params.spacing_bottom != blank %}{{params.spacing_bottom | divided_by: 12 }}{%- endif -%}{% else %}{{params.padding_bottom }}{% endunless %}{%endcapture %}
+{% capture padding_top %}{% unless params.padding_top != blank %}{% if params.spacing_top and params.spacing_top != blank %}{{params.spacing_top | times: 12 }}{%- endif -%}{% else %}{{params.padding_top }}{% endunless %}{%endcapture %}
+{% capture padding_bottom %}{% unless params.padding_bottom != blank %}{% if params.spacing_bottom and params.spacing_bottom != blank %}{{params.spacing_bottom | times: 12 }}{%- endif -%}{% else %}{{params.padding_bottom }}{% endunless %}{%endcapture %}
 
 <style>
   #{% unless inner %}shopify-section-{% endunless %}{{ final_id }} {
@@ -41,6 +41,7 @@ endif
     height: 100%;
     content: "";
     display: block;
+    pointer-events: none;
     width: 100%;
     top: 0;
     background-position: {{params.background_position_x|default: 50}}% {{params.background_position_y|default: 50}}%;
@@ -73,13 +74,12 @@ endif
     background-repeat: {{ params.background_style }};
     {% endif %}
     {% if params.background_style == 'parallax' %}
-      --offset: clamp(-10%, calc(-20% * (0.5 - var(--scroll))), 10%);
+      --offset: clamp(-16%, calc(-16% *  var(--scroll)), 5%);
       position: fixed;
-      top: -10%;
+      top: 0%;
       left: 0;
-      height: 120%;
-      width: 100%;
-      transition: transform 10ms ease;
+      height: calc(120 * var(--vh, 1vh));
+      width: 100vw;
       transform: translateY(var(--offset));
     {% endif %}
   }
@@ -130,9 +130,11 @@ endif
       {% when 'transparent-light' %}
     --color-foreground: 255, 255, 255;
     --color-background: transparent;
+    --gradient-background: transparent;
       {% when 'transparent-dark' %}
     --color-foreground: 0, 0 , 0;
     --color-background: transparent;
+    --gradient-background: transparent;
       {% when 'background-1' %}
     --color-foreground: var(--color-base-text);
     --color-background: var(--color-base-background-1);

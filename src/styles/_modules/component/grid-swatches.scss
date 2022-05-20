@@ -15,6 +15,7 @@ grid-swatches {
 .card__media {
   background-size: contain;
   background-position: 50% 50%;
+  &.variant-image-active--clicked,
   &.variant-image-active {
     &>.media {
       opacity: 0;
@@ -23,8 +24,7 @@ grid-swatches {
 }
 
 .grid-swatch {
-  margin: 2px;
-  padding: 1px;
+  padding: 3px;
   position: relative;
   label {
    width: 18px;

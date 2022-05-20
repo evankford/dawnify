@@ -64,7 +64,7 @@
     {% endif %}
   </head>
 
-  <body data-barba="wrapper" class="template-{{ template.name }} gradient {% if settings.enable_sidebar_menu == true%} has-sidebar{% endif %} {% if settings.enable_loading_effect %}loading {% endif %}">
+  <body data-barba="wrapper" {% if page.title != nil %} id="{{page.title | handleize }}" {% endif%} class="{% if template.suffix %} template-{{template.name}}-{{template.suffix}} {% endif%} template-{{ template.name }} {{pa}} gradient {% if settings.enable_sidebar_menu == true%} has-sidebar{% endif %} {% if settings.enable_loading_effect %}loading {% endif %}">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ "accessibility.skip_to_text" | t }}
     </a>
@@ -113,17 +113,6 @@
     {%- if settings.predictive_search_enabled -%}
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
-
-    {% if settings.grid_swatches_enabled == true %}
-      <script defer src="{{ 'grid-swatches.js' | asset_url }}"></script>
-      {{ 'component-grid-swatches.css' | asset_url | stylesheet_tag }}
-    {% endif %}
-
-
-    {% if settings.footer_code != blank %}
-    {{ settings.footer_code }}
-    {% endif %}
-    {% render 'browser-update' %}
-
+    {% render 'footer-extras' %}
   </body>
 </html>

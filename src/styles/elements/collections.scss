@@ -1,0 +1,11 @@
+@use '../abstracts/mixins//media-queries.scss' as *;
+
+.full-width .grid.grid-grid:not(.page-width) {
+  padding-left: var(--grid-mobile-horizontal-spacing);
+  padding-right: var(--grid-mobile-horizontal-spacing);
+
+  @include media-query($medium-up) {
+    padding-left: var(--grid-desktop-horizontal-spacing);
+    padding-right: var(--grid-desktop-horizontal-spacing);
+  }
+}

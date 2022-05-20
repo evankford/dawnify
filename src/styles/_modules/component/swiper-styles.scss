@@ -274,7 +274,7 @@
   // }
 }
 
-.image-section .multi-slider {
+.image-section.multi-slider__section {
   .swiper-navigation.style--modern {
     position: relative;
     margin: calc(20px + 2%) auto 0;
@@ -283,6 +283,13 @@
   }
   .swiper-lazy-preloader {
     display: none;
+  }
+  .swiper-navigation.style--modern {
+    position: relative;
+    transform: none;
+    left: none;
+    top: none;
+    bottom: none;
   }
 }
 

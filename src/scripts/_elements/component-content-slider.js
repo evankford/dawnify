@@ -7,9 +7,11 @@ class ContentSlider extends HTMLElement {
     this.prevEl = null;
     this.nextEl = null;
 
+
     this.slidesCount = this.el.querySelectorAll('.swiper-slide').length;
     this.pagination = this.getAttribute('data-pagination');
     if (this.pagination == "progressbar" || this.pagination == "bullets") {
+
       this.paginationEl = this.el.querySelector('[data-pagination]')
     }
 
@@ -108,7 +110,6 @@ class ContentSlider extends HTMLElement {
         };
       }
       if (this.slidesCount >= 4) {
-        console.log("There are a ton of slides")
         params.breakpoints["1800"] = {
           slidesPerView: 4,
           spaceBetween: 23,
@@ -126,7 +127,6 @@ class ContentSlider extends HTMLElement {
   init () {
     this.params = this.getParams();
     this.slider = new window.Slider(this, this.params)
-    console.log(this.slider.swiper);
     window.dispatchEvent(new Event('resize'));
     // console.log(this.slider)
   }

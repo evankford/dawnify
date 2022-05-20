@@ -72,7 +72,7 @@
             "value": "inverse",
             "label": "t:sections.image-banner.settings.color_scheme.options__5.label"
         }],
-        "default": "background-1",
+        "default": "inverse",
         "label": "t:settings_schema.global.settings.color_scheme.label"
       },
       {
@@ -87,7 +87,7 @@
         "step": 1,
         "unit": "px",
         "label": "t:settings_schema.global.settings.thickness.label",
-        "default": 1
+        "default":0
       },
       {
         "type": "range",

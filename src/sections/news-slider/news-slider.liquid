@@ -24,7 +24,7 @@
   {% assign is_slide = false%}
   {% if section.blocks.size > 1 %}
     {% assign is_slide = true %}
-    <content-slider class="swiper-container page-width news-slider" data-pagination="{{ section.settings.pagination }}" data-navigation="{{ section.settings.navigation }}" data-autoplay="{{ section.settings.autoplay_speed | default: 0 }}" data-full-width="{{ section.settings.full_width }}">
+    <content-slider class="swiper-container swiper page-width news-slider" data-pagination="{{ section.settings.pagination }}" data-navigation="{{ section.settings.navigation }}" data-autoplay="{{ section.settings.autoplay_speed | default: 0 }}" data-full-width="{{ section.settings.full_width }}">
         <ul class="swiper-wrapper">
   {% endif %}
     {% for block in section.blocks %}

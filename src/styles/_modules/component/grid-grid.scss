@@ -2,17 +2,22 @@
 
 .grid-grid {
   grid-template-columns: repeat(2, 1fr);
+
+  --pg-g: var(--grid-mobile-vertical-spacing) var(--grid-mobile-horizontal-spacing);
+  @include media-query($medium-up) {
+    --pg-g: var(--grid-desktop-vertical-spacing) var(--grid-desktop-horizontal-spacing);
+
+  }
 }
 
   .grid-grid--small,.grid-grid--medium {
     grid-template-columns: repeat(4, 1fr);
-    --pg-g: 10px;
     --pg-mw: 250px;
     &.center-insufficient {
       @include centerColumns(2, ".grid__item");
     }
     @include media-query($medium-up) {
-      --pg-g: 12px;
+
        --pg-mw: 320px;
     }
     @include media-query($medium) {
@@ -33,29 +38,41 @@
 
   .grid-grid--small {
       @include media-query($widescreen) {
-        grid-template-columns: repeat(10, 1fr);
+        grid-template-columns: repeat(8, 1fr);
         &.center-insufficient {
-          @include centerColumns(5, ".grid__item");
+          @include centerColumns(4, ".grid__item");
         }
       }
     }
 
+  .grid-grid--meduim {
+      @include media-query($large) {
+        --pg-mw: 400px;
+      }
+      @include media-query($widescreen) {
+        --pg-mw: 440px;
+        &[data-max="3"] {
+          grid-template-columns: repeat(6, 1fr);
+        }
+      }
+
+  }
+
 
 .grid-grid--large {
   --pg-mw: 340px;
-  --pg-g: 12px;
   grid-template-columns: repeat(4, 1fr);
   @include media-query($tiny) {
   grid-template-columns: repeat(2, 1fr);
   }
   @include media-query($medium) {
-      --pg-g: 15px;
+
       &.center-insufficient {
         @include centerColumns(2, ".grid__item");
       }
     }
     @include media-query($large) {
-      --pg-g: 18px;
+
       --pg-mw: 430px;
       grid-template-columns: repeat(6, 1fr);
       &.center-insufficient {
@@ -72,7 +89,6 @@
   }
 .grid-grid--huge {
   --pg-mw: 400px;
-  --pg-g: 15px;
   grid-template-columns: repeat(2, 1fr);
   @include media-query($medium) {
     grid-template-columns: repeat(4, 1fr);
@@ -81,7 +97,6 @@
     }
   }
   @include media-query($large-up) {
-    --pg-g: 20px;
     --pg-mw: 600px;
     grid-template-columns: repeat(6, 1fr);
     &.center-insufficient {
@@ -89,7 +104,71 @@
     }
   }
   @include media-query($widescreen) {
-    --pg-g: 24px;
     --pg-mw: 700px;
   }
+}
+
+
+.grid-grid.grid--peek {
+
+  &.slider--everywhere {
+    display: flex;
+    margin-bottom: 2rem;
+
+    .grid__item {
+      flex: 1 0 clamp(150px, calc(var(--pg-mw) * 0.9), 80vw);
+      &:first-child {
+        // margin-left: clamp(var(--grid-desktop-horizontal-spacing), 5vw, 5%)
+        margin-left: var(--grid-desktop-horizontal-spacing);
+      }
+      &:last-child {
+        // margin-right: clamp(var(--grid-desktop-horizontal-spacing), 5vw, 5%)
+        margin-right: var(--grid-desktop-horizontal-spacing);
+      }
+    }
+
+  }
+  @include media-query($medium-down) {
+    &.slider--tablet {
+      display: flex;
+      margin-bottom: 2rem;
+       .grid__item:first-of-type {
+      margin-left: 0;
+    }
+      .grid__item {
+        flex: 1 0 clamp(150px, calc(var(--pg-mw) * 0.9), 80vw);
+        &:first-child {
+          // margin-left: clamp(var(--grid-desktop-horizontal-spacing), 5vw, 5%);
+          margin-left: var(--grid-desktop-horizontal-spacing);
+        }
+        &:last-child {
+          // margin-right: clamp(var(--grid-desktop-horizontal-spacing), 5vw, 5%);
+          margin-right:var(--grid-desktop-horizontal-spacing);
+        }
+      }
+    }
+  }
+  @include media-query($small) {
+    &.slider--mobile {
+      display: flex;
+      margin-bottom: 2rem;
+
+      .grid__item {
+        flex: 1 0 clamp(150px, calc(var(--pg-mw) * 0.9), 80vw);
+        &:first-child {
+          margin-left: clamp(var(--grid-mobile-horizontal-spacing), 5vw, 5%)
+        }
+        &:last-child {
+          margin-right: clamp(var(--grid-mobile-horizontal-spacing), 5vw, 5%)
+        }
+      }
+    }
+  }
+
+  &+.slider-buttons {
+    margin-bottom: 1.5rem;
+  }
+
+
+
 }

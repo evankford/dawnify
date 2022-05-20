@@ -1,6 +1,6 @@
 {
   "name": "t:sections.main-collection-banner.name",
-  "class": "section",
+  "class": "section collection-banner",
   "settings": [
     {
       "type": "paragraph",
@@ -11,6 +11,57 @@
       "id": "show_collection_description",
       "default": false,
       "label": "t:sections.main-collection-banner.settings.show_collection_description.label"
+    },
+    {
+      "type" : "checkbox",
+      "label" : "Collection Image as background?",
+      "id" : "collection_image_overlay"
+    },
+   {
+      "type" : "range",
+      "default" : 50,
+      "step" : 1,
+      "min" : 0,
+      "max" : 100,
+      "unit" : "%",
+      "id" : "image_opacity",
+      "label" : "Image Opacity"
+     },
+       {
+      "type": "select",
+      "id": "color_scheme_overlay",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "t:sections.all.colors.accent_1.label"
+        },
+        {
+          "value": "accent-2",
+          "label": "t:sections.all.colors.accent_2.label"
+        },
+        {
+          "value": "background-1",
+          "label": "t:sections.all.colors.background_1.label"
+        },
+        {
+          "value": "background-2",
+          "label": "t:sections.all.colors.background_2.label"
+        },
+        {
+          "value": "inverse",
+          "label": "t:sections.all.colors.inverse.label"
+        },
+        {
+          "value": "transparent-light",
+          "label": "transparent (light text)"
+        },
+        {
+          "value": "transparent-dark",
+          "label": "Transparent (dark text)"
+        }
+      ],
+      "default": "inverse",
+      "label": "Overlay Color Scheme"
     },
     {
       "type": "checkbox",
@@ -51,7 +102,7 @@
       "step": 4,
       "unit": "px",
       "label": "t:sections.all.padding.padding_top",
-      "default": 36
+      "default": 16
     },
     {
       "type": "range",
@@ -61,7 +112,7 @@
       "step": 4,
       "unit": "px",
       "label": "t:sections.all.padding.padding_bottom",
-      "default": 36
+      "default": 8
     }
   ]
 }

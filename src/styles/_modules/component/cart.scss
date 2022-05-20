@@ -1,3 +1,5 @@
+
+///Ekf modded
 .cart {
   position: relative;
   display: block;
@@ -15,13 +17,17 @@ cart-items.is-empty .title-wrapper-with-link,
   display: block;
 }
 
+.is-empty {
+  padding-bottom: 2.5rem; ///Ekf modded
+}
+
 .cart__warnings {
   display: none;
   text-align: center;
   padding: 3rem 0 1rem;
 }
 
-.cart__empty-text {
+.cart__empty-text, h1.cart__empty-text {///Ekf modded
   margin: 4.5rem 0 2rem;
 }
 

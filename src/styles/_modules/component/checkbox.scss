@@ -1,0 +1,62 @@
+@use "../../abstracts/" as *;
+
+.checkbox-wrap {
+  display: flex;
+  input[type="hidden"]{
+    display: none;
+  }
+ .label__title:only-child {
+    padding-top: 0.5em;
+  }
+  input[type="checkbox"]{
+    @include visually-hidden;
+  }
+  label {
+    position: relative;
+    display: block;
+    padding-left: 38px;
+
+    &::before, &::after {
+      @extend %psuedo;
+      left: 0;
+      top: 20px;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 24px;
+      text-align: center;
+
+    }
+
+    &::before {
+      border: 1px solid currentColor;
+      border-radius: var(--buttons-radius);
+    }
+
+    &::after {
+      content:'x';
+      font-size: 15px;
+      line-height: 24px;
+      opacity: 0;
+      transition: opacity 200ms ease;
+    }
+  }
+
+  input:checked + label {
+    border-width: 3px;
+    &::after {
+      opacity: 1;
+    }
+  }
+  .label__title
+  .label__title, .label__sub {
+    display: block;
+    line-height: 1.1;
+    &:not(:last-child) {
+      margin-bottom: 0.5em;;
+    }
+  }
+  .label__sub {
+    font-weight: 400;
+    // font-weight: var(--font-body-weight);
+  }
+}

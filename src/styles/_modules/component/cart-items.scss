@@ -1,3 +1,5 @@
+@use "../../abstracts/" as *;
+
 .cart-items td,
 .cart-items th {
   padding: 0;
@@ -32,6 +34,7 @@
 }
 
 .cart-item__image {
+  width: 100%;
   height: auto;
   max-width: calc(10rem / var(--font-body-scale));
 }
@@ -257,6 +260,13 @@ cart-remove-button .icon-remove {
     justify-content: flex-end;
   }
 }
+@include media-query($tiny) {
+   .cart-item {
+    display: grid;
+    grid-template: repeat(2, auto) / 80px 2fr 1fr 1.5fr;
+   }
+}
+
 
 .cart-item__error-text + svg {
   margin-top: 0.4rem;
