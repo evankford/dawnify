@@ -203,7 +203,16 @@ h5.label , .h5.label, .label, .form__label, .field__label, label{
   font-size: {{ settings.label_font_size_smaller | times: 0.8 | default: '13.5' }}px;
 }
 
-a.button, input.shopify-challenge__button, .btn, .button, .button-label, button.button,a.customer-button, button.shopify-challenge-button, .button[type=submit] {
+a.button,
+button.shopify-payment-button__button--unbranded,
+input.shopify-challenge__button,
+.btn,
+.button,
+.button-label,
+button.button,
+a.customer-button,
+button.shopify-challenge-button,
+.button[type=submit] {
   {% case settings.button_font_family %}
     {% when 'body' %}
       font-family: var(--font-body-family);
@@ -477,6 +486,7 @@ summary .menu-drawer__menu-item {
   input.shopify-challenge__button,
   .btn,
   .button,
+  button.shopify-payment-button__button--unbranded,
   .button-label,
   button.button,
   a.customer-button,

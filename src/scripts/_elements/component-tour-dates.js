@@ -112,7 +112,6 @@ class TourDates extends HTMLElement {
     let cleanArtist = this.props.artist.replace(' ', '');
 
     let url =`https://rest.bandsintown.com/artists/${cleanArtist}/events?app_id=${this.props.appId}`
-    // console.log(url);
     if (this.provider == 'seated') {
       url = `https://cdn.seated.com/api/tour/${this.props.artist}?include=tour-events`
     }
@@ -382,7 +381,6 @@ class TourDates extends HTMLElement {
     try {
 
       if (this.props.filterString) {
-        console.log('Filtering shows by ' + this.props.filterString);
         this.shows = this.shows.filter(show=> {
           return (
             (typeof show.venueName == 'string' &&
@@ -399,8 +397,7 @@ class TourDates extends HTMLElement {
         })
       }
     } catch(e) {
-      console.log('Filtering failed: ');
-      console.log(e);
+      console.error(e);
     }
 
     this.shows.forEach((show) => {

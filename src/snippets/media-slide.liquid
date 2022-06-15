@@ -13,8 +13,10 @@ Usage:
 {% endcomment %}
 
 <{% if is_slide %}li{% else %}div{% endif %} class="swiper-slide swiper-slide--{{ type }} color-{{ color_scheme | default: 'transparent-light' }} {{class}}" style="background-color: {{ overlay_color | default: '#000000' }}; --oc: {{ overlay_color | default: '#000000' }}; ">
-{% if type == 'video' or type == 'image' and props.url != blank %}
+{% if type == 'image' or type == 'video' %}
+{% if props.url != blank %}
 <a href="{{ props.url }}" {% if props.target %} target="_blank" rel="nofollow noopener noreferrer"{% endif %}>
+{%endif %}
 {%endif %}
 {% if type contains 'video' %}
     <div class="background-video background-element" style="--oo: {{overlay_opacity }}; opacity: {{ 100 | minus: overlay_opacity | divided_by: 100.00 }}; --vbg-overlay-opacity: {{overlay_opacity | default: 0.4 }}; --vbg-bg: {{overlay_color | default: '#000000' }};">
@@ -36,8 +38,10 @@ Usage:
       {% render 'media' with type: 'image' , image: props.image, size: "full", center_x: props.image_center_x, center_y: props.image_center_y, type: "image"  , is_slide: is_slide %}
     </div>
     {% endif %}
-    {% if type == 'video' or type == 'image' and props.url != blank %}
+    {% if type == 'image' or type == 'video' %}
+{% if props.url != blank %}
       </a>
+    {% endif %}
     {% endif %}
     {% if type == 'content-image' %}
 

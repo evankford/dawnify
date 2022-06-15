@@ -16,7 +16,6 @@ if (!customElements.get('product-form')) {
         this.errors = [];
         const parent = this.form.closest('.product');
         const els = parent.querySelectorAll('input[required]');
-        let weGood = true;
         els.forEach(el=> {
           const property = el.getAttribute('name');
           const hasEntry = formData.has(property);
@@ -39,7 +38,7 @@ if (!customElements.get('product-form')) {
       onSubmitHandler(evt) {
         this.errors = [];
         evt.preventDefault();
-        const submitButton = this.querySelector('[type="submit"]');
+        const submitButton = this.querySelector('[type="submit"]:not([data-single-clone])');
         if (submitButton.classList.contains('loading')) return;
 
         this.handleErrorMessage();
@@ -47,7 +46,8 @@ if (!customElements.get('product-form')) {
 
         submitButton.setAttribute('aria-disabled', true);
         submitButton.classList.add('loading');
-        this.querySelector('.loading-overlay__spinner').classList.remove(
+
+        submitButton.querySelector('.loading-overlay__spinner').classList.remove(
           'hidden'
         );
 
@@ -60,7 +60,6 @@ if (!customElements.get('product-form')) {
           // console.log(passedCheck)
 
         if (this.errors.length) {
-          console.log(this.errors);
           let msg = '<ul>';
           this.errors.forEach(error=> {
             msg += `<li>Please check the <b>${error}</b> checkbox to add to your cart.</li>`
@@ -69,7 +68,7 @@ if (!customElements.get('product-form')) {
           this.handleErrorMessage(msg);
            submitButton.classList.remove('loading');
            submitButton.removeAttribute('aria-disabled');
-           this.querySelector('.loading-overlay__spinner').classList.add(
+           submitButton.querySelector('.loading-overlay__spinner').classList.add(
              'hidden'
            );
           return;
@@ -103,7 +102,7 @@ if (!customElements.get('product-form')) {
           .finally(() => {
             submitButton.classList.remove('loading');
             submitButton.removeAttribute('aria-disabled');
-            this.querySelector('.loading-overlay__spinner').classList.add(
+            submitButton.querySelector('.loading-overlay__spinner').classList.add(
               'hidden'
             );
           });

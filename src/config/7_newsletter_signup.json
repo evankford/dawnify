@@ -1,0 +1,15 @@
+{
+  "name": "Newsletter Signup",
+  "settings": [
+    {
+      "type" : "header",
+      "content" : "Settings"
+    },
+    {
+      "type" : "liquid",
+      "id" : "newsletter_form_code",
+      "label" : "Newsletter Form Code",
+      "info" : "Replaces the default shopify code"
+    }
+  ]
+}

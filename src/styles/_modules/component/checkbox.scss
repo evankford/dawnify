@@ -1,7 +1,13 @@
 @use "../../abstracts/" as *;
 
+span.form__label.label__title {
+  font-size: 1.15em;
+  font-weight: var(--font-heading-weight);
+}
+
 .checkbox-wrap {
   display: flex;
+  padding: 0.3rem 0;
   input[type="hidden"]{
     display: none;
   }
@@ -19,10 +25,10 @@
     &::before, &::after {
       @extend %psuedo;
       left: 0;
-      top: 20px;
+      top: clamp(0.5em, 50%, 50%);
       transform: translateY(-50%);
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
       text-align: center;
 
     }
@@ -33,16 +39,15 @@
     }
 
     &::after {
-      content:'x';
-      font-size: 15px;
-      line-height: 24px;
+      content:'✓';
+      font-size: 18px;
+      line-height: 22px;
       opacity: 0;
       transition: opacity 200ms ease;
     }
   }
 
   input:checked + label {
-    border-width: 3px;
     &::after {
       opacity: 1;
     }

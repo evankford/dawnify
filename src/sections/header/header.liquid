@@ -77,7 +77,7 @@
           {% assign sub_block = section.blocks[i] %}
           {% assign next_index = i | plus: 1 %}
           {% assign next_block = section.blocks[next_index] %}
-          <!-- Type: {{block.type }} - VBSmall: {{ sub_block.settings.visible_small }} -->
+          <!-- Type: {{sub_block.type }} - VBSmall: {{ sub_block.settings.visible_small }} -->
           {% if sub_block.settings.visible_small == true %}
             {% assign vb_small = '' %}
           {% endif %}
@@ -91,6 +91,15 @@
             {% break %}
           {% endif %}
           {% if sub_block.type == 'spacer' or sub_block.type == 'logo' or sub_block.type == 'mobile_menu' %}
+            {% break %}
+          {% endif %}
+          {% if next_block.type == "socials" and block.type == "menu" %}
+            {% break %}
+          {% endif %}
+          {% if next_block.type == "menu" and sub_block.type == "socials" %}
+            {% break %}
+          {% endif %}
+          {% if sub_block.type == 'menu' and section.settings.layout == 'logo-stacked' %}
             {% break %}
           {% endif %}
 

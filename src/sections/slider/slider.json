@@ -1257,7 +1257,7 @@
             "type": "range",
             "id": "overlay_opacity",
             "label": "Overlay Opacity",
-            "default": 30,
+            "default": 0,
             "min": 0,
             "max": 100,
             "step": 5,
@@ -1295,7 +1295,7 @@
         }, {
             "type": "url",
             "id": "url",
-            "label": "url"
+            "label": "URL"
         },
         {
             "type": "checkbox",
@@ -1314,7 +1314,7 @@
             "type": "range",
             "id": "overlay_opacity",
             "label": "Overlay Opacity",
-            "default": 30,
+            "default": 0,
             "min": 0,
             "max": 100,
             "step": 5,
@@ -1346,7 +1346,7 @@
         }, {
             "type": "url",
             "id": "url",
-            "label": "url"
+            "label": "URL"
         }, {
             "type": "checkbox",
             "id": "target",
@@ -1583,6 +1583,18 @@
             "type": "image-text"
         }, {
             "type": "video-text"
+        }]
+    },
+    {
+        "name" : "Banner",
+        "settings": {
+            "auto_height" : true,
+            "navigation" : false,
+            "pagination" : "disabled",
+            "autoplay_speed" : 0
+        },
+        "blocks" : [{
+            "type" : "image"
         }]
     },
     {

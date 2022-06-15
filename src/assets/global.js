@@ -383,7 +383,6 @@ class MenuDrawer extends HTMLElement {
   }
 
   onSummaryClick(event) {
-    console.log('Summary Clicked');
     const summaryElement = event.currentTarget;
     const detailsElement = summaryElement.parentNode;
     const isOpen = detailsElement.hasAttribute('open');
@@ -926,7 +925,6 @@ class VariantSelects extends HTMLElement {
     this.toggleAddButton(true, '', false);
     this.updatePickupAvailability();
     this.removeErrorMessage();
-    console.log('Variant changing');
 
     if (!this.currentVariant) {
       this.toggleAddButton(true, '', true);
@@ -1056,12 +1054,11 @@ class VariantSelects extends HTMLElement {
       `product-form-${this.dataset.section}`
     );
     if (!productForm) return;
-    const addButton = productForm.querySelector('[name="add"]:not([data-single-clone]');
+    const addButton = productForm.querySelector('[name="add"]:not([data-single-clone])');
     const addButtonText = productForm.querySelector(
-      '[name="add"]:not([data-single-clone] > span'
+      '[name="add"]:not([data-single-clone]) > span'
     );
 
-    console.log(text);
     if (!addButton) return;
     if (disable) {
       addButton.setAttribute('disabled', 'disabled');
@@ -1080,10 +1077,10 @@ class VariantSelects extends HTMLElement {
       `product-form-${this.dataset.section}`
     );
     const addButton = button.querySelector(
-      '[name="add"]:not([data-single-clone]'
+      '[name="add"]:not([data-single-clone])'
     );
     const addButtonText = button.querySelector(
-      '[name="add"]:not([data-single-clone] > span'
+      '[name="add"]:not([data-single-clone]) > span'
     );
     const price = document.getElementById(`price-${this.dataset.section}`);
     if (!addButton) return;

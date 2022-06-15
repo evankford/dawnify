@@ -271,7 +271,7 @@
           {%- when 'pre_order' -%}
             {%- if product.tags contains 'pre-order' or product.tags contains 'Pre-order' or product.tags contains 'Pre-Order' or product.tags contains 'PRE-ORDER' or product.tags contains 'PREORDER' or product.metafields.dawnify.pre-order == true  or product.metafields.dawnify.pre_order == true -%}
               <link rel="stylesheet" href="{{ 'component-checkbox.css' | asset_url }}" media="print" onload="this.media='all'">
-              <div class="product__pre-order checkbox-wrap">
+              <div class="product__pre-order checkbox-wrap" {{ block.shopify_attributes }}>
                   <input required id="pre-order-{{section.id}}" type="checkbox" name="properties[Accepts Pre-Order]" value="Yes" form="{{ product_form_id }}" />
                   <label for="pre-order-{{section.id}}">
                     <span class="form__label label__title">{{block.settings.heading | default : "I understand this item is a pre-order" }}</span>
@@ -286,6 +286,8 @@
                     <span class="form__label label__title">{{block.settings.heading  }}</span>
                     {% if block.settings.text != blank %}<span class="label__sub">{{ block.settings.text }}</span></label>{% endif %}
               </div>
+          {%- when 'tag' -%}
+            {% render 'product-tag' with tag: product.metafields.dawnify.tag, no_positioning: true, is_image: false %}
 
           {%- when 'quantity_selector' -%}
             <div class="product-form__input product-form__quantity {% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}" {{ block.shopify_attributes }}>
@@ -318,8 +320,7 @@
               <a href="{{ block.settings.page.url }}" class="product-popup-modal__button link no-js">{{ block.settings.link_label }}</a>
           {%- when 'share' -%}
             {% render 'share-button', block: block %}
-          {%- when 'tag' -%}
-              {% render 'product-tag' with tag: product.metafields.dawnify.tag, no_positioning: true, is_image: false %}
+
           {%- when 'variant_picker' -%}
            {% render 'variant-picker', product: product, block: block, id: section.id, product_form_id: product_form_id %}
           {%- when 'buy_buttons' -%}

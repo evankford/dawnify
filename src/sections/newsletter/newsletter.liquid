@@ -1,31 +1,29 @@
 {{ 'component-newsletter.css' | asset_url | stylesheet_tag }}
 {{ 'newsletter-section.css' | asset_url | stylesheet_tag }}
 
-{%- style -%}
-  .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
-  }
 
-  @media screen and (min-width: 750px) {
-    .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
-    }
-  }
-{%- endstyle -%}
+{% if section.settings.id == blank %}
+{% assign inner_id = "rt" | append : section.id %}
+{% else %}
+{% assign inner_id = section.settings.id %}
+{% endif %}
 
-<div class="newsletter center {% if section.settings.full_width == false %}newsletter--narrow page-width{% endif%}">
-  <div class="newsletter__wrapper color-{{ section.settings.color_scheme }} gradient content-container isolate{% if section.settings.full_width %} content-container--full-width{% endif %} section-{{ section.id }}-padding">
+{% render 'section-style' with inner: true, id: inner_id, params: section.settings %}
+
+<div id="{{ inner_id }}" class="newsletter center {% if section.settings.full_width == false %}newsletter--narrow page-width{% endif%}">
+  <div class="newsletter__wrapper content-container isolate{% if section.settings.full_width %} content-container--full-width{% endif %} section-{{ section.id }}-padding">
     {%- for block in section.blocks -%}
       {%- case block.type -%}
         {%- when '@app' -%}
           {% render block %}
         {%- when 'heading' -%}
-          <h2 class="h1" {{ block.shopify_attributes }}>{{ block.settings.heading | escape }}</h2>
+          <h2 class="h1 heading" {{ block.shopify_attributes }}>{{ block.settings.heading | escape }}</h2>
         {%- when 'paragraph' -%}
-          <div class="newsletter__subheading rte" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+          <div class="newsletter__subheading rte" {{ block.shopify_attributes }}>{{ block.settings.paragraph }}</div>
         {%- when 'email_form' -%}
+        {% if settings.newsletter_form_code and settings.newsletter_form_code != blank %}
+          {{settings.newsletter_form_code}}
+        {% else %}
           <div {{ block.shopify_attributes }}>
             {% form 'customer', class: 'newsletter-form' %}
               <input type="hidden" name="contact[tags]" value="newsletter">
@@ -67,6 +65,7 @@
               {%- endif -%}
             {% endform %}
           </div>
+        {% endif %}
       {%- endcase -%}
     {%- endfor -%}
   </div>

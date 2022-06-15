@@ -54,6 +54,9 @@
           {%- when 'password' -%}
               {% render 'password-modal' %}
           {%- when 'email_form' -%}
+          {% if settings.newsletter_form_code and settings.newsletter_form_code != blank %}
+          {{settings.newsletter_form_code }}
+          {% else %}
             <div {{ block.shopify_attributes }}>
               {% form 'customer', class: 'newsletter-form' %}
                 <input type="hidden" name="contact[tags]" value="newsletter">
@@ -95,6 +98,7 @@
                 {%- endif -%}
               {% endform %}
             </div>
+          {% endif %}
         {%- endcase -%}
       {%- endfor -%}
     </div>

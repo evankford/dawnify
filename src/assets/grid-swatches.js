@@ -30,7 +30,6 @@ class GridSwatch extends HTMLElement {
       this.cardWrap.addEventListener('click', this.handleClick.bind(this));
     }
     this.swatches.forEach(swatch=> {
-      console.log("Adding swatch hover listener");
       swatch.addEventListener('mouseover', this.handleHover.bind(this))
       swatch.addEventListener('mouseout', this.resetImages.bind(this))
     })
@@ -78,10 +77,8 @@ class GridSwatch extends HTMLElement {
     var button = this.getButton(evt.target);
 
     if ( this.swatches.includes(button)) {
-      console.log(button);
       if (button.classList.contains('selected')) {
         //Do the normal thing, go to page
-        console.log("already selected")
         window.location.href = this.linkWrap.href
       } else {
         this.imgWrap.classList.add('variant-image-active--clicked');

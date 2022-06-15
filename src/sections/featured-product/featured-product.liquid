@@ -133,6 +133,26 @@
               {% render 'share-button' with block: block, section: section %}
             {%- when 'variant_picker' -%}
               {% render 'variant-picker', product: product, block: block, id: section.id, product_form_id: product_form_id %}
+            {%- when 'pre_order' -%}
+              {%- if product.tags contains 'pre-order' or product.tags contains 'Pre-order' or product.tags contains 'Pre-Order' or product.tags contains 'PRE-ORDER' or product.tags contains 'PREORDER' or product.metafields.dawnify.pre-order == true  or product.metafields.dawnify.pre_order == true -%}
+                <link rel="stylesheet" href="{{ 'component-checkbox.css' | asset_url }}" media="print" onload="this.media='all'">
+                <div class="product__pre-order checkbox-wrap" {{ block.shopify_attributes }}>
+                    <input required id="pre-order-{{section.id}}" type="checkbox" name="properties[Accepts Pre-Order]" value="Yes" form="{{ product_form_id }}" />
+                    <label for="pre-order-{{section.id}}">
+                      <span class="form__label label__title">{{block.settings.heading | default : "I understand this item is a pre-order" }}</span>
+                      {% if block.settings.text != blank %}<span class="label__sub">{{ block.settings.text | default: "This is a pre-order product. It will ship when indicated in the product description."}}</span></label>{% endif %}
+                </div>
+              {%- endif -%}
+            {%- when 'required_checkbox' -%}
+              <link rel="stylesheet" href="{{ 'component-checkbox.css' | asset_url }}" media="print" onload="this.media='all'">
+              <div class="checkbox-wrap">
+                  <input required id="{{block.settings.id | handleize}}-{{section.id}}" type="checkbox" name="properties[{{block.settings.id}}]" value="Yes" form="{{ product_form_id }}" />
+                  <label for="{{block.settings.id | handleize}}-{{section.id}}">
+                    <span class="form__label label__title">{{block.settings.heading  }}</span>
+                    {% if block.settings.text != blank %}<span class="label__sub">{{ block.settings.text }}</span></label>{% endif %}
+              </div>
+            {%- when 'tag' -%}
+              {% render 'product-tag' with tag: product.metafields.dawnify.tag, no_positioning: true, is_image: false %}
             {%- when 'buy_buttons' -%}
               <div {{ block.shopify_attributes }}>
                 {%- if product != blank -%}

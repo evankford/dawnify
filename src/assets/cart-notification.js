@@ -18,6 +18,14 @@ class CartNotification extends HTMLElement {
   open() {
     this.notification.classList.add('animate', 'active');
 
+    const stickyHeader = document.querySelector(
+      '.shopify-section-header-sticky'
+      );
+
+    if (stickyHeader) {
+      stickyHeader.classList.add("animate")
+      stickyHeader.classList.remove('shopify-section-header-hidden');
+    }
     this.notification.addEventListener(
       'transitionend',
       () => {

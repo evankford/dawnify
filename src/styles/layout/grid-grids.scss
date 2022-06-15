@@ -41,11 +41,16 @@
   }
 
   &[data-max="3"] {
-     @include media-query($widescreen) {
+    grid-template-columns: repeat(2, 1fr);
+     @include media-query($medium-up) {
       grid-template-columns: repeat(6, 1fr);
+      .grid__item {
+        grid-column-end: auto !important;
+      }
     }
-    .grid__item {
-      grid-column-end: auto !important;
+    &.grid---small {
+            grid-template-columns: repeat(6, 1fr);
+
     }
   }
 
@@ -53,9 +58,6 @@
   &.grid---medium[data-max="4"] {
     @include media-query($medium-up) {
       grid-template-columns: repeat(8, 1fr);
-      .grid__item {
-      grid-column-end: auto !important;
-    }
     }
   }
   &.grid---large[data-max="4"] {
@@ -66,9 +68,6 @@
   &[data-max="3"],
   &[data-max="6"] {
     max-width: calc(3 * (var(--pg-mw) + var(--grid-desktop-horizontal-spacing)));
-    .grid__item {
-      grid-column-end: auto !important;
-    }
 
   }
 

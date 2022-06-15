@@ -19,7 +19,6 @@ class AutoModal extends HTMLElement {
     });
 
     const self = this;
-    console.log(this.show)
     window.setTimeout(self.tryToOpen.bind(self), this.delay * 1000);
   }
 
@@ -37,7 +36,6 @@ class AutoModal extends HTMLElement {
   }
 
   tryToOpen() {
-    console.log("Trying to open theme popop")
     if (this.debug) {
       this.open();
       return;

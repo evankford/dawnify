@@ -41,6 +41,63 @@
       "limit": 1
     },
     {
+      "type": "tag",
+      "name": "Visible Tag",
+      "limit": 1
+    },
+     {
+      "type" : "required_checkbox",
+      "limit" : 4,
+      "name" : "Checkbox",
+      "settings" : [
+        {
+          "type": "header",
+          "content" : "Warning:",
+          "info" : "These will show on all products with this template."
+        },
+        {
+          "type" : "text",
+          "id" : "id",
+          "label" : "ID",
+          "info" : "The Name of the property that will be stored as a product line item property.",
+          "default" : "Required Field"
+        },
+        {
+          "type" : "text",
+          "id" : "heading",
+          "label" : "Heading",
+          "default" : "Check this box to consent"
+        },
+        {
+          "type" : "text",
+          "id" : "text",
+          "label" : "Text"
+        }
+      ]
+    },
+    {
+      "type" : "pre_order",
+      "limit" : 1,
+      "name" : "Pre-Order Warning",
+      "settings" : [
+        {
+          "type" : "paragraph",
+          "content" : "To enable, use the tag 'Pre-Order' on a product, or set product.metafields.dawnify.pre-order . You may use metafields to populate the acceptance text, they have sensible fallback text."
+        },
+        {
+          "type" : "text",
+          "id" : "heading",
+          "label" : "Heading",
+          "default" : "I understand this item is a pre-order"
+        },
+        {
+          "type" : "text",
+          "id" : "text",
+          "label" : "Text"
+        }
+      ]
+    },
+    {
       "type": "price",
       "name": "t:sections.featured-product.blocks.price.name",
       "limit": 1
