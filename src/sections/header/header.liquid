@@ -67,6 +67,7 @@
           {% assign in_group = false %}
         {% endif %}
       {% endif %}
+
       {% unless in_group %}
 
       {% comment %}Check children to see if all group children are invisible {% endcomment %}
@@ -77,39 +78,30 @@
           {% assign sub_block = section.blocks[i] %}
           {% assign next_index = i | plus: 1 %}
           {% assign next_block = section.blocks[next_index] %}
-          <!-- Type: {{sub_block.type }} - VBSmall: {{ sub_block.settings.visible_small }} -->
           {% if sub_block.settings.visible_small == true %}
             {% assign vb_small = '' %}
           {% endif %}
           {% if sub_block.settings.visible_medium == true %}
             {% assign vb_medium = '' %}
+          <!--{{sub_block.type}}-visible-medium -->
           {% endif %}
           {% if sub_block.settings.visible_large == true %}
             {% assign vb_desktop = '' %}
           {% endif %}
-         {% if next_block.type == 'spacer' or next_block.type == 'logo'  %}
-            {% break %}
-          {% endif %}
-         {% if next_block.type == 'mobile_menu' and sub_block.type != 'button' %}
-            {% break %}
-          {% endif %}
-          {% if sub_block.type == 'spacer' or sub_block.type == 'logo'  %}
-            {% break %}
-          {% endif %}
-          {% if sub_block.type == 'mobile_menu' and next_block.type != 'button'  %}
-            {% break %}
-          {% endif %}
-          {% if next_block.type == "socials" and block.type == "menu" %}
-            {% break %}
-          {% endif %}
-          {% if next_block.type == "menu" and sub_block.type == "socials" %}
-            {% break %}
-          {% endif %}
-          {% if sub_block.type == 'menu' and section.settings.layout == 'logo-stacked' %}
-            {% break %}
-          {% endif %}
 
+          {% comment %}whether to break{%endcomment %}
+            {%- if sub_block.type == 'menu' and section.settings.layout == 'logo-stacked' -%}
+              {% break %}
+            {%- else -%}
+              {%- capture do_break -%}{% render 'header-break' with block:sub_block, next_block: next_block %}{%- endcapture -%}
+              <!-- block: {{sub_block.type}}, next_block: {{next_block.type}} = {{do_break}} -->
+              {%- if do_break == 'true' -%}
+              <!--breaking -->
+                {% break %}
+              {%- endif -%}
+          {%- endif -%}
         {% endfor %}
+        {%- comment -%} Open group {%- endcomment -%}
         <div class="header__group {% if block.type == 'logo' %}header__group--logo{% endif %} {% if block.type == 'mobile_menu' %}header__group--mobile_menu{% endif %} {{ vb_small }} {{ vb_medium }} {{ vb_desktop }}">
         {% assign in_group = true %}
       {%endunless%}
@@ -210,35 +202,19 @@
           %}
         {% endcase %}
     </div><!--\.header__item-->
-  {% comment %} Close  group if logo, mobile menu, spacer, or last item{% endcomment %}
+  {% comment %} Close group{% endcomment %}
+
     {% assign last_item_index = index %}
     {% assign index = index | plus: 1 %}
     {% assign next_block = section.blocks[index] %}
-     {% if index == section.blocks.size or block.type == 'spacer' %}
-       </div><!--\.header__group-->
-          {% assign in_group = false %}
-     {% elsif block.type == 'logo' %}
-        {% if section.settings.layout == 'logo-stacked' and next_block.type == "menu" %}
-          <!-- should be a stacked menu -->
-        {% else %}
-          </div><!--\.header__group-->
-          {% assign in_group = false %}
-        {% endif %}
-    {% elsif block.type == 'menu' and section.settings.layout == 'logo-stacked' %}
-      </div><!--\.header__group-->
-        {% assign in_group = false %}
-    {% elsif index == section.blocks.size or next_block.type == "spacer"  %}
-  </div><!--\.header__group-->
-  {% elsif block.type == "mobile_menu" and next_block.type != 'button' %}
-      {% assign in_group = false %}
-    {% comment %} Check if menu + socials (never put them in the same group {% endcomment %}
-    {% elsif next_block.type == "socials" and block.type == "menu" %}
-      </div><!--\.header__group-->
-      {% assign in_group = false %}
-    {% elsif next_block.type == "menu" and block.type == "socials" %}
-      </div><!--\.header__group-->
-      {% assign in_group = false %}
-    {% endif %}
+      {%- capture do_break -%}{% render 'header-break' with block:block, next_block: next_block %}{%- endcapture -%}
+      {%- if section.settings.layout == 'logo-stacked' and next_block.type == "menu" -%}
+      {% assign do_break = 'true' %}
+      {%- endif -%}
+          {%- if do_break == 'true' -%}
+            </div><!--\.header__group-->
+            {% assign in_group = false %}
+          {%- endif -%}
   {% endfor %}
   </header>
 </site-header>

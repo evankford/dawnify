@@ -1,6 +1,6 @@
 {
   "sections": {
-    "slider": {
+    "hero-slider": {
       "type": "slider",
       "blocks": {
         "slider-0": {
@@ -30,7 +30,6 @@
       "settings": {
         "introduction": "",
         "title": "Featured products",
-        "subtitle": "",
         "text_align": "center",
         "collection": "frontpage",
         "full_width": false,
@@ -55,11 +54,12 @@
         "introduction" : "Shop By",
         "heading" :"Collection",
         "text_align" : "center",
+        "center_insufficient" : true,
         "padding_top": 60,
         "swipe_on_mobile" : true,
         "padding_bottom": 60,
         "color_scheme" : "background-2",
-        "box_color_scheme" : "accent-1"
+        "color_scheme_content" : "inverse"
       },
       "blocks" : {
         "defaultclblock1" : {
@@ -82,7 +82,7 @@
     "insta1" : {
       "type"  :"rich-text",
       "settings" : {
-        "color_scheme" : "inverse"
+        "color_scheme" : "inverse",
         "padding_bottom" : 60,
         "padding_top" : 60
       },
@@ -126,7 +126,7 @@
     }
   },
   "order": [
-    "slider",
+    "hero-slider",
     "featured_products",
     "collection-list",
     "insta1"

@@ -1,0 +1,38 @@
+{%- comment -%}
+
+Returns true or false based on block and next block
+
+Usage: {%- capture do_break -%}{% render 'header-break' with block: block, next_block: next_block %}{%- endcapture -%}
+{%- endcomment -%}
+{% liquid
+  if block.type == 'spacer' or block.type == 'logo'
+    echo "true"
+  else
+    case next_block.type
+      when "spacer"
+        echo "true"
+      when "logo"
+        echo "true"
+      when "mobile_menu"
+        if block.type == 'button'
+          echo "false"
+        else
+          echo "true"
+        endif
+      when "socials"
+        if block.type == 'menu'
+          echo "true"
+        else
+          echo "false"
+        endif
+      when "button"
+        echo "false"
+      when "menu"
+        if block.type == 'socials'
+          echo "true"
+        else
+          echo "false"
+        endif
+    endcase
+  endif
+%}

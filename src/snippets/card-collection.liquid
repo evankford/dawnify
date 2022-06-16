@@ -34,7 +34,7 @@
 <div class="card-wrapper animate-arrow">
   <div class="card
     card--{{ settings.card_style }}
-    {% if image %} card--media{% else %} card--text{% endif %}
+    {% if image or style == 'overlay' %} card--media{% else %} card--text{% endif %}
     {% if settings.card_style == 'card' or style == 'overlay' %}
      color-{{color}}
     {% endif %}
