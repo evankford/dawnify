@@ -62,11 +62,11 @@
 
 .header__icon--menu[aria-expanded="true"]::before {
   content: "";
-  top: 100%;
+  top: 0;
   left: 0;
-  height: calc(var(--viewport-height, 100vh) - (var(--header-bottom-position, 100%)));
+  height: calc(100 * var(--vh, 1vh));
   width: 100%;
   display: block;
-  position: absolute;
+  position: fixed;
   background: rgba(var(--color-foreground), 0.5);
 }

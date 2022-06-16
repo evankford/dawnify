@@ -87,10 +87,16 @@
           {% if sub_block.settings.visible_large == true %}
             {% assign vb_desktop = '' %}
           {% endif %}
-         {% if next_block.type == 'spacer' or next_block.type == 'logo' or next_block.type == 'mobile_menu' %}
+         {% if next_block.type == 'spacer' or next_block.type == 'logo'  %}
             {% break %}
           {% endif %}
-          {% if sub_block.type == 'spacer' or sub_block.type == 'logo' or sub_block.type == 'mobile_menu' %}
+         {% if next_block.type == 'mobile_menu' and sub_block.type != 'button' %}
+            {% break %}
+          {% endif %}
+          {% if sub_block.type == 'spacer' or sub_block.type == 'logo'  %}
+            {% break %}
+          {% endif %}
+          {% if sub_block.type == 'mobile_menu' and next_block.type != 'button'  %}
             {% break %}
           {% endif %}
           {% if next_block.type == "socials" and block.type == "menu" %}
@@ -221,8 +227,9 @@
     {% elsif block.type == 'menu' and section.settings.layout == 'logo-stacked' %}
       </div><!--\.header__group-->
         {% assign in_group = false %}
-    {% elsif index == section.blocks.size or next_block.type == "spacer" or block.type == "mobile_menu" %}
-     </div><!--\.header__group-->
+    {% elsif index == section.blocks.size or next_block.type == "spacer"  %}
+  </div><!--\.header__group-->
+  {% elsif block.type == "mobile_menu" and next_block.type != 'button' %}
       {% assign in_group = false %}
     {% comment %} Check if menu + socials (never put them in the same group {% endcomment %}
     {% elsif next_block.type == "socials" and block.type == "menu" %}

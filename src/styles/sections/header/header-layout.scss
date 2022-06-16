@@ -119,14 +119,20 @@ a.header__menu-item, summary.header__menu-item, .header__icon, .list-social__lin
   z-index: 1;
 
   &.layout--centered {
-    @include media-query($medium-up) {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .header-group {
+      grid-area: first;
+
+       &.header__group--logo {
+        grid-area: middle
+       }
+    }
+    .header__group--logo ~ .header-group {
+      grid-area: last;
     }
 
     .header__group {
       flex: 0 0 auto;
+      margin: auto;
     }
   }
 

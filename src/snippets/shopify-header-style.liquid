@@ -52,8 +52,8 @@
         --popup-shadow-vertical-offset: {{ settings.popup_shadow_vertical_offset }}px;
         --popup-shadow-blur-radius: {{ settings.popup_shadow_blur }}px;
 
-        --drawer-background-color: {{ settings.color_drawer_foreground.red }}, {{ settings.color_drawer_foreground.green }}, {{ settings.color_drawer_foreground.blue }};
-        --drawer-foreground-color: {{ settings.color_drawer_background.red }},  {{ settings.color_drawer_background.green }}, {{ settings.color_drawer_background.blue }};
+        --drawer-foreground-color: {{ settings.color_drawer_foreground.red }}, {{ settings.color_drawer_foreground.green }}, {{ settings.color_drawer_foreground.blue }};
+        --drawer-background-color: {{ settings.color_drawer_background.red }},  {{ settings.color_drawer_background.green }}, {{ settings.color_drawer_background.blue }};
         {% if settings.color_drawer_accent != blank and settings.color_drawer_accent_inverse != blank %}
         --drawer-accent-color: {{ settings.color_drawer_accent.red }},{{ settings.color_drawer_accent.green }},{{ settings.color_drawer_accent.blue }};
         --drawer-accent-inverse-color: {{ settings.color_drawer_accent_inverse.red }},{{ settings.color_drawer_accent_inverse.green }},{{ settings.color_drawer_accent_inverse.blue }};
