@@ -2,11 +2,8 @@
 {% if settings.socials_order != blank %}
 {% assign socials_order = settings.socials_order %}
 {% endif %}
-
 {% assign socials_split = socials_order | split: ',' %}
-
 <ul class="list list-social list-unstyled" role="list" {{ attrs }}>
-
   {% for social in socials_split %}
     {% assign social_slug = social | trim | downcase %}
     {%- capture settings_slug %}social_{{social_slug}}_link{%- endcapture -%}
@@ -20,5 +17,4 @@
     </li>
   {% endif %}
   {% endfor %}
-
 </ul>
