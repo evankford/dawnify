@@ -37,6 +37,7 @@
     "push": "pnpm webpack --env=production && cd dist && shopify theme push -n --unpublished ",
     "push:new": "cd dist && shopify theme push -n --unpublished ",
     "push:dry": "cd dist && rm -f ./.shopifyignore && touch .shopifyignore && shopify theme push -n --unpublished ",
+    "push:dry:dawnify": "cd dist && rm -f ./.shopifyignore && touch .shopifyignore && shopify theme push -n --unpublished --theme=Dawnify",
     "push:templates": "cd dist && rm -f ./.shopifyignore  && shopify theme push -n -o 'templates/*.json' -o 'config/settings_data.json' && cp ../.shopifyignore ./",
     "push:config": "cd dist && rm -f ./.shopifyignore  && shopify theme push -n  -o 'config/settings_data.json' && cp ../.shopifyignore ./",
     "push:live:templates": "cd dist && rm -f ./.shopifyignore  && shopify theme push -n -l -o 'templates/*.json' -o 'config/settings_data.json' && cp ../.shopifyignore ./ ",
@@ -64,7 +65,8 @@
     "merge": "pnpm merge:pre && pnpm run build && pnpm merge:post",
     "merge:pre": "mkdir tmp && cd dist && cp -r templates ../tmp/templates && cp config/settings_data.json ../tmp",
     "merge:post": "cd dist && rm -rf templates && rm -rf config/settings_data.json && mv  ../tmp/templates ./ && mv ../tmp/settings_data.json ./config && rm -rf ../tmp",
-    "build": "pnpm  webpack -- --env=production"
+    "build": "pnpm  webpack -- --env=production",
+    "deploy": "pnpm pull:dev && pnpm push:dry:dawnify && pnpm run update --theme=Dawnify "
   },
   "devDependencies": {
     "any-date-parser": "^1.5.2",

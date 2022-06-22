@@ -80,17 +80,29 @@ function getEntries() {
     }
   });
   const allJsElements = glob.sync(
-    path.resolve('./src/scripts/_elements/*.js')
+    path.resolve('./src/scripts/_modules/*/*.js')
   );
   allJsElements.forEach((file) => {
     const name = file.substring(
       file.lastIndexOf('/') + 1,
       file.lastIndexOf('.')
     );
-    if (componentEntries[`${name}`]) {
-      componentEntries[`${name}`].push(file);
+     const type = file.substring(
+       file.indexOf('_modules/') + 9,
+       file.lastIndexOf('/')
+     );
+    if (type != 'base') {
+      if (componentEntries[`${type}-${name}`]) {
+        componentEntries[`${type}-${name}`].push(file);
+      } else {
+        componentEntries[`${type}-${name}`] = [file];
+      }
     } else {
-      componentEntries[`${name}`] = [file];
+       if (componentEntries[`${name}`]) {
+         componentEntries[`${name}`].push(file);
+       } else {
+         componentEntries[`${name}`] = [file];
+       }
     }
   });
 
@@ -105,7 +117,7 @@ function getEntries() {
 module.exports = (env) => {
   return {
   mode: !env.production ? 'development' : 'production',
-  stats: !env.production ? 'errors-only' : 'detailed',
+  // stats: !env.production ? 'errors-only' : 'detailed',
   entry: getEntries(),
   devtool: !env.production ? 'inline-source-map' : false,
   output: {
