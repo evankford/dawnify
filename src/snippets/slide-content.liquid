@@ -34,39 +34,47 @@
 {%- endcapture -%}
 {% assign yt_button = true %}
 {%- endif -%}
-
-{%- if props.introduction != blank -%}
-<div class="{% if is_small %} h5 {% else %} h4 {% endif %} label">{{ props.introduction }}</div>
-{%- endif -%}
-{% if props.content_image != blank %}
+{% if props.content_image != blank and type contains 'album' %}
+{% assign used_image = true %}
 <div class="content-image" style="width: clamp({{props.content_image_width_min | default: 40 }}%, {{props.content_image_width | default: 250 }}px, {{props.content_image_width_max | default: 70 }}%);">
-
-</div>
   {% render 'media' with class: "content-image", size: 'half', type: "image", image: props.content_image, max_width: props.content_image_width %}
-{% endif %}
-{% if props.heading != blank %}
-<h2 class="banner__heading {% if is_small %} h2 {% else %} h0 {% endif %} heading" {{ block.shopify_attributes }}>
-  <span>{{ props.heading | escape }}</span>
-</h2>
-{% endif %}
-{%- if props.subtitle != blank -%}
-<div class="{% if is_small %} h4 {% else %} h5 {% endif %} label">{{ props.subtitle }}</div>
-{%- endif -%}
-{% if props.content != blank %}
-<div class="banner__text" {{ block.shopify_attributes }}>
-  <span>{{ props.content }}</span>
 </div>
 {% endif %}
-{% if props.button_label_1 != blank and props.button_link_1 != blank or yt_button %}
-<div class="banner__buttons button-wrap{% if props.button_label_1 != blank and props.button_link_1 != blank and props.button_label_2 != blank and props.button_link_2 != blank %} banner__buttons--multiple{% endif %}" {{ block.shopify_attributes }}>
-  {%- if props.yt_button_location == 'first' and yt_button -%}{{ yt_button_markup }}{%-endif -%}
-  {%- if props.button_label_1 != blank and props.button_link_1 != blank -%}
-  <a{% if props.button_link_1 != blank %} href="{{ props.button_link_1 }}" {% if props.button_link_1 contains "http" %} target="_blank" rel="nofollow noopener noreferrer" {% endif %} {% endif %} class="button{% if props.button_style_secondary_1 %} button--secondary{% else %} button--primary{% endif %} {% if is_small %} small {% endif %}"{% if props.button_link_1 == blank %} aria-disabled="true"{% endif %}>{{ props.button_label_1 | escape }}</a>
+
+{% if props.heading != blank or props.subtitle != blank or props.content != blank or yt_button or props.button_label_1 != blank %}
+<heading class="banner__content__heading">
+  {%- if props.introduction != blank -%}
+  <div class="{% if is_small %} h5 {% else %} h4 {% endif %} label">{{ props.introduction }}</div>
   {%- endif -%}
-  {%- if props.button_label_2 != blank and props.button_link_2 != blank -%}
-  <a{% if props.button_link_2 != blank %} href="{{ props.button_link_2 }}" {% if props.button_link_2 contains "http" %} target="_blank" rel="nofollow noopener noreferrer" {% endif %} {% endif %} class="button{% if props.button_style_secondary_2 %} button--secondary{% else %} button--primary{% endif %} {% if is_small %} small {% endif %}"{% if props.button_link_2 == blank %} aria-disabled="true"{% endif %}>{{ props.button_label_2 | escape }}</a>
+  {% if props.content_image != blank and used_image != true  %}
+    <div class="content-image" style="width: clamp({{props.content_image_width_min | default: 40 }}%, {{props.content_image_width | default: 250 }}px, {{props.content_image_width_max | default: 70 }}%);">
+    {% render 'media' with class: "content-image", size: 'half', type: "image", image: props.content_image, max_width: props.content_image_width %}
+  </div>
+  {% elsif props.heading != blank %}
+  <h2 class="banner__heading {% if type contains 'album' %} h3 {% elsif is_small %} h2 {% else %} h0 {% endif %} heading" {{ block.shopify_attributes }}>
+    <span>{{ props.heading | escape }}</span>
+  </h2>
+  {% endif %}
+  {%- if props.subtitle != blank -%}
+  <div class="{% if is_small %} h5 {% else %} h4 {% endif %} label">{{ props.subtitle }}</div>
   {%- endif -%}
-  {%- if props.yt_button_location == 'last' and yt_button -%}{{yt_button}}{%-endif -%}
-</div>
+  {% if props.content != blank %}
+  <div class="banner__text" {{ block.shopify_attributes }}>
+    <span>{{ props.content }}</span>
+  </div>
+  {% endif %}
+  {% if props.button_label_1 != blank and props.button_link_1 != blank or yt_button %}
+  <div class="banner__buttons button-wrap{% if props.button_label_1 != blank and props.button_link_1 != blank and props.button_label_2 != blank and props.button_link_2 != blank %} banner__buttons--multiple{% endif %}" {{ block.shopify_attributes }}>
+    {%- if props.yt_button_location == 'first' and yt_button -%}{{ yt_button_markup }}{%-endif -%}
+    {%- if props.button_label_1 != blank and props.button_link_1 != blank -%}
+    <a{% if props.button_link_1 != blank %} href="{{ props.button_link_1 }}" {% if props.button_link_1 contains "http" %} target="_blank" rel="nofollow noopener noreferrer" {% endif %} {% endif %} class="button{% if props.button_style_secondary_1 %} button--secondary{% else %} button--primary{% endif %} {% if type contains 'album' %} tiny {% elsif is_small %} small {% endif %}"{% if props.button_link_1 == blank %} aria-disabled="true"{% endif %}>{{ props.button_label_1 | escape }}</a>
+    {%- endif -%}
+    {%- if props.button_label_2 != blank and props.button_link_2 != blank -%}
+    <a{% if props.button_link_2 != blank %} href="{{ props.button_link_2 }}" {% if props.button_link_2 contains "http" %} target="_blank" rel="nofollow noopener noreferrer" {% endif %} {% endif %} class="button{% if props.button_style_secondary_2 %} button--secondary{% else %} button--primary{% endif %} {% if type contains 'album' %} tiny {% elsif is_small %} small {% endif %}"{% if props.button_link_2 == blank %} aria-disabled="true"{% endif %}>{{ props.button_label_2 | escape }}</a>
+    {%- endif -%}
+    {%- if props.yt_button_location == 'last' and yt_button -%}{{yt_button}}{%-endif -%}
+  </div>
+  {% endif %}
+  {% render 'icon-links' with params: props %}
+</heading>
 {% endif %}
-{% render 'icon-links' with params: props %}

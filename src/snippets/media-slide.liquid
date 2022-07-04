@@ -13,12 +13,12 @@ Usage:
 {% endcomment %}
 
 <{% if is_slide %}li{% else %}div{% endif %} class="swiper-slide swiper-slide--{{ type }} color-{{ color_scheme | default: 'transparent-light' }} {{class}}" style="background-color: {{ overlay_color | default: '#000000' }}; --oc: {{ overlay_color | default: '#000000' }}; ">
-{% if type == 'image' or type == 'video' %}
-{% if props.url != blank %}
-<a href="{{ props.url }}" {% if props.target %} target="_blank" rel="nofollow noopener noreferrer"{% endif %}>
-{%endif %}
-{%endif %}
-{% if type contains 'video' %}
+  {% if type == 'image' or type == 'video' %}
+  {% if props.url != blank %}
+    <a href="{{ props.url }}" {% if props.target %} target="_blank" rel="nofollow noopener noreferrer"{% endif %}>
+    {%endif %}
+  {%endif %}
+  {% if type contains 'video' %}
     <div class="background-video background-element" style="--oo: {{overlay_opacity }}; opacity: {{ 100 | minus: overlay_opacity | divided_by: 100.00 }}; --vbg-overlay-opacity: {{overlay_opacity | default: 0.4 }}; --vbg-bg: {{overlay_color | default: '#000000' }};">
 
       {% if props.video_type == 'external' %}
@@ -39,12 +39,11 @@ Usage:
     </div>
     {% endif %}
     {% if type == 'image' or type == 'video' %}
-{% if props.url != blank %}
-      </a>
-    {% endif %}
+      {% if props.url != blank %}
+        </a>
+      {% endif %}
     {% endif %}
     {% if type == 'content-image' %}
-
       <div class="content-image-wrap style--{{props.content_image_spacing | default: 'overlapping' }}" style="opacity: {{props.content_image_opacity | divided_by: 100.00 | default: 1 }}; align-items: {{props.content_image_alignment | default: 'center' }}">
         {% if props.content_image_1 != blank %}
         <div class="content-image__1" style="flex-basis: {{props.image_1_basis | default: '150' }}px; {% if props.image_1_style %} {{props.image_1_style}} {% endif%}">
@@ -64,9 +63,11 @@ Usage:
       </div>
     {% endif %}
     {% if type != 'video' and type != 'image' %}
-    <div class="banner__content" style="text-align: {{ props.text_alignment }}; align-items: {{ props.desktop_text_box_position }}; justify-content: {{ props.content_alignment }}; {% if props.desktop_text_box_position == 'flex-end' %} padding-bottom: clamp(1rem, calc(0.5rem + 1.5vw), 2.5rem); {% endif %}">
+    <div class="banner__content banner__content--{{type}}" style="text-align: {{ props.text_alignment }}; align-items: {{ props.desktop_text_box_position }}; justify-content: {{ props.content_alignment }}; {% if props.desktop_text_box_position == 'flex-end' %} padding-bottom: clamp(1rem, calc(0.5rem + 1.5vw), 2.5rem); {% endif %}">
       <div class="banner__box color-{{ color_scheme }}"  data-slide-content>
-        {% render 'slide-content' with props: props, block: block, type: type, is_small: is_static %}
+        {% assign small = is_static %}
+        {% if type contains 'album' %}{% assign small = true %}{% endif %}
+        {% render 'slide-content' with props: props, block: block, type: type, is_small: small %}
       </div>
     </div>
     {% endif %}

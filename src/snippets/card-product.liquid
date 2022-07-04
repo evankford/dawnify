@@ -96,6 +96,7 @@
               </a>
             </h3>
           </div>
+          {% if  card_product.compare_at_price > card_product.price or card_product.available == false %}
           <div class="card__badge {{ settings.badge_position }}">
             {%- if card_product.available == false -%}
               <span class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }}">{{ 'products.product.sold_out' | t }}</span>
@@ -103,6 +104,7 @@
               <span class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}">{{ 'products.product.on_sale' | t }}</span>
             {%- endif -%}
           </div>
+          {% endif %}
            {% if settings.visible_tag_location == "content" and card_product.metafields.dawnify.tag %}
            <div class="card__badge {{ settings.badge_position }}  {% if settings.visible_tags_centered %} centered {% endif %}">
              {% render 'product-tag' with tag: card_product.metafields.dawnify.tag %}

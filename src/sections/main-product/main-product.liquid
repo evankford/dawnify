@@ -70,7 +70,7 @@
                 {% render 'product-thumbnail', media: featured_media, position: media_position, loop: section.settings.enable_video_looping, modal_id: section.id, xr_button: true, media_width: media_width, lazy_load: false %}
                 {% if settings.visible_tag_location == 'image' and product.metafields.dawnify.tag and tag_shown != true %}
                    {% assign tag_shown = true %};
-                  <div class="product__media__badge {{settings.badge_location}}">
+                  <div class="product__media__badge {{settings.badge_position}}">
                     {% render 'product-tag' with tag: product.metafields.dawnify.tag, is_image: true %}
                   </div>
                 {% endif %}
@@ -84,7 +84,7 @@
                   {% render 'product-thumbnail', media: media, position: media_position, loop: section.settings.enable_video_looping, modal_id: section.id, xr_button: true, media_width: media_width, lazy_load: true %}
                   {% if settings.visible_tag_location == 'image' and product.metafields.dawnify.tag and tag_shown != true %}
                    {% assign tag_shown = true %}
-                  <div class="product__media__badge {{settings.badge_location}}">
+                  <div class="product__media__badge {{settings.badge_position}}">
                     {% render 'product-tag' with tag: product.metafields.dawnify.tag, is_image: true %}
                   </div>
                 {% endif %}

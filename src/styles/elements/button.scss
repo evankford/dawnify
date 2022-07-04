@@ -44,6 +44,11 @@ button.shopify-payment-button__button--unbranded,
   -webkit-appearance: none;
   appearance: none;
   background-color: rgba(var(--color-button), var(--alpha-button-background));
+
+  &.tiny {
+        font-size: 15px;
+    padding: 0.4em 0.8em;
+  }
 }
 
 .button:before,

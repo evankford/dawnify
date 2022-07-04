@@ -1,6 +1,5 @@
 @use "../../abstracts/" as *;
 
-
 @import "~swiper/css";
 @import "~swiper/css/a11y";
 @import "~swiper/css/thumbs";
@@ -252,4 +251,26 @@ button[data-next] {
 
 li.swiper-slide {
   margin-bottom: -1px;
+}
+
+
+.banner__content.banner__content--album-image {
+
+
+  .content-image {
+    flex: 1 1 150px;
+    min-width: 95px;
+    max-width: 200px;
+    margin-right: 15px;
+  }
+  .banner__content__heading {
+    flex: 1 1 230px;
+    text-align: left;
+  }
+  .banner__box{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
 }

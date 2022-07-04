@@ -130,6 +130,10 @@ h5.heading,.h5.heading,h5.heading,.h5.heading
 {
   font-size: {{ settings.heading_font_size_smallest | times : 0.8 |  default : 19 }}px;
 }
+h6, .h6
+{
+  font-size:clamp(14px, {{ settings.heading_font_size_smallest | times : 0.7 |  default : '15' }}px, 18px);
+}
 
 .label
 h1.label,
@@ -384,7 +388,7 @@ div.price {
 
 .product__info-wrapper div.price {
   font-size: {{ settings.pm_price_font_size | default: '19' }}px;
-  padding-bottom: 0.5em;
+  /* padding-bottom: 0.5em; */
   {% if settings.pm_price_border == true %}
   border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.2);
   {% endif %}

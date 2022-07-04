@@ -315,6 +315,12 @@
   z-index: 1;
 }
 
+@media screen and (max-width: 600px) {
+  .banner__box {
+    padding: 4rem 2rem;
+  }
+}
+
 @media screen and (min-width: 750px) {
   .banner--desktop-transparent .banner__box {
     background-color: transparent;

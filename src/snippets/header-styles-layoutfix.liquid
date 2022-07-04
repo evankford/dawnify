@@ -1,4 +1,24 @@
 {% style %}
+.shopify-section {
+position: relative;
+}
+.swiper-element {
+  width: 100%; height: auto;
+
+}
+swiper-element:not(.swiper-initialized) .swiper-wrapper {
+  padding: 0;
+  height: auto;
+  display: flex;
+  flex-wrap: no-wrap;
+  overflow-x: auto;
+}
+swiper-element:not(.swiper-initialized) .swiper-slide{
+  flex: 0 0 100%;
+}
+.media--adapt:before {
+    padding-bottom: var(--ar, 100%);
+}
 
 /* Some default styles to lower layout shift */
         .list-menu {

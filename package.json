@@ -20,7 +20,6 @@
     "dev:new": "cd dist && rm .shopifyignore && touch .shopifyignore && cd ../ && run-p watch serve",
     "dev:dry": "pnpm serve",
     "dev:debug": " pnpm serve:debug",
-    "deploy": "pnpm webpack -env=production && cd dist && shopify theme push -n",
     "theme-check": "pnpm build && shopify theme check",
     "pull": "cd dist && rm .shopifyignore && touch .shopifyignore && shopify theme pull",
     "pull:dev": "cd dist && rm -f ./.shopifyignore && touch .shopifyignore && shopify theme pull -d",
