@@ -1,7 +1,0 @@
-@use '../variables/timings' as *;
-%hover {
-  transition: transform 300ms $ease;
-  &:hover {
-    transform: translateY(-2px)
-  }
-}

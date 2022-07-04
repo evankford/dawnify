@@ -61,10 +61,18 @@ function getSections() {
 function getEntries() {
   let componentEntries = {};
 
-  const allCssComponents = glob.sync(
+  function addEntry(name, file) {
+    if (name in componentEntries) {
+       componentEntries[name].push(file);
+    } else {
+       componentEntries[name] = [file];
+    }
+  }
+
+  const allCssCModules = glob.sync(
     path.resolve('./src/styles/_modules/*/*css')
   );
-  allCssComponents.forEach((file) => {
+  allCssCModules.forEach((file) => {
     const type = file.substring(
       file.indexOf('_modules/') + 9,
       file.lastIndexOf('/')
@@ -73,16 +81,23 @@ function getEntries() {
       file.lastIndexOf('/') + 1,
       file.lastIndexOf('.')
     );
-    if (type != "base") {
-      componentEntries[`${type}-${name}`] = [file];
-    } else {
-      componentEntries[`${name}`] = [file];
-    }
+
+    addEntry(`${type}-${name}`,  file);
   });
-  const allJsElements = glob.sync(
+  const allCssBaseFiles = glob.sync(
+    path.resolve('./src/styles/*css')
+  );
+  allCssBaseFiles.forEach((file) => {
+    const name = file.substring(
+      file.lastIndexOf('/') + 1,
+      file.lastIndexOf('.')
+    );
+      addEntry(name,file);
+  });
+  const allJsModules = glob.sync(
     path.resolve('./src/scripts/_modules/*/*.js')
   );
-  allJsElements.forEach((file) => {
+  allJsModules.forEach((file) => {
     const name = file.substring(
       file.lastIndexOf('/') + 1,
       file.lastIndexOf('.')
@@ -91,26 +106,24 @@ function getEntries() {
        file.indexOf('_modules/') + 9,
        file.lastIndexOf('/')
      );
-    if (type != 'base') {
-      if (componentEntries[`${type}-${name}`]) {
-        componentEntries[`${type}-${name}`].push(file);
-      } else {
-        componentEntries[`${type}-${name}`] = [file];
-      }
-    } else {
-       if (componentEntries[`${name}`]) {
-         componentEntries[`${name}`].push(file);
-       } else {
-         componentEntries[`${name}`] = [file];
-       }
-    }
+    addEntry(`${type}-${name}`, file);
+
+  });
+  const allJsFiles = glob.sync(
+    path.resolve('./src/scripts/*.js')
+  );
+  allJsFiles.forEach((file) => {
+    const name = file.substring(
+      file.lastIndexOf('/') + 1,
+      file.lastIndexOf('.')
+    );
+
+    addEntry(name, file);
+
   });
 
   return {
     ...componentEntries,
-    theme: ['./src/scripts/theme.js', './src/styles/theme.scss'],
-    slider: ['./src/scripts/slider.js'],
-    product: ['./src/scripts/product.js'],
   };
 }
 

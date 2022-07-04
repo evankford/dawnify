@@ -1,55 +1,49 @@
-{{ 'section-main-product.css' | asset_url | stylesheet_tag }}
-{{ 'component-accordion.css' | asset_url | stylesheet_tag }}
-{{ 'component-badge.css' | asset_url | stylesheet_tag }}
-{{ 'component-price.css' | asset_url | stylesheet_tag }}
-{{ 'component-rte.css' | asset_url | stylesheet_tag }}
+<section id="MainProduct-{{ section.id }}" class="page-width section-{{ section.id }}-padding" data-section="{{ section.id }}">
+  {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
+  {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
+  {{ 'component-price.css' | asset_url | stylesheet_tag }}
+  {{ 'component-rte.css' | asset_url | stylesheet_tag }}
+  {{ 'component-slider.css' | asset_url | stylesheet_tag }}
+  {{ 'component-rating.css' | asset_url | stylesheet_tag }}
+  {{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
+  {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
 
-{{ 'component-slider.css' | asset_url | stylesheet_tag }}
-{{ 'component-rating.css' | asset_url | stylesheet_tag }}
-{{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
+  {%- style -%}
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    }
 
-<link rel="stylesheet" href="{{ 'component-cart-notification.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'component-deferred-media.css' | asset_url }}" media="print" onload="this.media='all'">
+    @media screen and (min-width: 750px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+  {%- endstyle -%}
 
-<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
-<style>
-#shopify-section-{{ section.id }} {
-  margin-top: {{ section.settings.padding_top | minus: 5 | divided_by: 3.0 | default: 1 }}rem;
-  margin-bottom: {{ section.settings.padding_bottom | minus: 5 | divided_by: 3.0 | default: 1 }}rem;
-}
-@media (max-width: 749px) {
-  #shopify-section-{{ section.id }} {
-  margin-top: {{ section.settings.padding_top | minus: 5 | divided_by: 6.0 | default: 1 }}rem;
-  margin-bottom: {{ section.settings.padding_bottom | minus: 5 | divided_by: 6.0 | default: 1 }}rem;
-}
-}
-</style>
-{%- assign first_3d_model = product.media | where: "media_type", "model" | first -%}
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 
-{%- if first_3d_model -%}
-  {{ 'component-product-model.css' | asset_url | stylesheet_tag }}
-  <link id="ModelViewerStyle" rel="stylesheet" href="https://cdn.shopify.com/shopifycloud/model-viewer-ui/assets/v1.0/model-viewer-ui.css" media="print" onload="this.media='all'">
-  <link id="ModelViewerOverride" rel="stylesheet" href="{{ 'component-model-viewer-ui.css' | asset_url }}" media="print" onload="this.media='all'">
-{%- endif -%}
+  {%- assign first_3d_model = product.media | where: "media_type", "model" | first -%}
+  {%- if first_3d_model -%}
+    {{ 'component-product-model.css' | asset_url | stylesheet_tag }}
+    <link id="ModelViewerStyle" rel="stylesheet" href="https://cdn.shopify.com/shopifycloud/model-viewer-ui/assets/v1.0/model-viewer-ui.css" media="print" onload="this.media='all'">
+    <link id="ModelViewerOverride" rel="stylesheet" href="{{ 'component-model-viewer-ui.css' | asset_url }}" media="print" onload="this.media='all'">
+  {%- endif -%}
 
-<section class="page-width">
-  {% if section.settings.breadcrumbs %}
-  {% render 'breadcrumbs' %}
-  {% endif %}
   <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.gallery_layout }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
     <div class="grid__item product__media-wrapper">
-
-       <media-gallery id="MediaGallery-{{ section.id }}" role="region" {% if section.settings.enable_sticky_info %}class="product__media-gallery"{% endif %} aria-label="{{ 'products.product.media.gallery_viewer' | t }}" data-desktop-layout="{{ section.settings.gallery_layout }}">
+      <media-gallery id="MediaGallery-{{ section.id }}" role="region" {% if section.settings.enable_sticky_info %}class="product__media-gallery"{% endif %} aria-label="{{ 'products.product.media.gallery_viewer' | t }}" data-desktop-layout="{{ section.settings.gallery_layout }}">
         <div id="GalleryStatus-{{ section.id }}" class="visually-hidden" role="status"></div>
         <slider-component id="GalleryViewer-{{ section.id }}" class="slider-mobile-gutter">
-          <a class="skip-to-content-link button visually-hidden" href="#ProductInfo-{{ section.id }}">
+          <a class="skip-to-content-link button visually-hidden quick-add-hidden" href="#ProductInfo-{{ section.id }}">
             {{ "accessibility.skip_to_product_info" | t }}
           </a>
-          <ul id="Slider-Gallery-{{ section.id }}" class="product__media-list grid grid--peek list-unstyled slider slider--mobile" role="list">
+          <ul id="Slider-Gallery-{{ section.id }}" class="product__media-list contains-media grid grid--peek list-unstyled slider slider--mobile" role="list">
             {%- liquid
               assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src'
               assign media_count = product.media.size
-              if section.settings.hide_variants
+              if section.settings.hide_variants and media_count > 1
                 assign media_count = media_count | minus: variant_images.size | plus: 1
               endif
 
@@ -62,37 +56,28 @@
               endif
             -%}
             {%- if product.selected_or_first_available_variant.featured_media != null -%}
-
               {%- assign featured_media = product.selected_or_first_available_variant.featured_media -%}
               <li id="Slide-{{ section.id }}-{{ featured_media.id }}" class="product__media-item grid__item slider__slide is-active{% if featured_media.media_type != 'image' %} product__media-item--full{% endif %}{% if section.settings.hide_variants and variant_images contains featured_media.src %} product__media-item--variant{% endif %}" data-media-id="{{ section.id }}-{{ featured_media.id }}">
-
                 {%- assign media_position = 1 -%}
                 {% render 'product-thumbnail', media: featured_media, position: media_position, loop: section.settings.enable_video_looping, modal_id: section.id, xr_button: true, media_width: media_width, lazy_load: false %}
-                {% if settings.visible_tag_location == 'image' and product.metafields.dawnify.tag and tag_shown != true %}
-                   {% assign tag_shown = true %};
-                  <div class="product__media__badge {{settings.badge_position}}">
-                    {% render 'product-tag' with tag: product.metafields.dawnify.tag, is_image: true %}
-                  </div>
-                {% endif %}
               </li>
             {%- endif -%}
             {%- for media in product.media -%}
               {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
                 <li id="Slide-{{ section.id }}-{{ media.id }}" class="product__media-item grid__item slider__slide{% if product.selected_or_first_available_variant.featured_media == null and forloop.index == 1 %} is-active{% endif %}{% if media.media_type != 'image' %} product__media-item--full{% endif %}{% if section.settings.hide_variants and variant_images contains media.src %} product__media-item--variant{% endif %}" data-media-id="{{ section.id }}-{{ media.id }}">
-
-                  {%- assign media_position = media_position | default: 0 | plus: 1 -%}
-                  {% render 'product-thumbnail', media: media, position: media_position, loop: section.settings.enable_video_looping, modal_id: section.id, xr_button: true, media_width: media_width, lazy_load: true %}
-                  {% if settings.visible_tag_location == 'image' and product.metafields.dawnify.tag and tag_shown != true %}
-                   {% assign tag_shown = true %}
-                  <div class="product__media__badge {{settings.badge_position}}">
-                    {% render 'product-tag' with tag: product.metafields.dawnify.tag, is_image: true %}
-                  </div>
-                {% endif %}
+                  {%- liquid
+                    assign media_position = media_position | default: 0 | plus: 1
+                    assign lazy_load = false
+                    if media_position > 1
+                      assign lazy_load = true
+                    endif
+                    render 'product-thumbnail', media: media, position: media_position, loop: section.settings.enable_video_looping, modal_id: section.id, xr_button: true, media_width: media_width, lazy_load: lazy_load
+                  -%}
                 </li>
               {%- endunless -%}
             {%- endfor -%}
           </ul>
-          <div class="slider-buttons no-js-hidden{% if media_count < 2 or section.settings.mobile_thumbnails == 'show' %} small-hide{% endif %}">
+          <div class="slider-buttons no-js-hidden quick-add-hidden{% if media_count < 2 or section.settings.mobile_thumbnails == 'show' %} small-hide{% endif %}">
             <button type="button" class="slider-button slider-button--prev" name="previous" aria-label="{{ 'general.slider.previous_slide' | t }}">{% render 'icon-caret' %}</button>
             <div class="slider-counter caption">
               <span class="slider-counter--current">1</span>
@@ -118,17 +103,22 @@
           </button>
         {%- endif -%}
         {%- if media_count > 1 and section.settings.gallery_layout != 'stacked' or section.settings.mobile_thumbnails == 'show' -%}
-          <slider-component id="GalleryThumbnails-{{ section.id }}" class="thumbnail-slider slider-mobile-gutter{% if section.settings.mobile_thumbnails == 'hide' %} small-hide{% endif %}{% if media_count <= 3 %} thumbnail-slider--no-slide{% endif %}">
+          <slider-component id="GalleryThumbnails-{{ section.id }}" class="thumbnail-slider slider-mobile-gutter quick-add-hidden{% if section.settings.mobile_thumbnails == 'hide' %} small-hide{% endif %}{% if media_count <= 3 %} thumbnail-slider--no-slide{% endif %}">
             <button type="button" class="slider-button slider-button--prev{% if media_count <= 3 %} small-hide{% endif %}{% if media_count <= 4 %} medium-hide large-up-hide{% endif %}" name="previous" aria-label="{{ 'general.slider.previous_slide' | t }}" aria-controls="GalleryThumbnails-{{ section.id }}" data-step="3">{% render 'icon-caret' %}</button>
             <ul id="Slider-Thumbnails-{{ section.id }}" class="thumbnail-list list-unstyled slider slider--mobile{% if section.settings.gallery_layout == 'thumbnail_slider' %} slider--tablet-up{% endif %}">
               {%- if featured_media != null -%}
-                {%- capture media_index -%}
-                  {%- if featured_media.media_type == 'model' -%}{%- increment model_index -%}
-                  {%- elsif featured_media.media_type == 'video' or featured_media.media_type == 'external_video' -%}{%- increment video_index -%}
-                  {%- elsif featured_media.media_type == 'image'%}{%- increment image_index -%}
-                  {%- endif -%}
-                {%- endcapture -%}
-                {%- assign media_index = media_index | plus: 1 -%}
+                {%- liquid
+                  capture media_index
+                    if featured_media.media_type == 'model'
+                      increment model_index
+                    elsif featured_media.media_type == 'video' or featured_media.media_type == 'external_video'
+                      increment video_index
+                    elsif featured_media.media_type == 'image'
+                      increment image_index
+                    endif
+                  endcapture
+                  assign media_index = media_index | plus: 1
+                -%}
                 <li id="Slide-Thumbnails-{{ section.id }}-0" class="thumbnail-list__item slider__slide{% if section.settings.hide_variants and variant_images contains featured_media.src %} thumbnail-list_item--variant{% endif %}" data-target="{{ section.id }}-{{ featured_media.id }}" data-media-position="{{ media_index }}">
                   <button class="thumbnail global-media-settings global-media-settings--no-shadow {% if featured_media.preview_image.aspect_ratio > 1 %}thumbnail--wide{% else %}thumbnail--narrow{% endif %}"
                     aria-label="{%- if featured_media.media_type == 'image' -%}{{ 'products.product.media.load_image' | t: index: media_index }}{%- elsif featured_media.media_type == 'model' -%}{{ 'products.product.media.load_model' | t: index: media_index }}{%- elsif featured_media.media_type == 'video' or featured_media.media_type == 'external_video' -%}{{ 'products.product.media.load_video' | t: index: media_index }}{%- endif -%}"
@@ -136,15 +126,15 @@
                     aria-controls="GalleryViewer-{{ section.id }}"
                     aria-describedby="Thumbnail-{{ section.id }}-0"
                   >
-                    <img id="Thumbnail-{{ section.id }}-0" srcset="{% if featured_media.preview_image.width >= 54 %}{{ featured_media.preview_image | img_url: '54x' }} 54w,{% endif %}
-                      {% if featured_media.preview_image.width >= 74 %}{{ featured_media.preview_image | img_url: '74x' }} 74w,{% endif %}
-                      {% if featured_media.preview_image.width >= 104 %}{{ featured_media.preview_image | img_url: '104x' }} 104w,{% endif %}
-                      {% if featured_media.preview_image.width >= 162 %}{{ featured_media.preview_image | img_url: '162x' }} 162w,{% endif %}
-                      {% if featured_media.preview_image.width >= 208 %}{{ featured_media.preview_image | img_url: '208x' }} 208w,{% endif %}
-                      {% if featured_media.preview_image.width >= 324 %}{{ featured_media.preview_image | img_url: '324x' }} 324w,{% endif %}
-                      {% if featured_media.preview_image.width >= 416 %}{{ featured_media.preview_image | img_url: '416x' }} 416w,{% endif %},
-                      {{ featured_media.preview_image | img_url: 'master' }} {{ media.preview_image.width }}w"
-                      src="{{ featured_media | img_url: '416x' }}"
+                    <img id="Thumbnail-{{ section.id }}-0" srcset="{% if featured_media.preview_image.width >= 54 %}{{ featured_media.preview_image | image_url: width: 54 }} 54w,{% endif %}
+                      {% if featured_media.preview_image.width >= 74 %}{{ featured_media.preview_image | image_url: width: 74 }} 74w,{% endif %}
+                      {% if featured_media.preview_image.width >= 104 %}{{ featured_media.preview_image | image_url: width: 104 }} 104w,{% endif %}
+                      {% if featured_media.preview_image.width >= 162 %}{{ featured_media.preview_image | image_url: width: 162 }} 162w,{% endif %}
+                      {% if featured_media.preview_image.width >= 208 %}{{ featured_media.preview_image | image_url: width: 208 }} 208w,{% endif %}
+                      {% if featured_media.preview_image.width >= 324 %}{{ featured_media.preview_image | image_url: width: 324 }} 324w,{% endif %}
+                      {% if featured_media.preview_image.width >= 416 %}{{ featured_media.preview_image | image_url: width: 416 }} 416w,{% endif %},
+                      {{ featured_media.preview_image | image_url }} {{ media.preview_image.width }}w"
+                      src="{{ featured_media | image_url: width: 416 }}"
                       sizes="(min-width: {{ settings.page_width }}px) calc(({{ settings.page_width | minus: 100 | times: media_width | round }} - 4rem) / 4), (min-width: 990px) calc(({{ media_width | times: 100 }}vw - 4rem) / 4), (min-width: 750px) calc((100vw - 15rem) / 8), calc((100vw - 14rem) / 3)"
                       alt="{{ featured_media.alt | escape }}"
                       height="208"
@@ -156,13 +146,18 @@
               {%- endif -%}
               {%- for media in product.media -%}
                 {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
-                  {%- capture media_index -%}
-                    {%- if media.media_type == 'model' -%}{%- increment model_index -%}
-                    {%- elsif media.media_type == 'video' or media.media_type == 'external_video' -%}{%- increment video_index -%}
-                    {%- elsif media.media_type == 'image'%}{%- increment image_index -%}
-                    {%- endif -%}
-                  {%- endcapture -%}
-                  {%- assign media_index = media_index | plus: 1 -%}
+                  {%- liquid
+                    capture media_index
+                      if media.media_type == 'model'
+                        increment model_index
+                      elsif media.media_type == 'video' or media.media_type == 'external_video'
+                        increment video_index
+                      elsif media.media_type == 'image'
+                        increment image_index
+                      endif
+                    endcapture
+                    assign media_index = media_index | plus: 1
+                  -%}
                    <li id="Slide-Thumbnails-{{ section.id }}-{{ forloop.index }}" class="thumbnail-list__item slider__slide{% if section.settings.hide_variants and variant_images contains media.src %} thumbnail-list_item--variant{% endif %}" data-target="{{ section.id }}-{{ media.id }}"  data-media-position="{{ media_index }}">
                     {%- if media.media_type == 'model' -%}
                       <span class="thumbnail__badge" aria-hidden="true">
@@ -180,13 +175,13 @@
                       aria-describedby="Thumbnail-{{ section.id }}-{{ forloop.index }}"
                     >
                       <img id="Thumbnail-{{ section.id }}-{{ forloop.index }}"
-                        srcset="{% if media.preview_image.width >= 59 %}{{ media.preview_image | img_url: '59x' }} 59x,{% endif %}
-                                {% if media.preview_image.width >= 118 %}{{ media.preview_image | img_url: '118x' }} 118w,{% endif %}
-                                {% if media.preview_image.width >= 84 %}{{ media.preview_image | img_url: '84x' }} 84w,{% endif %}
-                                {% if media.preview_image.width >= 168 %}{{ media.preview_image | img_url: '168x' }} 168w,{% endif %}
-                                {% if media.preview_image.width >= 130 %}{{ media.preview_image | img_url: '130x' }} 130w,{% endif %}
-                                {% if media.preview_image.width >= 260 %}{{ media.preview_image | img_url: '260x' }} 260w{% endif %}"
-                        src="{{ media | img_url: '84x84' }}"
+                        srcset="{% if media.preview_image.width >= 59 %}{{ media.preview_image | image_url: width: 59 }} 59w,{% endif %}
+                                {% if media.preview_image.width >= 118 %}{{ media.preview_image | image_url: width: 118 }} 118w,{% endif %}
+                                {% if media.preview_image.width >= 84 %}{{ media.preview_image | image_url: width: 84 }} 84w,{% endif %}
+                                {% if media.preview_image.width >= 168 %}{{ media.preview_image | image_url: width: 168 }} 168w,{% endif %}
+                                {% if media.preview_image.width >= 130 %}{{ media.preview_image | image_url: width: 130 }} 130w,{% endif %}
+                                {% if media.preview_image.width >= 260 %}{{ media.preview_image | image_url: width: 260 }} 260w{% endif %}"
+                        src="{{ media | image_url: width: 84, height: 84 }}"
                         sizes="(min-width: 1200px) calc((1200px - 19.5rem) / 12), (min-width: 750px) calc((100vw - 16.5rem) / 8), calc((100vw - 8rem) / 5)"
                         alt="{{ media.alt | escape }}"
                         height="200"
@@ -202,11 +197,9 @@
           </slider-component>
         {%- endif -%}
       </media-gallery>
-
-
     </div>
-    <div class="product__info-wrapper grid__item {% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}">
-      <div id="ProductInfo-{{ section.id }}" class="product__info-container {% if section.settings.centerish %} centerish {%endif %}{% if section.settings.enable_sticky_info %} product__info-container--sticky{% endif %}">
+    <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}">
+      <div id="ProductInfo-{{ section.id }}" class="product__info-container{% if section.settings.enable_sticky_info %} product__info-container--sticky{% endif %}">
         {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
         {%- for block in section.blocks -%}
@@ -218,11 +211,45 @@
               {{- block.settings.text -}}
             </p>
           {%- when 'title' -%}
-            <h1 class="product__title  {% if product.title.size > 12 %}long {% endif %}" {{ block.shopify_attributes }}>
-              {{ product.title | escape }}
-            </h1>
+            <div class="product__title" {{ block.shopify_attributes }}>
+              <h1>{{ product.title | escape }}</h1>
+              <a href="{{ product.url }}" class="product__title">
+                <h2 class="h1">
+                  {{ product.title | escape }}
+                </h2>
+              </a>
+            </div>
+          {%- when 'price' -%}
+            <div class="no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+              {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
+            </div>
+            {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
+              <div class="product__tax caption rte">
+                {%- if shop.taxes_included -%}
+                  {{ 'products.product.include_taxes' | t }}
+                {%- endif -%}
+                {%- if shop.shipping_policy.body != blank -%}
+                  {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+            <div {{ block.shopify_attributes }}>
+              {%- assign product_form_installment_id = 'product-form-installment-' | append: section.id -%}
+              {%- form 'product', product, id: product_form_installment_id, class: 'installment caption-large' -%}
+                <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                {{ form | payment_terms }}
+              {%- endform -%}
+            </div>
+          {%- when 'description' -%}
+            {%- if product.description != blank -%}
+              <div class="product__description rte quick-add-hidden">
+                {{ product.description }}
+              </div>
+            {%- endif -%}
+          {%- when 'custom_liquid' -%}
+            {{ block.settings.custom_liquid }}
           {%- when 'collapsible_tab' -%}
-            <div class="product__accordion accordion" {{ block.shopify_attributes }}>
+            <div class="product__accordion accordion quick-add-hidden" {{ block.shopify_attributes }}>
               <details id="Details-{{ block.id }}-{{ section.id }}">
                 <summary>
                   <div class="summary__title">
@@ -239,61 +266,12 @@
                 </div>
               </details>
             </div>
-          {%- when 'price' -%}
-            <div class="no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
-              {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
-            </div>
-             {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
-                <div class="product__tax caption rte">
-                  {%- if shop.taxes_included -%}
-                    {{ 'products.product.include_taxes' | t }}
-                  {%- endif -%}
-                  {%- if shop.shipping_policy.body != blank -%}
-                    {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
-                  {%- endif -%}
-                </div>
-              {%- endif -%}
-
-            {% if block.settings.show_installments == true %}
-            <div {{ block.shopify_attributes }}>
-              {%- form 'product', product, id: 'product-form-installment', class: 'installment caption-large' -%}
-                <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-                {{ form | payment_terms }}
-              {%- endform -%}
-            </div>
-            {% endif %}
-          {%- when 'description' -%}
-            {%- if product.description != blank -%}
-              <div class="product__description rte">
-                {{ product.description }}
-              </div>
-            {%- endif -%}
-          {%- when 'pre_order' -%}
-            {%- if product.tags contains 'pre-order' or product.tags contains 'Pre-order' or product.tags contains 'Pre-Order' or product.tags contains 'PRE-ORDER' or product.tags contains 'PREORDER' or product.metafields.dawnify.pre-order == true  or product.metafields.dawnify.pre_order == true -%}
-              <link rel="stylesheet" href="{{ 'component-checkbox.css' | asset_url }}" media="print" onload="this.media='all'">
-              <div class="product__pre-order checkbox-wrap" {{ block.shopify_attributes }}>
-                  <input required id="pre-order-{{section.id}}" type="checkbox" name="properties[Accepts Pre-Order]" value="Yes" form="{{ product_form_id }}" />
-                  <label for="pre-order-{{section.id}}">
-                    <span class="form__label label__title">{{block.settings.heading | default : "I understand this item is a pre-order" }}</span>
-                    {% if block.settings.text != blank %}<span class="label__sub">{{ block.settings.text | default: "This is a pre-order product. It will ship when indicated in the product description."}}</span></label>{% endif %}
-              </div>
-            {%- endif -%}
-          {%- when 'required_checkbox' -%}
-              <link rel="stylesheet" href="{{ 'component-checkbox.css' | asset_url }}" media="print" onload="this.media='all'">
-              <div class="checkbox-wrap">
-                  <input required id="{{block.settings.id | handleize}}-{{section.id}}" type="checkbox" name="properties[{{block.settings.id}}]" value="Yes" form="{{ product_form_id }}" />
-                  <label for="{{block.settings.id | handleize}}-{{section.id}}">
-                    <span class="form__label label__title">{{block.settings.heading  }}</span>
-                    {% if block.settings.text != blank %}<span class="label__sub">{{ block.settings.text }}</span></label>{% endif %}
-              </div>
-          {%- when 'tag' -%}
-            {% render 'product-tag' with tag: product.metafields.dawnify.tag, no_positioning: true, is_image: false %}
-
           {%- when 'quantity_selector' -%}
-            <div class="product-form__input product-form__quantity {% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}" {{ block.shopify_attributes }}>
+            <div class="product-form__input product-form__quantity{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}" {{ block.shopify_attributes }}>
               <label class="form__label" for="Quantity-{{ section.id }}">
                 {{ 'products.product.quantity.label' | t }}
               </label>
+
               <quantity-input class="quantity">
                 <button class="quantity__button no-js-hidden" name="minus" type="button">
                   <span class="visually-hidden">{{ 'products.product.quantity.decrease' | t: product: product.title | escape }}</span>
@@ -314,36 +292,153 @@
               </quantity-input>
             </div>
           {%- when 'popup' -%}
-              <modal-opener class="product-popup-modal__opener no-js-hidden" data-modal="#PopupModal-{{ block.id }}" {{ block.shopify_attributes }}>
-                <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link" type="button" aria-haspopup="dialog">{{ block.settings.link_label | default: block.settings.page.title }}</button>
+              <modal-opener class="product-popup-modal__opener no-js-hidden quick-add-hidden" data-modal="#PopupModal-{{ block.id }}" {{ block.shopify_attributes }}>
+                <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link" type="button" aria-haspopup="dialog">{{ block.settings.text | default: block.settings.page.title }}</button>
               </modal-opener>
-              <a href="{{ block.settings.page.url }}" class="product-popup-modal__button link no-js">{{ block.settings.link_label }}</a>
+              <a href="{{ block.settings.page.url }}" class="product-popup-modal__button link no-js">{{ block.settings.text }}</a>
           {%- when 'share' -%}
-            {% render 'share-button', block: block %}
-
+            <share-button id="Share-{{ section.id }}" class="share-button quick-add-hidden" {{ block.shopify_attributes }}>
+              <button class="share-button__button hidden">
+                {% render 'icon-share' %}
+                {{ block.settings.share_label | escape }}
+              </button>
+              <details id="Details-{{ block.id }}-{{ section.id }}">
+                <summary class="share-button__button">
+                  {% render 'icon-share' %}
+                  {{ block.settings.share_label | escape }}
+                </summary>
+                <div id="Product-share-{{ section.id }}" class="share-button__fallback motion-reduce">
+                  <div class="field">
+                    <span id="ShareMessage-{{ section.id }}" class="share-button__message hidden" role="status">
+                    </span>
+                    <input type="text"
+                          class="field__input"
+                          id="url"
+                          value="{{ product.selected_variant.url | default: product.url | prepend: request.origin }}"
+                          placeholder="{{ 'general.share.share_url' | t }}"
+                          onclick="this.select();"
+                          readonly
+                    >
+                    <label class="field__label" for="url">{{ 'general.share.share_url' | t }}</label>
+                  </div>
+                  <button class="share-button__close hidden no-js-hidden">
+                    {% render 'icon-close' %}
+                    <span class="visually-hidden">{{ 'general.share.close' | t }}</span>
+                  </button>
+                  <button class="share-button__copy no-js-hidden">
+                    {% render 'icon-clipboard' %}
+                    <span class="visually-hidden">{{ 'general.share.copy_to_clipboard' | t }}</span>
+                  </button>
+                </div>
+              </details>
+            </share-button>
+            <script src="{{ 'share.js' | asset_url }}" defer="defer"></script>
           {%- when 'variant_picker' -%}
-           {% render 'variant-picker', product: product, block: block, id: section.id, product_form_id: product_form_id %}
+            {%- unless product.has_only_default_variant -%}
+              {%- if block.settings.picker_type == 'button' -%}
+                <variant-radios class="no-js-hidden" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
+                  {%- for option in product.options_with_values -%}
+                      <fieldset class="js product-form__input">
+                        <legend class="form__label">{{ option.name }}</legend>
+                        {%- for value in option.values -%}
+                          <input type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+                                name="{{ option.name }}"
+                                value="{{ value | escape }}"
+                                form="{{ product_form_id }}"
+                                {% if option.selected_value == value %}checked{% endif %}
+                          >
+                          <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
+                            {{ value }}
+                          </label>
+                        {%- endfor -%}
+                      </fieldset>
+                  {%- endfor -%}
+                  <script type="application/json">
+                    {{ product.variants | json }}
+                  </script>
+                </variant-radios>
+              {%- else -%}
+                <variant-selects class="no-js-hidden" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
+                  {%- for option in product.options_with_values -%}
+                    <div class="product-form__input product-form__input--dropdown">
+                      <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
+                        {{ option.name }}
+                      </label>
+                      <div class="select">
+                        <select id="Option-{{ section.id }}-{{ forloop.index0 }}"
+                          class="select__select"
+                          name="options[{{ option.name | escape }}]"
+                          form="{{ product_form_id }}"
+                        >
+                          {%- for value in option.values -%}
+                            <option value="{{ value | escape }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
+                              {{ value }}
+                            </option>
+                          {%- endfor -%}
+                        </select>
+                        {% render 'icon-caret' %}
+                      </div>
+                    </div>
+                  {%- endfor -%}
+
+                  <script type="application/json">
+                    {{ product.variants | json }}
+                  </script>
+                </variant-selects>
+              {%- endif -%}
+            {%- endunless -%}
+
+            <noscript class="product-form__noscript-wrapper-{{ section.id }}">
+              <div class="product-form__input{% if product.has_only_default_variant %} hidden{% endif %}">
+                <label class="form__label" for="Variants-{{ section.id }}">{{ 'products.product.product_variants' | t }}</label>
+                <div class="select">
+                  <select name="id" id="Variants-{{ section.id }}" class="select__select" form="{{ product_form_id }}">
+                    {%- for variant in product.variants -%}
+                      <option
+                        {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}
+                        {% if variant.available == false %}disabled{% endif %}
+                        value="{{ variant.id }}"
+                      >
+                        {{ variant.title }}
+                        {%- if variant.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}
+                        - {{ variant.price | money | strip_html }}
+                      </option>
+                    {%- endfor -%}
+                  </select>
+                  {% render 'icon-caret' %}
+                </div>
+              </div>
+            </noscript>
           {%- when 'buy_buttons' -%}
             <div {{ block.shopify_attributes }}>
               <product-form class="product-form">
-              {%- render 'product-form-error-message' -%}
+                <div class="product-form__error-message-wrapper" role="alert" hidden>
+                  <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-error" viewBox="0 0 13 13">
+                    <circle cx="6.5" cy="6.50049" r="5.5" stroke="white" stroke-width="2"/>
+                    <circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width="0.7"/>
+                    <path d="M5.87413 3.52832L5.97439 7.57216H7.02713L7.12739 3.52832H5.87413ZM6.50076 9.66091C6.88091 9.66091 7.18169 9.37267 7.18169 9.00504C7.18169 8.63742 6.88091 8.34917 6.50076 8.34917C6.12061 8.34917 5.81982 8.63742 5.81982 9.00504C5.81982 9.37267 6.12061 9.66091 6.50076 9.66091Z" fill="white"/>
+                    <path d="M5.87413 3.17832H5.51535L5.52424 3.537L5.6245 7.58083L5.63296 7.92216H5.97439H7.02713H7.36856L7.37702 7.58083L7.47728 3.537L7.48617 3.17832H7.12739H5.87413ZM6.50076 10.0109C7.06121 10.0109 7.5317 9.57872 7.5317 9.00504C7.5317 8.43137 7.06121 7.99918 6.50076 7.99918C5.94031 7.99918 5.46982 8.43137 5.46982 9.00504C5.46982 9.57872 5.94031 10.0109 6.50076 10.0109Z" fill="white" stroke="#EB001B" stroke-width="0.7">
+                  </svg>
+                  <span class="product-form__error-message"></span>
+                </div>
+
                 {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
-                  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" disabled>
                   <div class="product-form__buttons">
                     <button
                       type="submit"
                       name="add"
                       class="product-form__submit button button--full-width {% if block.settings.show_dynamic_checkout and product.selling_plan_groups == empty %}button--secondary{% else %}button--primary{% endif %}"
-                    {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
+                      {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
                     >
-                    <span>
-                      {%- if product.selected_or_first_available_variant.available -%}
-                        {{ 'products.product.add_to_cart' | t }}
-                      {%- else -%}
-                        {{ 'products.product.sold_out' | t }}
-                      {%- endif -%}
-                    </span>
-                        <div class="hidden loading-overlay__spinner">
+                        <span>
+                          {%- if product.selected_or_first_available_variant.available -%}
+                            {{ 'products.product.add_to_cart' | t }}
+                          {%- else -%}
+                            {{ 'products.product.sold_out' | t }}
+                          {%- endif -%}
+                        </span>
+                        <div class="loading-overlay__spinner hidden">
                           <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
                             <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
                           </svg>
@@ -360,9 +455,9 @@
 
               {%- assign pick_up_availabilities = product.selected_or_first_available_variant.store_availabilities | where: 'pick_up_enabled', true -%}
 
-              <pickup-availability class="product__pickup-availabilities no-js-hidden"
+              <pickup-availability class="product__pickup-availabilities no-js-hidden quick-add-hidden"
                 {% if product.selected_or_first_available_variant.available and pick_up_availabilities.size > 0 %} available{% endif %}
-                data-root-url="{{ request.origin }}{{ routes.root_url }}"
+                data-root-url="{{ routes.root_url }}"
                 data-variant-id="{{ product.selected_or_first_available_variant.id }}"
                 data-has-only-default-variant="{{ product.has_only_default_variant }}"
               >
@@ -379,22 +474,44 @@
             </div>
 
             <script src="{{ 'pickup-availability.js' | asset_url }}" defer="defer"></script>
-            {%- when 'rating' -%}
-                {% render 'product-rating', product: product %}
-
+          {%- when 'rating' -%}
+            {%- if product.metafields.reviews.rating.value != blank -%}
+              {% liquid
+               assign rating_decimal = 0
+               assign decimal = product.metafields.reviews.rating.value.rating | modulo: 1
+               if decimal >= 0.3 and decimal <= 0.7
+                assign rating_decimal = 0.5
+              elsif decimal > 0.7
+                assign rating_decimal = 1
+               endif
+              %}
+              <div class="rating" role="img" aria-label="{{ 'accessibility.star_reviews_info' | t: rating_value: product.metafields.reviews.rating.value, rating_max: product.metafields.reviews.rating.value.scale_max }}">
+                <span aria-hidden="true" class="rating-star color-icon-{{ settings.accent_icons }}" style="--rating: {{ product.metafields.reviews.rating.value.rating | floor }}; --rating-max: {{ product.metafields.reviews.rating.value.scale_max }}; --rating-decimal: {{ rating_decimal }};"></span>
+              </div>
+              <p class="rating-text caption">
+                <span aria-hidden="true">{{ product.metafields.reviews.rating.value }} / {{ product.metafields.reviews.rating.value.scale_max }}</span>
+              </p>
+              <p class="rating-count caption">
+                <span aria-hidden="true">({{ product.metafields.reviews.rating_count }})</span>
+                <span class="visually-hidden">{{ product.metafields.reviews.rating_count }} {{ "accessibility.total_reviews" | t }}</span>
+              </p>
+            {%- endif -%}
           {%- endcase -%}
         {%- endfor -%}
+        <a href="{{ product.url }}" class="link product__view-details animate-arrow">
+          {{ 'products.product.view_full_details' | t }}
+          {% render 'icon-arrow' %}
+        </a>
       </div>
     </div>
   </div>
-  {%- render 'cart-notification' -%}
 
   <product-modal id="ProductModal-{{ section.id }}" class="product-media-modal media-modal">
     <div class="product-media-modal__dialog" role="dialog" aria-label="{{ 'products.modal.label' | t }}" aria-modal="true" tabindex="-1">
       <button id="ModalClose-{{ section.id }}" type="button" class="product-media-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
 
-      <div class="product-media-modal__content" role="document" aria-label="{{ 'products.modal.label' | t }}" tabindex="0">
-      {%- liquid
+      <div class="product-media-modal__content gradient" role="document" aria-label="{{ 'products.modal.label' | t }}" tabindex="0">
+        {%- liquid
           if product.selected_or_first_available_variant.featured_media != null
             assign media = product.selected_or_first_available_variant.featured_media
             render 'product-media', media: media, loop: section.settings.enable_video_looping, variant_image: section.settings.hide_variants
@@ -421,89 +538,101 @@
   {% assign popups = section.blocks | where: "type", "popup" %}
   {%- for block in popups -%}
     <modal-dialog id="PopupModal-{{ block.id }}" class="product-popup-modal" {{ block.shopify_attributes }}>
-      <div role="dialog" aria-label="{{ block.settings.link_label }}" aria-modal="true" class="product-popup-modal__content" tabindex="-1">
+      <div role="dialog" aria-label="{{ block.settings.text }}" aria-modal="true" class="product-popup-modal__content" tabindex="-1">
         <button id="ModalClose-{{ block.id }}" type="button" class="product-popup-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
         <div class="product-popup-modal__content-info">
-          <h1 class="h2 heading {% if block.settings.page.title.length > 20%}long{% endif %}">{{ block.settings.page.title }}</h1>
+          <h1 class="h2">{{ block.settings.page.title }}</h1>
           {{ block.settings.page.content }}
         </div>
       </div>
     </modal-dialog>
   {%- endfor -%}
-</section>
 
-{%- if first_3d_model -%}
-  <script type="application/json" id="ProductJSON-{{ product.id }}">
-    {{ product.media | where: 'media_type', 'model' | json }}
+  {%- if product.media.size > 0 -%}
+    <script src="{{ 'product-modal.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
+  {%- endif -%}
+
+  {%- if first_3d_model -%}
+    <script type="application/json" id="ProductJSON-{{ product.id }}">
+      {{ product.media | where: 'media_type', 'model' | json }}
+    </script>
+    <script src="{{ 'product-model.js' | asset_url }}" defer></script>
+  {%- endif -%}
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      function isIE() {
+        const ua = window.navigator.userAgent;
+        const msie = ua.indexOf('MSIE ');
+        const trident = ua.indexOf('Trident/');
+
+        return (msie > 0 || trident > 0);
+      }
+
+      if (!isIE()) return;
+      const hiddenInput = document.querySelector('#{{ product_form_id }} input[name="id"]');
+      const noScriptInputWrapper = document.createElement('div');
+      const variantSwitcher = document.querySelector('variant-radios[data-section="{{ section.id }}"]') || document.querySelector('variant-selects[data-section="{{ section.id }}"]');
+      noScriptInputWrapper.innerHTML = document.querySelector('.product-form__noscript-wrapper-{{ section.id }}').textContent;
+      variantSwitcher.outerHTML = noScriptInputWrapper.outerHTML;
+
+      document.querySelector('#Variants-{{ section.id }}').addEventListener('change', function(event) {
+        hiddenInput.value = event.currentTarget.value;
+      });
+    });
   </script>
 
-  <script src="{{ 'product-model.js' | asset_url }}" defer></script>
-{%- endif -%}
+  {%- liquid
+    if product.selected_or_first_available_variant.featured_media
+      assign seo_media = product.selected_or_first_available_variant.featured_media
+    else
+      assign seo_media = product.featured_media
+    endif
+  -%}
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    function isIE() {
-      const ua = window.navigator.userAgent;
-      const msie = ua.indexOf('MSIE ');
-      const trident = ua.indexOf('Trident/');
-      return (msie > 0 || trident > 0);
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org/",
+      "@type": "Product",
+      "name": {{ product.title | json }},
+      "url": {{ request.origin | append: product.url | json }},
+      {% if seo_media -%}
+        "image": [
+          {{ seo_media | image_url: width: seo_media.preview_image.width | prepend: "https:" | json }}
+        ],
+      {%- endif %}
+      "description": {{ product.description | strip_html | json }},
+      {% if product.selected_or_first_available_variant.sku != blank -%}
+        "sku": {{ product.selected_or_first_available_variant.sku | json }},
+      {%- endif %}
+      "brand": {
+        "@type": "Brand",
+        "name": {{ product.vendor | json }}
+      },
+      "offers": [
+        {%- for variant in product.variants -%}
+          {
+            "@type" : "Offer",
+            {%- if variant.sku != blank -%}
+              "sku": {{ variant.sku | json }},
+            {%- endif -%}
+            {%- if variant.barcode.size == 12 -%}
+              "gtin12": {{ variant.barcode }},
+            {%- endif -%}
+            {%- if variant.barcode.size == 13 -%}
+              "gtin13": {{ variant.barcode }},
+            {%- endif -%}
+            {%- if variant.barcode.size == 14 -%}
+              "gtin14": {{ variant.barcode }},
+            {%- endif -%}
+            "availability" : "http://schema.org/{% if variant.available %}InStock{% else %}OutOfStock{% endif %}",
+            "price" : {{ variant.price | divided_by: 100.00 | json }},
+            "priceCurrency" : {{ cart.currency.iso_code | json }},
+            "url" : {{ request.origin | append: variant.url | json }}
+          }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ]
     }
-    if (!isIE()) return;
-    const hiddenInput = document.querySelector('#{{ product_form_id }} input[name="id"]');
-    const noScriptInputWrapper = document.createElement('div');
-    const variantSwitcher = document.querySelector('variant-radios[data-section="{{ section.id }}"]') || document.querySelector('variant-selects[data-section="{{ section.id }}"]');
-    noScriptInputWrapper.innerHTML = document.querySelector('.product-form__noscript-wrapper-{{ section.id }}').textContent;
-    variantSwitcher.outerHTML = noScriptInputWrapper.outerHTML;
-    document.querySelector('#Variants-{{ section.id }}').addEventListener('change', function(event) {
-      hiddenInput.value = event.currentTarget.value;
-    });
-  });
-</script>
-
-{%- liquid
-  if product.selected_or_first_available_variant.featured_media
-    assign seo_media = product.selected_or_first_available_variant.featured_media
-  else
-    assign seo_media = product.featured_media
-  endif
--%}
-
-<script type="application/ld+json">
-  {
-    "@context": "http://schema.org/",
-    "@type": "Product",
-    "name": {{ product.title | json }},
-    "url": {{ request.origin | append: product.url | json }},
-    {% if seo_media -%}
-      {%- assign media_size = seo_media.preview_image.width | append: 'x' -%}
-      "image": [
-        {{ seo_media | img_url: media_size | prepend: "https:" | json }}
-      ],
-    {%- endif %}
-    "description": {{ product.description | strip_html | json }},
-    {% if product.selected_or_first_available_variant.sku != blank -%}
-      "sku": {{ product.selected_or_first_available_variant.sku | json }},
-    {%- endif %}
-    "brand": {
-      "@type": "Thing",
-      "name": {{ product.vendor | json }}
-    },
-    "offers": [
-      {%- for variant in product.variants -%}
-        {
-          "@type" : "Offer",
-          {%- if variant.sku != blank -%}
-            "sku": {{ variant.sku | json }},
-          {%- endif -%}
-          "availability" : "http://schema.org/{% if variant.available %}InStock{% else %}OutOfStock{% endif %}",
-          "price" : {{ variant.price | divided_by: 100.00 | json }},
-          "priceCurrency" : {{ cart.currency.iso_code | json }},
-          "url" : {{ request.origin | append: variant.url | json }}
-        }{% unless forloop.last %},{% endunless %}
-      {%- endfor -%}
-    ]
-  }
-</script>
-{% if product.media.size > 0 %}
-  <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
-{% endif %}
+  </script>
+</section>

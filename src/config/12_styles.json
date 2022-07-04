@@ -1,0 +1,30 @@
+
+  {
+    "name": "t:settings_schema.styles.name",
+    "settings": [
+      {
+        "type": "select",
+        "id": "accent_icons",
+        "options": [
+          {
+            "value": "accent-1",
+            "label": "t:sections.all.colors.accent_1.label"
+          },
+          {
+            "value": "accent-2",
+            "label": "t:sections.all.colors.accent_2.label"
+          },
+          {
+            "value": "outline-button",
+            "label": "t:settings_schema.styles.settings.accent_icons.options__3.label"
+          },
+          {
+            "value": "text",
+            "label": "t:settings_schema.styles.settings.accent_icons.options__4.label"
+          }
+        ],
+        "default": "text",
+        "label": "t:settings_schema.styles.settings.accent_icons.label"
+      }
+    ]
+  }

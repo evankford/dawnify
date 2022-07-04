@@ -1,36 +1,51 @@
 {
   "name": "t:sections.newsletter.name",
   "tag": "section",
-  "settings": [{
-        "type": "select",
-        "id": "color_scheme",
-        "options": [{
-            "value": "accent-1",
-            "label": "t:sections.rich-text.settings.color_scheme.options__1.label"
-        }, {
-            "value": "accent-2",
-            "label": "t:sections.rich-text.settings.color_scheme.options__2.label"
-        }, {
-            "value": "background-1",
-            "label": "t:sections.rich-text.settings.color_scheme.options__3.label"
-        }, {
-            "value": "background-2",
-            "label": "t:sections.rich-text.settings.color_scheme.options__4.label"
-        }, {
-            "value": "inverse",
-            "label": "t:sections.rich-text.settings.color_scheme.options__5.label"
-        }],
-        "default": "background-1",
-        "label": "t:sections.rich-text.settings.color_scheme.label"
-    }, {
-        "type": "checkbox",
-        "id": "full_width",
-        "default": true,
-        "label": "t:sections.rich-text.settings.full_width.label"
-    }, {
-        "type": "header",
-        "content": "Section Settings"
-  },  {
+  "class": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "t:sections.all.colors.accent_1.label"
+        },
+        {
+          "value": "accent-2",
+          "label": "t:sections.all.colors.accent_2.label"
+        },
+        {
+          "value": "background-1",
+          "label": "t:sections.all.colors.background_1.label"
+        },
+        {
+          "value": "background-2",
+          "label": "t:sections.all.colors.background_2.label"
+        },
+        {
+          "value": "inverse",
+          "label": "t:sections.all.colors.inverse.label"
+        }
+      ],
+      "default": "background-1",
+      "label": "t:sections.all.colors.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "default": true,
+      "label": "t:sections.newsletter.settings.full_width.label"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.newsletter.settings.paragraph.content"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
       "type": "range",
       "id": "padding_top",
       "min": 0,
@@ -38,7 +53,7 @@
       "step": 4,
       "unit": "px",
       "label": "t:sections.all.padding.padding_top",
-      "default": 36
+      "default": 40
     },
     {
       "type": "range",
@@ -48,93 +63,8 @@
       "step": 4,
       "unit": "px",
       "label": "t:sections.all.padding.padding_bottom",
-      "default": 36
-    }, {
-        "id": "background_color",
-        "label": "Background Color",
-        "type": "color"
-    }, {
-        "id": "text_color",
-        "label": "Text Color",
-        "type": "color"
-    }, {
-        "type": "image_picker",
-        "id": "background_image",
-        "label": "Background Image"
-    },
-       {
-      "type" : "range",
-      "label" : "Background Opacity",
-      "id" : "background_opacity",
-      "default" : 100,
-      "step": 1,
-      "min" : 1,
-      "max" : 100
-    },
-     {
-      "type" : "range",
-      "label" : "Background Position X",
-      "id" : "background_position_x",
-      "default" : 50,
-      "step": 1,
-      "min" : 1,
-      "max" : 100,
-      "unit" : "%"
-    },
-     {
-      "type" : "range",
-      "label" : "Background Position Y",
-      "id" : "background_position_y",
-      "default" : 50,
-      "step": 1,
-      "min" : 1,
-      "max" : 100,
-      "unit" : "%"
-    },
-    {
-        "type": "select",
-        "id": "background_style",
-        "label": "Background Style",
-        "options": [{
-            "group": "Large Image",
-            "value": "cover",
-            "label": "Cover"
-        }, {
-            "group": "Large Image",
-            "value": "contain",
-            "label": "Contain"
-        }, {
-            "group": "Large Image",
-            "value": "fixed",
-            "label": "Fixed"
-        },  {
-          "group" : "Large Image",
-          "value" : "parallax",
-          "label" : "Parallax"
-        },
-        {
-            "group": "Image Pattern",
-            "value": "repeat",
-            "label": "Repeat"
-        }, {
-            "group": "Image Pattern",
-            "value": "repeat-x",
-            "label": "Repeat Horizontally"
-        }, {
-            "group": "Image Pattern",
-            "value": "repeat-y",
-            "label": "Repeat Vertically"
-        }]
-    }, {
-        "type": "text",
-        "id": "title",
-        "label": "Title (for customizer UX)"
-    },
-{
-    "type" : "text",
-    "id" : "id",
-    "label" : "ID - for anchor links"
-}
+      "default": 52
+    }
   ],
   "blocks": [
     {
@@ -147,17 +77,37 @@
           "id": "heading",
           "default": "Subscribe to our emails",
           "label": "t:sections.newsletter.blocks.heading.settings.heading.label"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "options": [
+            {
+              "value": "h2",
+              "label": "t:sections.all.heading_size.options__1.label"
+            },
+            {
+              "value": "h1",
+              "label": "t:sections.all.heading_size.options__2.label"
+            },
+            {
+              "value": "h0",
+              "label": "t:sections.all.heading_size.options__3.label"
+            }
+          ],
+          "default": "h1",
+          "label": "t:sections.all.heading_size.label"
         }
       ]
     },
     {
       "type": "paragraph",
       "name": "t:sections.newsletter.blocks.paragraph.name",
-      "limit": 2,
+      "limit": 1,
       "settings": [
         {
           "type": "richtext",
-          "id": "paragraph",
+          "id": "text",
           "default": "<p>Be the first to know about new collections and exclusive offers.</p>",
           "label": "t:sections.newsletter.blocks.paragraph.settings.paragraph.label"
         }

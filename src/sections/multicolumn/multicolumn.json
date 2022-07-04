@@ -11,6 +11,26 @@
     },
     {
       "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "select",
       "id": "image_width",
       "options": [
         {
@@ -59,7 +79,7 @@
       "min": 1,
       "max": 6,
       "step": 1,
-      "default": 4,
+      "default": 3,
       "label": "t:sections.multicolumn.settings.columns_desktop.label"
     },
     {
@@ -106,12 +126,6 @@
       "label": "t:sections.multicolumn.settings.button_link.label"
     },
     {
-      "type": "checkbox",
-      "id": "swipe_on_mobile",
-      "default": false,
-      "label": "t:sections.multicolumn.settings.swipe_on_mobile.label"
-    },
-    {
       "type": "select",
       "id": "color_scheme",
       "options": [
@@ -140,9 +154,30 @@
       "label": "t:sections.all.colors.label"
     },
     {
+      "type": "header",
+      "content": "t:sections.multicolumn.settings.header_mobile.content"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "t:sections.multicolumn.settings.columns_mobile.options__1.label"
+        },
+        {
+          "value": "2",
+          "label": "t:sections.multicolumn.settings.columns_mobile.options__2.label"
+        }
+      ],
+      "default": "1",
+      "label": "t:sections.multicolumn.settings.columns_mobile.label"
+    },
+    {
       "type": "checkbox",
-      "id" : "enable_button_style",
-      "label" : "Enable Button Style in blocks?"
+      "id": "swipe_on_mobile",
+      "default": false,
+      "label": "t:sections.multicolumn.settings.swipe_on_mobile.label"
     },
     {
       "type": "header",

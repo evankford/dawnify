@@ -1,4 +1,3 @@
-{%- comment -%}Modified: Added label/heading class to DT{%- endcomment -%}
 {{ 'component-cart.css' | asset_url | stylesheet_tag }}
 {{ 'component-cart-items.css' | asset_url | stylesheet_tag }}
 {{ 'component-totals.css' | asset_url | stylesheet_tag }}
@@ -8,8 +7,8 @@
 
 {%- style -%}
   .section-{{ section.id }}-padding {
-    padding-top: calc({{ section.settings.padding_top }}px * 0.75);
-    padding-bottom: calc({{ section.settings.padding_bottom }}px  * 0.75);
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
   }
 
   @media screen and (min-width: 750px) {
@@ -20,22 +19,24 @@
   }
 {%- endstyle -%}
 
-<script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
+{%- unless settings.cart_type == 'drawer' -%}
+  <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
+{%- endunless -%}
 
 <cart-items class="page-width{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}">
   <div class="title-wrapper-with-link">
-    <h1 class="title title--primary heading">{{ 'sections.cart.title' | t }}</h1>
+    <h1 class="title title--primary">{{ 'sections.cart.title' | t }}</h1>
     <a href="{{ routes.all_products_collection_url }}" class="underlined-link">{{ 'general.continue_shopping' | t }}</a>
   </div>
 
   <div class="cart__warnings">
-    <h1 class="cart__empty-text heading">{{ 'sections.cart.empty' | t }}</h1>
+    <h1 class="cart__empty-text">{{ 'sections.cart.empty' | t }}</h1>
     <a href="{{ routes.all_products_collection_url }}" class="button">
       {{ 'general.continue_shopping' | t }}
     </a>
 
     {%- if shop.customer_accounts_enabled and customer == nil -%}
-    <h2 class="cart__login-title">{{ 'sections.cart.login.title' | t }}</h2>
+      <h2 class="cart__login-title">{{ 'sections.cart.login.title' | t }}</h2>
       <p class="cart__login-paragraph">
         {{ 'sections.cart.login.paragraph_html' | t: link: routes.account_login_url }}
       </p>
@@ -47,6 +48,7 @@
       <div class="js-contents">
         {%- if cart != empty -%}
           <table class="cart-items">
+            <caption class="visually-hidden">{{ 'sections.cart.title' | t }}</caption>
             <thead>
               <tr>
                 <th class="caption-with-letter-spacing" colspan="2" scope="col">{{ 'sections.cart.headings.product' | t }}</th>
@@ -63,8 +65,8 @@
                     {% if item.image %}
                       {% comment %} Leave empty space due to a:empty CSS display: none rule {% endcomment %}
                       <a href="{{ item.url }}" class="cart-item__link" aria-hidden="true" tabindex="-1"> </a>
-                      <div class="cart-item__image-container global-media-settings">
-                          <img src="{{ item.image | img_url: '300x' }}"
+                        <div class="cart-item__image-container gradient global-media-settings">
+                          <img src="{{ item.image | image_url: width: 300 }}"
                             class="cart-item__image"
                             alt="{{ item.image.alt | escape }}"
                             loading="lazy"
@@ -76,11 +78,11 @@
                   </td>
 
                   <td class="cart-item__details">
-                    {%- if section.settings.show_vendor -%}
-                      <p class="caption-with-letter-spacing light">{{ item.product.vendor }}</p>
+                    {%- if settings.show_vendor -%}
+                      <p class="caption-with-letter-spacing">{{ item.product.vendor }}</p>
                     {%- endif -%}
 
-                    <a href="{{ item.url }}" class="cart-item__name h4 heading break">{{ item.product.title | escape }}</a>
+                    <a href="{{ item.url }}" class="cart-item__name h4 break">{{ item.product.title | escape }}</a>
 
                     {%- if item.original_price != item.final_price -%}
                       <div class="cart-item__discounted-prices">
@@ -108,7 +110,7 @@
                         {%- if item.product.has_only_default_variant == false -%}
                           {%- for option in item.options_with_values -%}
                             <div class="product-option">
-                              <dt class="label h6">{{ option.name }}: </dt>
+                              <dt>{{ option.name }}: </dt>
                               <dd>{{ option.value }}</dd>
                             </div>
                           {%- endfor -%}
@@ -118,7 +120,7 @@
                           {%- assign property_first_char = property.first | slice: 0 -%}
                           {%- if property.last != blank and property_first_char != '_' -%}
                             <div class="product-option">
-                              <dt class="label h6">{{ property.first }}: </dt>
+                              <dt>{{ property.first }}: </dt>
                               <dd>
                                 {%- if property.last contains '/uploads/' -%}
                                   <a href="{{ property.last }}" class="link" target="_blank">
@@ -147,7 +149,7 @@
                   </td>
 
                   <td class="cart-item__totals right medium-hide large-up-hide">
-                    <div class="hidden loading-overlay">
+                    <div class="loading-overlay hidden">
                       <div class="loading-overlay__spinner">
                         <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
                           <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
@@ -236,7 +238,7 @@
                   </td>
 
                   <td class="cart-item__totals right small-hide">
-                    <div class="hidden loading-overlay">
+                    <div class="loading-overlay hidden">
                       <div class="loading-overlay__spinner">
                         <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
                           <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
@@ -294,16 +296,3 @@
     <p class="visually-hidden" id="shopping-cart-line-item-status" aria-live="polite" aria-hidden="true" role="status">{{ 'accessibility.loading' | t }}</p>
   </form>
 </cart-items>
-
-<style>
-#shopify-section-{{ section.id }} {
-  margin-top: {{ section.settings.padding_top | minus: 5 | divided_by: 3.0 | default: 1 }}rem;
-  margin-bottom: {{ section.settings.padding_bottom | minus: 5 | divided_by: 3.0 | default: 1 }}rem;
-}
-@media (max-width: 749px) {
-  #shopify-section-{{ section.id }} {
-  margin-top: {{ section.settings.padding_top | minus: 5 | divided_by: 6.0 | default: 1 }}rem;
-  margin-bottom: {{ section.settings.padding_bottom | minus: 5 | divided_by: 6.0 | default: 1 }}rem;
-}
-}
-</style>

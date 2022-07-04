@@ -6,12 +6,13 @@
 <div class="page-width{% if cart == empty %} is-empty{% endif %}" id="main-cart-footer" data-id="{{ section.id }}">
   <div>
     <div class="cart__footer">
-      {%- if section.settings.show_cart_note -%}
+      {%- if settings.show_cart_note -%}
         <cart-note class="cart__note field">
           <label for="Cart-note">{{ 'sections.cart.note' | t }}</label>
           <textarea class="text-area field__input" name="note" form="cart" id="Cart-note" placeholder="{{ 'sections.cart.note' | t }}">{{ cart.note }}</textarea>
         </cart-note>
       {%- endif -%}
+
       <div class="cart__blocks">
         {% for block in section.blocks %}
           {%- case block.type -%}
@@ -20,7 +21,7 @@
             {%- when 'subtotal' -%}
               <div class="js-contents" {{ block.shopify_attributes }}>
                 <div class="totals">
-                  <h3 class="totals__subtotal label h4">{{ 'sections.cart.subtotal' | t }}</h3>
+                  <h2 class="totals__subtotal">{{ 'sections.cart.subtotal' | t }}</h2>
                   <p class="totals__subtotal-value">{{ cart.total_price | money_with_currency }}</p>
                 </div>
 

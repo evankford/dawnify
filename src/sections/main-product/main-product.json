@@ -1,7 +1,7 @@
 {
   "name": "t:sections.main-product.name",
   "tag": "section",
-  "class": "product-section",
+  "class": "section",
   "blocks": [
     {
       "type": "@app"
@@ -44,21 +44,9 @@
       "limit": 1
     },
     {
-      "type": "tag",
-      "name": "Visible Tag",
-      "limit": 1
-    },
-    {
       "type": "price",
       "name": "t:sections.main-product.blocks.price.name",
-      "limit": 1,
-      "settings" : [
-        {
-          "type" : "checkbox",
-          "id" : "show_installments",
-          "label" : "t:sections.main-product.blocks.price.settings.show_installments"
-        }
-      ]
+      "limit": 1
     },
     {
       "type": "quantity_selector",
@@ -103,63 +91,11 @@
       ]
     },
     {
-      "type" : "required_checkbox",
-      "limit" : 4,
-      "name" : "Checkbox",
-      "settings" : [
-        {
-          "type": "header",
-          "content" : "Warning:",
-          "info" : "These will show on all products with this template."
-        },
-        {
-          "type" : "text",
-          "id" : "id",
-          "label" : "ID",
-          "info" : "The Name of the property that will be stored as a product line item property.",
-          "default" : "Required Field"
-        },
-        {
-          "type" : "text",
-          "id" : "heading",
-          "label" : "Heading",
-          "default" : "Check this box to consent"
-        },
-        {
-          "type" : "text",
-          "id" : "text",
-          "label" : "Text"
-        }
-      ]
-    },
-    {
-      "type" : "pre_order",
-      "limit" : 1,
-      "name" : "Pre-Order Warning",
-      "settings" : [
-        {
-          "type" : "paragraph",
-          "content" : "To enable, use the tag 'Pre-Order' on a product, or set product.metafields.dawnify.pre-order . You may use metafields to populate the acceptance text, they have sensible fallback text."
-        },
-        {
-          "type" : "text",
-          "id" : "heading",
-          "label" : "Heading",
-          "default" : "I understand this item is a pre-order"
-        },
-        {
-          "type" : "text",
-          "id" : "text",
-          "label" : "Text"
-        }
-      ]
-    },
-    {
       "type": "description",
       "name": "t:sections.main-product.blocks.description.name",
       "limit": 1
     },
-     {
+    {
       "type": "share",
       "name": "t:sections.main-product.blocks.share.name",
       "limit": 1,
@@ -177,6 +113,18 @@
         {
           "type": "paragraph",
           "content": "t:sections.main-product.blocks.share.settings.title_info.content"
+        }
+      ]
+    },
+    {
+      "type": "custom_liquid",
+      "name": "t:sections.main-product.blocks.custom_liquid.name",
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "custom_liquid",
+          "label": "t:sections.main-product.blocks.custom_liquid.settings.custom_liquid.label",
+          "info": "t:sections.main-product.blocks.custom_liquid.settings.custom_liquid.info"
         }
       ]
     },
@@ -387,14 +335,13 @@
         }
       ]
     },
-
     {
       "type": "popup",
       "name": "t:sections.main-product.blocks.popup.name",
       "settings": [
         {
           "type": "text",
-          "id": "link_label",
+          "id": "text",
           "default": "Pop-up link text",
           "label": "t:sections.main-product.blocks.popup.settings.link_label.label"
         },
@@ -407,28 +354,22 @@
     },
     {
       "type": "rating",
-      "name": "t:sections.featured-product.blocks.rating.name",
+      "name": "t:sections.main-product.blocks.rating.name",
       "limit": 1,
       "settings": [
         {
           "type": "paragraph",
-          "content": "t:sections.featured-product.blocks.rating.settings.paragraph.content"
+          "content": "t:sections.main-product.blocks.rating.settings.paragraph.content"
         }
       ]
     }
   ],
   "settings": [
-   {
+    {
       "type": "checkbox",
       "id": "enable_sticky_info",
       "default": true,
       "label": "t:sections.main-product.settings.enable_sticky_info.label"
-    },
-   {
-      "type": "checkbox",
-      "id": "centerish",
-      "default": true,
-      "label": "V Center description"
     },
     {
       "type": "header",
@@ -451,11 +392,11 @@
           "value": "thumbnail_slider",
           "label": "t:sections.main-product.settings.gallery_layout.options__3.label"
         }
-    ],
-    "default": "stacked",
-    "label": "t:sections.main-product.settings.gallery_layout.label"
+      ],
+      "default": "stacked",
+      "label": "t:sections.main-product.settings.gallery_layout.label"
     },
-     {
+    {
       "type": "select",
       "id": "media_size",
       "options": [
@@ -504,29 +445,9 @@
       "default": false,
       "label": "t:sections.main-product.settings.enable_video_looping.label"
     },
-
     {
-      "type": "checkbox",
-      "id": "breadcrumbs",
-      "default": false,
-      "label": "Enable Breadcrumbs"
-    },
-    {
-      "type": "checkbox",
-      "id": "zoom",
-      "default": true,
-      "label": "Enable Hover Zoom"
-    },
-    {
-      "type": "checkbox",
-      "id": "disable_image_modal",
-      "default": true,
-      "label": "Disable image modal"
-    },
-    {
-      "type" : "header",
-      "content"  :"Spacing",
-      "info" : "Only works when no image"
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
     },
     {
       "type": "range",
@@ -536,7 +457,7 @@
       "step": 4,
       "unit": "px",
       "label": "t:sections.all.padding.padding_top",
-      "default": 12
+      "default": 36
     },
     {
       "type": "range",
@@ -546,7 +467,7 @@
       "step": 4,
       "unit": "px",
       "label": "t:sections.all.padding.padding_bottom",
-      "default": 12
+      "default": 36
     }
   ]
 }

@@ -190,7 +190,7 @@
   }
 
   .banner:not(.banner--mobile-bottom):not(.email-signup-banner) .banner__box {
-    background-color: transparent;
+    background: transparent;
     --color-foreground: 255, 255, 255;
     --color-button: 255, 255, 255;
     --color-button-text: 0, 0, 0;
@@ -315,15 +315,9 @@
   z-index: 1;
 }
 
-@media screen and (max-width: 600px) {
-  .banner__box {
-    padding: 4rem 2rem;
-  }
-}
-
 @media screen and (min-width: 750px) {
   .banner--desktop-transparent .banner__box {
-    background-color: transparent;
+    background: transparent;
     --color-foreground: 255, 255, 255;
     --color-button: 255, 255, 255;
     --color-button-text: 0, 0, 0;
@@ -437,4 +431,8 @@
   .banner--content-align-right .banner__buttons--multiple {
     justify-content: flex-end;
   }
+}
+
+.banner__box > * + .banner__buttons {
+  margin-top: 2rem;
 }

@@ -1,42 +1,88 @@
 {
-    "name": "t:sections.rich-text.name",
-    "tag": "section",
-    "settings": [{
-        "type": "select",
-        "id": "color_scheme",
-        "options": [{
-                "value": "transparent-dark",
-                "label": "Dark Text (no bg)"
-            }, {
-                "value": "transparent-light",
-                "label": "Light Text (no bg)"
-            }, {
-                "value": "accent-1",
-                "label": "t:sections.image-banner.settings.color_scheme.options__1.label"
-            }, {
-                "value": "accent-2",
-                "label": "t:sections.image-banner.settings.color_scheme.options__2.label"
-            }, {
-                "value": "background-1",
-                "label": "t:sections.image-banner.settings.color_scheme.options__3.label"
-            }, {
-                "value": "background-2",
-                "label": "t:sections.image-banner.settings.color_scheme.options__4.label"
-            }, {
-                "value": "inverse",
-                "label": "t:sections.image-banner.settings.color_scheme.options__5.label"
-            }],
-        "default": "background-1",
-        "label": "t:sections.rich-text.settings.color_scheme.label"
-    }, {
-        "type": "checkbox",
-        "id": "full_width",
-        "default": true,
-        "label": "t:sections.rich-text.settings.full_width.label"
-    }, {
-        "type": "header",
-        "content": "Section Settings"
-    },  {
+  "name": "t:sections.rich-text.name",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "desktop_content_position",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.rich-text.settings.desktop_content_position.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.rich-text.settings.desktop_content_position.options__2.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.rich-text.settings.desktop_content_position.options__3.label"
+        }
+      ],
+      "default": "center",
+      "label": "t:sections.rich-text.settings.desktop_content_position.label",
+      "info": "t:sections.rich-text.settings.desktop_content_position.info"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.rich-text.settings.content_alignment.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.rich-text.settings.content_alignment.options__2.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.rich-text.settings.content_alignment.options__3.label"
+        }
+      ],
+      "default": "center",
+      "label": "t:sections.rich-text.settings.content_alignment.label"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "t:sections.all.colors.accent_1.label"
+        },
+        {
+          "value": "accent-2",
+          "label": "t:sections.all.colors.accent_2.label"
+        },
+        {
+          "value": "background-1",
+          "label": "t:sections.all.colors.background_1.label"
+        },
+        {
+          "value": "background-2",
+          "label": "t:sections.all.colors.background_2.label"
+        },
+        {
+          "value": "inverse",
+          "label": "t:sections.all.colors.inverse.label"
+        }
+      ],
+      "default": "background-1",
+      "label": "t:sections.all.colors.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "default": true,
+      "label": "t:sections.rich-text.settings.full_width.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
       "type": "range",
       "id": "padding_top",
       "min": 0,
@@ -44,7 +90,7 @@
       "step": 4,
       "unit": "px",
       "label": "t:sections.all.padding.padding_top",
-      "default": 36
+      "default": 40
     },
     {
       "type": "range",
@@ -54,473 +100,166 @@
       "step": 4,
       "unit": "px",
       "label": "t:sections.all.padding.padding_bottom",
-      "default": 36
-    }, {
-        "id": "background_color",
-        "label": "Background Color",
-        "type": "color"
-    }, {
-        "id": "text_color",
-        "label": "Text Color",
-        "type": "color"
-    }, {
-        "type": "image_picker",
-        "id": "background_image",
-        "label": "Background Image"
-    },
-     {
-      "type" : "range",
-      "label" : "Background Opacity",
-      "id" : "background_opacity",
-      "default" : 100,
-      "step": 1,
-      "min" : 1,
-      "max" : 100
-    },
-     {
-      "type" : "range",
-      "label" : "Background Position X",
-      "id" : "background_position_x",
-      "default" : 50,
-      "step": 1,
-      "min" : 1,
-      "max" : 100,
-      "unit" : "%"
-    },
-     {
-      "type" : "range",
-      "label" : "Background Position Y",
-      "id" : "background_position_y",
-      "default" : 50,
-      "step": 1,
-      "min" : 1,
-      "max" : 100,
-      "unit" : "%"
-    },
-
+      "default": 52
+    }
+  ],
+  "blocks": [
     {
-        "type": "select",
-        "id": "background_style",
-        "label": "Background Style",
-        "options": [{
-            "group": "Large Image",
-            "value": "cover",
-            "label": "Cover"
-        }, {
-            "group": "Large Image",
-            "value": "contain",
-            "label": "Contain"
-        }, {
-            "group": "Large Image",
-            "value": "fixed",
-            "label": "Fixed"
-        },  {
-          "group" : "Large Image",
-          "value" : "parallax",
-          "label" : "Parallax"
+      "type": "heading",
+      "name": "t:sections.rich-text.blocks.heading.name",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "heading",
+          "default": "<p>Talk about your brand</p>",
+          "label": "t:sections.rich-text.blocks.heading.settings.heading.label"
         },
         {
-            "group": "Image Pattern",
-            "value": "repeat",
-            "label": "Repeat"
-        }, {
-            "group": "Image Pattern",
-            "value": "repeat-x",
-            "label": "Repeat Horizontally"
-        }, {
-            "group": "Image Pattern",
-            "value": "repeat-y",
-            "label": "Repeat Vertically"
-        }]
-    },
-{
-    "type" : "text",
-    "id" : "id",
-    "label" : "ID - for anchor links"
-}],
-    "blocks": [{
-        "type": "label",
-        "name": "Label",
-        "settings": [
-        {
-            "type": "text",
-            "id": "heading",
-            "default": "Talk about your brand",
-            "label": "t:sections.rich-text.blocks.heading.settings.heading.label"
-        }, {
-            "type": "select",
-            "id": "heading_size",
-            "options": [{
-                "value": "small",
-                "label": "t:sections.rich-text.blocks.heading.settings.heading_size.options__1.label"
-            }, {
-                "value": "medium",
-                "label": "t:sections.rich-text.blocks.heading.settings.heading_size.options__2.label"
-            }, {
-                "value": "large",
-                "label": "Large"
-            }],
-            "default": "medium",
-            "label": "t:sections.rich-text.blocks.heading.settings.heading_size.label"
-        }]
-    }, {
-        "type": "html",
-        "name": "HTML",
-        "limit": 3,
-        "settings": [{
-            "type": "html",
-            "id": "html",
-            "label": "HTML"
-        }, {
-            "type": "select",
-            "id": "size",
-            "options": [{
-                "value": "small",
-                "label": "t:sections.rich-text.blocks.heading.settings.heading_size.options__1.label"
-            }, {
-                "value": "medium",
-                "label": "t:sections.rich-text.blocks.heading.settings.heading_size.options__2.label"
-            }, {
-                "value": "large",
-                "label": "Large"
-            }, {
-                "value": "full",
-                "label": "Full-width"
-            }, {
-                "value": "video",
-                "label": "Video"
-            }],
-            "default": "medium",
-            "label": "Size"
-        }]
-    }, {
-        "type": "socials",
-        "name": "Socials",
-        "limit" : 1
-    }, {
-        "type": "heading",
-        "name": "t:sections.rich-text.blocks.heading.name",
-        "settings": [{
-            "type": "text",
-            "id": "heading",
-            "default": "Talk about your brand",
-            "label": "t:sections.rich-text.blocks.heading.settings.heading.label"
-        },  {
-            "type" : "url",
-            "id" : "url",
-            "label" : "URL",
-            "info": "Should usually be blank"
+          "type": "select",
+          "id": "heading_size",
+          "options": [
+            {
+              "value": "h2",
+              "label": "t:sections.all.heading_size.options__1.label"
             },
             {
-            "type": "select",
-            "id": "heading_size",
-            "options": [{
-                "value": "small",
-                "label": "t:sections.rich-text.blocks.heading.settings.heading_size.options__1.label"
-            }, {
-                "value": "medium",
-                "label": "t:sections.rich-text.blocks.heading.settings.heading_size.options__2.label"
-            }, {
-                "value": "large",
-                "label": "Large"
-            }],
-            "default": "medium",
-            "label": "t:sections.rich-text.blocks.heading.settings.heading_size.label"
-        }]
-    }, {
-        "type": "text",
-        "name": "t:sections.rich-text.blocks.text.name",
-        "limit": 1,
-        "settings": [{
-            "type": "richtext",
-            "id": "text",
-            "default": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
-            "label": "t:sections.rich-text.blocks.text.settings.text.label"
-        }, {
-            "type": "select",
-            "id": "heading_size",
-            "options": [{
-                "value": "small",
-                "label": "t:sections.rich-text.blocks.heading.settings.heading_size.options__1.label"
-            }, {
-                "value": "medium",
-                "label": "t:sections.rich-text.blocks.heading.settings.heading_size.options__2.label"
-            }, {
-                "value": "large",
-                "label": "Large"
-            }],
-            "default": "medium",
-            "label": "t:sections.rich-text.blocks.heading.settings.heading_size.label"
-        }]
-    }, {
-        "type": "button",
-        "name": "t:sections.rich-text.blocks.button.name",
-        "limit": 1,
-        "settings": [{
-            "type": "text",
-            "id": "button_label",
-            "default": "Button label",
-            "label": "t:sections.rich-text.blocks.button.settings.button_label.label"
-        }, {
-            "type": "url",
-            "id": "button_link",
-            "label": "t:sections.rich-text.blocks.button.settings.button_link.label"
-        }, {
-            "type": "checkbox",
-            "id": "button_style_secondary",
-            "default": false,
-            "label": "t:sections.rich-text.blocks.button.settings.button_style_secondary.label"
-        }, {
-            "type": "checkbox",
-            "id": "target_blank",
-            "default": false,
-            "label": "Open in new window?"
-        }]
-    },
-    {
-      "type" : "tour",
-      "name" : "Tour Dates",
-      "settings" : [
-          {
-              "type" : "header",
-              "content" : "Widget Settings"
-          },
-          {
-            "type": "select",
-            "id": "size",
-            "options": [{
-                "value": "small",
-                "label": "t:sections.rich-text.blocks.heading.settings.heading_size.options__1.label"
-            }, {
-                "value": "medium",
-                "label": "t:sections.rich-text.blocks.heading.settings.heading_size.options__2.label"
-            }, {
-                "value": "large",
-                "label": "Large"
-            }, {
-                "value": "full",
-                "label": "Full-width"
-            }, {
-                "value": "video",
-                "label": "Video"
-            }],
-            "default": "medium",
-            "label": "Size"
-        },
-          {
-              "type" : "select",
-              "id" : "provider",
-              "label" : "Tour Dates Provider",
-              "default" : "bandsintown",
-              "options" : [
-                  {
-                      "value" : "bandsintown",
-                      "label" : "Bandsintown"
-                  },
-                  {
-                      "value" : "seated",
-                      "label" : "Seated"
-                  }
-              ]
-          },
-          {
-              "type" : "text",
-              "id" : "artist",
-              "label" : "Artist ID/Name",
-              "info" : "For bandsintown, the name or id_${number} should work. For seated, you should have a 30 or so character id with a number of hyphens. "
-          },{
-              "type" : "range",
-              "id" : "limit",
-              "default" : 8,
-              "max" : 99,
-              "min" : 0,
-              "label" : "Limit"
-          },   {
-              "type" : "checkbox",
-              "id" : "load_more",
-              "label" : "Load More",
-              "default" : true,
-              "info" : "Show a 'More Dates' | 'Less Dates' button"
-          },{
-              "type" : "select",
-              "id" : "date_format",
-              "label" : "Date Format",
-              "options" : [
-                  {
-                      "value" : "long numbers",
-                      "label": "Long Numbers"
-                  },
-                  {
-                      "value" : "long words",
-                      "label": "Long Words"
-                  },
-                  {
-                      "value" : "short numbers",
-                      "label": "Short Numbers"
-                  },
-                  {
-                      "value" : "short words",
-                      "label": "Short Words"
-                  }
-              ]
-          },
-          {
-              "type" : "checkbox",
-              "id" : "show_lineup",
-              "label" : "Show Lineup"
-          },
-          {
-              "type" : "checkbox",
-              "id" : "show_year",
-              "label" : "Show Year"
-          },
-          {
-              "type" : "header",
-              "content" : "Fallback Texts"
-          },
-          {
-              "type" : "text",
-              "label" : "Loading Title",
-              "id" : "loading_title",
-              "default" : "Loading tour dates",
-              "info" : "Shown when section is loading"
-          },
-
-          {
-              "type" : "text",
-              "label" : "Fallback Title",
-              "id" : "fallback_title",
-              "default" : "No dates found",
-              "info" : "Shown when no dates are found"
-          },
-          {
-              "type" : "richtext",
-              "label" : "Fallback Content",
-              "id" : "fallback",
-              "default" : "<p>Check back soon or follow for more news.</p>",
-              "info" : "Shown when no dates are found"
-          },
-          {
-              "type" : "header",
-              "content" : "advanced"
-          },
-          {
-              "id" : "custom_style",
-              "type": "html",
-              "label" : "Custom Style"
-          },{
-              "type" : "text",
-              "id" : "app_id",
-              "label" : "App ID",
-              "default" : "5234ca141a91a3721bdc34b061d329a2",
-              "info" : "Only for bandsintown. You may get rate-limited and need to reach out to bandsintown for a new APP id for this site."
-          },
-          {
-              "type" : "text",
-              "id" : "filter",
-              "label" : "Filter String",
-              "info" : "Will look for this string exactly in the venue or location name, and only include IF IT MATCHES."
-          }
+              "value": "h1",
+              "label": "t:sections.all.heading_size.options__2.label"
+            },
+            {
+              "value": "h0",
+              "label": "t:sections.all.heading_size.options__3.label"
+            },
+            {
+              "value": "hxl",
+              "label": "t:sections.all.heading_size.options__4.label"
+            }
+          ],
+          "default": "h1",
+          "label": "t:sections.all.heading_size.label"
+        }
       ]
-  }],
-    "presets": [{
-        "name": "t:sections.rich-text.presets.name",
-        "blocks": [{
-            "type": "heading"
-        }, {
-            "type": "text"
-        }, {
-            "type": "button"
-        }]
     },
     {
-        "name" : "Tour Dates",
-        "settings" : {
-            "color_scheme": "reverse"
+      "type": "caption",
+      "name": "t:sections.rich-text.blocks.caption.name",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "caption",
+          "default": "Add a tagline",
+          "label": "t:sections.rich-text.blocks.caption.settings.text.label"
         },
-        "blocks" :[
+        {
+          "type": "select",
+          "id": "text_style",
+          "options": [
             {
-                "type" : "label",
-                "settings" : {
-                    "heading" : "Upcoming"
-                }
+              "value": "subtitle",
+              "label": "t:sections.rich-text.blocks.caption.settings.text_style.options__1.label"
             },
             {
-                "type" : "heading",
-                "settings" : {
-                    "heading" : "Tour Dates"
-                }
-            },
-            {
-                "type" : "tour"
+              "value": "caption-with-letter-spacing",
+              "label": "t:sections.rich-text.blocks.caption.settings.text_style.options__2.label"
             }
-        ]
+          ],
+          "default": "caption-with-letter-spacing",
+          "label": "t:sections.rich-text.blocks.caption.settings.text_style.label"
+        },
+        {
+          "type": "select",
+          "id": "text_size",
+          "options": [
+            {
+              "value": "small",
+              "label": "t:sections.rich-text.blocks.caption.settings.caption_size.options__1.label"
+            },
+            {
+              "value": "medium",
+              "label": "t:sections.rich-text.blocks.caption.settings.caption_size.options__2.label"
+            },
+            {
+              "value": "large",
+              "label": "t:sections.rich-text.blocks.caption.settings.caption_size.options__3.label"
+            }
+          ],
+          "default": "medium",
+          "label": "t:sections.rich-text.blocks.caption.settings.caption_size.label"
+        }
+      ]
     },
     {
-        "name": "Instagram",
-        "settings": {
+      "type": "text",
+      "name": "t:sections.rich-text.blocks.text.name",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
+          "label": "t:sections.rich-text.blocks.text.settings.text.label"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "t:sections.rich-text.blocks.buttons.name",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_label",
+          "default": "Button label",
+          "label": "t:sections.rich-text.blocks.buttons.settings.button_label_1.label",
+          "info": "t:sections.rich-text.blocks.buttons.settings.button_label_1.info"
         },
-        "blocks": [{
-            "type": "label",
-            "settings": {
-                "heading": "follow on"
-            }
-        }, {
-            "type": "heading",
-            "settings": {
-                "heading": "Instagram"
-            }
-        }, {
-            "type": "html",
-            "settings": {
-                "html": "<script src=\"https://apps.elfsight.com/p/platform.js\" defer></script><div class=\"elfsight-app-5c5c5c20-8dff-446a-aa50-588a4eef61c5\"></div>"
-            }
-        }, {
-            "type": "label",
-            "settings": {
-                "heading": "+ more"
-            }
-        }, {
-            "type": "socials"
-        }, {
-            "type": "button",
-            "settings": {
-                "button_link": "https://instagram.com",
-                "button_label": "More Photos"
-            }
-        }]
-    },
-  {
-    "name": "Embed w/ Text",
-    "settings": {
-    },
-    "blocks": [
-      {
-        "type": "label",
-        "settings": {
-          "heading": "watch"
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "t:sections.rich-text.blocks.buttons.settings.button_link_1.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_style_secondary",
+          "default": false,
+          "label": "t:sections.rich-text.blocks.buttons.settings.button_style_secondary_1.label"
+        },
+        {
+          "type": "text",
+          "id": "button_label_2",
+          "label": "t:sections.rich-text.blocks.buttons.settings.button_label_2.label",
+          "info": "t:sections.rich-text.blocks.buttons.settings.button_label_2.info"
+        },
+        {
+          "type": "url",
+          "id": "button_link_2",
+          "label": "t:sections.rich-text.blocks.buttons.settings.button_link_2.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_style_secondary_2",
+          "default": false,
+          "label": "t:sections.rich-text.blocks.buttons.settings.button_style_secondary_2.label"
         }
-      },
-      {
-        "type": "heading",
-        "settings": {
-          "heading": "The New Video"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.rich-text.presets.name",
+      "blocks": [
+        {
+          "type": "heading"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "button"
         }
-      },
-      {
-        "type": "html",
-        "settings": {
-          "html": "<h3>Iframe goes here</h3>"
-        }
-      },
-      {
-        "type": "button",
-        "settings": {
-          "button_link": "https://youtube.com",
-          "button_label": "More Videos"
-        }
-      }
-    ]
-  }
-]
+      ]
+    }
+  ]
 }

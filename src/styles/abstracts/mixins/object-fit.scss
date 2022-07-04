@@ -1,6 +1,0 @@
-
-@mixin object-fit($style: cover, $position: 50% 50%) {
-  object-fit: $style;
-  object-position: $position;
-  font-family: "object-fit: #{$style}; object-position: #{$position};";
-}

@@ -2,15 +2,12 @@
   "name": "t:sections.main-page.name",
   "tag": "section",
   "class": "section",
-  "settings" : [
+  "settings": [
     {
-
-      "id" : "show_title",
-      "label" : "Show Page Title?",
-      "type" : "checkbox",
-      "default" : true
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
     },
-     {
+    {
       "type": "range",
       "id": "padding_top",
       "min": 0,
@@ -18,7 +15,7 @@
       "step": 4,
       "unit": "px",
       "label": "t:sections.all.padding.padding_top",
-      "default": 40
+      "default": 36
     },
     {
       "type": "range",
@@ -28,7 +25,7 @@
       "step": 4,
       "unit": "px",
       "label": "t:sections.all.padding.padding_bottom",
-      "default": 52
+      "default": 36
     }
   ]
 }

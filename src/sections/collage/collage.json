@@ -11,6 +11,26 @@
     },
     {
       "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.all.heading_size.options__3.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "select",
       "id": "desktop_layout",
       "options": [
         {
@@ -158,7 +178,7 @@
             "youtube",
             "vimeo"
           ],
-          "default": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+          "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
           "label": "t:sections.collage.blocks.video.settings.video_url.label",
           "placeholder": "t:sections.collage.blocks.video.settings.video_url.placeholder",
           "info": "t:sections.collage.blocks.video.settings.video_url.info"

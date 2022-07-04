@@ -1,8 +1,11 @@
 {
   "name": "t:sections.featured-product.name",
   "tag": "section",
-  "class": "featured-product-section section section--full-width",
+  "class": "section section-featured-product",
   "blocks": [
+    {
+      "type": "@app"
+    },
     {
       "type": "text",
       "name": "t:sections.featured-product.blocks.text.name",
@@ -38,62 +41,27 @@
     {
       "type": "title",
       "name": "t:sections.featured-product.blocks.title.name",
-      "limit": 1
-    },
-    {
-      "type": "tag",
-      "name": "Visible Tag",
-      "limit": 1
-    },
-     {
-      "type" : "required_checkbox",
-      "limit" : 4,
-      "name" : "Checkbox",
-      "settings" : [
+      "limit": 1,
+      "settings": [
         {
-          "type": "header",
-          "content" : "Warning:",
-          "info" : "These will show on all products with this template."
-        },
-        {
-          "type" : "text",
-          "id" : "id",
-          "label" : "ID",
-          "info" : "The Name of the property that will be stored as a product line item property.",
-          "default" : "Required Field"
-        },
-        {
-          "type" : "text",
-          "id" : "heading",
-          "label" : "Heading",
-          "default" : "Check this box to consent"
-        },
-        {
-          "type" : "text",
-          "id" : "text",
-          "label" : "Text"
-        }
-      ]
-    },
-    {
-      "type" : "pre_order",
-      "limit" : 1,
-      "name" : "Pre-Order Warning",
-      "settings" : [
-        {
-          "type" : "paragraph",
-          "content" : "To enable, use the tag 'Pre-Order' on a product, or set product.metafields.dawnify.pre-order . You may use metafields to populate the acceptance text, they have sensible fallback text."
-        },
-        {
-          "type" : "text",
-          "id" : "heading",
-          "label" : "Heading",
-          "default" : "I understand this item is a pre-order"
-        },
-        {
-          "type" : "text",
-          "id" : "text",
-          "label" : "Text"
+          "type": "select",
+          "id": "heading_size",
+          "options": [
+            {
+              "value": "h2",
+              "label": "t:sections.all.heading_size.options__1.label"
+            },
+            {
+              "value": "h1",
+              "label": "t:sections.all.heading_size.options__2.label"
+            },
+            {
+              "value": "h0",
+              "label": "t:sections.all.heading_size.options__3.label"
+            }
+          ],
+          "default": "h1",
+          "label": "t:sections.all.heading_size.label"
         }
       ]
     },
@@ -195,6 +163,34 @@
       "label": "t:sections.featured-product.settings.product.label"
     },
     {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "t:sections.all.colors.accent_1.label"
+        },
+        {
+          "value": "accent-2",
+          "label": "t:sections.all.colors.accent_2.label"
+        },
+        {
+          "value": "background-1",
+          "label": "t:sections.all.colors.background_1.label"
+        },
+        {
+          "value": "background-2",
+          "label": "t:sections.all.colors.background_2.label"
+        },
+        {
+          "value": "inverse",
+          "label": "t:sections.all.colors.inverse.label"
+        }
+      ],
+      "default": "background-1",
+      "label": "t:sections.all.colors.label"
+    },
+    {
       "type": "checkbox",
       "id": "secondary_background",
       "default": false,
@@ -216,10 +212,12 @@
       "id": "enable_video_looping",
       "default": false,
       "label": "t:sections.featured-product.settings.enable_video_looping.label"
-    },{
-        "type": "header",
-        "content": "Section Settings"
-    },   {
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
       "type": "range",
       "id": "padding_top",
       "min": 0,
@@ -238,68 +236,7 @@
       "unit": "px",
       "label": "t:sections.all.padding.padding_bottom",
       "default": 36
-    },{
-        "id": "background_color",
-        "label": "Background Color",
-        "type": "color"
-    }, {
-        "id": "text_color",
-        "label": "Text Color",
-        "type": "color"
-    }, {
-        "type": "image_picker",
-        "id": "background_image",
-        "label": "Background Image"
-    },
-     {
-      "type" : "range",
-      "label" : "Background Opacity",
-      "id" : "background_opacity",
-      "default" : 100,
-      "step": 1,
-      "min" : 1,
-      "max" : 100
-    },
-
-    {
-        "type": "select",
-        "id": "background_style",
-        "label": "Background Style",
-        "options": [{
-            "group": "Large Image",
-            "value": "cover",
-            "label": "Cover"
-        }, {
-            "group": "Large Image",
-            "value": "contain",
-            "label": "Contain"
-        }, {
-            "group": "Large Image",
-            "value": "fixed",
-            "label": "Fixed"
-        }, {
-            "group": "Image Pattern",
-            "value": "repeat",
-            "label": "Repeat"
-        }, {
-            "group": "Image Pattern",
-            "value": "repeat-x",
-            "label": "Repeat Horizontally"
-        }, {
-            "group": "Image Pattern",
-            "value": "repeat-y",
-            "label": "Repeat Vertically"
-        }]
-    }, {
-        "type": "text",
-        "id": "title",
-        "label": "Title (for customizer UX)"
-    },
-{
-    "type" : "text",
-    "id" : "id",
-    "label" : "ID - for anchor links"
-}
+    }
   ],
   "presets": [
     {

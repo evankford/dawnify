@@ -1,25 +1,93 @@
 {
   "name": "t:sections.header.name",
+  "class": "section-header",
   "settings": [
     {
-      "type" : "header",
-      "content" : "About The Header"
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "t:sections.all.colors.accent_1.label"
+        },
+        {
+          "value": "accent-2",
+          "label": "t:sections.all.colors.accent_2.label"
+        },
+        {
+          "value": "background-1",
+          "label": "t:sections.all.colors.background_1.label"
+        },
+        {
+          "value": "background-2",
+          "label": "t:sections.all.colors.background_2.label"
+        },
+        {
+          "value": "inverse",
+          "label": "t:sections.all.colors.inverse.label"
+        }
+      ],
+      "default": "background-1",
+      "label": "t:sections.all.colors.label"
     },
     {
-      "type" : "paragraph",
-      "content" : "Use blocks to add content and the header. You can hide/show different blocks on mobile, medium, and large screens."
-    },
-
-     {
-      "type" : "header",
-      "content" : "General Settings"
+      "type": "image_picker",
+      "id": "logo",
+      "label": "t:sections.header.settings.logo.label"
     },
     {
-      "type": "checkbox",
-      "id": "enable_overlay",
-      "default": false,
-      "info" : "Overlays header over image banner sections if they are the first section",
-      "label": "Overlay header?"
+      "type": "range",
+      "id": "logo_width",
+      "min": 50,
+      "max": 250,
+      "step": 10,
+      "default": 100,
+      "unit": "t:sections.header.settings.logo_width.unit",
+      "label": "t:sections.header.settings.logo_width.label"
+    },
+    {
+      "type": "select",
+      "id": "logo_position",
+      "options": [
+        {
+          "value": "middle-left",
+          "label": "t:sections.header.settings.logo_position.options__1.label"
+        },
+        {
+          "value": "top-left",
+          "label": "t:sections.header.settings.logo_position.options__2.label"
+        },
+        {
+          "value": "top-center",
+          "label": "t:sections.header.settings.logo_position.options__3.label"
+        }
+      ],
+      "default": "middle-left",
+      "label": "t:sections.header.settings.logo_position.label",
+      "info": "t:sections.header.settings.logo_position.info"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "main-menu",
+      "label": "t:sections.header.settings.menu.label"
+    },
+    {
+      "type": "select",
+      "id": "menu_type_desktop",
+      "options": [
+        {
+          "value": "dropdown",
+          "label": "t:sections.header.settings.menu_type_desktop.options__1.label"
+        },
+        {
+          "value": "mega",
+          "label": "t:sections.header.settings.menu_type_desktop.options__2.label"
+        }
+      ],
+      "default": "dropdown",
+      "label": "t:sections.header.settings.menu_type_desktop.label",
+      "info": "t:sections.header.settings.menu_type_desktop.info"
     },
     {
       "type": "checkbox",
@@ -29,529 +97,48 @@
     },
     {
       "type": "checkbox",
-      "id": "enable_shadow",
+      "id": "enable_sticky_header",
       "default": true,
-      "label": "Enable Shadow"
+      "label": "t:sections.header.settings.enable_sticky_header.label",
+      "info": "t:sections.header.settings.enable_sticky_header.info"
     },
     {
-      "type" : "header",
-      "content" : "Colors"
+      "type": "header",
+      "content": "t:sections.all.spacing"
     },
     {
-      "type": "select",
-      "id": "color_scheme",
-      "options": [
-        {
-          "value": "none",
-          "label": "None"
-        },
-        {
-          "value": "accent-1",
-          "label": "t:sections.footer.settings.color_scheme.options__1.label"
-        },
-        {
-          "value": "accent-2",
-          "label": "t:sections.footer.settings.color_scheme.options__2.label"
-        },
-        {
-          "value": "background-1",
-          "label": "t:sections.footer.settings.color_scheme.options__3.label"
-        },
-        {
-          "value": "background-2",
-          "label": "t:sections.footer.settings.color_scheme.options__4.label"
-        },
-        {
-          "value": "inverse",
-          "label": "t:sections.footer.settings.color_scheme.options__5.label"
-        }
-      ],
-      "default": "none",
-      "info" : "Determines the cart notification color scheme",
-      "label": "t:sections.footer.settings.color_scheme.label"
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.header.settings.margin_bottom.label",
+      "default": 0
     },
     {
-      "type" : "color",
-      "label" : "Background",
-      "id" : "background",
-      "default" : "#ffffff"
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
     },
     {
-      "type" : "color",
-      "label" : "Text Color",
-      "id" : "color",
-      "default" : "#3f3f3f"
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 36,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 20
     },
     {
-      "type" : "color",
-      "label" : "Color (Hover)",
-      "id" : "color_hover",
-      "default" : "#1f1f1f"
-    },
-    {
-      "type" : "color",
-      "label" : "Color (Overlay)",
-      "id" : "color_overlay",
-      "default" : "#ffffff"
-    },
-    {
-      "type" : "color",
-      "label" : "Color (Overlay Hover)",
-      "id" : "color_overlay_hover",
-      "default" : "#fafafa"
-    },
-    {
-      "type" : "header" ,
-      "content" : "Layout"
-    },
-    {
-      "type" : "select",
-      "id" : "layout",
-      "label" : "Layout",
-      "default" : "logo-first",
-      "options" : [
-        {
-          "group" : "Horizontal",
-          "value" : "centered",
-          "label" : "Centered"
-        },
-        {
-          "group" : "Horizontal",
-          "value" : "spaced",
-          "label" : "Spaced"
-        },
-        {
-          "group" : "standard",
-          "value" : "logo-first",
-          "label" : "Logo First"
-        },
-        {
-          "group" : "standard",
-          "value" : "logo-stacked",
-          "label" : "Logo Stacked"
-        },
-        {
-          "group" : "Sidebar",
-          "value" : "sidebar-all",
-          "label"  : "All in sidebar"
-        },
-        {
-          "group" : "Sidebar",
-          "value": "sidebar-menu",
-          "label" : "Menu in sidebar"
-        }
-      ]
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 36,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 20
     }
-  ],
-  "blocks" : [
-    {
-      "type" : "link",
-      "name" : "Link",
-      "settings" : [
-        {
-          "type" :"text",
-          "label" : "Button Label",
-          "id" : "button_label",
-          "default" :"A Button"
-        },
-        {
-          "type" :"url",
-          "label" : "Button Link",
-          "id" : "button_link",
-          "default" :"/"
-        },
-        {
-          "type" : "checkbox",
-          "id" : "button_style",
-          "label" : "Button Style",
-          "default" : true
-        },
-        {
-          "type" : "checkbox",
-          "id" : "button_target",
-          "label" : "Open in new window?",
-          "default" : true
-        },
-        {
-          "type" : "header",
-          "content" : "visibility"
-        },
-        {
-          "type" : "checkbox",
-          "id" : "visible_large",
-          "label" : "Large Screens",
-          "default" :true
-        },
-        {
-          "type" : "checkbox",
-          "id" : "visible_medium",
-          "label" : "Medium Screens",
-          "default" :true
-        },
-        {
-          "type" : "checkbox",
-          "id" : "visible_small",
-          "label" : "Small Screens",
-          "default" :true
-        }
-      ]
-    },
-    {
-      "type" : "content",
-      "name" : "Content",
-      "settings" : [
-        {
-          "type" :"text",
-          "label" : "Text",
-          "id" : "title",
-          "default" :"Some Text Here"
-        },
-        {
-          "type" : "header",
-          "content" : "visibility"
-        },
-        {
-          "type" : "checkbox",
-          "id" : "visible_large",
-          "label" : "Large Screens",
-          "default" :true
-        },
-        {
-          "type" : "checkbox",
-          "id" : "visible_medium",
-          "label" : "Medium Screens",
-          "default" :true
-        },
-        {
-          "type" : "checkbox",
-          "id" : "visible_small",
-          "label" : "Small Screens",
-          "default" :true
-        }
-      ]
-    },
-    {
-      "type" : "logo",
-      "name" : "Logo",
-      "settings" : [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "t:sections.header.settings.logo.label"
-        },
-
-        {
-          "type": "range",
-          "id": "logo_width",
-          "min": 50,
-          "max": 440,
-          "step": 10,
-          "default": 180,
-          "unit": "t:sections.header.settings.logo_width.unit",
-          "label": "t:sections.header.settings.logo_width.label"
-        },
-        {
-          "type" : "header",
-          "content" : "Spacing"
-        },
-        {
-          "type": "range",
-          "id": "logo_padding_top",
-          "min": 0,
-          "max": 80,
-          "step": 1,
-          "default": 40,
-          "info" : "Less than 40 is negative!",
-          "label": "Logo Spacing Top "
-        },
-        {
-          "type": "range",
-          "id": "logo_padding_bottom",
-          "min": 0,
-          "max": 80,
-          "step": 1,
-          "default": 40,
-          "info" : "Less than 40 is negative!",
-          "label": "Logo Spacing Bottom "
-        },
-        {
-          "type" : "header",
-          "content" : "More"
-        },
-        {
-          "type": "range",
-          "id": "logo_width_tablet",
-          "min": 30,
-          "max": 450,
-          "step": 5,
-          "default": 150,
-          "unit": "t:sections.header.settings.logo_width.unit",
-          "label": "Logo Width (tablet)"
-        },
-        {
-          "type": "range",
-          "id": "logo_width_mobile",
-          "min": 30,
-          "max": 300,
-          "step": 5,
-          "default": 120,
-          "unit": "t:sections.header.settings.logo_width.unit",
-          "label": "Logo Width (mobile)"
-        },
-        {
-          "type": "image_picker",
-          "id": "overlay_image",
-          "label": "Logo (overlay)",
-          "info" : "Logo to show over transparent header"
-        },
-        {
-          "type" : "url",
-          "label" : "Custom URL",
-          "id" : "url"
-        },
-        {
-          "type" : "header",
-          "content" : "visibility"
-        },
-        {
-          "type" : "checkbox",
-          "id" : "visible_large",
-          "label" : "Large Screens",
-          "default" :true
-        },
-        {
-          "type" : "checkbox",
-          "id" : "visible_medium",
-          "label" : "Medium Screens",
-          "default" :true
-        },
-        {
-          "type" : "checkbox",
-          "id" : "visible_small",
-          "label" : "Small Screens",
-          "default" :true
-        }
-      ]
-    },
-    {
-      "type" : "socials",
-      "name" : "Socials",
-      "settings" : [
-         {
-          "type" : "header",
-          "content" : "visibility"
-        },
-        {
-          "type" : "checkbox",
-          "id" : "visible_large",
-          "label" : "Large Screens",
-          "default" :true
-        },
-        {
-          "type" : "checkbox",
-          "id" : "visible_medium",
-          "label" : "Medium Screens",
-          "default" :true
-        },
-        {
-          "type" : "checkbox",
-          "id" : "visible_small",
-          "label" : "Small Screens",
-          "default" :true
-        }
-      ]
-    },
-
-    {
-      "type" : "button",
-      "name" : "Icon Button",
-      "settings" : [
-         {
-          "type": "select",
-          "id": "type",
-          "default": "search",
-          "label": "Button Type",
-          "options" : [
-            {
-              "value" : "search",
-              "label" : "Search"
-            },
-            {
-              "value" : "account",
-              "label" : "Account"
-            },
-            {
-              "value" : "cart",
-              "label" : "Cart"
-            }
-          ]
-        },
-        {
-          "type" : "header",
-          "content" : "visibility"
-        },
-        {
-          "type" : "checkbox",
-          "id" : "visible_large",
-          "label" : "Large Screens",
-          "default" :true
-        },
-        {
-          "type" : "checkbox",
-          "id" : "visible_medium",
-          "label" : "Medium Screens",
-          "default" :true
-        },
-        {
-          "type" : "checkbox",
-          "id" : "visible_small",
-          "label" : "Small Screens",
-          "default" :true
-        }
-      ]
-    },
-    {
-      "type" : "menu",
-      "name" : "Menu",
-      "settings" : [
-         {
-          "type": "link_list",
-          "id": "menu",
-          "default": "main-menu",
-          "label": "t:sections.header.settings.menu.label"
-        },
-        {
-          "type" : "select",
-          "id" : "align",
-          "default" : "center",
-          "label" : "Align Menu",
-          "options" : [
-            {
-              "value" : "left",
-              "label" : "Left"
-            },
-            {
-              "value" : "center",
-              "label" : "Center"
-            },
-            {
-              "value" : "right",
-              "label" : "Right"
-            }
-          ]
-        },
-        {
-          "type" : "header",
-          "content" : "visibility"
-        },
-        {
-          "type" : "checkbox",
-          "id" : "visible_large",
-          "label" : "Large Screens",
-          "default" :true
-        },
-        {
-          "type" : "checkbox",
-          "id" : "visible_medium",
-          "label" : "Medium Screens",
-          "default" :true
-        },
-        {
-          "type" : "checkbox",
-          "id" : "visible_small",
-          "label" : "Small Screens",
-          "default" :false
-        }
-      ]
-    },
-    {
-      "type" : "mobile_menu",
-      "name" : "Mobile Menu",
-      "limit" : 1,
-      "settings" : [
-         {
-          "type": "link_list",
-          "id": "menu",
-          "default": "main-menu",
-          "label": "t:sections.header.settings.menu.label"
-        },
-        {
-          "type" : "header",
-          "content" : "visibility"
-        },
-        {
-          "type" : "checkbox",
-          "id" : "visible_large",
-          "label" : "Large Screens",
-          "default" :false
-        },
-        {
-          "type" : "checkbox",
-          "id" : "visible_medium",
-          "label" : "Medium Screens",
-          "default" :false
-        },
-        {
-          "type" : "checkbox",
-          "id" : "visible_small",
-          "label" : "Small Screens",
-          "default" :true
-        }
-      ]
-    },
-    {
-      "type" : "spacer",
-      "name" : "Spacer",
-      "limit" : 2,
-      "settings" : [
-        {
-          "type" : "header",
-          "content" : "visibility"
-        },
-        {
-          "type" : "checkbox",
-          "id" : "visible_large",
-          "label" : "Large Screens",
-          "default" :true
-        },
-        {
-          "type" : "checkbox",
-          "id" : "visible_medium",
-          "label" : "Medium Screens",
-          "default" :true
-        },
-        {
-          "type" : "checkbox",
-          "id" : "visible_small",
-          "label" : "Small Screens",
-          "default" :true
-        }
-      ]
-    }
-  ],
-  "default": {
-    "blocks": [
-      {
-        "type": "mobile_menu"
-      },
-      {
-        "type": "logo"
-      },
-      {
-        "type": "menu"
-      },
-      {
-        "type": "button",
-        "settings" : {
-          "type" : "search"
-        }
-      },
-      {
-        "type": "button",
-        "settings" : {
-          "type" : "cart"
-        }
-      }
-    ]
-  }
+  ]
 }

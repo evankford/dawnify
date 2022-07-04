@@ -12,39 +12,13 @@
       "label": "t:sections.main-collection-product-grid.settings.products_per_page.label"
     },
     {
-      "type" : "checkbox",
-      "id" : "full_width",
-      "label"  :"Full Width"
-    },
-    {
-      "type" : "select",
-      "id" : "grid_size",
-      "label" : "Product Size",
-      "default" : "large",
-      "options" : [
-        {
-          "value" : "small",
-          "label": "Small"
-        },
-        {
-          "value" : "medium",
-          "label": "Medium"
-        },
-        {
-          "value" : "large",
-          "label": "Large"
-        },
-        {
-          "value" : "huge",
-          "label": "Huge"
-        }
-      ]
-    },
-     {
-      "id": "center_insufficient",
-      "label" : "Center insufficient boxes?",
-      "type" : "checkbox",
-      "default" : true
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 4,
+      "label": "t:sections.main-collection-product-grid.settings.columns_desktop.label"
     },
     {
       "type": "header",
@@ -73,10 +47,9 @@
     {
       "type": "checkbox",
       "id": "show_secondary_image",
-      "default": true,
+      "default": false,
       "label": "t:sections.main-collection-product-grid.settings.show_secondary_image.label"
     },
-
     {
       "type": "checkbox",
       "id": "show_vendor",
@@ -84,28 +57,21 @@
       "label": "t:sections.main-collection-product-grid.settings.show_vendor.label"
     },
     {
-      "type": "header",
-      "content": "t:sections.main-collection-product-grid.settings.header__1.content"
+      "type": "checkbox",
+      "id": "show_rating",
+      "default": false,
+      "label": "t:sections.main-collection-product-grid.settings.show_rating.label",
+      "info": "t:sections.main-collection-product-grid.settings.show_rating.info"
     },
     {
-      "type" : "select",
-      "id" : "filter_behavior",
-      "label" : "Filter Behavior",
-      "options" : [
-        {
-          "value" : "responsive",
-          "label" : "Responsive"
-        },
-        {
-          "value" : "filter_button",
-          "label" : "Filter Button"
-        },
-        {
-          "value" : "disabled",
-          "label" : "disabled"
-        }
-      ],
-      "default" : "responsive"
+      "type": "checkbox",
+      "id": "enable_quick_add",
+      "default": false,
+      "label": "t:sections.main-collection-product-grid.settings.enable_quick_buy.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-collection-product-grid.settings.header__1.content"
     },
     {
       "type": "checkbox",
@@ -115,22 +81,57 @@
       "info": "t:sections.main-collection-product-grid.settings.enable_filtering.info"
     },
     {
+      "type": "select",
+      "id": "filter_type",
+      "options": [
+        {
+          "value": "horizontal",
+          "label": "t:sections.main-collection-product-grid.settings.filter_type.options__1.label"
+        },
+        {
+          "value": "vertical",
+          "label": "t:sections.main-collection-product-grid.settings.filter_type.options__2.label"
+        },
+        {
+          "value": "drawer",
+          "label": "t:sections.main-collection-product-grid.settings.filter_type.options__3.label"
+        }
+      ],
+      "default": "horizontal",
+      "label": "t:sections.main-collection-product-grid.settings.filter_type.label",
+      "info": "t:sections.main-collection-product-grid.settings.filter_type.info"
+    },
+    {
       "type": "checkbox",
       "id": "enable_sorting",
       "default": true,
       "label": "t:sections.main-collection-product-grid.settings.enable_sorting.label"
     },
     {
-      "type": "checkbox",
-      "id": "show_product_count",
-      "default": false,
-      "label": "Show Product Count"
+      "type": "header",
+      "content": "t:sections.main-collection-product-grid.settings.header_mobile.content"
     },
     {
-      "type" : "header",
-      "content" : "Spacing"
+      "type": "select",
+      "id": "columns_mobile",
+      "default": "2",
+      "label": "t:sections.main-collection-product-grid.settings.columns_mobile.label",
+      "options": [
+        {
+          "value": "1",
+          "label": "t:sections.main-collection-product-grid.settings.columns_mobile.options__1.label"
+        },
+        {
+          "value": "2",
+          "label": "t:sections.main-collection-product-grid.settings.columns_mobile.options__2.label"
+        }
+      ]
     },
-     {
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
       "type": "range",
       "id": "padding_top",
       "min": 0,
@@ -138,7 +139,7 @@
       "step": 4,
       "unit": "px",
       "label": "t:sections.all.padding.padding_top",
-      "default": 0
+      "default": 36
     },
     {
       "type": "range",
@@ -148,7 +149,7 @@
       "step": 4,
       "unit": "px",
       "label": "t:sections.all.padding.padding_bottom",
-      "default": 24
+      "default": 36
     }
   ]
 }

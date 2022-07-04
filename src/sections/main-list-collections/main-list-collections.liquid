@@ -1,21 +1,8 @@
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'section-collection-list.css' | asset_url | stylesheet_tag }}
-<style>
-#shopify-section-{{ section.id }} {
-  margin-top: {{ section.settings.padding_top | minus: 5 | divided_by: 3.0 | default: 1 }}rem;
-  margin-bottom: {{ section.settings.padding_bottom | minus: 5 | divided_by: 3.0 | default: 1 }}rem;
-}
-@media (max-width: 749px) {
-  #shopify-section-{{ section.id }} {
-  margin-top: {{ section.settings.padding_top | minus: 5 | divided_by: 6.0 | default: 1 }}rem;
-  margin-bottom: {{ section.settings.padding_bottom | minus: 5 | divided_by: 6.0 | default: 1 }}rem;
-}
-}
-</style>
 
 <div class="page-width">
   <h1 class="title title--primary">{{ section.settings.title | escape }}</h1>
-
   {%- liquid
     case section.settings.sort
       when 'products_high' or 'products_low'
@@ -28,10 +15,9 @@
       assign collections = collections | reverse
     endif
   -%}
-
-  <ul class="grid collection-list grid--1-col grid--3-col-tablet" role="list">
+  <ul class="collection-list grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down" role="list">
     {%- for collection in collections -%}
-      <li data-reveal class="collection-list__item grid__item">
+      <li class="collection-list__item grid__item">
         {% render 'card-collection', card_collection: collection, media_aspect_ratio: section.settings.image_ratio, columns: 3 %}
       </li>
     {%- endfor -%}

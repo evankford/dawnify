@@ -1,16 +1,7 @@
-# Dawn Development Flow
-This is a development flow I built around preprocessing and building Shopify 2.0 Themes. By default, it builds the "Dawn" shopify theme, with some extras added for better headers, typography and styling.
-
-## Getting Started
-
-You'll need to have shopify-cli installed, and login using `shopify login`.
-
-After you're logged in, you can simply run `yarn start`. Webpack will watch your files and
-
-## Dawn
+# Dawn
 
 [![Build status](https://github.com/shopify/dawn/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Shopify/dawn/actions/workflows/ci.yml?query=branch%3Amain)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?color=informational)](/CONTRIBUTING.md)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?color=informational)](/.github/CONTRIBUTING.md)
 
 [Getting started](#getting-started) |
 [Staying up to date with Dawn changes](#staying-up-to-date-with-dawn-changes) |
@@ -32,18 +23,9 @@ You can find a more detailed version of our theme code principles in the [contri
 
 ## Getting started
 
-1. Fork the repository and clone it:
-```sh
-git clone git@github.com:your-username/dawn.git
-cd dawn
-```
-2. Install the [Shopify CLI](https://github.com/Shopify/shopify-cli) by following [these steps](https://shopify.dev/themes/tools/cli/installation).
-3. Launch a development server in the `dawn/` folder:
-```sh
-shopify theme serve
-```
+We recommend using Dawn as a starting point for theme development. [Learn more on Shopify.dev](https://shopify.dev/themes/getting-started/create). 
 
->:information_source: You'll need access to a Shopify store in order to get started with theme development. If you don't already have one, you can set up a [development store](https://shopify.dev/themes/tools/development-stores).
+> If you're building a theme for the Shopify Theme Store, then you can use Dawn as a starting point. However, the theme that you submit needs to be [substantively different from Dawn](https://shopify.dev/themes/store/requirements#uniqueness) so that it provides added value for merchants. Learn about the [ways that you can use Dawn](https://shopify.dev/themes/tools/dawn#ways-to-use-dawn).
 
 ## Staying up to date with Dawn changes
 
@@ -78,7 +60,7 @@ You can follow this [quick start guide for theme developers](https://github.com/
 
 We recommend using [Theme Check](https://github.com/shopify/theme-check) as a way to validate and lint your Shopify themes.
 
-We've added Theme Check to Dawn's [list of VS Code extensions](https://github.com/Shopify/dawn/blob/update-README/.vscode/extensions.json) so if you're using Visual Studio Code as your code editor of choice, you'll be prompted to install the [Theme Check VS Code](https://marketplace.visualstudio.com/items?itemName=Shopify.theme-check-vscode) extension upon opening VS Code after you've forked and cloned Dawn.
+We've added Theme Check to Dawn's [list of VS Code extensions](/.vscode/extensions.json) so if you're using Visual Studio Code as your code editor of choice, you'll be prompted to install the [Theme Check VS Code](https://marketplace.visualstudio.com/items?itemName=Shopify.theme-check-vscode) extension upon opening VS Code after you've forked and cloned Dawn.
 
 You can also run it from a terminal with the following Shopify CLI command:
 

@@ -1,4 +1,4 @@
-lockfileVersion: 5.3
+lockfileVersion: 5.4
 
 specifiers:
   '@atmtfy/schema-loader': ^0.0.5
@@ -51,7 +51,7 @@ devDependencies:
   mini-css-extract-plugin: 2.4.7_webpack@5.72.1
   npm-run-all: 4.1.5
   sass: 1.51.0
-  sass-loader: 12.6.0_7e9f85199885edbe16f2f1b45bc940f7
+  sass-loader: 12.6.0_p2pykgmyqxw34fxs6g2fxska64
   terser-webpack-plugin: 5.3.1_webpack@5.72.1
   webpack: 5.72.1_webpack-cli@4.9.2
   webpack-cli: 4.9.2_webpack@5.72.1
@@ -74,6 +74,8 @@ packages:
       lodash.get: 4.4.2
       url-parse: 1.5.10
       youtube-player: 5.5.2
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /@barba/core/2.9.7:
@@ -258,7 +260,7 @@ packages:
       '@xtuc/long': 4.2.2
     dev: true
 
-  /@webpack-cli/configtest/1.1.1_webpack-cli@4.9.2+webpack@5.72.1:
+  /@webpack-cli/configtest/1.1.1_smhu6mcfcg7aivfsuosc335k3u:
     resolution: {integrity: sha512-1FBc1f9G4P/AxMqIgfZgeOTuRnwZMten8E7zap5zgpPInnCrP8D4Q81+4CWIch8i/Nf7nXjP0v6CjjbHOrXhKg==}
     peerDependencies:
       webpack: 4.x.x || 5.x.x
@@ -641,6 +643,11 @@ packages:
 
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
     dependencies:
       ms: 2.0.0
     dev: false
@@ -1840,7 +1847,7 @@ packages:
     resolution: {integrity: sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==}
     dev: true
 
-  /sass-loader/12.6.0_7e9f85199885edbe16f2f1b45bc940f7:
+  /sass-loader/12.6.0_p2pykgmyqxw34fxs6g2fxska64:
     resolution: {integrity: sha512-oLTaH0YCtX4cfnJZxKSLAyglED0naiYfNG1iXfU5w1LNZ+ukoA5DtyDIN5zmKVZwYNJP4KRc5Y3hkWga+7tYfA==}
     engines: {node: '>= 12.13.0'}
     peerDependencies:
@@ -2245,7 +2252,7 @@ packages:
         optional: true
     dependencies:
       '@discoveryjs/json-ext': 0.5.7
-      '@webpack-cli/configtest': 1.1.1_webpack-cli@4.9.2+webpack@5.72.1
+      '@webpack-cli/configtest': 1.1.1_smhu6mcfcg7aivfsuosc335k3u
       '@webpack-cli/info': 1.4.1_webpack-cli@4.9.2
       '@webpack-cli/serve': 1.6.1_webpack-cli@4.9.2
       colorette: 2.0.16
@@ -2424,4 +2431,6 @@ packages:
       debug: 2.6.9
       load-script: 1.0.0
       sister: 3.0.2
+    transitivePeerDependencies:
+      - supports-color
     dev: false

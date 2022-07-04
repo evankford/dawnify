@@ -105,7 +105,7 @@
     {
       "type": "slide",
       "name": "t:sections.slideshow.blocks.slide.name",
-      "limit": 1,
+      "limit": 5,
       "settings": [
         {
           "type": "image_picker",
@@ -123,20 +123,20 @@
           "id": "heading_size",
           "options": [
             {
-              "value": "small",
-              "label": "t:sections.slideshow.blocks.slide.settings.heading_size.options__1.label"
+              "value": "h2",
+              "label": "t:sections.all.heading_size.options__1.label"
             },
             {
-              "value": "medium",
-              "label": "t:sections.slideshow.blocks.slide.settings.heading_size.options__2.label"
+              "value": "h1",
+              "label": "t:sections.all.heading_size.options__2.label"
             },
             {
-              "value": "large",
-              "label": "t:sections.slideshow.blocks.slide.settings.heading_size.options__3.label"
+              "value": "h0",
+              "label": "t:sections.all.heading_size.options__3.label"
             }
           ],
-          "default": "medium",
-          "label": "t:sections.slideshow.blocks.slide.settings.heading_size.label"
+          "default": "h1",
+          "label": "t:sections.all.heading_size.label"
         },
         {
           "type": "text",
@@ -218,8 +218,8 @@
           "id": "text_alignment",
           "options": [
             {
-            "value": "left",
-            "label": "t:sections.slideshow.blocks.slide.settings.text_alignment.option_1.label"
+              "value": "left",
+              "label": "t:sections.slideshow.blocks.slide.settings.text_alignment.option_1.label"
             },
             {
               "value": "center",
@@ -249,27 +249,27 @@
           "options": [
             {
               "value": "accent-1",
-              "label": "t:sections.slideshow.blocks.slide.settings.color_scheme.options__1.label"
+              "label": "t:sections.all.colors.accent_1.label"
             },
             {
               "value": "accent-2",
-              "label": "t:sections.slideshow.blocks.slide.settings.color_scheme.options__2.label"
+              "label": "t:sections.all.colors.accent_2.label"
             },
             {
               "value": "background-1",
-              "label": "t:sections.slideshow.blocks.slide.settings.color_scheme.options__3.label"
+              "label": "t:sections.all.colors.background_1.label"
             },
             {
               "value": "background-2",
-              "label": "t:sections.slideshow.blocks.slide.settings.color_scheme.options__4.label"
+              "label": "t:sections.all.colors.background_2.label"
             },
             {
               "value": "inverse",
-              "label": "t:sections.slideshow.blocks.slide.settings.color_scheme.options__5.label"
+              "label": "t:sections.all.colors.inverse.label"
             }
           ],
           "default": "background-1",
-          "label": "t:sections.slideshow.blocks.slide.settings.color_scheme.label",
+          "label": "t:sections.all.colors.label",
           "info": "t:sections.slideshow.blocks.slide.settings.color_scheme.info"
         },
         {
@@ -296,8 +296,7 @@
           "default": "center",
           "label": "t:sections.slideshow.blocks.slide.settings.text_alignment_mobile.label"
         }
-      ],
-      "limit": 5
+      ]
     }
   ],
   "presets": [
