@@ -8,6 +8,8 @@
 ehthumbs.db
 Thumbs.db
 
+**/.gitkeep
+
 /tmp
 /dist
 /node_modules
